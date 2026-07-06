@@ -215,6 +215,130 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-6">Why Partner With Us?</h2>
+              <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
+                In a complex legal landscape, you need more than just legal advice. You need a strategic partner who understands your business, protects your assets, and fights for your rights with uncompromising dedication.
+              </p>
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="mt-1 h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 text-secondary">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Unwavering Integrity</h4>
+                    <p className="text-muted-foreground text-sm">We operate with the highest ethical standards, ensuring transparent communication and honest assessments at every stage.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="mt-1 h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 text-secondary">
+                    <Award className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Industry-Leading Expertise</h4>
+                    <p className="text-muted-foreground text-sm">Our partners bring decades of specialized experience across corporate, civil, and criminal jurisdictions.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="mt-1 h-10 w-10 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 text-secondary">
+                    <Users className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Client-Centric Approach</h4>
+                    <p className="text-muted-foreground text-sm">Every strategy is bespoke. We tailor our legal architecture to fit your specific goals and risk tolerance.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="aspect-square rounded-2xl bg-gray-100 border border-gray-200 overflow-hidden relative shadow-lg">
+                <div className="absolute inset-0 bg-primary/5 flex items-center justify-center">
+                  <Scale className="h-48 w-48 text-primary/20" />
+                </div>
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl border border-gray-100 max-w-xs">
+                <p className="text-2xl font-bold text-primary font-heading">"Justice delayed is justice denied."</p>
+                <p className="text-sm text-muted-foreground mt-2">— Our Founding Principle</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Partners */}
+      <section className="py-24 bg-surface">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-semibold tracking-wider uppercase mb-4">
+            Leadership
+          </span>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-16">Meet the Partners</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            {[
+              { name: "Robert Kavanagh", role: "Managing Partner", area: "Corporate Law", initials: "RK" },
+              { name: "Sarah Jenkins", role: "Senior Partner", area: "Civil Litigation", initials: "SJ" },
+              { name: "David Chen", role: "Partner", area: "Intellectual Property", initials: "DC" }
+            ].map((partner, i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-all group">
+                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center group-hover:bg-primary/5 transition-colors relative overflow-hidden">
+                  <div className="text-5xl font-bold text-gray-300 group-hover:text-primary/20 transition-colors font-heading tracking-tighter">
+                    {partner.initials}
+                  </div>
+                </div>
+                <div className="p-6">
+                  <p className="text-secondary text-sm font-bold uppercase tracking-wider mb-1">{partner.role}</p>
+                  <h3 className="text-xl font-bold text-primary mb-1">{partner.name}</h3>
+                  <p className="text-muted-foreground text-sm flex items-center gap-1.5 mb-4">
+                    <Award className="h-4 w-4" /> {partner.area}
+                  </p>
+                  <Button variant="outline" className="w-full h-10 text-primary border-gray-200 hover:bg-gray-50">View Profile</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-primary to-primary"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Client Success Stories</h2>
+            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">Don't just take our word for it. Here's what our clients have to say about our legal representation.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { quote: "Their strategic approach to our corporate merger saved us millions in potential liabilities. Absolutely brilliant team.", author: "Michael T.", company: "TechStart Inc." },
+              { quote: "When I was facing complex IP litigation, Robert and his team were my shield. We didn't just win; we set a precedent.", author: "Elena R.", company: "Innovate Labs" },
+              { quote: "Professional, transparent, and incredibly effective. They turned a stressful property dispute into a swift victory.", author: "James W.", company: "Wellington Estates" }
+            ].map((t, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl relative">
+                <div className="text-4xl font-serif text-secondary absolute top-6 left-6 opacity-50">"</div>
+                <p className="text-lg leading-relaxed mb-6 relative z-10 pt-6">
+                  {t.quote}
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="h-12 w-12 rounded-full bg-white/20 flex items-center justify-center font-bold">
+                    {t.author.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-bold">{t.author}</h4>
+                    <p className="text-primary-foreground/70 text-sm">{t.company}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

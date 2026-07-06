@@ -50,12 +50,39 @@ export function TopCaseActions({ caseId }: { caseId: string }) {
           'aria-label': 'Upload your document'
         },
         showCancelButton: true,
-        confirmButtonColor: '#0B132B'
+        confirmButtonText: 'Upload',
+        confirmButtonColor: '#0B132B',
+        showLoaderOnConfirm: true,
+        preConfirm: async (file) => {
+          if (!file) {
+            Swal.default.showValidationMessage('Please select a file to upload');
+            return false;
+          }
+
+          const formData = new FormData();
+          formData.append('file', file);
+          
+          try {
+            // dynamically import the server action to avoid client/server module bleed issues if necessary,
+            // or just use a standard import at the top. Let's import it inline to ensure it works in preConfirm.
+            const { uploadFile } = await import('@/app/actions/upload');
+            const result = await uploadFile(formData, `cases/${caseId}`);
+            
+            if (!result.success) {
+              throw new Error(result.error);
+            }
+            return result;
+          } catch (error: any) {
+            Swal.default.showValidationMessage(`Upload failed: ${error.message}`);
+            return false;
+          }
+        },
+        allowOutsideClick: () => !Swal.default.isLoading()
       }).then((result) => {
         if (result.isConfirmed && result.value) {
           Swal.default.fire({
             title: 'Uploaded!',
-            text: 'Your document has been securely uploaded to the case file.',
+            html: `Your document has been securely uploaded.<br/><br/><a href="${result.value.url}" target="_blank" class="text-primary hover:underline font-medium">View Document</a>`,
             icon: 'success',
             confirmButtonColor: '#0B132B'
           });
