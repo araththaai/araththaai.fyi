@@ -48,3 +48,22 @@ export async function updateRecord(table: string, id: string, data: any) {
     return { success: false, error: error.message || "Failed to update record" };
   }
 }
+
+export async function deleteRecord(table: string, id: string) {
+  try {
+    const model = (prisma as any)[table];
+    if (!model) {
+      throw new Error(`Table ${table} not found in Prisma Client`);
+    }
+
+    await model.delete({
+      where: { id }
+    });
+
+    revalidatePath("/super-admin/data");
+    return { success: true };
+  } catch (error: any) {
+    console.error("Error deleting record:", error);
+    return { success: false, error: error.message || "Failed to delete record" };
+  }
+}

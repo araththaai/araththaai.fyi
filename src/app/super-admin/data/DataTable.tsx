@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Database } from "lucide-react";
-import { updateRecord } from "./actions";
+import { Database, Trash2 } from "lucide-react";
+import { updateRecord, deleteRecord } from "./actions";
 
 export default function DataTable({ 
   data, 
@@ -17,6 +17,20 @@ export default function DataTable({
   const [editValue, setEditValue] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this record?")) return;
+    
+    setLoading(true);
+    try {
+      const res = await deleteRecord(table, id);
+      if (!res.success) throw new Error(res.error);
+    } catch (err: any) {
+      setErrorMsg(err.message || "Failed to delete record");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCellClick = (row: any, col: string) => {
     if (col.toLowerCase().includes('id') || col === 'createdAt' || col === 'updatedAt') {
@@ -83,7 +97,7 @@ export default function DataTable({
   };
 
   return (
-    <div className="overflow-x-auto overflow-y-auto flex-1 custom-scrollbar relative min-h-[400px]">
+    <div className="overflow-x-auto overflow-y-auto flex-1 relative min-h-[400px]">
       {errorMsg && (
         <div className="sticky top-0 z-10 w-full bg-red-900 text-white text-xs px-4 py-2 text-center shadow-lg">
           {errorMsg}
@@ -98,6 +112,7 @@ export default function DataTable({
               {columns.map(col => (
                 <th key={col} className="py-3 px-4 font-bold border-r border-gray-800">{col}</th>
               ))}
+              <th className="py-3 px-4 font-bold border-gray-800 text-center w-12 text-red-500/70">Act</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-800 text-gray-300">
@@ -111,7 +126,10 @@ export default function DataTable({
                   let displayVal = String(val);
                   let colorClass = "text-gray-300";
                   
-                  if (val === null) {
+                  if (col.toLowerCase() === 'id') {
+                    displayVal = String(i + 1); // Display sequence instead of UUID
+                    colorClass = "text-amber-500 font-bold px-4"; 
+                  } else if (val === null) {
                     displayVal = "NULL";
                     colorClass = "text-gray-600 italic";
                   } else if (col === 'password' && typeof val === 'string' && !val.includes(':') && !val.startsWith('$2b$')) {
@@ -132,6 +150,7 @@ export default function DataTable({
                     <td 
                       key={col} 
                       onClick={() => handleCellClick(row, col)}
+                      title={col.toLowerCase() === 'id' ? String(val) : undefined}
                       className={`py-2 px-4 border-r border-gray-800 text-xs max-w-xs truncate ${!isReadOnly && !isEditing ? 'cursor-pointer hover:bg-gray-800' : ''} ${colorClass}`}
                     >
                       {isEditing ? (
@@ -150,6 +169,16 @@ export default function DataTable({
                     </td>
                   );
                 })}
+                <td className="py-2 px-2 border-gray-800 text-center">
+                  <button 
+                    onClick={() => handleDelete(row.id)}
+                    disabled={loading}
+                    className="p-1.5 bg-red-900/30 text-red-400 rounded hover:bg-red-900/50 transition-colors disabled:opacity-50"
+                    title="Delete Record"
+                  >
+                    <Trash2 className="h-4 w-4 mx-auto" />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

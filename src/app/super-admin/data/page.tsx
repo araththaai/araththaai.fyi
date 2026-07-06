@@ -40,6 +40,16 @@ export default async function DataExplorerPage(props: {
 
     if (data.length > 0) {
       columns = Object.keys(data[0]);
+      
+      // Decrypt passwords securely on the server side before passing to client
+      if (columns.includes('password')) {
+        data = data.map(row => {
+          if (row.password && typeof row.password === 'string') {
+            return { ...row, password: decrypt(row.password) };
+          }
+          return row;
+        });
+      }
     }
   } catch (error) {
     console.error(error);
@@ -54,7 +64,7 @@ export default async function DataExplorerPage(props: {
         <p className="text-sm text-gray-500 mt-1">Direct read/write access to the database tables.</p>
       </div>
 
-      <div className="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
+      <div className="flex gap-2 overflow-x-auto pb-2">
         {tables.map((t) => (
           <Link 
             key={t} 
@@ -81,23 +91,6 @@ export default async function DataExplorerPage(props: {
         
         <DataTable data={data} columns={columns} table={table} />
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #111827; 
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #374151; 
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #4B5563; 
-        }
-      `}} />
     </div>
   );
 }
