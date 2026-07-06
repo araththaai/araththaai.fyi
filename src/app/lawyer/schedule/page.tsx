@@ -40,7 +40,16 @@ export default function LawyerSchedulePage() {
                   </div>
                 </div>
                 <div className="mt-2 sm:mt-0">
-                  <button onClick={() => alert(`Opening details for: ${meeting.title}`)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition-colors">
+                  <button onClick={() => {
+                    import('sweetalert2').then(Swal => {
+                      Swal.default.fire({
+                        title: 'Meeting Details',
+                        text: `Opening details for: ${meeting.title}`,
+                        icon: 'info',
+                        confirmButtonColor: '#0B132B'
+                      });
+                    });
+                  }} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition-colors">
                     View Details
                   </button>
                 </div>
