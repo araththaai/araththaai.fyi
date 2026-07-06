@@ -134,7 +134,16 @@ export default function LawyerSettingsPage() {
                     <input type="password" placeholder="••••••••" className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" />
                   </div>
                   <div className="pt-2">
-                    <Button onClick={() => alert("Password updated securely.")} className="bg-primary text-primary-foreground">Update Password</Button>
+                    <Button onClick={() => {
+                      import('sweetalert2').then(Swal => {
+                        Swal.default.fire({
+                          title: 'Success!',
+                          text: 'Password updated securely.',
+                          icon: 'success',
+                          confirmButtonColor: '#0B132B'
+                        });
+                      });
+                    }} className="bg-primary text-primary-foreground">Update Password</Button>
                   </div>
                 </div>
               </div>
@@ -143,7 +152,16 @@ export default function LawyerSettingsPage() {
             {activeTab !== "security" && (
               <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
                 <Button variant="outline">Cancel</Button>
-                <Button onClick={() => alert("Settings saved successfully!")} className="bg-primary text-primary-foreground hover:bg-primary/90">Save Changes</Button>
+                <Button onClick={() => {
+                  import('sweetalert2').then(Swal => {
+                    Swal.default.fire({
+                      title: 'Settings Saved',
+                      text: 'Your preferences have been updated successfully!',
+                      icon: 'success',
+                      confirmButtonColor: '#0B132B'
+                    });
+                  });
+                }} className="bg-primary text-primary-foreground hover:bg-primary/90">Save Changes</Button>
               </div>
             )}
           </div>
