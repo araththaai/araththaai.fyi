@@ -60,9 +60,9 @@ export default function LawyerCasesPage() {
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2">
                       {isSenior ? (
-                        <Button variant="outline" size="sm" className="h-8 text-xs">Assign Associate</Button>
+                        <Button onClick={() => alert("Associate assignment modal opened for Case " + c.id)} variant="outline" size="sm" className="h-8 text-xs">Assign Associate</Button>
                       ) : (
-                        <Button variant="outline" size="sm" className="h-8 text-xs">Submit Draft</Button>
+                        <Button onClick={() => alert("Draft submitted to Senior Counsel successfully for Case " + c.id)} variant="outline" size="sm" className="h-8 text-xs">Submit Draft</Button>
                       )}
                       <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400">
                         <MoreVertical className="h-4 w-4" />

@@ -40,7 +40,7 @@ export default function LawyerSchedulePage() {
                   </div>
                 </div>
                 <div className="mt-2 sm:mt-0">
-                  <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition-colors">
+                  <button onClick={() => alert(`Opening details for: ${meeting.title}`)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition-colors">
                     View Details
                   </button>
                 </div>
