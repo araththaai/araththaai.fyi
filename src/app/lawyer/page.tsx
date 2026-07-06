@@ -1,8 +1,14 @@
 "use client";
 
 import { Users, Briefcase, Calendar, CheckCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function LawyerOverview() {
+  const { data: session } = useSession();
+  const role = (session?.user as any)?.role || "LAWYER";
+  
+  const isSenior = role === "SENIOR_LAWYER";
+
   const stats = [
     { name: "My Active Cases", value: "8", icon: Briefcase, color: "text-blue-600", bg: "bg-blue-100" },
     { name: "My Clients", value: "12", icon: Users, color: "text-amber-600", bg: "bg-amber-100" },
@@ -13,8 +19,12 @@ export default function LawyerOverview() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900">Lawyer Dashboard</h1>
-        <p className="text-sm text-gray-500 mt-1">Manage your assigned cases and client consultations.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+          {isSenior ? "Senior Counsel Dashboard" : "Associate Dashboard"}
+        </h1>
+        <p className="text-sm text-gray-500 mt-1">
+          {isSenior ? "Manage your assigned cases and oversee associate workflows." : "Manage your assigned cases and client consultations."}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
