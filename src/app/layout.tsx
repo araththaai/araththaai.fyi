@@ -17,6 +17,7 @@ const playfair = Playfair_Display({
 });
 
 import TRPCProvider from "@/lib/trpc/Provider";
+import AuthProvider from "@/components/SessionProvider";
 
 export const metadata: Metadata = {
   title: "Araththaai – AKM Associates & Legal Consultants",
@@ -34,13 +35,15 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground pt-20">
-        <TRPCProvider>
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </TRPCProvider>
+        <AuthProvider>
+          <TRPCProvider>
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </TRPCProvider>
+        </AuthProvider>
       </body>
     </html>
   );

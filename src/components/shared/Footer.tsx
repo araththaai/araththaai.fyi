@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import { Scale, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 
 export function Footer() {
   return (
@@ -10,14 +13,21 @@ export function Footer() {
           {/* Brand Info */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <Scale className="h-8 w-8 text-secondary" />
+              <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-white/10 p-1">
+                <CldImage 
+                  src="araththaai_k0wo2e" 
+                  alt="Araththaai Logo" 
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl tracking-tight text-white">Araththaai</span>
-                <span className="text-[0.65rem] uppercase tracking-widest text-gray-400">AKM Associates & Legal</span>
+                <span className="font-heading font-bold text-xl tracking-tight text-white">ARATHTHAAI</span>
+                <span className="text-[0.65rem] uppercase tracking-widest text-gray-400">AKM ASSOCIATES</span>
               </div>
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Providing premium, transparent, and authoritative legal consultancy services for individuals and enterprises worldwide.
+              AKM ASSOCIATES AND LEGAL CONSULTANTS. Providing premium, trustworthy, and authoritative legal consultation with a commitment to excellence.
             </p>
             <div className="flex space-x-4 text-sm text-gray-400">
               <a href="#" className="hover:text-secondary transition-colors">LinkedIn</a>
@@ -31,22 +41,22 @@ export function Footer() {
             <h3 className="font-heading font-semibold text-lg mb-6 text-white">Quick Links</h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li><Link href="/" className="hover:text-secondary transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-secondary transition-colors">About the Firm</Link></li>
-              <li><Link href="/services" className="hover:text-secondary transition-colors">Practice Areas</Link></li>
-              <li><Link href="/insights" className="hover:text-secondary transition-colors">Legal Insights</Link></li>
-              <li><Link href="/contact" className="hover:text-secondary transition-colors">Contact Us</Link></li>
+              <li><Link href="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-secondary transition-colors">Services</Link></li>
+              <li><Link href="/knowledge-hub" className="hover:text-secondary transition-colors">Knowledge Hub</Link></li>
+              <li><Link href="/contact" className="hover:text-secondary transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           {/* Practice Areas */}
           <div>
-            <h3 className="font-heading font-semibold text-lg mb-6 text-white">Practice Areas</h3>
+            <h3 className="font-heading font-semibold text-lg mb-6 text-white">Services</h3>
             <ul className="space-y-3 text-sm text-gray-300">
-              <li><Link href="/services/corporate-law" className="hover:text-secondary transition-colors">Corporate Law</Link></li>
-              <li><Link href="/services/property-law" className="hover:text-secondary transition-colors">Property Law</Link></li>
-              <li><Link href="/services/family-law" className="hover:text-secondary transition-colors">Family Law</Link></li>
-              <li><Link href="/services/taxation" className="hover:text-secondary transition-colors">Taxation & GST</Link></li>
-              <li><Link href="/services/startup-compliance" className="hover:text-secondary transition-colors">Startup Compliance</Link></li>
+              <li><Link href="/services#corporate-law" className="hover:text-secondary transition-colors">Corporate Law</Link></li>
+              <li><Link href="/services#civil-litigation" className="hover:text-secondary transition-colors">Civil Litigation</Link></li>
+              <li><Link href="/services#family-law" className="hover:text-secondary transition-colors">Family Law</Link></li>
+              <li><Link href="/services#real-estate" className="hover:text-secondary transition-colors">Real Estate</Link></li>
+              <li><Link href="/services#intellectual-property" className="hover:text-secondary transition-colors">Intellectual Property</Link></li>
             </ul>
           </div>
 
@@ -56,22 +66,22 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-gray-300">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
-                <span>123 Legal Avenue, Business District, <br/>Chennai, TN 600001, India</span>
+                <span>123 Legal Avenue, Business District, <br/>City, Country</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-secondary shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+1 (555) 123-4567</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-secondary shrink-0" />
-                <span>consult@araththaai.com</span>
+                <span>consult@araththaai.fyi</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Araththaai – AKM Associates. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). All rights reserved.</p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

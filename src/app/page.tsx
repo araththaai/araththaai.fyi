@@ -44,12 +44,12 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book">
               <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-md transition-all shadow-xl hover:shadow-2xl">
-                Schedule Consultation <ArrowRight className="ml-2 h-5 w-5" />
+                Book Consultation <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/services">
+            <Link href="#services">
               <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border-border text-foreground hover:bg-muted transition-all">
-                Explore Practice Areas
+                Explore Services
               </Button>
             </Link>
           </div>
@@ -92,42 +92,126 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Practice Areas Preview (Placeholder for next phase) */}
-      <section className="py-24 bg-surface">
+      {/* Legal Services Section */}
+      <section id="services" className="py-24 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-6">Expertise That Matters</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-12">
-            Comprehensive legal solutions tailored to your unique circumstances and business objectives.
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-6">Our Legal Services</h2>
+          <p className="text-muted-foreground max-w-3xl mx-auto mb-16 text-lg">
+            AKM Associates offers specialized expertise across key practice areas, providing comprehensive legal solutions tailored to the sophisticated needs of our clients.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* These would map to individual practice areas */}
-            <div className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow text-left">
-              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Corporate Law</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                End-to-end legal support for businesses, from incorporation to compliance and M&A.
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            {/* Civil Law */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Civil Law</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Comprehensive representation in civil disputes, property claims, and contract enforcements. We safeguard your rights in all civil matters through strategic litigation and alternative dispute resolution.
               </p>
-              <Link href="/services/corporate-law" className="text-secondary font-medium hover:underline inline-flex items-center">
-                Learn more <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Property Disputes</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Breach of Contract</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Injunctions</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Debt Recovery</li>
+              </ul>
             </div>
-            <div className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow text-left">
-              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Property Law</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Expert guidance on real estate transactions, property disputes, and documentation.
+            
+            {/* Criminal Law */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Criminal Law</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Robust defense and strategic advocacy in criminal proceedings. Our experienced litigators provide aggressive representation to protect your liberties and rights at every stage of the legal process.
               </p>
-              <Link href="/services/property-law" className="text-secondary font-medium hover:underline inline-flex items-center">
-                Learn more <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Bail Applications</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Trial Advocacy</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> White-Collar Crimes</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Appeals & Revisions</li>
+              </ul>
             </div>
-            <div className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow text-left">
+
+            {/* Tax Law */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Tax Law</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Strategic tax planning and litigation services for businesses and individuals. We navigate complex taxation frameworks to ensure compliance and resolve disputes with tax authorities efficiently.
+              </p>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Direct & Indirect Tax</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Tax Litigation</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Corporate Structuring</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> GST Compliance</li>
+              </ul>
+            </div>
+
+            {/* HR&CE */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">HR&CE</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Expert legal counsel dealing with the administration, regulation, and protection of Hindu religious institutions, endowments, and temple properties under the HR&CE Act.
+              </p>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Temple Administration</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Property Disputes</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Trusteeship Rights</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Writ Petitions</li>
+              </ul>
+            </div>
+
+            {/* Family Law */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
               <h3 className="text-xl font-bold font-heading mb-3 text-primary">Family Law</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Compassionate and discreet representation in matrimonial and family disputes.
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Discreet and compassionate legal services for matrimonial disputes, custody battles, and family partitions. We handle sensitive family matters with utmost care and professionalism.
               </p>
-              <Link href="/services/family-law" className="text-secondary font-medium hover:underline inline-flex items-center">
-                Learn more <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Divorce Proceedings</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Child Custody</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Alimony & Maintenance</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Family Partitions</li>
+              </ul>
             </div>
+
+            {/* IPR */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">IPR</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Protect your innovations and creative assets. We handle strategic IP registration, portfolio management, and enforcement against infringement to secure your competitive advantage.
+              </p>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Trademark Registration</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Patent Strategy</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Copyright Protection</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> IP Litigation</li>
+              </ul>
+            </div>
+
+            {/* Corporate Laws */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Corporate Laws</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Comprehensive legal counsel for businesses, from formation and governance to mergers, acquisitions, and compliance. We ensure your business operations align with regulatory frameworks.
+              </p>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Mergers & Acquisitions</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Corporate Governance</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Contract Drafting</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Regulatory Compliance</li>
+              </ul>
+            </div>
+
+            {/* Human Rights */}
+            <div className="bg-card p-6 rounded-xl shadow-sm border border-border hover:shadow-md transition-shadow flex flex-col h-full">
+              <h3 className="text-xl font-bold font-heading mb-3 text-primary">Human Rights</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                Dedicated advocacy for the protection and enforcement of fundamental human rights. We represent victims of rights violations and fight against systemic injustices at all judicial levels.
+              </p>
+              <ul className="space-y-2 mb-2">
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Constitutional Writs</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Civil Liberties</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Public Interest Litigation</li>
+                <li className="text-xs font-medium text-primary/80 flex items-center"><ArrowRight className="h-3 w-3 mr-2 text-secondary" /> Anti-Discrimination</li>
+              </ul>
+            </div>
+
           </div>
         </div>
       </section>
