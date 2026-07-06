@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Database, Trash2 } from "lucide-react";
 import { updateRecord, deleteRecord } from "./actions";
+import Swal from "sweetalert2";
 
 export default function DataTable({ 
   data, 
@@ -19,14 +20,37 @@ export default function DataTable({
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this record?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    });
+    
+    if (!result.isConfirmed) return;
     
     setLoading(true);
     try {
       const res = await deleteRecord(table, id);
       if (!res.success) throw new Error(res.error);
+      
+      Swal.fire({
+        title: "Deleted!",
+        text: "The record has been deleted.",
+        icon: "success",
+        confirmButtonColor: "#16a34a"
+      });
     } catch (err: any) {
       setErrorMsg(err.message || "Failed to delete record");
+      Swal.fire({
+        title: "Error!",
+        text: err.message || "Failed to delete record",
+        icon: "error",
+        confirmButtonColor: "#16a34a"
+      });
     } finally {
       setLoading(false);
     }
