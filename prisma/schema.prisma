@@ -16,9 +16,7 @@ enum Role {
   ADMIN
   SENIOR_LAWYER
   JUNIOR_LAWYER
-  RECEPTIONIST
   CLIENT
-  GUEST
 }
 
 enum GeneralStatus {

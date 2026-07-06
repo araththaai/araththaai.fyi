@@ -81,7 +81,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). All rights reserved. | Developed by AustralAI</p>
           <div className="flex space-x-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

@@ -22,12 +22,24 @@ export default function SignInPage() {
     if (res?.error) {
       setError("Invalid email or password");
     } else {
-      window.location.href = "/dashboard";
+      const { getSession } = await import("next-auth/react");
+      const session = await getSession();
+      const role = (session?.user as any)?.role;
+      
+      if (role === "SUPER_ADMIN") {
+        window.location.href = "/super-admin";
+      } else if (role === "ADMIN") {
+        window.location.href = "/admin";
+      } else if (role === "SENIOR_LAWYER" || role === "JUNIOR_LAWYER") {
+        window.location.href = "/lawyer";
+      } else {
+        window.location.href = "/dashboard";
+      }
     }
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center py-24 px-4 bg-surface">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-surface">
       <div className="w-full max-w-md flex flex-col items-center">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-heading font-bold text-primary mb-2">Client Portal</h1>
