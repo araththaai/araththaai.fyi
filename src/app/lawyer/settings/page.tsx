@@ -4,11 +4,94 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { User, Bell, Lock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { updatePassword } from "./actions";
 
 export default function LawyerSettingsPage() {
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState("profile");
   
+  // Password State
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
+
+  const handlePasswordUpdate = async () => {
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      import('sweetalert2').then(Swal => {
+        Swal.default.fire({
+          title: 'Error',
+          text: 'Please fill in all password fields.',
+          icon: 'error',
+          confirmButtonColor: '#0B132B'
+        });
+      });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      import('sweetalert2').then(Swal => {
+        Swal.default.fire({
+          title: 'Mismatch',
+          text: 'New password and confirm password do not match.',
+          icon: 'error',
+          confirmButtonColor: '#0B132B'
+        });
+      });
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      import('sweetalert2').then(Swal => {
+        Swal.default.fire({
+          title: 'Invalid',
+          text: 'New password must be at least 6 characters long.',
+          icon: 'error',
+          confirmButtonColor: '#0B132B'
+        });
+      });
+      return;
+    }
+
+    setIsUpdatingPassword(true);
+    try {
+      const res = await updatePassword(currentPassword, newPassword);
+      if (res.success) {
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        import('sweetalert2').then(Swal => {
+          Swal.default.fire({
+            title: 'Success!',
+            text: 'Password updated securely.',
+            icon: 'success',
+            confirmButtonColor: '#0B132B'
+          });
+        });
+      } else {
+        import('sweetalert2').then(Swal => {
+          Swal.default.fire({
+            title: 'Update Failed',
+            text: res.error || 'Failed to update password.',
+            icon: 'error',
+            confirmButtonColor: '#0B132B'
+          });
+        });
+      }
+    } catch (e) {
+      import('sweetalert2').then(Swal => {
+        Swal.default.fire({
+          title: 'Error',
+          text: 'An unexpected error occurred.',
+          icon: 'error',
+          confirmButtonColor: '#0B132B'
+        });
+      });
+    } finally {
+      setIsUpdatingPassword(false);
+    }
+  };
+
   return (
     <div className="max-w-4xl space-y-6">
       <div>
@@ -123,27 +206,42 @@ export default function LawyerSettingsPage() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" />
+                    <input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" />
+                    <input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" />
+                    <input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="w-full sm:w-2/3 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" 
+                    />
                   </div>
                   <div className="pt-2">
-                    <Button onClick={() => {
-                      import('sweetalert2').then(Swal => {
-                        Swal.default.fire({
-                          title: 'Success!',
-                          text: 'Password updated securely.',
-                          icon: 'success',
-                          confirmButtonColor: '#0B132B'
-                        });
-                      });
-                    }} className="bg-primary text-primary-foreground">Update Password</Button>
+                    <Button 
+                      onClick={handlePasswordUpdate} 
+                      disabled={isUpdatingPassword}
+                      className="bg-primary text-primary-foreground"
+                    >
+                      {isUpdatingPassword ? "Updating..." : "Update Password"}
+                    </Button>
                   </div>
                 </div>
               </div>

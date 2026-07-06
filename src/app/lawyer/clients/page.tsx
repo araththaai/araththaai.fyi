@@ -1,78 +1,98 @@
-"use client";
+import { PrismaClient } from "@prisma/client";
+import ClientDirectory from "./ClientDirectory";
+import { revalidatePath } from "next/cache";
 
-import { useSession } from "next-auth/react";
-import { Search, Mail, Phone, ExternalLink } from "lucide-react";
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+const prisma = globalForPrisma.prisma || new PrismaClient();
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
-export default function LawyerClientsPage() {
-  const { data: session } = useSession();
+export default async function LawyerClientsPage() {
+  // Fetch users with role CLIENT
+  let dbClients = await prisma.user.findMany({
+    where: { role: "CLIENT" },
+    include: {
+      clientProfile: true,
+      casesAsClient: {
+        where: { status: { notIn: ["CLOSED"] } } // Get active cases count
+      }
+    }
+  });
 
-  const clients = [
-    { id: 1, name: "John Doe", company: "Doe Enterprises", email: "john@doeenterprises.com", phone: "+1 (555) 123-4567", activeCases: 2 },
-    { id: 2, name: "Sarah Smith", company: "Individual", email: "sarah.smith@example.com", phone: "+1 (555) 987-6543", activeCases: 1 },
-    { id: 3, name: "Acme Corp", company: "Acme Corporation", email: "legal@acmecorp.com", phone: "+1 (555) 456-7890", activeCases: 1 },
-  ];
+  // If no clients exist, seed some dummy clients so the view works
+  if (dbClients.length === 0) {
+    console.log("No clients found. Seeding dummy clients...");
+    
+    // Seed Client 1
+    const c1 = await prisma.user.create({
+      data: {
+        email: "john@doeenterprises.com",
+        firstName: "John",
+        lastName: "Doe",
+        phone: "+1 (555) 123-4567",
+        role: "CLIENT",
+        clientProfile: {
+          create: {
+            companyName: "Doe Enterprises"
+          }
+        }
+      }
+    });
 
-  return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900">My Clients</h1>
-          <p className="text-sm text-gray-500 mt-1">Directory of clients you are currently representing.</p>
-        </div>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <input 
-            type="text" 
-            placeholder="Search clients..." 
-            className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary w-full sm:w-64"
-          />
-        </div>
-      </div>
+    // Seed Client 2
+    const c2 = await prisma.user.create({
+      data: {
+        email: "sarah.smith@example.com",
+        firstName: "Sarah",
+        lastName: "Smith",
+        phone: "+1 (555) 987-6543",
+        role: "CLIENT",
+        clientProfile: {
+          create: {
+            companyName: null
+          }
+        }
+      }
+    });
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {clients.map((client) => (
-          <div key={client.id} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
-                  {client.name.substring(0, 2).toUpperCase()}
-                </div>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                  {client.activeCases} Active Cases
-                </span>
-              </div>
-              
-              <h3 className="text-lg font-bold text-gray-900">{client.name}</h3>
-              <p className="text-sm text-gray-500 mb-6">{client.company}</p>
-              
-              <div className="space-y-3">
-                <a href={`mailto:${client.email}`} className="flex items-center gap-3 text-sm text-gray-600 hover:text-primary transition-colors">
-                  <Mail className="h-4 w-4 text-gray-400" />
-                  {client.email}
-                </a>
-                <a href={`tel:${client.phone}`} className="flex items-center gap-3 text-sm text-gray-600 hover:text-primary transition-colors">
-                  <Phone className="h-4 w-4 text-gray-400" />
-                  {client.phone}
-                </a>
-              </div>
-            </div>
-            <div className="px-6 py-3 bg-gray-50 border-t border-gray-200">
-              <button onClick={() => {
-                import('sweetalert2').then(Swal => {
-                  Swal.default.fire({
-                    title: 'Loading Profile',
-                    text: `Loading profile portal for ${client.name}...`,
-                    icon: 'info',
-                    confirmButtonColor: '#0B132B'
-                  });
-                });
-              }} className="text-sm font-medium text-primary hover:text-primary/80 flex items-center gap-1 w-full justify-center">
-                View Client Profile <ExternalLink className="h-3 w-3" />
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    // Seed Client 3
+    const c3 = await prisma.user.create({
+      data: {
+        email: "legal@acmecorp.com",
+        firstName: "Acme",
+        lastName: "Corp",
+        phone: "+1 (555) 456-7890",
+        role: "CLIENT",
+        clientProfile: {
+          create: {
+            companyName: "Acme Corporation"
+          }
+        }
+      }
+    });
+
+    // Refetch the newly created clients
+    dbClients = await prisma.user.findMany({
+      where: { role: "CLIENT" },
+      include: {
+        clientProfile: true,
+        casesAsClient: {
+          where: { status: { notIn: ["CLOSED"] } }
+        }
+      }
+    });
+    
+    revalidatePath("/lawyer/clients");
+  }
+
+  // Map DB data to the format expected by the ClientDirectory component
+  const formattedClients = dbClients.map(c => ({
+    id: c.id,
+    name: `${c.firstName || ""} ${c.lastName || ""}`.trim() || c.email,
+    company: c.clientProfile?.companyName || null,
+    email: c.email,
+    phone: c.phone || "",
+    activeCases: c.casesAsClient.length
+  }));
+
+  return <ClientDirectory initialClients={formattedClients} />;
 }
