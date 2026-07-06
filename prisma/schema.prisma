@@ -1,0 +1,645 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  SENIOR_LAWYER
+  JUNIOR_LAWYER
+  RECEPTIONIST
+  CLIENT
+  GUEST
+}
+
+enum GeneralStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  ARCHIVED
+}
+
+enum CaseStatus {
+  OPEN
+  IN_PROGRESS
+  ON_HOLD
+  CLOSED
+  APPEAL
+}
+
+enum CasePriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AppointmentStatus {
+  REQUESTED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum AppointmentType {
+  ONLINE
+  OFFLINE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  DEBIT_CARD
+  UPI
+  NET_BANKING
+  CASH
+  CHEQUE
+  BANK_TRANSFER
+}
+
+// ---------------------------------------------------------------------------
+// Users & Roles
+// ---------------------------------------------------------------------------
+model User {
+  id        String        @id @default(uuid())
+  email     String        @unique
+  password  String?
+  firstName String?
+  lastName  String?
+  phone     String?
+  role      Role          @default(CLIENT)
+  status    GeneralStatus @default(ACTIVE)
+
+  // Audit
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  // Relations
+  clientProfile      ClientProfile?
+  lawyerProfile      LawyerProfile?
+  casesAsClient      Case[]         @relation("CaseClient")
+  casesAsLawyer      Case[]         @relation("CaseLawyer")
+  appointmentsClient Appointment[]  @relation("AppointmentClient")
+  appointmentsLawyer Appointment[]  @relation("AppointmentLawyer")
+  blogs              Blog[]
+  activityLogs       ActivityLog[]
+  auditLogs          AuditLog[]
+  notifications      Notification[]
+  sentMessages       Message[]      @relation("MessageSender")
+  receivedMessages   Message[]      @relation("MessageReceiver")
+  documents          Document[]     @relation("DocumentUploader")
+  invoices           Invoice[]
+}
+
+model ClientProfile {
+  id             String  @id @default(uuid())
+  userId         String  @unique
+  companyName    String?
+  taxId          String?
+  billingAddress String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model LawyerProfile {
+  id             String  @id @default(uuid())
+  userId         String  @unique
+  specialization String?
+  barNumber      String?
+  experience     Int? // Years of experience
+  bio            String? @db.Text
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------------------------
+// Core Business Logic (Cases, Appointments, Services)
+// ---------------------------------------------------------------------------
+model PracticeArea {
+  id          String        @id @default(uuid())
+  title       String
+  slug        String        @unique
+  description String        @db.Text
+  icon        String?
+  status      GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  cases Case[]
+}
+
+model Case {
+  id          String       @id @default(uuid())
+  caseNumber  String       @unique
+  title       String
+  description String?      @db.Text
+  status      CaseStatus   @default(OPEN)
+  priority    CasePriority @default(MEDIUM)
+  courtInfo   String?
+  deadline    DateTime?
+
+  practiceAreaId String
+  clientId       String
+  lawyerId       String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  practiceArea PracticeArea @relation(fields: [practiceAreaId], references: [id])
+  client       User         @relation("CaseClient", fields: [clientId], references: [id])
+  lawyer       User?        @relation("CaseLawyer", fields: [lawyerId], references: [id])
+
+  documents    Document[]
+  appointments Appointment[]
+  updates      CaseUpdate[]
+  invoices     Invoice[]
+}
+
+model CaseUpdate {
+  id          String @id @default(uuid())
+  caseId      String
+  title       String
+  description String @db.Text
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String? // User ID who created this
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+}
+
+model Appointment {
+  id               String  @id @default(uuid())
+  clientId         String
+  lawyerId         String?
+  caseId           String?
+  officeLocationId String?
+
+  title       String
+  description String?           @db.Text
+  type        AppointmentType   @default(ONLINE)
+  status      AppointmentStatus @default(REQUESTED)
+  date        DateTime
+  duration    Int               @default(60) // minutes
+  meetingLink String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  client         User            @relation("AppointmentClient", fields: [clientId], references: [id])
+  lawyer         User?           @relation("AppointmentLawyer", fields: [lawyerId], references: [id])
+  case           Case?           @relation(fields: [caseId], references: [id])
+  officeLocation OfficeLocation? @relation(fields: [officeLocationId], references: [id])
+}
+
+// ---------------------------------------------------------------------------
+// Document Management
+// ---------------------------------------------------------------------------
+model Document {
+  id           String        @id @default(uuid())
+  title        String
+  url          String
+  type         String // Mime type (e.g. application/pdf)
+  size         Int // Bytes
+  caseId       String?
+  uploadedById String
+  status       GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  case       Case? @relation(fields: [caseId], references: [id])
+  uploadedBy User  @relation("DocumentUploader", fields: [uploadedById], references: [id])
+}
+
+// ---------------------------------------------------------------------------
+// Billing & Payments
+// ---------------------------------------------------------------------------
+model Invoice {
+  id        String        @id @default(uuid())
+  invoiceNo String        @unique
+  clientId  String
+  caseId    String?
+  amount    Float
+  tax       Float         @default(0)
+  total     Float
+  status    InvoiceStatus @default(DRAFT)
+  dueDate   DateTime
+  notes     String?       @db.Text
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  client   User      @relation(fields: [clientId], references: [id])
+  case     Case?     @relation(fields: [caseId], references: [id])
+  payments Payment[]
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  invoiceId     String
+  amount        Float
+  method        PaymentMethod
+  transactionId String?
+  status        PaymentStatus @default(PENDING)
+  date          DateTime      @default(now())
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+}
+
+// ---------------------------------------------------------------------------
+// CMS: Blogs, FAQ, Testimonials
+// ---------------------------------------------------------------------------
+model BlogCategory {
+  id     String        @id @default(uuid())
+  name   String
+  slug   String        @unique
+  status GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  blogs Blog[]
+}
+
+model Blog {
+  id          String        @id @default(uuid())
+  title       String
+  slug        String        @unique
+  content     String        @db.Text
+  excerpt     String?       @db.Text
+  featuredImg String?
+  authorId    String
+  categoryId  String
+  status      GeneralStatus @default(PENDING) // PENDING = Draft
+  publishedAt DateTime?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  author    User         @relation(fields: [authorId], references: [id])
+  category  BlogCategory @relation(fields: [categoryId], references: [id])
+  seoMeta   SeoMetadata? @relation(fields: [seoMetaId], references: [id])
+  seoMetaId String?      @unique
+}
+
+model FAQ {
+  id       String        @id @default(uuid())
+  question String
+  answer   String        @db.Text
+  category String?
+  status   GeneralStatus @default(ACTIVE)
+  order    Int           @default(0)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model Testimonial {
+  id         String        @id @default(uuid())
+  clientName String
+  company    String?
+  content    String        @db.Text
+  rating     Int           @default(5)
+  status     GeneralStatus @default(PENDING)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model Review {
+  id         String        @id @default(uuid())
+  platform   String // e.g. Google, Trustpilot
+  clientName String
+  content    String        @db.Text
+  rating     Int
+  link       String?
+  status     GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+// ---------------------------------------------------------------------------
+// Operations & General CMS
+// ---------------------------------------------------------------------------
+model OfficeLocation {
+  id         String        @id @default(uuid())
+  name       String
+  address    String        @db.Text
+  city       String
+  state      String
+  country    String
+  postalCode String
+  phone      String?
+  email      String?
+  isPrimary  Boolean       @default(false)
+  status     GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  appointments Appointment[]
+}
+
+model ContactRequest {
+  id      String        @id @default(uuid())
+  name    String
+  email   String
+  phone   String?
+  subject String?
+  message String        @db.Text
+  status  GeneralStatus @default(PENDING) // PENDING = Unread
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model ConsultationRequest {
+  id          String        @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  serviceType String
+  message     String?       @db.Text
+  status      GeneralStatus @default(PENDING)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model Notification {
+  id      String  @id @default(uuid())
+  userId  String
+  title   String
+  message String  @db.Text
+  isRead  Boolean @default(false)
+  type    String // System, Message, Alert
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id         String  @id @default(uuid())
+  senderId   String
+  receiverId String
+  content    String  @db.Text
+  isRead     Boolean @default(false)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  sender   User @relation("MessageSender", fields: [senderId], references: [id])
+  receiver User @relation("MessageReceiver", fields: [receiverId], references: [id])
+}
+
+// ---------------------------------------------------------------------------
+// Firm & Marketing Info
+// ---------------------------------------------------------------------------
+model TeamMember {
+  id          String        @id @default(uuid())
+  name        String
+  designation String
+  bio         String?       @db.Text
+  photoUrl    String?
+  order       Int           @default(0)
+  status      GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model Career {
+  id           String        @id @default(uuid())
+  title        String
+  department   String
+  location     String
+  description  String        @db.Text
+  requirements String        @db.Text
+  status       GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id          String        @id @default(uuid())
+  careerId    String
+  name        String
+  email       String
+  phone       String
+  resumeUrl   String
+  coverLetter String?       @db.Text
+  status      GeneralStatus @default(PENDING)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  career Career @relation(fields: [careerId], references: [id])
+}
+
+model GalleryImage {
+  id       String        @id @default(uuid())
+  title    String?
+  url      String
+  category String?
+  status   GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model MediaFile {
+  id       String @id @default(uuid())
+  filename String
+  url      String
+  mimeType String
+  size     Int
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+// ---------------------------------------------------------------------------
+// Localization & Settings
+// ---------------------------------------------------------------------------
+model Language {
+  id        String        @id @default(uuid())
+  code      String        @unique // en, hi, ta
+  name      String
+  isDefault Boolean       @default(false)
+  status    GeneralStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model TranslationKey {
+  id        String @id @default(uuid())
+  key       String @unique // e.g. "home.hero.title"
+  namespace String @default("common")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model Setting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String @db.Text // JSON string for complex objects
+  group String @default("general")
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+}
+
+model SeoMetadata {
+  id          String  @id @default(uuid())
+  path        String? @unique // URL path, e.g. "/about", or null if linked to entity
+  title       String
+  description String? @db.Text
+  keywords    String?
+  ogImage     String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  createdBy String?
+  updatedBy String?
+
+  blog Blog?
+}
+
+// ---------------------------------------------------------------------------
+// System Audit
+// ---------------------------------------------------------------------------
+model ActivityLog {
+  id       String  @id @default(uuid())
+  userId   String?
+  action   String
+  entity   String // e.g. 'Case', 'Invoice'
+  entityId String?
+  details  String? @db.Text // JSON metadata
+
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model AuditLog {
+  id        String  @id @default(uuid())
+  userId    String?
+  action    String
+  resource  String
+  ipAddress String?
+  userAgent String?
+  status    String // SUCCESS / FAILED
+
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+}
