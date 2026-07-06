@@ -57,7 +57,16 @@ export default function LawyerClientsPage() {
               </div>
             </div>
             <div className="px-6 py-3 bg-gray-50 border-t border-gray-200">
-              <button onClick={() => alert(`Loading profile portal for ${client.name}...`)} className="text-sm font-medium text-primary hover:text-primary/80 flex items-center gap-1 w-full justify-center">
+              <button onClick={() => {
+                import('sweetalert2').then(Swal => {
+                  Swal.default.fire({
+                    title: 'Loading Profile',
+                    text: `Loading profile portal for ${client.name}...`,
+                    icon: 'info',
+                    confirmButtonColor: '#0B132B'
+                  });
+                });
+              }} className="text-sm font-medium text-primary hover:text-primary/80 flex items-center gap-1 w-full justify-center">
                 View Client Profile <ExternalLink className="h-3 w-3" />
               </button>
             </div>
