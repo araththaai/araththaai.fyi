@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { Resend } from "resend";
 
+export const dynamic = "force-static";
+
 const prisma = new PrismaClient();
 
 const bookingSchema = z.object({
