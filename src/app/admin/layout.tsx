@@ -54,7 +54,18 @@ export default function AdminLayout({
           <div className="h-20 flex items-center px-6 border-b border-slate-800">
             <Link href="/" className="flex items-center gap-2 group w-full">
               <div className="relative h-10 w-10 flex-shrink-0 bg-white/10 rounded p-1">
-                <CldImage src="araththaai_k0wo2e" alt="Logo" fill sizes="40px" className="object-contain" />
+                <CldImage 
+                  src="araththaai_k0wo2e" 
+                  alt="Logo" 
+                  fill 
+                  sizes="40px" 
+                  className="object-contain" 
+                  config={{
+                    cloud: {
+                      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "r0lvbyu3",
+                    },
+                  }}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-lg tracking-tight text-white">Araththaai</span>

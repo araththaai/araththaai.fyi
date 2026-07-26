@@ -18,7 +18,13 @@ export function Footer() {
                   src="araththaai_k0wo2e" 
                   alt="Araththaai Logo" 
                   fill
+                  sizes="48px"
                   className="object-contain"
+                  config={{
+                    cloud: {
+                      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "r0lvbyu3",
+                    },
+                  }}
                 />
               </div>
               <div className="flex flex-col">

@@ -22,6 +22,11 @@ export function Navbar() {
                   fill
                   sizes="48px"
                   className="object-contain"
+                  config={{
+                    cloud: {
+                      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "r0lvbyu3",
+                    },
+                  }}
                 />
               </div>
               <div className="flex flex-col">
