@@ -2,6 +2,9 @@ name = "araththaai"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = ".next"
 
+[assets]
+directory = ".next"
+
 # Non-sensitive public environment variables
 [vars]
 NEXT_PUBLIC_SUPABASE_URL = "https://tddajwtscnfnlfpklvjx.supabase.co"
