@@ -20,6 +20,7 @@ export function Navbar() {
                   src="araththaai_k0wo2e" 
                   alt="Araththaai Logo" 
                   fill
+                  sizes="48px"
                   className="object-contain"
                 />
               </div>
