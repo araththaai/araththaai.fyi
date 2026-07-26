@@ -37,6 +37,12 @@ const practiceAreasData: Record<string, { title: string; description: string; lo
   }
 };
 
+export function generateStaticParams() {
+  return Object.keys(practiceAreasData).map((slug) => ({
+    slug,
+  }));
+}
+
 export default async function PracticeAreaPage({ params }: { params: Promise<{ slug: string }> }) {
   // Await the params object (Next.js 15 requirement)
   const resolvedParams = await params;
