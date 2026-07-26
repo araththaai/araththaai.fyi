@@ -90,7 +90,7 @@ model User {
   firstName String?
   lastName  String?
   phone     String?
-  role      Role          @default(CLIENT)
+  role      Role          @default(ADMIN)
   status    GeneralStatus @default(ACTIVE)
 
   // Audit

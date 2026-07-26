@@ -7,7 +7,7 @@ import { useSession, signOut } from "next-auth/react";
 import { CldImage } from "next-cloudinary";
 import { 
   LayoutDashboard, 
-  Users, 
+  MessageSquare, 
   Briefcase, 
   Calendar, 
   CreditCard,
@@ -15,7 +15,7 @@ import {
   LogOut,
   Menu,
   X,
-  ShieldAlert
+  ShieldCheck
 } from "lucide-react";
 
 export default function AdminLayout({
@@ -29,7 +29,7 @@ export default function AdminLayout({
 
   const navItems = [
     { name: "Overview", href: "/admin", icon: LayoutDashboard },
-    { name: "Users & Roles", href: "/admin/users", icon: Users },
+    { name: "Consultations", href: "/admin/consultations", icon: MessageSquare },
     { name: "All Cases", href: "/admin/cases", icon: Briefcase },
     { name: "Master Schedule", href: "/admin/schedule", icon: Calendar },
     { name: "Finances", href: "/admin/finances", icon: CreditCard },
@@ -54,12 +54,12 @@ export default function AdminLayout({
           <div className="h-20 flex items-center px-6 border-b border-slate-800">
             <Link href="/" className="flex items-center gap-2 group w-full">
               <div className="relative h-10 w-10 flex-shrink-0 bg-white/10 rounded p-1">
-                <CldImage src="araththaai_k0wo2e" alt="Logo" fill className="object-contain" />
+                <CldImage src="araththaai_k0wo2e" alt="Logo" fill sizes="40px" className="object-contain" />
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-bold text-lg tracking-tight text-white">Araththaai</span>
                 <span className="text-[0.55rem] uppercase tracking-widest text-secondary flex items-center gap-1">
-                  <ShieldAlert className="h-3 w-3" /> Admin
+                  <ShieldCheck className="h-3 w-3" /> Admin Portal
                 </span>
               </div>
             </Link>
@@ -70,7 +70,7 @@ export default function AdminLayout({
 
           <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || (item.href !== "/admin" && pathname.startsWith(item.href));
               const Icon = item.icon;
               return (
                 <Link
@@ -107,8 +107,8 @@ export default function AdminLayout({
           <div className="flex-1 flex justify-end items-center gap-4">
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-medium text-gray-900">{session?.user?.name || "Admin"}</p>
-                <p className="text-xs text-gray-500 capitalize">{(session?.user as any)?.role?.toLowerCase() || "Admin"}</p>
+                <p className="text-sm font-medium text-gray-900">{session?.user?.name || "Administrator"}</p>
+                <p className="text-xs text-gray-500 capitalize">Firm Administrator</p>
               </div>
               <div className="h-10 w-10 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold uppercase">
                 {session?.user?.name ? session.user.name.substring(0, 2) : "A"}

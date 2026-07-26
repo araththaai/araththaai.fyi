@@ -41,7 +41,7 @@ export function Navbar() {
 
           <div className="hidden md:flex items-center space-x-4">
             <Link href="/sign-in">
-              <Button variant="ghost" className="text-primary hover:text-secondary">Client Portal</Button>
+              <Button variant="ghost" className="text-primary hover:text-secondary">Admin Login</Button>
             </Link>
             <Link href="/book">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Book Consultation</Button>
@@ -70,7 +70,7 @@ export function Navbar() {
             <Link href="/contact" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Contact</Link>
             <div className="mt-4 flex flex-col space-y-2 px-3">
               <Link href="/sign-in">
-                <Button variant="outline" className="w-full justify-center">Client Portal</Button>
+                <Button variant="outline" className="w-full justify-center">Admin Login</Button>
               </Link>
               <Link href="/book">
                 <Button className="w-full justify-center bg-primary text-primary-foreground">Book Consultation</Button>

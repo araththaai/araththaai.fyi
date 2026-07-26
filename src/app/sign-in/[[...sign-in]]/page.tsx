@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 
@@ -9,32 +8,29 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    const res = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    setLoading(true);
 
-    if (res?.error) {
-      setError("Invalid email or password");
-    } else {
-      const { getSession } = await import("next-auth/react");
-      const session = await getSession();
-      const role = (session?.user as any)?.role;
-      
-      if (role === "SUPER_ADMIN") {
-        window.location.href = "/super-admin";
-      } else if (role === "ADMIN") {
-        window.location.href = "/admin";
-      } else if (role === "SENIOR_LAWYER" || role === "JUNIOR_LAWYER") {
-        window.location.href = "/lawyer";
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        setError("Invalid email or password");
+        setLoading(false);
       } else {
-        window.location.href = "/dashboard";
+        window.location.href = "/admin";
       }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+      setLoading(false);
     }
   };
 
@@ -42,9 +38,9 @@ export default function SignInPage() {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-surface">
       <div className="w-full max-w-md flex flex-col items-center">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-heading font-bold text-primary mb-2">Client Portal</h1>
+          <h1 className="text-3xl font-heading font-bold text-primary mb-2">Admin Portal</h1>
           <p className="text-muted-foreground text-sm">
-            Sign in to access your case files and upcoming appointments.
+            Sign in to manage firm consultations, cases, and settings.
           </p>
         </div>
         
@@ -70,14 +66,13 @@ export default function SignInPage() {
               required 
             />
           </div>
-          <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12">
-            Sign In
+          <Button 
+            type="submit" 
+            disabled={loading}
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12"
+          >
+            {loading ? "Signing in..." : "Sign In to Admin"}
           </Button>
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
-              Don't have an account? <Link href="/sign-up" className="text-secondary hover:underline font-semibold">Sign Up</Link>
-            </p>
-          </div>
         </form>
       </div>
     </div>
