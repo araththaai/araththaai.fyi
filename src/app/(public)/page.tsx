@@ -1,35 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Scale, Award, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import LiquidEther from "@/components/shared/LiquidEther";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-background">
-          <LiquidEther
-            colors={['#5227FF', '#FF9FFC', '#B497CF']}
-            mouseForce={20}
-            cursorSize={100}
-            isViscous={true}
-            viscous={30}
-            iterationsViscous={32}
-            iterationsPoisson={32}
-            resolution={0.5}
-            isBounce={false}
-            autoDemo={true}
-            autoSpeed={0.5}
-            autoIntensity={2.2}
-            takeoverDuration={0.25}
-            autoResumeDelay={3000}
-            autoRampDuration={0.6}
-            style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, opacity: 0.3 }}
-          />
-        </div>
-        
+      <section className="relative pt-24 pb-32 lg:pt-36 lg:pb-40 overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-6">
             Premier Legal Consultancy
