@@ -4,7 +4,6 @@ import { z } from "zod";
 import { Resend } from "resend";
 
 const prisma = new PrismaClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const bookingSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -43,6 +42,7 @@ export async function POST(req: Request) {
 
     // Send email notification via Resend
     if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
         from: "Araththaai Legal <consult@araththaai.fyi>",
         to: [email],
