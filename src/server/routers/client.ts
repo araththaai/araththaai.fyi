@@ -21,7 +21,7 @@ export const clientRouter = router({
       }),
     ]);
 
-    const unpaidInvoicesTotal = invoices.reduce((sum, inv) => sum + inv.total, 0);
+    const unpaidInvoicesTotal = invoices.reduce((sum: number, inv: { total: number }) => sum + inv.total, 0);
 
     return {
       activeCases,

@@ -15,7 +15,7 @@
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@hookform/resolvers": "^5.5.7",
-    "@prisma/client": "^7.9.1",
+    "@prisma/client": "^6.0.0",
     "@swc/helpers": "^0.5.23",
     "@tanstack/react-query": "^5.101.4",
     "@trpc/client": "^11.18.0",
@@ -54,11 +54,11 @@
     "@types/react-dom": "^19",
     "eslint": "^10.8.0",
     "eslint-config-next": "^16.3.0-preview.10",
-    "prisma": "^7.9.1",
+    "prisma": "^6.0.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.1",
     "typescript": "^7",
-    "wrangler": "^3.100.0"
+    "wrangler": "^4.115.0"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
