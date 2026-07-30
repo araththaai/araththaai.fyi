@@ -2,7 +2,7 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { prisma } from "./config/prisma";
-import { supabaseAdmin } from "./config/supabaseAdmin";
+
 import { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import { Role } from "@prisma/client";
 

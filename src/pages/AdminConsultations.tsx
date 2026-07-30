@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageSquare, Mail, Phone, Calendar, Clock, CheckCircle2, AlertCircle } from "lucide-react";
+import { MessageSquare, Mail, Phone, Calendar } from "lucide-react";
 
 export default function AdminConsultationsPage() {
   // Demonstration data for public requests received via /book and /contact
