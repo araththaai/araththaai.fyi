@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CldImage } from "next-cloudinary";
+
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,19 +14,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link to="/" className="flex items-center gap-2 group">
               <div className="relative h-12 w-12 flex-shrink-0 transition-transform group-hover:scale-110 overflow-hidden rounded-md">
-                <CldImage 
-                  src="araththaai_k0wo2e" 
+                <img
+                  src="https://res.cloudinary.com/demo/image/upload/araththaai_k0wo2e.png" 
                   alt="Araththaai Logo" 
-                  fill
-                  sizes="48px"
-                  className="object-contain"
-                  config={{
-                    cloud: {
-                      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "r0lvbyu3",
-                    },
-                  }}
+                  className="h-full w-full object-contain"
                 />
               </div>
               <div className="flex flex-col">
@@ -37,18 +30,18 @@ export function Navbar() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Home</Link>
-            <Link href="/services" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Services</Link>
-            <Link href="/knowledge-hub" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Knowledge Hub</Link>
-            <Link href="/about" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">About</Link>
-            <Link href="/contact" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Contact</Link>
+            <Link to="/" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Home</Link>
+            <Link to="/services" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Services</Link>
+            <Link to="/knowledge-hub" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Knowledge Hub</Link>
+            <Link to="/about" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">About</Link>
+            <Link to="/contact" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">Contact</Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/sign-in">
+            <Link to="/sign-in">
               <Button variant="ghost" className="text-primary hover:text-secondary">Admin Login</Button>
             </Link>
-            <Link href="/book">
+            <Link to="/book">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Book Consultation</Button>
             </Link>
           </div>
@@ -68,16 +61,16 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-background border-b border-border shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link href="/" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Home</Link>
-            <Link href="/services" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Services</Link>
-            <Link href="/knowledge-hub" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Knowledge Hub</Link>
-            <Link href="/about" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">About</Link>
-            <Link href="/contact" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Contact</Link>
+            <Link to="/" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Home</Link>
+            <Link to="/services" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Services</Link>
+            <Link to="/knowledge-hub" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Knowledge Hub</Link>
+            <Link to="/about" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">About</Link>
+            <Link to="/contact" className="block px-3 py-2 text-base font-medium text-foreground hover:text-secondary">Contact</Link>
             <div className="mt-4 flex flex-col space-y-2 px-3">
-              <Link href="/sign-in">
+              <Link to="/sign-in">
                 <Button variant="outline" className="w-full justify-center">Admin Login</Button>
               </Link>
-              <Link href="/book">
+              <Link to="/book">
                 <Button className="w-full justify-center bg-primary text-primary-foreground">Book Consultation</Button>
               </Link>
             </div>

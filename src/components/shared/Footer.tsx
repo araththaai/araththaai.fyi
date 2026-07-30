@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { CldImage } from "next-cloudinary";
+
 
 export function Footer() {
   return (
@@ -12,19 +12,12 @@ export function Footer() {
           
           {/* Brand Info */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-white/10 p-1">
-                <CldImage 
-                  src="araththaai_k0wo2e" 
+                <img 
+                  src="https://res.cloudinary.com/demo/image/upload/araththaai_k0wo2e.png" 
                   alt="Araththaai Logo" 
-                  fill
-                  sizes="48px"
-                  className="object-contain"
-                  config={{
-                    cloud: {
-                      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "r0lvbyu3",
-                    },
-                  }}
+                  className="object-contain w-full h-full"
                 />
               </div>
               <div className="flex flex-col">
@@ -46,11 +39,11 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-semibold text-lg mb-6 text-white">Quick Links</h3>
             <ul className="space-y-3 text-sm text-gray-300">
-              <li><Link href="/" className="hover:text-secondary transition-colors">Home</Link></li>
-              <li><Link href="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-secondary transition-colors">Services</Link></li>
-              <li><Link href="/knowledge-hub" className="hover:text-secondary transition-colors">Knowledge Hub</Link></li>
-              <li><Link href="/contact" className="hover:text-secondary transition-colors">Contact</Link></li>
+              <li><Link to="/" className="hover:text-secondary transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
+              <li><Link to="/services" className="hover:text-secondary transition-colors">Services</Link></li>
+              <li><Link to="/knowledge-hub" className="hover:text-secondary transition-colors">Knowledge Hub</Link></li>
+              <li><Link to="/contact" className="hover:text-secondary transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -58,11 +51,11 @@ export function Footer() {
           <div>
             <h3 className="font-heading font-semibold text-lg mb-6 text-white">Services</h3>
             <ul className="space-y-3 text-sm text-gray-300">
-              <li><Link href="/services#corporate-law" className="hover:text-secondary transition-colors">Corporate Law</Link></li>
-              <li><Link href="/services#civil-litigation" className="hover:text-secondary transition-colors">Civil Litigation</Link></li>
-              <li><Link href="/services#family-law" className="hover:text-secondary transition-colors">Family Law</Link></li>
-              <li><Link href="/services#real-estate" className="hover:text-secondary transition-colors">Real Estate</Link></li>
-              <li><Link href="/services#intellectual-property" className="hover:text-secondary transition-colors">Intellectual Property</Link></li>
+              <li><Link to="/services#corporate-law" className="hover:text-secondary transition-colors">Corporate Law</Link></li>
+              <li><Link to="/services#civil-litigation" className="hover:text-secondary transition-colors">Civil Litigation</Link></li>
+              <li><Link to="/services#family-law" className="hover:text-secondary transition-colors">Family Law</Link></li>
+              <li><Link to="/services#real-estate" className="hover:text-secondary transition-colors">Real Estate</Link></li>
+              <li><Link to="/services#intellectual-property" className="hover:text-secondary transition-colors">Intellectual Property</Link></li>
             </ul>
           </div>
 
@@ -89,8 +82,8 @@ export function Footer() {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). All rights reserved. | Developed by AustralAI</p>
           <div className="flex space-x-6">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

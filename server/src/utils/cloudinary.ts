@@ -3,7 +3,7 @@ import { v2 as cloudinary } from 'cloudinary';
 // Configure Cloudinary
 // Note: If these env vars are missing, the SDK will look for CLOUDINARY_URL
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'r0lvbyu3',
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'r0lvbyu3',
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
