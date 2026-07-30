@@ -6,8 +6,9 @@
     "server"
   ],
   "scripts": {
+    "postinstall": "npm run generate --workspace=server",
     "dev": "concurrently \"vite --port 5173\" \"npm run dev --workspace=server\"",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run generate --workspace=server && npm run build:client && npm run build:server",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "build:client": "tsc && vite build",
