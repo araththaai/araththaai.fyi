@@ -1,0 +1,8 @@
+import { router, publicProcedure } from "../trpc";
+import { clientRouter } from "./client";
+export const appRouter = router({
+    healthcheck: publicProcedure.query(() => {
+        return { status: "ok", timestamp: new Date() };
+    }),
+    client: clientRouter,
+});
