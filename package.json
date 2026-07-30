@@ -2,17 +2,15 @@
   "name": "araththaai-monorepo",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "server"
-  ],
+
   "scripts": {
-    "postinstall": "npm run generate --workspace=server",
-    "dev": "concurrently \"vite --port 5173\" \"npm run dev --workspace=server\"",
-    "build": "npm run generate --workspace=server && npm run build:client && npm run build:server",
+    "postinstall": "cd server && npm install",
+    "dev": "concurrently \"vite --port 5173\" \"cd server && npm run dev\"",
+    "build": "npm run build:client && npm run build:server",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "build:client": "tsc && vite build",
-    "build:server": "npm run build --workspace=server"
+    "build:server": "cd server && npm run build"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
