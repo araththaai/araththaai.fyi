@@ -71,7 +71,7 @@ export default function BookConsultationPage() {
           <p className="text-muted-foreground text-lg mb-8">
             Thank you for reaching out to Araththaai. Your consultation request has been successfully received. Our legal team will review your details and contact you within 24 hours to schedule your appointment.
           </p>
-          <Link href="/">
+          <Link to="/">
             <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
               Return to Home
             </Button>

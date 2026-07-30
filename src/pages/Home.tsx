@@ -20,12 +20,12 @@ export default function Home() {
             AKM Associates & Legal Consultants provides world-class legal representation for individuals, enterprises, and startups. We turn complex legal challenges into strategic advantages.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book">
+            <Link to="/book">
               <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-md transition-all shadow-xl hover:shadow-2xl">
                 Book Consultation <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link href="#services">
+            <Link to="#services">
               <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 border-border text-foreground hover:bg-muted transition-all">
                 Explore Services
               </Button>

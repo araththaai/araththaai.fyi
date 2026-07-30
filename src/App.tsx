@@ -6,15 +6,15 @@ import React, { Suspense, lazy } from "react";
 import "./App.css";
 
 // Lazy loaded pages
-const Home = lazy(() => import("@/pages/page"));
-const About = lazy(() => import("@/pages/about/page"));
-const Book = lazy(() => import("@/pages/book/page"));
-const Contact = lazy(() => import("@/pages/contact/page"));
-const Services = lazy(() => import("@/pages/services/page"));
-const ServiceDetail = lazy(() => import("@/pages/services/[slug]/page"));
-const Admin = lazy(() => import("@/pages/admin/page"));
-const AdminConsultations = lazy(() => import("@/pages/admin/consultations/page"));
-const SignIn = lazy(() => import("@/pages/sign-in/page"));
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Book = lazy(() => import("@/pages/Book"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Services = lazy(() => import("@/pages/Services"));
+const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
+const Admin = lazy(() => import("@/pages/Admin"));
+const AdminConsultations = lazy(() => import("@/pages/AdminConsultations"));
+const SignIn = lazy(() => import("@/pages/SignIn"));
 
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
@@ -66,3 +66,4 @@ function App() {
 }
 
 export default App;
+

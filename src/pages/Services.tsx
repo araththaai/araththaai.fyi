@@ -98,7 +98,7 @@ export default function ServicesPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link href={`/contact`} className="text-secondary font-medium hover:underline inline-flex items-center text-sm uppercase tracking-wider">
+                  <Link to={`/contact`} className="text-secondary font-medium hover:underline inline-flex items-center text-sm uppercase tracking-wider">
                     Consult Us <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </div>

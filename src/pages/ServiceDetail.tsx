@@ -1,5 +1,4 @@
-
-import { Link } from "react-router-dom";
+import { Link, useParams, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 // In a real scenario, this would query the DB. Since we haven't seeded the DB yet,
@@ -37,27 +36,19 @@ const practiceAreasData: Record<string, { title: string; description: string; lo
   }
 };
 
-export function generateStaticParams() {
-  return Object.keys(practiceAreasData).map((slug) => ({
-    slug,
-  }));
-}
-
-export default async function PracticeAreaPage({ params }: { params: Promise<{ slug: string }> }) {
-  // Await the params object (Next.js 15 requirement)
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+export default function PracticeAreaPage() {
+  const { slug } = useParams<{ slug: string }>();
   
-  const area = practiceAreasData[slug];
+  const area = slug ? practiceAreasData[slug] : null;
 
   if (!area) {
-    notFound();
+    return <Navigate to="/services" replace />;
   }
 
   return (
     <div className="py-24 bg-surface min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/services" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
+        <Link to="/services" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Practice Areas
         </Link>
         
@@ -81,7 +72,7 @@ export default async function PracticeAreaPage({ params }: { params: Promise<{ s
         <div className="bg-card border border-border p-8 rounded-2xl shadow-sm text-center">
           <h3 className="text-2xl font-heading font-bold text-primary mb-4">Need Legal Counsel in {area.title}?</h3>
           <p className="text-muted-foreground mb-8">Schedule a private consultation with our specialized legal team.</p>
-          <Link href="/book">
+          <Link to="/book">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12">
               Book a Consultation
             </Button>
