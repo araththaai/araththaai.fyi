@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "server",
-    "shared"
+    "server"
   ],
   "scripts": {
     "dev": "concurrently \"vite --port 5173\" \"npm run dev --workspace=server\"",

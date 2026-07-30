@@ -3,7 +3,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import TRPCProvider from "@/lib/trpc/Provider";
 import AuthProvider from "@/components/SessionProvider";
 import React, { Suspense, lazy } from "react";
-import "./App.css";
+
 
 // Lazy loaded pages
 const Home = lazy(() => import("@/pages/Home"));
