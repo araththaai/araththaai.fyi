@@ -1,18 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import React, { Suspense, lazy } from "react";
+import React from "react";
 
-
-// Lazy loaded pages
-const Home = lazy(() => import("@/pages/Home"));
-const About = lazy(() => import("@/pages/About"));
-const Book = lazy(() => import("@/pages/Book"));
-const Contact = lazy(() => import("@/pages/Contact"));
-const Services = lazy(() => import("@/pages/Services"));
-const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
-const Admin = lazy(() => import("@/pages/Admin"));
-const AdminConsultations = lazy(() => import("@/pages/AdminConsultations"));
-const SignIn = lazy(() => import("@/pages/SignIn"));
+// Static imports for single-file bundling
+import Home from "@/pages/Home";
+import About from "@/pages/About";
+import Book from "@/pages/Book";
+import Contact from "@/pages/Contact";
+import Services from "@/pages/Services";
+import ServiceDetail from "@/pages/ServiceDetail";
+import Admin from "@/pages/Admin";
+import AdminConsultations from "@/pages/AdminConsultations";
+import SignIn from "@/pages/SignIn";
 
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
@@ -38,22 +37,20 @@ function App() {
         <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
       </Helmet>
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            {/* Routes with Navbar & Footer */}
-            <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
-            <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
-            <Route path="/book" element={<PublicLayout><Book /></PublicLayout>} />
-            <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
-            <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
-            <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
-            
-            {/* Admin & Auth Routes (without standard Navbar/Footer) */}
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/consultations" element={<AdminConsultations />} />
-            <Route path="/sign-in" element={<SignIn />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          {/* Routes with Navbar & Footer */}
+          <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+          <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+          <Route path="/book" element={<PublicLayout><Book /></PublicLayout>} />
+          <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+          <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
+          <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
+          
+          {/* Admin & Auth Routes (without standard Navbar/Footer) */}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/consultations" element={<AdminConsultations />} />
+          <Route path="/sign-in" element={<SignIn />} />
+        </Routes>
       </BrowserRouter>
     </HelmetProvider>
   );
