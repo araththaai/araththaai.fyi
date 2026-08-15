@@ -15,7 +15,7 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2">
               <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-white/10 p-1">
                 <img 
-                  src="https://res.cloudinary.com/demo/image/upload/araththaai_k0wo2e.png" 
+                  src="/lgo.jpg" 
                   alt="Araththaai Logo" 
                   className="object-contain w-full h-full"
                 />

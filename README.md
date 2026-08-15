@@ -1,7 +1,7 @@
 # Araththaai – AKM Associates & Legal Consultants
 > Premium, modern, secure, and responsive Legal Practice & Consultancy Platform.
 
-![Araththaai Logo](https://res.cloudinary.com/r0lvbyu3/image/upload/f_auto,q_auto/araththaai_k0wo2e)
+![Araththaai Logo](public/lgo.jpg)
 
 ---
 

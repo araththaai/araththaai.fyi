@@ -17,7 +17,7 @@ export function Navbar() {
             <Link to="/" className="flex items-center gap-2 group">
               <div className="relative h-12 w-12 flex-shrink-0 transition-transform group-hover:scale-110 overflow-hidden rounded-md">
                 <img
-                  src="https://res.cloudinary.com/demo/image/upload/araththaai_k0wo2e.png" 
+                  src="/lgo.jpg" 
                   alt="Araththaai Logo" 
                   className="h-full w-full object-contain"
                 />
