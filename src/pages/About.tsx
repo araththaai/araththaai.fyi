@@ -83,25 +83,25 @@ export default function AboutPage() {
         </div>
 
         {/* Credentials & Memberships */}
-        <div className="bg-primary text-primary-foreground p-8 md:p-12 rounded-2xl shadow-lg border border-primary/20">
+        <div className="bg-card text-foreground p-8 md:p-12 rounded-2xl shadow-sm border border-border">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
             <div className="lg:col-span-1 space-y-4 text-center lg:text-left">
               <div className="inline-flex p-3 bg-secondary/15 rounded-lg text-secondary">
                 <Landmark className="h-8 w-8" />
               </div>
-              <h3 className="text-2xl font-heading font-bold text-white">Bar Accreditations</h3>
-              <p className="text-xs text-gray-300 leading-relaxed">
+              <h3 className="text-2xl font-heading font-bold text-primary">Bar Accreditations</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
                 Our attorneys are active members in good standing of various national and state regulatory bar organizations.
               </p>
             </div>
             
-            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-gray-300">
-              <div className="bg-white/5 border border-white/10 p-5 rounded-lg">
-                <h4 className="font-bold text-white mb-2">Bar Council of India</h4>
+            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-muted-foreground">
+              <div className="bg-muted border border-border p-5 rounded-lg">
+                <h4 className="font-bold text-primary mb-2">Bar Council of India</h4>
                 <p className="text-xs">Statutory licensing and regulatory board for all advocates practicing within the Supreme Court and national high court systems.</p>
               </div>
-              <div className="bg-white/5 border border-white/10 p-5 rounded-lg">
-                <h4 className="font-bold text-white mb-2">Madras High Court Bar Association</h4>
+              <div className="bg-muted border border-border p-5 rounded-lg">
+                <h4 className="font-bold text-primary mb-2">Madras High Court Bar Association</h4>
                 <p className="text-xs">One of the oldest legal association pools in South Asia, representing senior advocacy members since the 19th century.</p>
               </div>
             </div>

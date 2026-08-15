@@ -354,26 +354,26 @@ export default function PracticeAreaDetail() {
 
           {/* Sidebar Case Intake Form */}
           <div className="lg:col-span-1">
-            <div className="bg-primary text-primary-foreground p-8 rounded-2xl shadow-lg sticky top-24 border border-primary/20">
+            <div className="bg-card border border-border p-8 rounded-2xl shadow-sm sticky top-24 text-foreground">
               <div className="flex items-center gap-3 mb-6">
                 <PlayCircle className="h-6 w-6 text-secondary" />
-                <h3 className="text-xl font-heading font-bold">Fast Case Intake</h3>
+                <h3 className="text-xl font-heading font-bold text-primary">Fast Case Intake</h3>
               </div>
-              <p className="text-xs text-primary-foreground/80 mb-6 leading-relaxed">
+              <p className="text-xs text-muted-foreground mb-6 leading-relaxed">
                 Provide your details below to schedule an initial consultation with a specialized {area.title} advocate.
               </p>
 
               {isSuccess ? (
-                <div className="bg-white/10 border border-white/20 p-6 rounded-xl text-center">
+                <div className="bg-muted p-6 rounded-xl text-center border border-border">
                   <CheckCircle2 className="h-12 w-12 text-secondary mx-auto mb-4" />
-                  <h4 className="font-bold text-lg text-white mb-2">Request Received!</h4>
-                  <p className="text-xs text-primary-foreground/80 leading-relaxed mb-4">
+                  <h4 className="font-bold text-lg text-primary mb-2">Request Received!</h4>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-4">
                     Our compliance team is completing conflicts check. We will email details shortly.
                   </p>
                   <Button 
                     onClick={() => setIsSuccess(false)}
                     variant="outline" 
-                    className="w-full text-white border-white/20 hover:bg-white/10"
+                    className="w-full border-border text-foreground hover:bg-muted"
                   >
                     Send another request
                   </Button>
@@ -381,59 +381,59 @@ export default function PracticeAreaDetail() {
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   {errorMsg && (
-                    <div className="p-3 bg-destructive/20 border border-destructive/30 text-xs rounded text-center text-white">
+                    <div className="p-3 bg-destructive/10 border border-destructive/20 text-xs rounded text-center text-destructive">
                       {errorMsg}
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1">Full Name</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Full Name</label>
                     <input
                       {...register("fullName")}
                       type="text"
-                      className="w-full bg-white/10 border border-white/20 rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-white"
+                      className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground"
                       placeholder="Jane Doe"
                     />
-                    {errors.fullName && <p className="text-[10px] text-red-300 mt-1">{errors.fullName.message}</p>}
+                    {errors.fullName && <p className="text-[10px] text-red-600 mt-1">{errors.fullName.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1">Email Address</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Email Address</label>
                     <input
                       {...register("email")}
                       type="email"
-                      className="w-full bg-white/10 border border-white/20 rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-white"
+                      className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground"
                       placeholder="jane@example.com"
                     />
-                    {errors.email && <p className="text-[10px] text-red-300 mt-1">{errors.email.message}</p>}
+                    {errors.email && <p className="text-[10px] text-red-600 mt-1">{errors.email.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1">Phone Number</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Phone Number</label>
                     <input
                       {...register("phone")}
                       type="text"
-                      className="w-full bg-white/10 border border-white/20 rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-white"
+                      className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground"
                       placeholder="+91 98765 43210"
                     />
-                    {errors.phone && <p className="text-[10px] text-red-300 mt-1">{errors.phone.message}</p>}
+                    {errors.phone && <p className="text-[10px] text-red-600 mt-1">{errors.phone.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1">Brief Details</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Brief Details</label>
                     <textarea
                       {...register("message")}
                       rows={3}
-                      className="w-full bg-white/10 border border-white/20 rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-white resize-none"
+                      className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground resize-none"
                       placeholder="Please outline the issue..."
                     />
-                    {errors.message && <p className="text-[10px] text-red-300 mt-1">{errors.message.message}</p>}
+                    {errors.message && <p className="text-[10px] text-red-600 mt-1">{errors.message.message}</p>}
                   </div>
 
                   <Button 
                     type="submit" 
                     disabled={isSubmitting} 
-                    className="w-full bg-secondary hover:bg-secondary/90 text-primary font-bold py-2.5 rounded transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-primary hover:bg-primary/95 text-primary-foreground font-bold py-2.5 rounded transition-all flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>

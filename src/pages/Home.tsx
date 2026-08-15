@@ -5,9 +5,9 @@ import LiquidEther from "@/components/shared/LiquidEther";
 
 export default function Home() {
   const spotlightPartners = [
+    { name: "Aseema Khaudhar", role: "AKM Associate – Legal Consultant", area: "Civil & High Court Advocacy", initials: "AK", slug: "aseema-khaudhar" },
     { name: "A. K. Munusamy", role: "Senior Managing Partner", area: "Corporate Law", initials: "AKM", slug: "ak-munusamy" },
-    { name: "Karthik Munusamy", role: "Senior Litigating Partner", area: "Criminal Defense", initials: "KM", slug: "karthik-munusamy" },
-    { name: "Sarah Jenkins", role: "Senior Partner", area: "Family Law", initials: "SJ", slug: "sarah-jenkins" }
+    { name: "Karthik Munusamy", role: "Senior Litigating Partner", area: "Criminal Defense", initials: "KM", slug: "karthik-munusamy" }
   ];
 
   const quickPracticeAreas = [
@@ -21,12 +21,12 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       
       {/* Hero Section with LiquidEther Shader Backdrop */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-32 overflow-hidden bg-primary">
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-32 overflow-hidden bg-muted border-b border-border">
         
         {/* Interactive WebGL Shader Background */}
         <div className="absolute inset-0 z-0 opacity-40">
           <LiquidEther 
-            colors={["#C8A24A", "#0B132B", "#1E293B"]}
+            colors={["#C8A24A", "#F8FAFC", "#E2E8F0"]}
             mouseForce={1.2}
             cursorSize={0.25}
             autoDemo={true}
@@ -36,34 +36,34 @@ export default function Home() {
           />
         </div>
 
-        {/* Navy Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/95 to-primary z-10 pointer-events-none"></div>
+        {/* Light Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-background z-10 pointer-events-none"></div>
 
         {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center text-primary-foreground space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center text-foreground space-y-8">
           
-          <span className="inline-block py-1.5 px-4 rounded-full bg-secondary/15 text-secondary border border-secondary/30 text-xs font-bold tracking-widest uppercase mb-4 animate-pulse">
+          <span className="inline-block py-1.5 px-4 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-xs font-bold tracking-widest uppercase mb-4 animate-pulse">
             Premier Legal Consultancy & Advocacy
           </span>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-white leading-tight tracking-tight max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-heading font-extrabold text-primary leading-tight tracking-tight max-w-4xl mx-auto">
             Authority. Integrity.<br />
             <span className="text-secondary bg-clip-text">Uncompromising Results.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Araththaai (AKM Associates) represents corporations, startups, and families through complex jurisdictions. We deliver high-stakes courtroom victories and comprehensive compliance structures.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Link to="/book-consultation">
-              <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 bg-secondary hover:bg-secondary/95 text-primary font-bold rounded shadow-xl transition-all">
+              <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded shadow-md hover:shadow-lg transition-all">
                 Schedule Privileged Intake <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/practice-areas">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 border-white/20 text-white hover:bg-white/10 rounded transition-all">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 border-border text-foreground hover:bg-muted rounded transition-all">
                 Explore Practice Areas
               </Button>
             </Link>
@@ -75,10 +75,10 @@ export default function Home() {
               <Link 
                 key={idx}
                 to={`/practice-areas/${area.slug}`} 
-                className="bg-white/5 border border-white/10 hover:border-secondary p-4 rounded-lg backdrop-blur-md transition-all group"
+                className="bg-card border border-border hover:border-secondary p-4 rounded-lg shadow-sm transition-all group"
               >
-                <h4 className="font-bold text-white text-sm group-hover:text-secondary transition-colors">{area.title}</h4>
-                <p className="text-[11px] text-gray-400 mt-1">{area.desc}</p>
+                <h4 className="font-bold text-primary text-sm group-hover:text-secondary transition-colors">{area.title}</h4>
+                <p className="text-[11px] text-muted-foreground mt-1">{area.desc}</p>
               </Link>
             ))}
           </div>
@@ -87,36 +87,36 @@ export default function Home() {
       </section>
 
       {/* Trust & Achievements Section */}
-      <section className="py-16 bg-primary text-primary-foreground border-y border-white/5">
+      <section className="py-16 bg-card text-foreground border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="space-y-2">
               <div className="flex justify-center mb-2">
                 <ShieldCheck className="h-10 w-10 text-secondary" />
               </div>
-              <h3 className="text-4xl font-bold font-heading text-white">25+</h3>
-              <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold">Years Active Experience</p>
+              <h3 className="text-4xl font-bold font-heading text-primary">25+</h3>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Years Active Experience</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center mb-2">
                 <Scale className="h-10 w-10 text-secondary" />
               </div>
-              <h3 className="text-4xl font-bold font-heading text-white">98%</h3>
-              <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold">Favorable Settlements</p>
+              <h3 className="text-4xl font-bold font-heading text-primary">98%</h3>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Favorable Settlements</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center mb-2">
                 <Users className="h-10 w-10 text-secondary" />
               </div>
-              <h3 className="text-4xl font-bold font-heading text-white">5,000+</h3>
-              <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold">Corporate & Private Clients</p>
+              <h3 className="text-4xl font-bold font-heading text-primary">5,000+</h3>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Corporate & Private Clients</p>
             </div>
             <div className="space-y-2">
               <div className="flex justify-center mb-2">
                 <Award className="h-10 w-10 text-secondary" />
               </div>
-              <h3 className="text-4xl font-bold font-heading text-white">Top Tier</h3>
-              <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold">Legal Bar Credentials</p>
+              <h3 className="text-4xl font-bold font-heading text-primary">Top Tier</h3>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Legal Bar Credentials</p>
             </div>
           </div>
         </div>
@@ -215,16 +215,16 @@ export default function Home() {
       </section>
 
       {/* Case Victories Testimonial Grid */}
-      <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-primary to-primary pointer-events-none"></div>
+      <section className="py-24 bg-muted text-foreground border-t border-border relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-muted to-muted pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
           
           <div className="text-center space-y-4">
-            <span className="text-xs font-bold text-secondary uppercase tracking-widest bg-secondary/20 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-3 py-1 rounded-full">
               Track Record Outcomes
             </span>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">Client Success Stories</h2>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-base">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary">Client Success Stories</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-base">
               Explore outcomes accomplished for our clients across various jurisdictions.
             </p>
           </div>
@@ -235,20 +235,20 @@ export default function Home() {
               { quote: "Facing economic offense allegations was stressful, but Karthik secured immediate protection. The case was resolved in record time.", author: "Chief Executive Officer", company: "FinTech Enterprise" },
               { quote: "We recovered temple trust estates that had been unlawfully encroached for 15 years. Their knowledge of temple law is unmatched.", author: "Hereditary Trustee", company: "Religious Endowment Board" }
             ].map((t, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-8 rounded-2xl relative flex flex-col justify-between backdrop-blur-md">
+              <div key={i} className="bg-card border border-border p-8 rounded-2xl relative flex flex-col justify-between shadow-sm">
                 <div>
                   <div className="text-4xl font-serif text-secondary absolute top-6 left-6 opacity-30">“</div>
-                  <p className="text-base leading-relaxed text-gray-200 mb-6 relative z-10 pt-6">
+                  <p className="text-base leading-relaxed text-muted-foreground mb-6 relative z-10 pt-6">
                     {t.quote}
                   </p>
                 </div>
-                <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                  <div className="h-10 w-10 rounded-full bg-secondary/25 flex items-center justify-center font-bold text-secondary text-sm">
+                <div className="flex items-center gap-3 pt-4 border-t border-border">
+                  <div className="h-10 w-10 rounded-full bg-secondary/15 flex items-center justify-center font-bold text-secondary text-sm">
                     {t.author.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white text-sm">{t.author}</h4>
-                    <p className="text-gray-400 text-xs">{t.company}</p>
+                    <h4 className="font-semibold text-primary text-sm">{t.author}</h4>
+                    <p className="text-muted-foreground text-xs">{t.company}</p>
                   </div>
                 </div>
               </div>
@@ -256,9 +256,9 @@ export default function Home() {
           </div>
 
           {/* Outcomes Footer Note */}
-          <div className="text-center pt-8 max-w-2xl mx-auto flex items-center gap-3 bg-white/5 border border-white/15 p-4 rounded-lg">
+          <div className="text-center pt-8 max-w-2xl mx-auto flex items-center gap-3 bg-card border border-border p-4 rounded-lg">
             <AlertCircle className="h-5 w-5 text-secondary shrink-0" />
-            <p className="text-[10px] text-gray-400 text-left leading-relaxed">
+            <p className="text-[10px] text-muted-foreground text-left leading-relaxed">
               <strong>Advertising Notice:</strong> Prior results achieved do not guarantee similar outcomes in subsequent legal matters. All client references are anonymized in accordance with professional bar guidelines.
             </p>
           </div>

@@ -168,13 +168,13 @@ export default function BlogDetail() {
         </div>
 
         {/* Read Next Banner */}
-        <div className="bg-primary text-primary-foreground p-8 rounded-2xl shadow-lg mt-12 border border-primary/20 text-center">
-          <h3 className="text-2xl font-heading font-bold text-white mb-2">Need Direct Case Guidance?</h3>
-          <p className="text-xs text-primary-foreground/80 mb-6 max-w-lg mx-auto">
+        <div className="bg-card text-foreground p-8 rounded-2xl shadow-sm mt-12 border border-border text-center">
+          <h3 className="text-2xl font-heading font-bold text-primary mb-2">Need Direct Case Guidance?</h3>
+          <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
             Schedule a private, privileged consultation with our senior partners regarding PMLA, GST audits, or corporate restructuring.
           </p>
           <Link to="/book-consultation">
-            <button className="bg-secondary text-primary hover:bg-secondary/90 font-bold px-6 py-3 rounded text-sm transition-all">
+            <button className="bg-primary text-primary-foreground hover:bg-primary/95 font-bold px-6 py-3 rounded text-sm transition-all">
               Schedule Private Consultation
             </button>
           </Link>

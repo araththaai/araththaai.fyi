@@ -4,6 +4,19 @@ import { ArrowRight, Search, Award, GraduationCap, MapPin } from "lucide-react";
 
 export const attorneysList = [
   {
+    slug: "aseema-khaudhar",
+    name: "Aseema Khaudhar",
+    role: "AKM Associate – Legal Consultant",
+    practice: "District Court, High Court & Tribunal Advocacy",
+    practiceSlug: "property-law",
+    initials: "AK",
+    bio: "Specializes in District Court matters, High Court appeals, tribunals, property audits, civil disputes, consumer concerns, and family matters.",
+    education: "LL.B. (Hons) - Madras High Court Jurisdiction & Legal Studies",
+    admissions: "Bar Council of Tamil Nadu (Karur & Chennai Offices)",
+    whatsapp: "8610792622",
+    instagram: "@ARATHTHAAI"
+  },
+  {
     slug: "ak-munusamy",
     name: "A. K. Munusamy",
     role: "Senior Managing Partner",
@@ -57,17 +70,6 @@ export const attorneysList = [
     bio: "Exhaustive legal check of land histories, joint development contracts, patta transfers, and representing developers in RERA complaints.",
     education: "LL.B. - School of Excellence in Law, Chennai",
     admissions: "Bar Council of Tamil Nadu (2016)"
-  },
-  {
-    slug: "arjun-sharma",
-    name: "Arjun Sharma",
-    role: "Associate",
-    practice: "Taxation & GST Litigation",
-    practiceSlug: "tax-law",
-    initials: "AS",
-    bio: "Assists corporations in responding to tax audits, preparing appeals before appellate tribunals, and structuring GST liabilities.",
-    education: "B.A. LL.B. (Hons) - NALSAR, Hyderabad",
-    admissions: "Bar Council of Delhi (2019)"
   }
 ];
 

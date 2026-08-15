@@ -1,6 +1,6 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Award, GraduationCap, Scale, ShieldCheck, Calendar, BookOpen, Briefcase } from "lucide-react";
+import { ArrowLeft, Award, GraduationCap, Scale, ShieldCheck, Calendar, BookOpen, Briefcase, Instagram, Phone } from "lucide-react";
 import { attorneysList } from "./Attorneys";
 
 // Expanded details maps for notable cases, bar publications etc.
@@ -9,6 +9,23 @@ const extendedAttorneyDetails: Record<string, {
   publications: string[];
   bioParagraphs: string[];
 }> = {
+  "aseema-khaudhar": {
+    bioParagraphs: [
+      "Advocate Aseema Khaudhar is an Associate and Legal Consultant at AKM Associates (Araththaai). She advises clients on a comprehensive suite of legal matters across Tamil Nadu, maintaining key offices in Karur and Chennai.",
+      "Her practice covers trial and appellate advocacy, representing individuals and entities before District Courts, the Madras High Court, and regulatory tribunals. She has a deep focus on property titling audits, civil disputes, consumer protections, and family counseling.",
+      "Aseema is highly dedicated to legal awareness, frequently conducting community consultation programs and sharing regulatory guidance online through the @ARATHTHAAI portal."
+    ],
+    notableCases: [
+      "District Court Matters & Civil Disputes: Represented clients in partition actions, injunction suits, and contract violations.",
+      "High Court & Tribunal Cases: Appealed administrative decisions and defended statutory rights.",
+      "Consumer & Family Matters: Handled counseling, child visitation rights, and consumer tribunal compensations.",
+      "Property Audits: Verified legal history and title ownership across Tamil Nadu."
+    ],
+    publications: [
+      "‘Understanding Land Registration and Title Verifications in Tamil Nadu’ - Legal Awareness Series, 2023.",
+      "‘Consumer Protection Act: A Guide for First-time Claimants’ - Advocate's Journal, 2024."
+    ]
+  },
   "ak-munusamy": {
     bioParagraphs: [
       "A. K. Munusamy is the founding partner of AKM Associates (Araththaai). With a legal career spanning over two and a half decades, he serves as lead counsel to major banking institutions, infrastructure builders, and retail chains.",
@@ -151,7 +168,6 @@ export default function AttorneyDetail() {
                   ))}
                 </div>
               </div>
-
               <div className="border-t border-border pt-6 mt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -162,6 +178,38 @@ export default function AttorneyDetail() {
                     <Scale className="h-4 w-4 text-secondary shrink-0" />
                     <span><strong>Admissions:</strong> {attorney.admissions}</span>
                   </div>
+                  {(attorney as any).whatsapp && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Phone className="h-4 w-4 text-secondary shrink-0" />
+                      <span>
+                        <strong>WhatsApp:</strong>{" "}
+                        <a 
+                          href={`https://wa.me/91${(attorney as any).whatsapp}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-secondary hover:underline font-semibold"
+                        >
+                          +91 {(attorney as any).whatsapp}
+                        </a>
+                      </span>
+                    </div>
+                  )}
+                  {(attorney as any).instagram && (
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Instagram className="h-4 w-4 text-secondary shrink-0" />
+                      <span>
+                        <strong>Instagram:</strong>{" "}
+                        <a 
+                          href={`https://instagram.com/${((attorney as any).instagram).replace('@', '')}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-secondary hover:underline font-semibold"
+                        >
+                          {(attorney as any).instagram}
+                        </a>
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <Link to="/book-consultation">
