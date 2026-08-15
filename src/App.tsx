@@ -35,6 +35,7 @@ function App() {
       <Helmet>
         <title>Araththaai – AKM Associates & Legal Consultants</title>
         <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
+        <link rel="icon" type="image/jpeg" href="/lgo.jpg" />
       </Helmet>
       <BrowserRouter>
         <Routes>
