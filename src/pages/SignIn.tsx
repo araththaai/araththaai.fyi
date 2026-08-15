@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -15,21 +16,16 @@ export default function SignInPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      if (!res.ok) {
-        setError("Invalid email or password");
+      if (authError) {
+        setError(authError.message || "Invalid email or password");
         setLoading(false);
       } else {
-        const data = await res.json();
-        if (data.token) {
-          // In a real app we might store this in context, but for now just redirect
-          window.location.href = "/admin";
-        }
+        window.location.href = "/admin";
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");

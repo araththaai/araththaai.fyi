@@ -6,6 +6,7 @@ import { CheckCircle2, Loader2, ArrowRight } from "lucide-react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { supabase } from "@/lib/supabaseClient";
 import { Link } from "react-router-dom";
 
 const bookingSchema = z.object({
@@ -36,18 +37,18 @@ export default function BookConsultationPage() {
     setServerError("");
     
     try {
-      const response = await fetch("/api/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const { error } = await supabase
+        .from("bookings")
+        .insert({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          service_type: data.serviceType,
+          message: data.message || null,
+        });
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Failed to submit request.");
+      if (error) {
+        throw new Error(error.message || "Failed to submit request.");
       }
 
       setIsSuccess(true);

@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import TRPCProvider from "@/lib/trpc/Provider";
-import AuthProvider from "@/components/SessionProvider";
 import React, { Suspense, lazy } from "react";
 
 
@@ -39,31 +37,26 @@ function App() {
         <title>Araththaai – AKM Associates & Legal Consultants</title>
         <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
       </Helmet>
-      <AuthProvider>
-        <TRPCProvider>
-          <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                {/* Routes with Navbar & Footer */}
-                <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
-                <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
-                <Route path="/book" element={<PublicLayout><Book /></PublicLayout>} />
-                <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
-                <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
-                <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
-                
-                {/* Admin & Auth Routes (without standard Navbar/Footer) */}
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/admin/consultations" element={<AdminConsultations />} />
-                <Route path="/sign-in" element={<SignIn />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TRPCProvider>
-      </AuthProvider>
+      <BrowserRouter>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {/* Routes with Navbar & Footer */}
+            <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+            <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+            <Route path="/book" element={<PublicLayout><Book /></PublicLayout>} />
+            <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+            <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
+            <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
+            
+            {/* Admin & Auth Routes (without standard Navbar/Footer) */}
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/consultations" element={<AdminConsultations />} />
+            <Route path="/sign-in" element={<SignIn />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
     </HelmetProvider>
   );
 }
 
 export default App;
-
