@@ -1092,16 +1092,23 @@ export default function LiquidEther({
     container.style.position = container.style.position || 'relative';
     container.style.overflow = container.style.overflow || 'hidden';
 
-    const webgl = new WebGLManager({
-      $wrapper: container,
-      autoDemo,
-      autoSpeed,
-      autoIntensity,
-      takeoverDuration,
-      autoResumeDelay,
-      autoRampDuration
-    });
-    webglRef.current = webgl;
+    let webgl: WebGLManager | null = null;
+    try {
+      webgl = new WebGLManager({
+        $wrapper: container,
+        autoDemo,
+        autoSpeed,
+        autoIntensity,
+        takeoverDuration,
+        autoResumeDelay,
+        autoRampDuration
+      });
+      webglRef.current = webgl;
+    } catch (err) {
+      console.warn('LiquidEther WebGL context initialization failed:', err);
+      return;
+    }
+
 
     const applyOptionsFromProps = () => {
       if (!webglRef.current) return;
