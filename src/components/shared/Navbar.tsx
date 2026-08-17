@@ -190,7 +190,8 @@ export function Navbar() {
           <div className="hidden lg:flex items-center justify-end space-x-3 shrink-0">
             {/* Language Switcher Dropdown */}
             <div 
-              className="relative"
+              className="relative notranslate"
+              translate="no"
               onMouseEnter={() => setIsLangDropdownOpen(true)}
               onMouseLeave={() => setIsLangDropdownOpen(false)}
             >
@@ -238,7 +239,7 @@ export function Navbar() {
           {/* Mobile Menu Icon */}
           <div className="lg:hidden flex items-center gap-3">
             {/* Language Switcher for Mobile */}
-            <div className="relative">
+            <div className="relative notranslate" translate="no">
               <button
                 onClick={() => setIsMobileLangOpen(!isMobileLangOpen)}
                 className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-border bg-card text-xs font-bold text-secondary cursor-pointer select-none"
