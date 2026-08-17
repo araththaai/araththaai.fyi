@@ -1,6 +1,6 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
-export type Language = "en" | "ta" | "hi";
+export type Language = "en" | "ta" | "hi" | "as" | "bn" | "gu" | "kn" | "ml" | "mr" | "or" | "pa" | "te";
 
 interface LanguageContextType {
   language: Language;
@@ -10,7 +10,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const translations: Record<Language, Record<string, string>> = {
+const translations: Record<string, Record<string, string>> = {
   en: {
     // Navbar
     "nav.home": "Home",
@@ -253,16 +253,48 @@ const translations: Record<Language, Record<string, string>> = {
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem("app_lang");
-    return saved === "en" || saved === "ta" || saved === "hi" ? saved : "en";
+    const allowed: Language[] = ["en", "ta", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "te"];
+    return allowed.includes(saved as Language) ? (saved as Language) : "en";
   });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("app_lang", lang);
+    
+    // Cookie synchronization for Google Translate
+    const targetCookieValue = lang === "en" ? "/en/en" : `/en/${lang}`;
+    document.cookie = `googtrans=${targetCookieValue}; path=/;`;
+    const domain = window.location.hostname;
+    document.cookie = `googtrans=${targetCookieValue}; path=/; domain=${domain};`;
+    document.cookie = `googtrans=${targetCookieValue}; path=/; domain=.${domain};`;
+    
+    window.location.reload();
   };
 
+  useEffect(() => {
+    const targetCookieValue = language === "en" ? "/en/en" : `/en/${language}`;
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+      return null;
+    };
+    
+    const currentCookie = getCookie("googtrans");
+    if (currentCookie !== targetCookieValue) {
+      document.cookie = `googtrans=${targetCookieValue}; path=/;`;
+      const domain = window.location.hostname;
+      document.cookie = `googtrans=${targetCookieValue}; path=/; domain=${domain};`;
+      document.cookie = `googtrans=${targetCookieValue}; path=/; domain=.${domain};`;
+      if (language !== "en") {
+        window.location.reload();
+      }
+    }
+  }, [language]);
+
   const t = (key: string): string => {
-    return translations[language][key] || translations["en"][key] || key;
+    const dict = translations[language] || translations["en"];
+    return dict[key] || translations["en"][key] || key;
   };
 
   return (

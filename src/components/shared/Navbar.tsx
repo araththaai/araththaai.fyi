@@ -81,9 +81,18 @@ export function Navbar() {
   ];
 
   const currentLangLabel: Record<Language, string> = {
-    en: "English",
+    en: "English (Default)",
+    hi: "हिन्दी",
+    as: "অসমীয়া",
+    bn: "বাংলা",
+    gu: "ગુજરાતી",
+    kn: "ಕನ್ನಡ",
+    ml: "മലയാളം",
+    mr: "मराठी",
+    or: "ଓଡ଼ିଆ",
+    pa: "ਪੰਜਾਬੀ",
     ta: "தமிழ்",
-    hi: "हिंदी"
+    te: "తెలుగు"
   };
 
   return (
@@ -195,8 +204,8 @@ export function Navbar() {
               </button>
               
               {isLangDropdownOpen && (
-                <div className="absolute top-full right-0 mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-32 animate-in fade-in duration-200">
-                  {(["en", "ta", "hi"] as Language[]).map((lang) => (
+                <div className="absolute top-full right-0 mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-44 max-h-60 overflow-y-auto z-50 animate-in fade-in duration-200">
+                  {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
                     <button
                       key={lang}
                       onClick={() => {
@@ -239,8 +248,8 @@ export function Navbar() {
                 <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isMobileLangOpen ? 'rotate-180' : ''}`} />
               </button>
               {isMobileLangOpen && (
-                <div className="absolute right-0 top-full mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-28 z-50 animate-in fade-in duration-200">
-                  {(["en", "ta", "hi"] as Language[]).map((lang) => (
+                <div className="absolute right-0 top-full mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-40 max-h-60 overflow-y-auto z-50 animate-in fade-in duration-200">
+                  {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
                     <button
                       key={lang}
                       onClick={() => {
