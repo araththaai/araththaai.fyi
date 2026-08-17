@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage, Language } from "@/lib/LanguageContext";
 
 export function Navbar() {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, selectedLanguage, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAssociatesDropdownOpen, setIsAssociatesDropdownOpen] = useState(false);
@@ -204,7 +204,7 @@ export function Navbar() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-card hover:bg-muted text-[10px] xl:text-xs font-bold text-secondary hover:text-primary transition-all cursor-pointer select-none"
               >
                 <Globe className="h-3.5 w-3.5" />
-                <span>{currentLangLabel[language]}</span>
+                 <span>{currentLangLabel[selectedLanguage]}</span>
                 <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               
@@ -219,7 +219,7 @@ export function Navbar() {
                           setIsLangDropdownOpen(false);
                         }}
                         className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
-                          language === lang ? "text-secondary font-bold" : "text-foreground"
+                          selectedLanguage === lang ? "text-secondary font-bold" : "text-foreground"
                         }`}
                       >
                         {currentLangLabel[lang]}
@@ -251,7 +251,7 @@ export function Navbar() {
                 className="flex items-center gap-1 px-2 py-1 rounded-full border border-border bg-card text-[11px] font-bold text-secondary cursor-pointer select-none whitespace-nowrap shrink-0"
               >
                 <Globe className="h-3.5 w-3.5" />
-                <span>{currentLangLabel[language]}</span>
+                 <span>{currentLangLabel[selectedLanguage]}</span>
                 <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isMobileLangOpen ? 'rotate-180' : ''}`} />
               </button>
               {isMobileLangOpen && (
@@ -265,7 +265,7 @@ export function Navbar() {
                           setIsMobileLangOpen(false);
                         }}
                         className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
-                          language === lang ? "text-secondary font-bold" : "text-foreground"
+                          selectedLanguage === lang ? "text-secondary font-bold" : "text-foreground"
                         }`}
                       >
                         {currentLangLabel[lang]}

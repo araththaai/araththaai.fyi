@@ -4,6 +4,7 @@ export type Language = "en" | "ta" | "hi" | "as" | "bn" | "gu" | "kn" | "ml" | "
 
 interface LanguageContextType {
   language: Language;
+  selectedLanguage: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
@@ -251,14 +252,14 @@ const translations: Record<string, Record<string, string>> = {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>(() => {
     const saved = localStorage.getItem("app_lang");
     const allowed: Language[] = ["en", "ta", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "te"];
     return allowed.includes(saved as Language) ? (saved as Language) : "en";
   });
 
   const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
+    setSelectedLanguage(lang);
     localStorage.setItem("app_lang", lang);
     
     // Cookie synchronization for Google Translate
@@ -272,7 +273,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    const targetCookieValue = language === "en" ? "/en/en" : `/en/${language}`;
+    const targetCookieValue = selectedLanguage === "en" ? "/en/en" : `/en/${selectedLanguage}`;
     const getCookie = (name: string) => {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
@@ -286,11 +287,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       const domain = window.location.hostname;
       document.cookie = `googtrans=${targetCookieValue}; path=/; domain=${domain};`;
       document.cookie = `googtrans=${targetCookieValue}; path=/; domain=.${domain};`;
-      if (language !== "en") {
+      if (selectedLanguage !== "en") {
         window.location.reload();
       }
     }
-  }, [language]);
+  }, [selectedLanguage]);
+
+  // Dynamically resolve rendering language: Tamil, Hindi, or fallback English for the 9 Google Translated languages
+  const language: Language = selectedLanguage === "ta" ? "ta" : selectedLanguage === "hi" ? "hi" : "en";
 
   const t = (key: string): string => {
     const dict = translations[language] || translations["en"];
@@ -298,7 +302,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, selectedLanguage, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
