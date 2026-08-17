@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Navbar() {
+  const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAssociatesDropdownOpen, setIsAssociatesDropdownOpen] = useState(false);
@@ -11,19 +13,19 @@ export function Navbar() {
   const [isMobileAssociatesOpen, setIsMobileAssociatesOpen] = useState(false);
 
   const practiceSubLinks = [
-    { name: "Corporate Law", slug: "corporate-law" },
-    { name: "Property Law", slug: "property-law" },
-    { name: "Family Law", slug: "family-law" },
-    { name: "Taxation & GST", slug: "tax-law" },
-    { name: "Criminal Defense", slug: "criminal-defense" }
+    { name: language === "en" ? "Corporate & Commercial" : "கார்ப்பரேட் மற்றும் வணிகம்", slug: "corporate-law" },
+    { name: language === "en" ? "Civil & Property Matters" : "சிவில் மற்றும் சொத்து விவகாரங்கள்", slug: "property-law" },
+    { name: language === "en" ? "HR & CE Cases" : "HR & CE வழக்குகள்", slug: "hr-ce" },
+    { name: language === "en" ? "Trial Defence & Litigation" : "வழக்கு விசாரணை & தற்காப்பு", slug: "criminal-defense" },
+    { name: language === "en" ? "Taxation & GST" : "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி", slug: "tax-law" }
   ];
 
   const associatesSubLinks = [
-    { name: "Attorneys", path: "/attorneys" },
-    { name: "Case Results", path: "/case-results" },
-    { name: "Insights", path: "/blog" },
-    { name: "About Us", path: "/about" },
-    { name: "Contact Us", path: "/contact" }
+    { name: language === "en" ? "Attorneys" : "வழக்கறிஞர்கள்", path: "/attorneys" },
+    { name: language === "en" ? "Case Results" : "வழக்கு முடிவுகள்", path: "/case-results" },
+    { name: language === "en" ? "Insights / Blog" : "சட்டக் கட்டுரைகள்", path: "/blog" },
+    { name: language === "en" ? "About Us" : "எங்களைப் பற்றி", path: "/about" },
+    { name: language === "en" ? "Contact Us" : "தொடர்புகொள்ள", path: "/contact" }
   ];
 
   return (
@@ -50,7 +52,9 @@ export function Navbar() {
           
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-center flex-grow mx-4 xl:mx-8 space-x-1 xl:space-x-4">
-            <Link to="/" className="px-3 py-2 text-[10px] xl:text-xs uppercase tracking-wider font-semibold text-foreground hover:text-secondary transition-colors">Home</Link>
+            <Link to="/" className="px-3 py-2 text-[10px] xl:text-xs uppercase tracking-wider font-semibold text-foreground hover:text-secondary transition-colors">
+              {t("nav.home")}
+            </Link>
             
             {/* Practice Areas Dropdown */}
             <div 
@@ -62,7 +66,7 @@ export function Navbar() {
                 to="/practice-areas" 
                 className="px-3 py-2 text-[10px] xl:text-xs uppercase tracking-wider font-semibold text-foreground hover:text-secondary transition-colors flex items-center gap-1"
               >
-                Practice Areas <ChevronDown className="h-3 w-3" />
+                {t("nav.practiceAreas")} <ChevronDown className="h-3 w-3" />
               </Link>
               {isDropdownOpen && (
                 <div className="absolute top-full left-0 bg-background border border-border shadow-lg rounded-md py-2 w-56 animate-in fade-in duration-200">
@@ -80,7 +84,7 @@ export function Navbar() {
                       to="/practice-areas"
                       className="block px-4 py-2 text-xs font-bold text-secondary hover:bg-muted"
                     >
-                      All Practice Areas &rarr;
+                      {t("nav.allPractice")} &rarr;
                     </Link>
                   </div>
                 </div>
@@ -95,9 +99,9 @@ export function Navbar() {
             >
               <button 
                 type="button"
-                className="px-3 py-2 text-[10px] xl:text-xs uppercase tracking-wider font-semibold text-foreground hover:text-secondary transition-colors flex items-center gap-1 focus:outline-none cursor-pointer"
+                className="px-3 py-2 text-[10px] xl:text-xs uppercase tracking-wider font-semibold text-foreground hover:text-secondary transition-colors flex items-center gap-1 focus:outline-none cursor-pointer animate-none bg-transparent border-none"
               >
-                Associates <ChevronDown className="h-3 w-3" />
+                {t("nav.associates")} <ChevronDown className="h-3 w-3" />
               </button>
               {isAssociatesDropdownOpen && (
                 <div className="absolute top-full left-0 bg-background border border-border shadow-lg rounded-md py-2 w-56 animate-in fade-in duration-200">
@@ -117,16 +121,39 @@ export function Navbar() {
 
           {/* Desktop Call to Actions */}
           <div className="hidden lg:flex items-center justify-end space-x-3 shrink-0">
+            {/* Language Switcher */}
+            <button
+              onClick={() => setLanguage(language === "en" ? "ta" : "en")}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-card hover:bg-muted text-[10px] xl:text-xs font-bold text-secondary hover:text-primary transition-all cursor-pointer select-none"
+              title={language === "en" ? "Switch to Tamil" : "ஆங்கிலத்திற்கு மாற்றவும்"}
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span>{language === "en" ? "தமிழ்" : "English"}</span>
+            </button>
+
             <Link to="/sign-in">
-              <Button variant="ghost" className="text-xs uppercase tracking-wider font-semibold text-primary hover:text-secondary h-10">Admin Access</Button>
+              <Button variant="ghost" className="text-xs uppercase tracking-wider font-semibold text-primary hover:text-secondary h-10">
+                Admin
+              </Button>
             </Link>
             <Link to="/book-consultation">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/95 text-xs uppercase tracking-wider font-semibold px-5 h-10 rounded">Book Consultation</Button>
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/95 text-xs uppercase tracking-wider font-semibold px-5 h-10 rounded">
+                {t("nav.bookConsultation")}
+              </Button>
             </Link>
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center gap-3">
+            {/* Language Switcher for Mobile */}
+            <button
+              onClick={() => setLanguage(language === "en" ? "ta" : "en")}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-border bg-card text-xs font-bold text-secondary cursor-pointer select-none"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span>{language === "en" ? "தமிழ்" : "EN"}</span>
+            </button>
+
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-foreground hover:text-secondary focus:outline-none"
@@ -141,16 +168,18 @@ export function Navbar() {
       {isOpen && (
         <div className="lg:hidden bg-background border-b border-border shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link to="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm font-semibold text-foreground hover:text-secondary">Home</Link>
+            <Link to="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm font-semibold text-foreground hover:text-secondary">
+              {t("nav.home")}
+            </Link>
             
             {/* Mobile Practice Areas Dropdown */}
             <div>
               <button 
                 type="button"
                 onClick={() => setIsMobilePracticeOpen(!isMobilePracticeOpen)}
-                className="w-full flex justify-between items-center px-3 py-2 text-sm font-semibold text-foreground hover:text-secondary focus:outline-none cursor-pointer"
+                className="w-full flex justify-between items-center px-3 py-2 text-sm font-semibold text-foreground hover:text-secondary focus:outline-none cursor-pointer bg-transparent border-none"
               >
-                <span>Practice Areas</span>
+                <span>{t("nav.practiceAreas")}</span>
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isMobilePracticeOpen ? 'rotate-180' : ''}`} />
               </button>
               {isMobilePracticeOpen && (
@@ -170,7 +199,7 @@ export function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className="block py-1.5 text-xs font-bold text-secondary"
                   >
-                    All Practice Areas &rarr;
+                    {t("nav.allPractice")} &rarr;
                   </Link>
                 </div>
               )}
@@ -181,9 +210,9 @@ export function Navbar() {
               <button 
                 type="button"
                 onClick={() => setIsMobileAssociatesOpen(!isMobileAssociatesOpen)}
-                className="w-full flex justify-between items-center px-3 py-2 text-sm font-semibold text-foreground hover:text-secondary focus:outline-none cursor-pointer"
+                className="w-full flex justify-between items-center px-3 py-2 text-sm font-semibold text-foreground hover:text-secondary focus:outline-none cursor-pointer bg-transparent border-none"
               >
-                <span>Associates</span>
+                <span>{t("nav.associates")}</span>
                 <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isMobileAssociatesOpen ? 'rotate-180' : ''}`} />
               </button>
               {isMobileAssociatesOpen && (
@@ -204,10 +233,14 @@ export function Navbar() {
 
             <div className="mt-4 flex flex-col space-y-2 px-3 pb-3">
               <Link to="/sign-in" onClick={() => setIsOpen(false)}>
-                <Button variant="outline" className="w-full justify-center text-xs uppercase tracking-wider font-semibold">Admin Access</Button>
+                <Button variant="outline" className="w-full justify-center text-xs uppercase tracking-wider font-semibold">
+                  Admin Access
+                </Button>
               </Link>
               <Link to="/book-consultation" onClick={() => setIsOpen(false)}>
-                <Button className="w-full justify-center bg-primary text-primary-foreground text-xs uppercase tracking-wider font-semibold">Book Consultation</Button>
+                <Button className="w-full justify-center bg-primary text-primary-foreground text-xs uppercase tracking-wider font-semibold">
+                  {t("nav.bookConsultation")}
+                </Button>
               </Link>
             </div>
           </div>

@@ -1,92 +1,132 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Search, ShieldCheck, Scale, Users, Landmark, Lightbulb, Briefcase, BookOpen, HandMetal } from "lucide-react";
+import { ArrowRight, Search, ShieldCheck, Scale, Landmark, BookOpen, Briefcase } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export const practiceAreasList = [
   {
     slug: "corporate-law",
-    title: "Corporate Law & Governance",
     category: "Corporate",
-    description: "Full-spectrum corporate legal support, advisory, compliance audits, and M&A transactions. We guide boardrooms and startups through high-stakes regulatory landscapes.",
-    bullets: ["Mergers & Acquisitions", "Corporate Governance", "Contract Engineering", "Regulatory Audits"],
     icon: Briefcase,
-    color: "bg-blue-500/10 text-blue-600"
+    color: "bg-blue-500/10 text-blue-600",
+    title: {
+      en: "Corporate & Commercial Matters",
+      ta: "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்"
+    },
+    description: {
+      en: "Corporate advisory, commercial contracts, agreements, business structuring, compliance, corporate governance, and commercial disputes.",
+      ta: "கார்ப்பரேட் ஆலோசனை, வணிக ஒப்பந்தங்கள், ஒப்பந்த வரைவுகள், வணிகக் கட்டமைப்பு, சட்ட இணக்கத்தன்மை, கார்ப்பரேட் ஆளுமை மற்றும் வணிகத் தகராறுகள்."
+    },
+    bullets: {
+      en: ["Corporate Advisory", "Commercial Contracts & Agreements", "Business Structuring & Compliance", "Corporate Governance", "Commercial Disputes"],
+      ta: ["கார்ப்பரேட் ஆலோசனை", "வணிக ஒப்பந்தங்கள்", "வணிகக் கட்டமைப்பு & இணக்கம்", "கார்ப்பரேட் ஆளுமை", "வணிகத் தகராறுகள்"]
+    }
   },
   {
     slug: "property-law",
-    title: "Property & Real Estate",
-    category: "Property",
-    description: "Meticulous documentation, title verifications, leasing contracts, and land acquisition dispute representation. We protect high-value real estate assets.",
-    bullets: ["Title Clearance & Verification", "Leasing & Conveyance", "Joint Venture Structuring", "Land Acquisition Disputes"],
+    category: "Property & Civil",
     icon: Landmark,
-    color: "bg-amber-500/10 text-amber-600"
-  },
-  {
-    slug: "family-law",
-    title: "Family & Matrimonial Law",
-    category: "Individual",
-    description: "Compassionate, highly discrete, and professional legal representation in matrimonial actions, alimony disputes, and family wealth partitions.",
-    bullets: ["Divorce Actions", "Child Custody & Guardianship", "Alimony & Child Support", "Partition & Partition Deeds"],
-    icon: Users,
-    color: "bg-purple-500/10 text-purple-600"
-  },
-  {
-    slug: "tax-law",
-    title: "Taxation & GST Litigation",
-    category: "Corporate",
-    description: "Advanced advisory on direct and indirect taxation, compliance auditing, and representing clients in tax disputes before appellate authorities and tribunals.",
-    bullets: ["Corporate Tax Restructuring", "GST Compliance Audits", "Appellate Appeals", "Cross-Border Tax Advisory"],
-    icon: Scale,
-    color: "bg-emerald-500/10 text-emerald-600"
-  },
-  {
-    slug: "ipr",
-    title: "Intellectual Property Rights",
-    category: "Corporate",
-    description: "Defending innovative assets. We cover trademark registration, patent strategy, design copyright protection, and litigation against IP infringement.",
-    bullets: ["Trademark Filing & Prosecution", "Patent Search & Drafts", "Copyright Enforcement", "IP Portfolio Licensing"],
-    icon: Lightbulb,
-    color: "bg-rose-500/10 text-rose-600"
-  },
-  {
-    slug: "criminal-defense",
-    title: "Criminal Defense & White-Collar",
-    category: "Litigation",
-    description: "Aggressive and strategic defense in economic offenses, white-collar financial crimes, bail applications, and representations in trials and appeals.",
-    bullets: ["White-Collar Crime Defense", "Bail & Anticipatory Bail", "Trial Representation", "High Court Appeals"],
-    icon: ShieldCheck,
-    color: "bg-indigo-500/10 text-indigo-600"
+    color: "bg-amber-500/10 text-amber-600",
+    title: {
+      en: "Civil Disputes & Property Matters",
+      ta: "சிவில் தகராறுகள் மற்றும் சொத்து விவகாரங்கள்"
+    },
+    description: {
+      en: "Property disputes, title verification, land and possession disputes, injunctions, declarations, recovery proceedings, partition, specific performance, and other civil litigation.",
+      ta: "சொத்து தகராறுகள், பத்திர சரிபார்ப்பு, நிலம் மற்றும் உடைமை தகராறுகள், தடையுத்தரவுகள், பிரகடனங்கள், மீட்பு நடவடிக்கைகள், பாகப்பிரிவினை, ஒப்பந்த செயல்திறன் மற்றும் பிற சிவில் வழக்குகள்."
+    },
+    bullets: {
+      en: ["Property Disputes & Title Verification", "Land & Possession Disputes", "Injunctions & Declarations", "Partition & Partition Deeds", "Recovery Proceedings & Specific Performance"],
+      ta: ["சொத்து தகராறுகள் & பத்திர சரிபார்ப்பு", "நிலம் & உடைமை தகராறுகள்", "தடையுத்தரவுகள் & பிரகடனங்கள்", "பாகப்பிரிவினை & பாகப்பிரிவினை ஆவணங்கள்", "மீட்பு நடவடிக்கைகள் & குறிப்பிட்ட செயல்திறன்"]
+    }
   },
   {
     slug: "hr-ce",
-    title: "HR & CE / Temple Law",
     category: "Litigation",
-    description: "Specialized representation in administration, regulatory compliance, and protecting religious properties and endowments under the HR&CE Act.",
-    bullets: ["Temple Endowments Management", "Trusteeship Entitlements", "Writ Petitions", "Audit & Rent Recovery"],
     icon: BookOpen,
-    color: "bg-cyan-500/10 text-cyan-600"
+    color: "bg-cyan-500/10 text-cyan-600",
+    title: {
+      en: "HR & CE Cases",
+      ta: "HR & CE வழக்குகள் (அறநிலையத்துறை)"
+    },
+    description: {
+      en: "Legal representation in matters involving the Hindu Religious & Charitable Endowments Department, temple properties, encroachment proceedings, Section 78/79 proceedings, title and possession disputes, and related civil and writ proceedings.",
+      ta: "இந்து சமய அறநிலையத்துறை சம்பந்தப்பட்ட விவகாரங்கள், கோவில் சொத்துக்கள், ஆக்கிரமிப்பு அகற்றுதல் நடவடிக்கைகள், பிரிவு 78/79 நடவடிக்கைகள், உரிமை மற்றும் உடைமை தகராறுகள் மற்றும் சிவில் மற்றும் ரிட் வழக்குகள்."
+    },
+    bullets: {
+      en: ["Temple Properties & Endowments", "Encroachment Clearance Proceedings", "Section 78/79 Proceedings", "Title & Possession Disputes", "Civil & Writ Proceedings"],
+      ta: ["கோவில் சொத்துக்கள் & அறக்கட்டளைகள்", "ஆக்கிரமிப்பு அகற்றுதல் நடவடிக்கைகள்", "பிரிவு 78/79 நடவடிக்கைகள்", "உரிமை & உடைமை தகராறுகள்", "சிவில் & ரிட் மேல்முறையீடுகள்"]
+    }
   },
   {
-    slug: "employment-law",
-    title: "Employment & Labor Law",
+    slug: "criminal-defense",
+    category: "Litigation",
+    icon: ShieldCheck,
+    color: "bg-indigo-500/10 text-indigo-600",
+    title: {
+      en: "Trial Defence & Litigation",
+      ta: "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்"
+    },
+    description: {
+      en: "Strong representation before Trial Courts, District Courts, High Court, and other appropriate forums in civil, criminal, commercial, and regulatory proceedings, with a focus on strategic trial defence and effective advocacy.",
+      ta: "சிவில், குற்றவியல், வணிக மற்றும் ஒழுங்குமுறை விவகாரங்களில் விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள், உயர் நீதிமன்றம் மற்றும் பிற மன்றங்களில் வலுவான பிரதிநிதித்துவம் மற்றும் தற்காப்பு வாதம்."
+    },
+    bullets: {
+      en: ["Trial & District Court Representation", "High Court Litigation", "Strategic Trial Defence", "Civil, Criminal & Regulatory Advocacy", "Effective Advocacy & Appeals"],
+      ta: ["விசாரணை & மாவட்ட நீதிமன்ற பிரதிநிதித்துவம்", "உயர் நீதிமன்ற வழக்குகள்", "மூலோபாய தற்காப்பு வாதம்", "சிவில், குற்றவியல் & ஒழுங்குமுறை வாதங்கள்", "மேல்முறையீடுகள் & தீர்வுகள்"]
+    }
+  },
+  {
+    slug: "tax-law",
     category: "Corporate",
-    description: "Drafting employment agreements, executing corporate compliance audits, resolving labor disputes, and protecting company and employee rights.",
-    bullets: ["Non-Compete & NDA Drafting", "Labor Dispute Representation", "POSH Policy Compliance", "Severance Structuring"],
-    icon: HandMetal,
-    color: "bg-teal-500/10 text-teal-600"
+    icon: Scale,
+    color: "bg-emerald-500/10 text-emerald-600",
+    title: {
+      en: "Taxation & GST",
+      ta: "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி"
+    },
+    description: {
+      en: "Advisory and representation relating to GST, income-tax, tax notices, assessments, appeals, compliance, tax disputes, and other direct and indirect taxation matters.",
+      ta: "ஜிஎஸ்டி, வருமான வரி, வரி அறிவிப்புகள், வரி மதிப்பீடுகள், மேல்முறையீடுகள், இணக்கம், வரி தகராறுகள் மற்றும் பிற நேரடி மற்றும் மறைமுக வரி விவகாரங்கள்."
+    },
+    bullets: {
+      en: ["GST Advisory & Compliance", "Income Tax Assessments", "Tax Notices & Appeals", "Tax Disputes & Litigation", "Direct & Indirect Taxation"],
+      ta: ["ஜிஎஸ்டி ஆலோசனை & இணக்கம்", "வருமான வரி மதிப்பீடுகள்", "வரி அறிவிப்புகள் & மேல்முறையீடுகள்", "வரி தகராறுகள் & வழக்குகள்", "நேரடி & மறைமுக வரிவிதிப்பு"]
+    }
   }
 ];
 
 export default function PracticeAreas() {
+  const { language, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(language === "en" ? "All" : "அனைத்தும்");
 
-  const categories = ["All", "Corporate", "Individual", "Property", "Litigation"];
+  const categories = language === "en" 
+    ? ["All", "Corporate", "Property & Civil", "Litigation"]
+    : ["அனைத்தும்", "கார்ப்பரேட்", "சொத்து & சிவில்", "வழக்குகள்"];
 
   const filteredAreas = practiceAreasList.filter((area) => {
-    const matchesSearch = area.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          area.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || area.category === selectedCategory;
+    const titleText = language === "en" ? area.title.en : area.title.ta;
+    const descText = language === "en" ? area.description.en : area.description.ta;
+    
+    const matchesSearch = titleText.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          descText.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const catEn = area.category;
+    let matchesCategory = true;
+    
+    if (selectedCategory !== "All" && selectedCategory !== "அனைத்தும்") {
+      if (language === "en") {
+        matchesCategory = catEn === selectedCategory;
+      } else {
+        const catMap: Record<string, string> = {
+          "கார்ப்பரேட்": "Corporate",
+          "சொத்து & சிவில்": "Property & Civil",
+          "வழக்குகள்": "Litigation"
+        };
+        matchesCategory = catEn === catMap[selectedCategory];
+      }
+    }
     return matchesSearch && matchesCategory;
   });
 
@@ -97,13 +137,15 @@ export default function PracticeAreas() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-4">
-            Practice Areas
+            {t("nav.practiceAreas")}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            Fields of Legal Expertise
+            {language === "en" ? "Fields of Legal Expertise" : "எங்கள் சட்ட நிபுணத்துவத் துறைகள்"}
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
-            AKM Associates delivers authoritative representation across a vast legal spectrum. Filter our practice areas below to find the specialized legal team for your needs.
+            {language === "en" 
+              ? "AKM Associates delivers authoritative representation across a vast legal spectrum. Filter our practice areas below to find the specialized legal team for your needs."
+              : "AKM அசோசியேட்ஸ் பரந்த சட்ட நிபுணத்துவத்தைக் கொண்டு வாடிக்கையாளர்களுக்கு வலுவான பாதுகாப்பை வழங்குகிறது. உங்களின் தேவைகளுக்கான குறிப்பிட்ட சட்டப்பிரிவை கீழே தேடி தேர்ந்தெடுக்கவும்."}
           </p>
         </div>
 
@@ -131,7 +173,7 @@ export default function PracticeAreas() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Search legal issues..."
+              placeholder={language === "en" ? "Search legal issues..." : "சட்டப் பிரச்சனைகளைத் தேடவும்..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -141,9 +183,13 @@ export default function PracticeAreas() {
 
         {/* Practice Areas Grid */}
         {filteredAreas.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             {filteredAreas.map((area, index) => {
               const Icon = area.icon;
+              const title = language === "en" ? area.title.en : area.title.ta;
+              const desc = language === "en" ? area.description.en : area.description.ta;
+              const bullets = language === "en" ? area.bullets.en : area.bullets.ta;
+              
               return (
                 <div key={index} className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-lg hover:-translate-y-1 transition-all text-left flex flex-col group h-full">
                   <div className="mb-6 flex justify-between items-center">
@@ -156,16 +202,16 @@ export default function PracticeAreas() {
                   </div>
                   
                   <h3 className="text-xl font-bold font-heading mb-4 text-primary group-hover:text-secondary transition-colors">
-                    {area.title}
+                    {title}
                   </h3>
                   
                   <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
-                    {area.description}
+                    {desc}
                   </p>
 
                   <div className="mt-auto">
                     <ul className="space-y-2 mb-6 border-t border-border/50 pt-4">
-                      {area.bullets.map((bullet, i) => (
+                      {bullets.map((bullet, i) => (
                         <li key={i} className="text-xs text-primary/80 flex items-center">
                           <ArrowRight className="h-3 w-3 mr-2 text-secondary shrink-0" /> {bullet}
                         </li>
@@ -176,7 +222,7 @@ export default function PracticeAreas() {
                       to={`/practice-areas/${area.slug}`} 
                       className="text-secondary font-bold hover:text-primary transition-colors inline-flex items-center text-sm uppercase tracking-wider group/link"
                     >
-                      Explore Details 
+                      {language === "en" ? "Explore Details" : "மேலும் விவரங்கள்"} 
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                     </Link>
                   </div>
@@ -186,12 +232,14 @@ export default function PracticeAreas() {
           </div>
         ) : (
           <div className="text-center py-20 bg-card border border-dashed border-border rounded-2xl">
-            <p className="text-muted-foreground text-lg mb-4">No practice areas match your filters.</p>
+            <p className="text-muted-foreground text-lg mb-4">
+              {language === "en" ? "No practice areas match your filters." : "உங்கள் வடிப்பான்களுடன் பொருந்தும் சட்டப் பிரிவுகள் எதுவும் இல்லை."}
+            </p>
             <button 
-              onClick={() => { setSearchTerm(""); setSelectedCategory("All"); }}
+              onClick={() => { setSearchTerm(""); setSelectedCategory(language === "en" ? "All" : "அனைத்தும்"); }}
               className="text-secondary hover:text-primary font-bold transition-colors"
             >
-              Clear filters and search
+              {language === "en" ? "Clear filters and search" : "வடிப்பான்களை நீக்கவும்"}
             </button>
           </div>
         )}

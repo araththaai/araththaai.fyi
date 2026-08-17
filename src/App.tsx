@@ -26,6 +26,9 @@ import NotFound from "@/pages/NotFound";
 
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
+import { ScrollToTop } from "@/components/shared/ScrollToTop";
+import { GoToTopButton } from "@/components/shared/GoToTopButton";
+import { LanguageProvider } from "@/lib/LanguageContext";
 
 // Layout wrapper for public pages that need Navbar and Footer
 function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -43,12 +46,15 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <HelmetProvider>
-      <Helmet>
-        <title>Araththaai – AKM Associates & Legal Consultants</title>
-        <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
-        <link rel="icon" type="image/jpeg" href="/lgo.jpg" />
-      </Helmet>
-      <BrowserRouter>
+      <LanguageProvider>
+        <Helmet>
+          <title>Araththaai – AKM Associates & Legal Consultants</title>
+          <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
+          <link rel="icon" type="image/jpeg" href="/lgo.jpg" />
+        </Helmet>
+        <BrowserRouter>
+        <ScrollToTop />
+        <GoToTopButton />
         <Routes>
           {/* Public Pages Layout wrapper */}
           <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
@@ -95,6 +101,7 @@ function App() {
           <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
         </Routes>
       </BrowserRouter>
+      </LanguageProvider>
     </HelmetProvider>
   );
 }

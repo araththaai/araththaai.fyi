@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, AlertCircle } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export function Footer() {
+  const { language, t } = useLanguage();
+
   return (
     <footer className="bg-muted text-foreground pt-16 pb-8 border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,54 +26,63 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              AKM Associates & Legal Consultants. Delivering authoritative legal advisory, compliance strategies, and trial advocacy under the highest professional standards.
+              {t("footer.desc")}
             </p>
             <div className="flex space-x-4 text-xs text-muted-foreground">
-              <a href="#" className="hover:text-secondary transition-colors">LinkedIn</a>
-              <a href="#" className="hover:text-secondary transition-colors">Twitter</a>
-              <a href="#" className="hover:text-secondary transition-colors">Facebook</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">LinkedIn</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">Twitter</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">Facebook</a>
             </div>
           </div>
 
           {/* Directory Links */}
           <div>
-            <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">Quick Links</h3>
+            <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">
+              {language === "en" ? "Quick Links" : "விரைவு இணைப்புகள்"}
+            </h3>
             <ul className="space-y-3 text-xs text-muted-foreground">
-              <li><Link to="/" className="hover:text-secondary transition-colors">Home</Link></li>
-              <li><Link to="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
-              <li><Link to="/attorneys" className="hover:text-secondary transition-colors">Our Attorneys</Link></li>
-              <li><Link to="/case-results" className="hover:text-secondary transition-colors">Case Results</Link></li>
-              <li><Link to="/blog" className="hover:text-secondary transition-colors">Insights & Hub</Link></li>
+              <li><Link to="/" className="hover:text-secondary transition-colors">{t("nav.home")}</Link></li>
+              <li><Link to="/about" className="hover:text-secondary transition-colors">{t("nav.aboutUs")}</Link></li>
+              <li><Link to="/attorneys" className="hover:text-secondary transition-colors">{t("nav.attorneys")}</Link></li>
+              <li><Link to="/case-results" className="hover:text-secondary transition-colors">{t("nav.caseResults")}</Link></li>
+              <li><Link to="/blog" className="hover:text-secondary transition-colors">{t("nav.insights")}</Link></li>
             </ul>
           </div>
 
           {/* Practice Areas */}
           <div>
-            <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">Practice Areas</h3>
+            <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">
+              {t("nav.practiceAreas")}
+            </h3>
             <ul className="space-y-3 text-xs text-muted-foreground">
-              <li><Link to="/practice-areas/corporate-law" className="hover:text-secondary transition-colors">Corporate Governance</Link></li>
-              <li><Link to="/practice-areas/property-law" className="hover:text-secondary transition-colors">Property & Titles</Link></li>
-              <li><Link to="/practice-areas/family-law" className="hover:text-secondary transition-colors">Family & Matrimonial</Link></li>
-              <li><Link to="/practice-areas/tax-law" className="hover:text-secondary transition-colors">Taxation & GST</Link></li>
-              <li><Link to="/practice-areas/criminal-defense" className="hover:text-secondary transition-colors">Criminal Defense</Link></li>
+              <li><Link to="/practice-areas/corporate-law" className="hover:text-secondary transition-colors">{language === "en" ? "Corporate & Commercial Matters" : "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்"}</Link></li>
+              <li><Link to="/practice-areas/property-law" className="hover:text-secondary transition-colors">{language === "en" ? "Civil Disputes & Property Matters" : "சிவில் மற்றும் சொத்து விவகாரங்கள்"}</Link></li>
+              <li><Link to="/practice-areas/hr-ce" className="hover:text-secondary transition-colors">{language === "en" ? "HR & CE Cases" : "HR & CE வழக்குகள்"}</Link></li>
+              <li><Link to="/practice-areas/criminal-defense" className="hover:text-secondary transition-colors">{language === "en" ? "Trial Defence & Litigation" : "வழக்கு விசாரணை & தற்காப்பு"}</Link></li>
+              <li><Link to="/practice-areas/tax-law" className="hover:text-secondary transition-colors">{language === "en" ? "Taxation & GST" : "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி"}</Link></li>
             </ul>
           </div>
 
           {/* Contact coordinates */}
           <div>
-            <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">Contact Info</h3>
+            <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">
+              {t("footer.contact")}
+            </h3>
             <ul className="space-y-4 text-xs text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
-                <span>123 Legal Avenue, Business District, <br/>Chennai, Tamil Nadu 600001</span>
+                <span>
+                  {language === "en" ? "Karur & Chennai Offices," : "கரூர் & சென்னை அலுவலகங்கள்,"} <br/>
+                  Tamil Nadu, India
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-secondary shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 86107 92622 / +91 72002 69349</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-secondary shrink-0" />
-                <span>consult@araththaai.com</span>
+                <span>akmattorney@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -81,16 +93,16 @@ export function Footer() {
           <div className="flex items-start gap-2 bg-card p-4 rounded border border-border">
             <AlertCircle className="h-4 w-4 text-secondary shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              <strong>Attorney Advertising Disclaimer:</strong> Under rules of professional conduct in certain jurisdictions, contents on this site may be considered attorney advertising. Prior outcomes achieved do not guarantee similar results. Consultation bookings do not constitute a binding attorney-client relationship.
+              <strong>{t("footer.disclaimerTitle")}</strong> {t("footer.disclaimerText")}
             </p>
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-            <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). {t("footer.rights")}</p>
             <div className="flex space-x-6">
-              <Link to="/disclaimer" className="hover:text-secondary transition-colors">Advertising Disclaimer</Link>
-              <Link to="/privacy-policy" className="hover:text-secondary transition-colors">Privacy Policy</Link>
-              <Link to="/terms-of-service" className="hover:text-secondary transition-colors">Terms of Service</Link>
+              <Link to="/privacy-policy" className="hover:text-secondary transition-colors">{t("footer.privacy")}</Link>
+              <Link to="/terms-of-service" className="hover:text-secondary transition-colors">{t("footer.terms")}</Link>
+              <Link to="/disclaimer" className="hover:text-secondary transition-colors">{t("footer.disclaimer")}</Link>
             </div>
           </div>
         </div>

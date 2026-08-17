@@ -10,9 +10,9 @@ export const blogPosts = [
     category: "Personal Rights",
     date: "August 12, 2026",
     readTime: "8 min read",
-    author: "Karthik Munusamy",
-    authorTitle: "Senior Litigating Partner",
-    initials: "KM"
+    author: "Mohammad Muzammil",
+    authorTitle: "Managing Partner & Criminal Lawyer",
+    initials: "MM"
   },
   {
     slug: "gst-compliance-audits-2026",

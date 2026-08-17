@@ -1,127 +1,125 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Award, GraduationCap, Scale, ShieldCheck, Calendar, BookOpen, Briefcase, Instagram, Phone } from "lucide-react";
+import { ArrowLeft, Award, GraduationCap, Scale, Calendar, BookOpen, Briefcase, Instagram, Phone, ShieldCheck } from "lucide-react";
 import { attorneysList } from "./Attorneys";
+import { useLanguage } from "@/lib/LanguageContext";
 
-// Expanded details maps for notable cases, bar publications etc.
+// Expanded details maps for notable cases, publications, etc.
 const extendedAttorneyDetails: Record<string, {
-  notableCases: string[];
-  publications: string[];
-  bioParagraphs: string[];
+  notableCases: { en: string[]; ta: string[] };
+  publications: { en: string[]; ta: string[] };
+  bioParagraphs: { en: string[]; ta: string[] };
 }> = {
   "aseema-khaudhar": {
-    bioParagraphs: [
-      "Advocate Aseema Khaudhar is an Associate and Legal Consultant at AKM Associates (Araththaai). She advises clients on a comprehensive suite of legal matters across Tamil Nadu, maintaining key offices in Karur and Chennai.",
-      "Her practice covers trial and appellate advocacy, representing individuals and entities before District Courts, the Madras High Court, and regulatory tribunals. She has a deep focus on property titling audits, civil disputes, consumer protections, and family counseling.",
-      "Aseema is highly dedicated to legal awareness, frequently conducting community consultation programs and sharing regulatory guidance online through the @ARATHTHAAI portal."
-    ],
-    notableCases: [
-      "District Court Matters & Civil Disputes: Represented clients in partition actions, injunction suits, and contract violations.",
-      "High Court & Tribunal Cases: Appealed administrative decisions and defended statutory rights.",
-      "Consumer & Family Matters: Handled counseling, child visitation rights, and consumer tribunal compensations.",
-      "Property Audits: Verified legal history and title ownership across Tamil Nadu."
-    ],
-    publications: [
-      "‘Understanding Land Registration and Title Verifications in Tamil Nadu’ - Legal Awareness Series, 2023.",
-      "‘Consumer Protection Act: A Guide for First-time Claimants’ - Advocate's Journal, 2024."
-    ]
+    bioParagraphs: {
+      en: [
+        "Advocate Aseema Khaudhar is the Founder and Senior Partner at AKM Associates (Araththaai). She advises clients on a comprehensive suite of legal matters across Tamil Nadu, maintaining key offices in Karur and Chennai.",
+        "Her practice covers trial and appellate advocacy, representing individuals, institutions, and corporations before District Courts, the Madras High Court, and regulatory tribunals. She has a deep focus on property titling audits, civil disputes, consumer protections, and family counseling.",
+        "Aseema is highly dedicated to legal awareness, frequently conducting community consultation programs and sharing regulatory guidance online through the @ARATHTHAAI portal."
+      ],
+      ta: [
+        "வழக்கறிஞர் அசீமா கௌதர் AKM அசோசியேட்ஸ் (அறத்தாய்) நிறுவனத்தின் நிறுவனர் மற்றும் மூத்த பங்குதாரர் ஆவார். கரூர் மற்றும் சென்னையில் கிளை அலுவலகங்களைக் கொண்டு, தமிழகம் முழுவதும் வாடிக்கையாளர்களுக்கு சட்ட ஆலோசனைகளை வழங்கி வருகிறார்.",
+        "அவரது சட்டப் பணி விசாரணை மற்றும் மேல்முறையீட்டு வாதங்களை உள்ளடக்கியது. மாவட்ட நீதிமன்றங்கள், சென்னை உயர் நீதிமன்றம் மற்றும் ஒழுங்குமுறை மன்றங்களில் தனிநபர்கள், அமைப்புகள் மற்றும் கார்ப்பரேட் நிறுவனங்களைப் பிரதிநிதித்துவப்படுத்துகிறார். சொத்து பத்திர தணிக்கை, சிவில் தகராறுகள், நுகர்வோர் பாதுகாப்பு மற்றும் குடும்ப நல விவகாரங்களில் அவர் தீவிர கவனம் செலுத்துகிறார்.",
+        "சட்ட விழிப்புணர்வில் மிகுந்த ஈடுபாடு கொண்ட அசீமா, அடிக்கடி சமூக சட்ட முகாம்களை நடத்துவதுடன், @ARATHTHAAI தளம் மூலமாக இணையத்தில் சட்ட வழிகாட்டுதல்களையும் பகிர்ந்து வருகிறார்."
+      ]
+    },
+    notableCases: {
+      en: [
+        "District Court Matters & Civil Disputes: Represented clients in partition actions, injunction suits, and contract violations.",
+        "High Court & Tribunal Cases: Appealed administrative decisions and defended statutory rights.",
+        "Property Audits: Verified legal history and title ownership across Tamil Nadu."
+      ],
+      ta: [
+        "மாவட்ட நீதிமன்ற விவகாரங்கள் & சிவில் தகராறுகள்: பாகப்பிரிவினை வழக்குகள், தடையுத்தரவு வழக்குகள் மற்றும் ஒப்பந்த மீறல்களில் வாடிக்கையாளர்களைப் பிரதிநிதித்துவப்படுத்தினார்.",
+        "உயர் நீதிமன்றம் & தீர்ப்பாய வழக்குகள்: தன்னிச்சையான நிர்வாக முடிவுகளை எதிர்த்து மேல்முறையீடு செய்து சட்ட உரிமைகளைப் பாதுகாத்தார்.",
+        "சொத்து தணிக்கை: தமிழகம் முழுவதும் சொத்துக்களின் உரிமை வரலாறுகள் மற்றும் ஆவணங்களைச் சரிபார்த்துள்ளார்."
+      ]
+    },
+    publications: {
+      en: [
+        "‘Understanding Land Registration and Title Verifications in Tamil Nadu’ - Legal Awareness Series, 2023.",
+        "‘Consumer Protection Act: A Guide for First-time Claimants’ - Advocate's Journal, 2024."
+      ],
+      ta: [
+        "‘தமிழ்நாட்டில் நிலப் பதிவு மற்றும் பத்திர சரிபார்ப்புகளைப் புரிந்துகொள்ளுதல்’ - சட்ட விழிப்புணர்வுத் தொடர், 2023.",
+        "‘நுகர்வோர் பாதுகாப்புச் சட்டம்: முதல்முறை விண்ணப்பிப்பவர்களுக்கான வழிகாட்டி’ - வழக்கறிஞர் இதழ், 2024."
+      ]
+    }
+  },
+  "mohammad-muzammil": {
+    bioParagraphs: {
+      en: [
+        "Mohammad Muzammil is the Managing Partner of AKM Associates and heads the Criminal Defence and litigation division. He provides strong, strategic representation before Trial Courts, District Courts, High Court, and other forums in civil, criminal, commercial, and regulatory proceedings.",
+        "He has earned a reputation for strategic defense filings, securing bails and anticipatory bails in complex financial and economic investigations, and representing clients before specialized enforcement directorates.",
+        "Muzammil is a passionate defender of constitutional liberties, frequently contesting arbitrary searches, seizures, and regulatory overreaches."
+      ],
+      ta: [
+        "முகமது முஸம்மில் AKM அசோசியேட்ஸ் நிறுவனத்தின் நிர்வாக பங்குதாரர் மற்றும் குற்றவியல் தற்காப்புப் பிரிவின் தலைவர் ஆவார். சிவில், குற்றவியல், வணிக மற்றும் ஒழுங்குமுறை விவகாரங்களில் விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள் மற்றும் உயர் நீதிமன்றங்களில் வலுவான பிரதிநிதித்துவத்தை வழங்குகிறார்.",
+        "பொருளாதார மற்றும் நிதிசார் குற்றச்சாட்டுகளின் விசாரணைகளில் ஜாமீன் மற்றும் முன்ஜாமீன்களைப் பெறுவதிலும், சிறப்பு அமலாக்க அமைப்புகளின் முன் ஆஜராகி வாடிக்கையாளர்களைப் பாதுகாப்பதிலும் அவர் சிறந்த நற்பெயரைப் பெற்றுள்ளார்.",
+        "அரசியலமைப்பு உரிமைகளைப் பாதுகாப்பதில் ஆர்வம் கொண்ட முஸம்மில், தன்னிச்சையான தேடுதல், சொத்து முடக்கம் மற்றும் அதிகார வரம்பு மீறல்களை எதிர்த்து நீதிமன்றங்களில் தொடர்ந்து வாதாடுகிறார்."
+      ]
+    },
+    notableCases: {
+      en: [
+        "Trial Court Representation: Secured favorable verdicts in complex criminal and corporate trial proceedings.",
+        "Anticipatory Bail & Bails: Successfully defended individuals facing high-stakes financial investigations.",
+        "Constitutional Writs: Contested arbitrary enforcement actions in the High Court."
+      ],
+      ta: [
+        "நீதிமன்ற விசாரணை பிரதிநிதித்துவம்: சிக்கலான குற்றவியல் மற்றும் கார்ப்பரேட் வழக்கு விசாரணைகளில் சாதகமான தீர்ப்புகளைப் பெற்றுள்ளார்.",
+        "முன்ஜாமீன் & ஜாமீன்கள்: கடுமையான நிதி விசாரணைப் பிரிவுகளை எதிர்கொள்ளும் நபர்களுக்கு வெற்றிகரமாக முன்ஜாமீன் பெற்றுத் தந்துள்ளார்.",
+        "அரசியலமைப்பு ரிட் மனுக்கள்: தன்னிச்சையான அமலாக்க நடவடிக்கைகளை சென்னை உயர் நீதிமன்றத்தில் எதிர்த்துப் போட்டியிட்டு உரிமைகளை நிலைநாட்டினார்."
+      ]
+    },
+    publications: {
+      en: [
+        "‘PMLA Investigations and Constitutional Protections’ - National Law Review, 2020.",
+        "‘Evidentiary Standards in Corporate Financial Trials’ - Indian Bar Association Journal, 2023."
+      ],
+      ta: [
+        "‘PMLA விசாரணைகளும் அரசியலமைப்புப் பாதுகாப்புகளும்’ - தேசிய சட்ட இதழ், 2020.",
+        "‘கார்ப்பரேட் நிதிசார் வழக்குகளில் சான்றாதாரங்களின் தரநிலைகள்’ - இந்திய வழக்கறிஞர் சங்க இதழ், 2023."
+      ]
+    }
   },
   "ak-munusamy": {
-    bioParagraphs: [
-      "A. K. Munusamy is the founding partner of AKM Associates (Araththaai). With a legal career spanning over two and a half decades, he serves as lead counsel to major banking institutions, infrastructure builders, and retail chains.",
-      "His practice centers on high-stakes litigation before the Madras High Court, administrative arbitration, and corporate structuring. He has represented boards of directors in complex shareholder deadlocks and regulatory actions under the Companies Act.",
-      "In addition to his corporate work, A. K. Munusamy is an advisor to state boards and regularly participates in policy discussions regarding environmental compliance and industrial zoning regulations."
-    ],
-    notableCases: [
-      "Successfully defended a national infrastructure developer in a ₹450M contract breach claim.",
-      "Advised a multi-state retail group during a complex corporate restructuring involving 12 subsidiaries.",
-      "Obtained a favorable judgment in the High Court regarding land classification permits for a smart city project."
-    ],
-    publications: [
-      "‘Shareholder Disputes and NCLT Jurisdictions’ - Madras Law Journal, 2018.",
-      "‘Evolving Environmental Compliance Standards for Heavy Industries’ - Chambers & Partners Legal Guide, 2022."
-    ]
-  },
-  "karthik-munusamy": {
-    bioParagraphs: [
-      "Karthik Munusamy heads the White-Collar Defense & Criminal litigation team at Araththaai. He holds a Master's degree in Criminal Jurisprudence and specializes in defense work under the Prevention of Money Laundering Act (PMLA) and Prevention of Corruption Act.",
-      "He has earned a reputation for strategic defense filings, securing anticipatory bails in highly publicized corporate investigations, and representing clients before specialized enforcement directorates.",
-      "Karthik is a passionate defender of fundamental rights and frequently handles writ petitions in high courts contesting arbitrary state search and seizure orders."
-    ],
-    notableCases: [
-      "Secured immediate bail for a financial controller accused of major bank consortium fraud.",
-      "Quashed an arbitrary tax enforcement FIR in the High Court under Section 482 jurisdiction.",
-      "Favorable defense verdict in an anti-corruption investigation involving state contract approvals."
-    ],
-    publications: [
-      "‘PMLA Investigations and Constitutional Protections’ - National Law Review, 2020.",
-      "‘Evidentiary Standards in Corporate Bribery Prosecutions’ - Indian Bar Association Journal, 2023."
-    ]
-  },
-  "sarah-jenkins": {
-    bioParagraphs: [
-      "Sarah Jenkins leads the Matrimonial and Family Law practice at the firm. Over the last 15 years, she has advised high-net-worth clients, entrepreneurs, and public figures in sensitive family reorganizations, international custody disputes, and estate inheritance claims.",
-      "She strongly advocates for strategic mediation, working to resolve sensitive custody and alimony disputes without protracted public courtroom battles. Where trial becomes necessary, she executes case strategies with extreme preparation and precision.",
-      "Sarah is also a member of various women's rights advocates networks, contributing pro-bono counsel in child safety and protection cases."
-    ],
-    notableCases: [
-      "Resolved a complex cross-border custody dispute involving jurisdictions in India and the UK.",
-      "Represented a prominent family business owner in a strategic partition deed dividing ₹800M in assets.",
-      "Successfully contested a major maintenance claim, securing an equitable settlement for the client."
-    ],
-    publications: [
-      "‘Hague Convention and Cross-Border Child Abduction Laws in India’ - Family Law Quarterly, 2019.",
-      "‘Valuing Business Assets in Matrimonial Partitions’ - Legal Era Magazine, 2021."
-    ]
-  },
-  "david-chen": {
-    bioParagraphs: [
-      "David Chen manages the Intellectual Property portfolio at Araththaai. His expertise covers patent prosecution, global trademark filing strategies, and defending software copyright infringement suits.",
-      "David works closely with tech startup founders, research hospitals, and media houses to lock in their proprietary assets. He draft licensing contracts and technology transfer agreements designed to scale globally.",
-      "Prior to joining the firm, David practiced with a top-tier intellectual property boutique in Washington D.C., where he advised on international patent treaties."
-    ],
-    notableCases: [
-      "Managed the global trademark filing strategy for a unicorn fintech enterprise across 18 countries.",
-      "Obtained a preliminary injunction against an competitor replicating a proprietary SaaS source code.",
-      "Negotiated a cross-licensing technology agreement for a medical equipment developer."
-    ],
-    publications: [
-      "‘Patent Strategies for Software in Developing Markets’ - IP Watchdog, 2021.",
-      "‘Enforcing Brand Marks in Digital Landscapes’ - Journal of IPR & Practice, 2023."
-    ]
-  },
-  "meera-raman": {
-    bioParagraphs: [
-      "Meera Raman is a senior associate in the Property Law practice. She drafts Joint Development Agreements (JDA), reviews title histories, and conducts detailed real estate due diligence audits.",
-      "She represents corporate real estate buyers and private individuals in title claims,Patta transfers, and boundary disputes. Meera has argued various matters before the RERA Appellate Tribunal.",
-      "Meera regularly organizes workshops for first-time homebuyers, detailing legal rights and title diligence requirements."
-    ],
-    notableCases: [
-      "Completed title due diligence reports for a 50-acre warehouse acquisition project near Chennai.",
-      "Obtained a RERA compensation order for buyers in a delayed residential tower project.",
-      "Favorable court settlement in a family property boundary partition dispute."
-    ],
-    publications: [
-      "‘RERA Compliance and Builder Delays: A Study of Buyer Protections’ - Real Estate Law Review, 2022."
-    ]
-  },
-  "arjun-sharma": {
-    bioParagraphs: [
-      "Arjun Sharma is an associate in the Taxation division. He advises clients on GST classifications, tax compliance audits, and drafts corporate responses to tax authorities.",
-      "Arjun has represented clients in tax assessments before the ITAT and helps startups manage their direct tax structures during fundraising phases.",
-      "His technical knowledge of GST guidelines helps clients mitigate potential double-taxation issues."
-    ],
-    notableCases: [
-      "Assisted a logistics firm in reducing a tax demand by ₹8M through a technical classification appeal.",
-      "Successfully draft an ITAT response resolving a complex transfer pricing audit inquiry."
-    ],
-    publications: [
-      "‘GST Revisions and Small Business Compliance Audits’ - Taxman Journal, 2024."
-    ]
+    bioParagraphs: {
+      en: [
+        "A. K. Munusamy is a Senior Partner at AKM Associates (Araththaai). With a legal career spanning over two and a half decades, he serves as lead counsel to major corporate institutions, infrastructure builders, and retail chains.",
+        "His practice centers on corporate litigation, administrative arbitration, and joint venture structures. He has represented boards of directors in complex shareholder deadlocks and regulatory actions under the Companies Act.",
+        "In addition to his corporate work, A. K. Munusamy is an advisor to state boards regarding industrial zoning regulations."
+      ],
+      ta: [
+        "ஏ. கே. முனுசாமி AKM அசோசியேட்ஸ் (அறத்தாய்) நிறுவனத்தின் மூத்த பங்குதாரர் ஆவார். கால் நூற்றாண்டுக்கும் மேலான சட்டப் பணியில், பெரிய கார்ப்பரேட் நிறுவனங்கள், உள்கட்டமைப்பு நிறுவனங்கள் மற்றும் வணிக அமைப்புகளுக்குத் தலைமை ஆலோசகராகச் செயல்பட்டு வருகிறார்.",
+        "அவரது பணி கார்ப்பரேட் வழக்குகள், நிர்வாக நடுவர் தீர்ப்பாயங்கள் மற்றும் கூட்டு நிறுவனக் கட்டமைப்புகளில் கவனம் செலுத்துகிறது. நிறுவனங்கள் சட்டத்தின் கீழ் இயக்குநர்கள் குழுவிற்கு ஆளுமை மற்றும் இணக்க ஆலோசனைகளை வழங்கியுள்ளார்.",
+        "கார்ப்பரேட் பணிகளுக்கு மேலாக, தொழில்துறை மண்டல ஒழுங்குமுறைகள் தொடர்பாக மாநில வாரியங்களுக்கு ஆலோசகராகவும் செயல்படுகிறார்."
+      ]
+    },
+    notableCases: {
+      en: [
+        "Corporate Arbitration: Defended a national infrastructure developer in a contract breach claim.",
+        "Corporate Restructuring: Advised a retail group during a complex corporate restructuring.",
+        "Land Use Permits: Obtained favorable judgment in the High Court regarding industrial zoning classifications."
+      ],
+      ta: [
+        "கார்ப்பரேட் நடுவர் தீர்ப்பு: ஒப்பந்த மீறல் கோரிக்கையில் தேசிய உள்கட்டமைப்பு நிறுவனத்தை வெற்றிகரமாகப் பிரதிநிதித்துவப்படுத்தினார்.",
+        "கார்ப்பரேட் மறுசீரமைப்பு: ஒரு பெரிய வணிகக் குழுமத்திற்கு நிறுவன மறுசீரமைப்பின் போது ஆலோசனைகளை வழங்கினார்.",
+        "நிலப் பயன்பாட்டு அனுமதிகள்: தொழில்துறை நில வகைப்பாடுகள் தொடர்பாக சென்னை உயர் நீதிமன்றத்தில் சாதகமான தீர்ப்பைப் பெற்றுள்ளார்."
+      ]
+    },
+    publications: {
+      en: [
+        "‘Shareholder Disputes and NCLT Jurisdictions’ - Madras Law Journal, 2018."
+      ],
+      ta: [
+        "‘பங்குதாரர் தகராறுகளும் NCLT அதிகார வரம்புகளும்’ - மெட்ராஸ் சட்ட இதழ், 2018."
+      ]
+    }
   }
 };
 
 export default function AttorneyDetail() {
+  const { language } = useLanguage();
   const { slug } = useParams<{ slug: string }>();
   const attorney = attorneysList.find((a) => a.slug === slug);
   const details = slug ? extendedAttorneyDetails[slug] : null;
@@ -130,13 +128,21 @@ export default function AttorneyDetail() {
     return <Navigate to="/attorneys" replace />;
   }
 
+  const roleName = language === "en" ? attorney.role.en : attorney.role.ta;
+  const practiceName = language === "en" ? attorney.practice.en : attorney.practice.ta;
+  const educationName = language === "en" ? attorney.education.en : attorney.education.ta;
+  const admissionsName = language === "en" ? attorney.admissions.en : attorney.admissions.ta;
+  const bioParagraphs = language === "en" ? details.bioParagraphs.en : details.bioParagraphs.ta;
+  const notableCases = language === "en" ? details.notableCases.en : details.notableCases.ta;
+  const publications = language === "en" ? details.publications.en : details.publications.ta;
+
   return (
     <div className="py-24 bg-surface min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back Link */}
         <Link to="/attorneys" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Attorneys List
+          <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back to Attorneys List" : "வழக்கறிஞர்கள் பட்டியலுக்குத் திரும்பவும்"}
         </Link>
 
         {/* Profile Card */}
@@ -144,12 +150,12 @@ export default function AttorneyDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3">
             
             {/* Initials Avatar */}
-            <div className="bg-muted p-12 lg:p-24 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-border relative">
+            <div className="bg-muted p-12 lg:p-24 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-border relative select-none">
               <div className="text-8xl lg:text-9xl font-extrabold text-muted-foreground/30 font-heading tracking-tighter">
                 {attorney.initials}
               </div>
               <div className="absolute top-6 left-6 bg-primary text-primary-foreground text-[10px] uppercase font-bold tracking-wider px-3 py-1.5 rounded">
-                {attorney.role}
+                {roleName}
               </div>
             </div>
 
@@ -160,52 +166,53 @@ export default function AttorneyDetail() {
                   {attorney.name}
                 </h1>
                 <p className="text-secondary text-sm font-bold uppercase tracking-wider mb-6 flex items-center gap-2">
-                  <Award className="h-4 w-4" /> {attorney.practice}
+                  <Award className="h-4 w-4 shrink-0" /> {practiceName}
                 </p>
                 <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
-                  {details.bioParagraphs.map((para, idx) => (
+                  {bioParagraphs.map((para, idx) => (
                     <p key={idx}>{para}</p>
                   ))}
                 </div>
               </div>
+              
               <div className="border-t border-border pt-6 mt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <GraduationCap className="h-4 w-4 text-secondary shrink-0" />
-                    <span><strong>Education:</strong> {attorney.education}</span>
+                    <span><strong>{language === "en" ? "Education:" : "கல்வி:"}</strong> {educationName}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Scale className="h-4 w-4 text-secondary shrink-0" />
-                    <span><strong>Admissions:</strong> {attorney.admissions}</span>
+                    <span><strong>{language === "en" ? "Admissions:" : "அங்கீகாரம்:"}</strong> {admissionsName}</span>
                   </div>
-                  {(attorney as any).whatsapp && (
+                  {attorney.whatsapp && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Phone className="h-4 w-4 text-secondary shrink-0" />
                       <span>
                         <strong>WhatsApp:</strong>{" "}
                         <a 
-                          href={`https://wa.me/91${(attorney as any).whatsapp}`} 
+                          href={`https://wa.me/91${attorney.whatsapp}`} 
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="text-secondary hover:underline font-semibold"
                         >
-                          +91 {(attorney as any).whatsapp}
+                          +91 {attorney.whatsapp}
                         </a>
                       </span>
                     </div>
                   )}
-                  {(attorney as any).instagram && (
+                  {attorney.instagram && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Instagram className="h-4 w-4 text-secondary shrink-0" />
                       <span>
                         <strong>Instagram:</strong>{" "}
                         <a 
-                          href={`https://instagram.com/${((attorney as any).instagram).replace('@', '')}`} 
+                          href={`https://instagram.com/${attorney.instagram.replace('@', '')}`} 
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="text-secondary hover:underline font-semibold"
                         >
-                          {(attorney as any).instagram}
+                          {attorney.instagram}
                         </a>
                       </span>
                     </div>
@@ -214,7 +221,7 @@ export default function AttorneyDetail() {
 
                 <Link to="/book-consultation">
                   <Button className="bg-secondary text-primary hover:bg-secondary/90 font-bold h-12 px-6">
-                    <Calendar className="mr-2 h-4 w-4" /> Book Appointment
+                    <Calendar className="mr-2 h-4 w-4" /> {language === "en" ? "Book Appointment" : "முன்பதிவு செய்ய"}
                   </Button>
                 </Link>
               </div>
@@ -228,11 +235,13 @@ export default function AttorneyDetail() {
           {/* Notable Case Outcomes */}
           <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-              <Briefcase className="h-6 w-6 text-secondary" />
-              <h3 className="text-xl font-heading font-bold text-primary">Representative Matters</h3>
+              <Briefcase className="h-6 w-6 text-secondary shrink-0" />
+              <h3 className="text-xl font-heading font-bold text-primary">
+                {language === "en" ? "Representative Matters" : "வழக்கு பிரதிநிதித்துவம்"}
+              </h3>
             </div>
             <ul className="space-y-4">
-              {details.notableCases.map((caseItem, idx) => (
+              {notableCases.map((caseItem, idx) => (
                 <li key={idx} className="flex items-start gap-3">
                   <ShieldCheck className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
                   <span className="text-sm text-muted-foreground">{caseItem}</span>
@@ -244,12 +253,14 @@ export default function AttorneyDetail() {
           {/* Publications */}
           <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-              <BookOpen className="h-6 w-6 text-secondary" />
-              <h3 className="text-xl font-heading font-bold text-primary">Publications & Articles</h3>
+              <BookOpen className="h-6 w-6 text-secondary shrink-0" />
+              <h3 className="text-xl font-heading font-bold text-primary">
+                {language === "en" ? "Publications & Articles" : "கட்டுரைகள் & வெளியீடுகள்"}
+              </h3>
             </div>
-            {details.publications && details.publications.length > 0 ? (
+            {publications && publications.length > 0 ? (
               <ul className="space-y-4">
-                {details.publications.map((pub, idx) => (
+                {publications.map((pub, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <Award className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
                     <span className="text-sm text-muted-foreground italic">“{pub}”</span>
@@ -257,7 +268,11 @@ export default function AttorneyDetail() {
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-muted-foreground italic">No public publications recorded in compliance with bar guidelines.</p>
+              <p className="text-sm text-muted-foreground italic">
+                {language === "en" 
+                  ? "No public publications recorded in compliance with bar guidelines." 
+                  : "விளம்பர வழிகாட்டுதல்களின்படி எந்த பொது வெளியீடுகளும் பதிவு செய்யப்படவில்லை."}
+              </p>
             )}
           </div>
         </div>

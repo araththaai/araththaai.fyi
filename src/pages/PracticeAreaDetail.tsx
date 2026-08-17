@@ -6,211 +6,329 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { supabase } from "@/lib/supabaseClient";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // Practice Area Detailed Data Map
 const detailedPracticeData: Record<string, {
-  title: string;
-  description: string;
-  longText: string;
-  mattersHandled: string[];
-  clientJourney: { step: string; title: string; desc: string }[];
-  faqs: { q: string; a: string }[];
+  title: { en: string; ta: string };
+  description: { en: string; ta: string };
+  longText: { en: string; ta: string };
+  mattersHandled: { en: string[]; ta: string[] };
+  clientJourney: { step: string; title: { en: string; ta: string }; desc: { en: string; ta: string } }[];
+  faqs: { q: { en: string; ta: string }; a: { en: string; ta: string } }[];
 }> = {
   "corporate-law": {
-    title: "Corporate Law & Governance",
-    description: "End-to-end legal support for businesses, from incorporation to compliance and M&A.",
-    longText: "In today's highly scrutinized corporate ecosystem, ensuring robust legal compliance is vital for strategic expansion. Our Corporate Law & Governance practice provides complete advisory, transactional, and compliance solutions for startups, established conglomerates, and institutional investors. We align legal structure with corporate objectives, minimizing liability risks and protecting shareholder interests during critical deals.",
-    mattersHandled: [
-      "Company Incorporation & Founder Agreements",
-      "Corporate Governance & Board Advisory",
-      "Mergers, Acquisitions & Venture Capital Fundraisings",
-      "Contract Engineering, Drafting & Reviews",
-      "Appellate Representation before NCLT",
-      "Employment Audits & Statutory Compliances"
-    ],
+    title: {
+      en: "Corporate & Commercial Matters",
+      ta: "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்"
+    },
+    description: {
+      en: "Corporate advisory, commercial contracts, agreements, business structuring, compliance, corporate governance, and commercial disputes.",
+      ta: "கார்ப்பரேட் ஆலோசனை, வணிக ஒப்பந்தங்கள், ஒப்பந்த வரைவுகள், வணிகக் கட்டமைப்பு, சட்ட இணக்கத்தன்மை, கார்ப்பரேட் ஆளுமை மற்றும் வணிகத் தகராறுகள்."
+    },
+    longText: {
+      en: "Our Corporate & Commercial practice provides complete advisory, transactional, and compliance solutions for startups, established companies, and institutional investors. We align legal structure with corporate objectives, minimizing liability risks and protecting shareholder interests during critical business transactions and contract negotiations.",
+      ta: "எங்கள் கார்ப்பரேட் & வணிகச் சட்டப் பிரிவு ஸ்டார்ட்-அப்கள், நிறுவப்பட்ட நிறுவனங்கள் மற்றும் முதலீட்டாளர்களுக்கு முழுமையான ஆலோசனை, பரிவர்த்தனை மற்றும் சட்ட இணக்க தீர்வுகளை வழங்குகிறது. வணிக இலக்குகளுடன் சட்டக் கட்டமைப்பை சீரமைத்து, பொறுப்பு அபாயங்களைக் குறைத்து, முக்கியமான வணிக பரிவர்த்தனைகள் மற்றும் ஒப்பந்த பேச்சுவார்த்தைகளின் போது பங்குதாரர்களின் நலன்களைப் பாதுகாக்கிறோம்."
+    },
+    mattersHandled: {
+      en: [
+        "Company Incorporation & Founder Agreements",
+        "Corporate Governance & Board Advisory",
+        "Commercial Contracts Drafting & Engineering",
+        "Business Compliance Audits",
+        "Commercial Dispute Resolutions before Tribunals & NCLT"
+      ],
+      ta: [
+        "நிறுவன பதிவு & நிறுவனர் ஒப்பந்தங்கள்",
+        "கார்ப்பரேட் ஆளுமை & நிர்வாக வாரிய ஆலோசனை",
+        "வணிக ஒப்பந்தங்கள் வரைவு செய்தல்",
+        "வணிக சட்ட இணக்கத் தணிக்கைகள்",
+        "தீர்ப்பாயங்கள் & NCLT முன்னிலையிலான வணிகத் தகராறு தீர்வுகள்"
+      ]
+    },
     clientJourney: [
-      { step: "01", title: "Corporate Discovery", desc: "We review your company structure, sector-specific regulations, and business goals." },
-      { step: "02", title: "Compliance Mapping", desc: "Our specialists trace regulatory vulnerabilities and draft operational protocols." },
-      { step: "03", title: "Contract Design", desc: "We draft and review all necessary transaction documents and partnership agreements." },
-      { step: "04", title: "Continuous Auditing", desc: "Ongoing compliance updates, governance monitoring, and active board advisory." }
+      {
+        step: "01",
+        title: { en: "Corporate Discovery", ta: "கார்ப்பரேட் பகுப்பாய்வு" },
+        desc: { en: "We review your company structure, sector regulations, and business goals.", ta: "உங்கள் நிறுவன அமைப்பு, துறை சார்ந்த விதிமுறைகள் மற்றும் வணிக இலக்குகளை நாங்கள் மதிப்பாய்வு செய்கிறோம்." }
+      },
+      {
+        step: "02",
+        title: { en: "Compliance Mapping", ta: "இணக்கத்தன்மை வடிவமைப்பு" },
+        desc: { en: "Our specialists trace regulatory vulnerabilities and draft operational protocols.", ta: "எங்கள் நிபுணர்கள் ஒழுங்குமுறை குறைபாடுகளைக் கண்டறிந்து செயல்பாட்டு நெறிமுறைகளை உருவாக்குகிறார்கள்." }
+      },
+      {
+        step: "03",
+        title: { en: "Contract Design", ta: "ஒப்பந்த வடிவமைப்பு" },
+        desc: { en: "We draft and review all necessary transaction documents and partnership agreements.", ta: "நாங்கள் தேவையான அனைத்து பரிவர்த்தனை ஆவணங்களையும் கூட்டாண்மை ஒப்பந்தங்களையும் வரைந்து சரிபார்க்கிறோம்." }
+      },
+      {
+        step: "04",
+        title: { en: "Continuous Auditing", ta: "தொடர் சட்ட தணிக்கை" },
+        desc: { en: "Ongoing compliance updates, governance monitoring, and active board advisory.", ta: "தொடர்ச்சியான இணக்க புதுப்பிப்புகள், கார்ப்பரேட் ஆளுமை கண்காணிப்பு மற்றும் வாரிய ஆலோசனை." }
+      }
     ],
     faqs: [
-      { q: "What corporate structures do you advise on?", a: "We advise on Private Limited Companies, Public Limited Companies, Limited Liability Partnerships (LLPs), and Joint Ventures." },
-      { q: "Do you represent companies before regulatory tribunals?", a: "Yes, our litigation team represents corporate entities before the NCLT, NCLAT, and other regulatory bodies." },
-      { q: "Can you assist with startup fundraising?", a: "Absolutely. We represent both startups and venture funds in drafting term sheets, shareholder agreements, and managing due diligence." }
+      {
+        q: { en: "What corporate structures do you advise on?", ta: "எந்த வகையான கார்ப்பரேட் கட்டமைப்புகளுக்கு நீங்கள் ஆலோசனை வழங்குகிறீர்கள்?" },
+        a: { en: "We advise on Private Limited, Public Limited, LLPs, and Joint Ventures.", ta: "பிரைவேட் லிமிடெட், பப்ளிக் லிமிடெட், எல்.எல்.பி (LLP) மற்றும் கூட்டு முயற்சிகள் (Joint Ventures) ஆகியவற்றிற்கு ஆலோசனை வழங்குகிறோம்." }
+      },
+      {
+        q: { en: "Do you represent companies before regulatory tribunals?", ta: "ஒழுங்குமுறை தீர்ப்பாயங்களில் நிறுவனங்களை பிரதிநிதித்துவப்படுத்துகிறீர்களா?" },
+        a: { en: "Yes, our team represents corporate entities before NCLT, NCLAT, and other regulatory bodies.", ta: "ஆம், எங்கள் குழு நிறுவனங்களை NCLT, NCLAT மற்றும் பிற ஒழுங்குமுறை மன்றங்களில் பிரதிநிதித்துவப்படுத்துகிறது." }
+      }
     ]
   },
   "property-law": {
-    title: "Property & Real Estate Law",
-    description: "Expert guidance on real estate transactions, property disputes, and documentation.",
-    longText: "Real estate investment represents significant capital commitment. Our property division protects your real estate assets through exhaustive title investigation, legal verification of conveyance documents, and aggressive representation in land disputes. We support builders, commercial developers, and individual property buyers with comprehensive due diligence.",
-    mattersHandled: [
-      "Title Verification & Due Diligence Reports",
-      "Drafting Conveyance, Sale, and Gift Deeds",
-      "Joint Development Agreements (JDA) Structuring",
-      "Real Estate Dispute Litigation",
-      "RERA Registrations & Compliance Hearings",
-      "Zoning & Land Use Permits Advisory"
-    ],
+    title: {
+      en: "Civil Disputes & Property Matters",
+      ta: "சிவில் தகராறுகள் மற்றும் சொத்து விவகாரங்கள்"
+    },
+    description: {
+      en: "Property disputes, title verification, land and possession disputes, injunctions, declarations, recovery proceedings, partition, specific performance, and other civil litigation.",
+      ta: "சொத்து தகராறுகள், பத்திர சரிபார்ப்பு, நிலம் மற்றும் உடைமை தகராறுகள், தடையுத்தரவுகள், பிரகடனங்கள், மீட்பு நடவடிக்கைகள், பாகப்பிரிவினை, ஒப்பந்த செயல்திறன் மற்றும் பிற சிவில் வழக்குகள்."
+    },
+    longText: {
+      en: "Our property and civil division protects your real estate assets and civil rights through exhaustive title investigation, legal verification of conveyance documents, and representation in civil disputes. We support businesses, land owners, and individual property buyers with comprehensive due diligence, partition suits, and injunction proceedings before courts.",
+      ta: "எங்கள் சொத்து மற்றும் சிவில் பிரிவு உங்கள் ரியல் எஸ்டேட் சொத்துக்கள் மற்றும் சிவில் உரிமைகளை முழுமையான பத்திர சரிபார்ப்பு, சட்ட ரீதியான ஆவண சரிபார்ப்பு மற்றும் சிவில் தகராறு பிரதிநிதித்துவம் மூலம் பாதுகாக்கிறது. வணிகங்கள், நில உரிமையாளர்கள் மற்றும் தனிநபர் சொத்து வாங்குபவர்களுக்கு விரிவான பத்திர தணிக்கை, பாகப்பிரிவினை வழக்குகள் மற்றும் நீதிமன்ற தடையுத்தரவு நடவடிக்கைகளை நாங்கள் வழங்குகிறோம்."
+    },
+    mattersHandled: {
+      en: [
+        "Property Title Verification & due diligence flow search",
+        "Land encroachment & possession disputes representation",
+        "Injunction suits, declarations & recovery proceedings",
+        "Partition suits, Family Settlements & partition deeds",
+        "Specific performance litigation & other civil suits"
+      ],
+      ta: [
+        "சொத்து பத்திர சரிபார்ப்பு & முந்தைய ஆவண சரிபார்ப்பு",
+        "நில ஆக்கிரமிப்பு & உடைமை தகராறு பிரதிநிதித்துவம்",
+        "தடையுத்தரவு வழக்குகள், பிரகடனங்கள் & மீட்பு நடவடிக்கைகள்",
+        "பாகப்பிரிவினை வழக்குகள், குடும்ப தீர்வுகள் & பாகப்பிரிவினை பத்திரங்கள்",
+        "குறிப்பிட்ட ஒப்பந்த செயல்திறன் வழக்குகள் & பிற சிவில் வழக்குகள்"
+      ]
+    },
     clientJourney: [
-      { step: "01", title: "Document Collation", desc: "We aggregate parent deeds, revenue records, encumbrance certificates, and patta." },
-      { step: "02", title: "Title Investigation", desc: "Exhaustive legal check of property history over a 30-year flow to ensure clean title." },
-      { step: "03", title: "Agreement Drafting", desc: "Drafting of bulletproof Sale Agreements, JDAs, or tenancy contracts." },
-      { step: "04", title: "Registration Support", desc: "Guiding the execution and registration processes at the Sub-Registrar Office." }
+      {
+        step: "01",
+        title: { en: "Document Collation", ta: "ஆவணங்கள் சேகரிப்பு" },
+        desc: { en: "We collect parent deeds, revenue records, encumbrance certificates, and patta.", ta: "நாங்கள் மூலப் பத்திரங்கள், வருவாய்த் துறை ஆவணங்கள், வில்லங்கச் சான்றிதழ்கள் மற்றும் பட்டாக்களைச் சேகரிக்கிறோம்." }
+      },
+      {
+        step: "02",
+        title: { en: "Title Investigation", ta: "பத்திரங்கள் சரிபார்ப்பு" },
+        desc: { en: "Exhaustive legal check of property history over a 30-year flow to ensure clean title.", ta: "சொத்துக்குத் தெளிவான உரிமை இருப்பதை உறுதி செய்ய 30 ஆண்டுகால வரலாற்றை முழுமையாக ஆய்வு செய்கிறோம்." }
+      },
+      {
+        step: "03",
+        title: { en: "Suit / Draft Preparation", ta: "வழக்கு / வரைவு தயாரிப்பு" },
+        desc: { en: "Drafting of partition deeds, plaints for injunction, or specific performance suits.", ta: "பாகப்பிரிவினை பத்திரங்கள், தடையுத்தரவுக்கான மனுக்கள் அல்லது சிவில் வழக்குகளைத் தயாரிக்கிறோம்." }
+      },
+      {
+        step: "04",
+        title: { en: "Court / Sub-Registrar Support", ta: "நீதிமன்ற & பதிவு ஆதரவு" },
+        desc: { en: "Guiding courtroom litigation or registration execution at Sub-Registrar offices.", ta: "நீதிமன்ற வழக்குகள் அல்லது சார்பதிவாளர் அலுவலகங்களில் ஆவணப் பதிவுகளை மேற்கொள்கிறோம்." }
+      }
     ],
     faqs: [
-      { q: "Why is 30-year title flow verification necessary?", a: "It ensures there are no hidden legal claimants, minor rights, mortgages, or government acquisitions on the property." },
-      { q: "Do you handle RERA dispute cases?", a: "Yes, we represent all property buyers and developers before RERA authorities and appellate tribunals." },
-      { q: "How long does a title search take?", a: "Typically, a thorough title search and due diligence report takes 5 to 7 business days." }
-    ]
-  },
-  "family-law": {
-    title: "Family & Matrimonial Law",
-    description: "Compassionate and discreet representation in matrimonial and family disputes.",
-    longText: "Family disputes involve deep emotional complexities and require sensitive, private legal structures. We prioritize mediation and strategic negotiations to resolve matrimonial issues, asset distribution, and child guardianship. Where litigation is inevitable, our trial advocates protect your rights aggressively in family courts.",
-    mattersHandled: [
-      "Mutual Consent & Contested Divorce Actions",
-      "Child Custody & Guardianship Petitions",
-      "Alimony, Maintenance & Child Support Claims",
-      "Family Settlement Agreements & Partition Deeds",
-      "Domestic Violence Protection Orders",
-      "Pre-nuptial & Separation Agreements Advisory"
-    ],
-    clientJourney: [
-      { step: "01", title: "Empathetic Intake", desc: "A private consultation to understand family dynamics and client expectations." },
-      { step: "02", title: "Mediation Assessment", desc: "We explore alternative resolutions to minimize stress and legal expenses." },
-      { step: "03", title: "Petition Strategy", desc: "If mediation fails, we draft thorough petitions with clear evidentiary backing." },
-      { step: "04", title: "Court Representation", desc: "Robust representation in family courts for child custody, partition, or divorce." }
-    ],
-    faqs: [
-      { q: "How long does a mutual consent divorce take?", a: "Generally, it takes 6 to 18 months, depending on the mandatory cooling-off period, which can sometimes be waived." },
-      { q: "How is child custody determined?", a: "Courts determine custody primarily based on the 'welfare of the child' principle, evaluating financial, emotional, and social stability." },
-      { q: "Are family court proceedings confidential?", a: "Yes, family court proceedings can be held in-camera (privately) at the request of the parties to ensure privacy." }
-    ]
-  },
-  "tax-law": {
-    title: "Taxation & GST Litigation",
-    description: "Comprehensive advisory on income tax, GST compliance, and dispute resolution.",
-    longText: "Taxation frameworks change frequently, creating financial uncertainty for businesses and individuals. Our tax litigation division provides strategic planning, compliance reviews, and represents clients in complex tax assessment disputes before tax officers, appellate authorities, and high courts.",
-    mattersHandled: [
-      "Direct Tax Planning & High-Net-Worth Advisory",
-      "GST Audits, Compliance & Classification Disputes",
-      "Representation before Commissioner (Appeals)",
-      "Tax Appellate Tribunal (ITAT & GSTAT) Representation",
-      "Transfer Pricing Audits & Documentation",
-      "Writ Petitions against Arbitrary Tax Assessments"
-    ],
-    clientJourney: [
-      { step: "01", title: "Tax Assessment Audit", desc: "We review the assessment order, tax demands, and relevant compliance papers." },
-      { step: "02", title: "Legal Grounds Design", desc: "Framing technical arguments, case-law research, and response drafting." },
-      { step: "03", title: "Appeal Execution", desc: "Filing and defending the appeal before Commissioner Appeals or Tribunals." },
-      { step: "04", title: "System Adjustment", desc: "Reviewing business operations to prevent future tax disputes." }
-    ],
-    faqs: [
-      { q: "Do you assist with GST classification disputes?", a: "Yes. We advise on tax rates, exemptions, and input tax credit eligibility to resolve classification disputes." },
-      { q: "Can you represent clients during tax search and seizures?", a: "Yes. We offer rapid legal advisory and defense representation during tax search and seizure operations." },
-      { q: "What is your success rate in tax appeals?", a: "While regulations prevent promising results, our team has resolved major tax disputes successfully at the ITAT level." }
-    ]
-  },
-  "ipr": {
-    title: "Intellectual Property Rights",
-    description: "Protect your innovations and creative assets. We handle strategic IP registration.",
-    longText: "Your intellectual property is a core competitive advantage. Our IPR practice covers complete intellectual asset protection, from trademark registration to global patent strategies and copyright enforcement. We litigate infringement claims aggressively to defend your brand equity and research investments.",
-    mattersHandled: [
-      "Trademark Availability Search & Filings",
-      "Patent Specification Drafting & Prosecution",
-      "Copyright Registrations for Software & Creative Works",
-      "IP Infringement Litigation & Cease & Desist Actions",
-      "Licensing, Franchising & Technology Transfer Contracts",
-      "Trade Secret Protection Protocols"
-    ],
-    clientJourney: [
-      { step: "01", title: "IP Discovery & Search", desc: "Comprehensive global search to verify trademark/patent availability." },
-      { step: "02", title: "Application Drafting", desc: "Formulating specifications, claims, and applications for filing." },
-      { step: "03", title: "Prosecution Defense", desc: "Responding to examiner objections and representing clients in hearings." },
-      { step: "04", title: "Enforcement Audit", desc: "Monitoring market infringement and taking swift enforcement actions." }
-    ],
-    faqs: [
-      { q: "How long does a trademark registration take?", a: "Typically, trademark applications take 6 to 12 months, though you can use the 'TM' symbol immediately after filing." },
-      { q: "Can software be patented?", a: "Software as code is protected by copyright. Patenting requires showing it is part of a novel hardware-linked system." },
-      { q: "What is an IP Cease & Desist letter?", a: "A formal warning letter sent to infringers demanding they stop using your IP, which often resolves disputes pre-trial." }
-    ]
-  },
-  "criminal-defense": {
-    title: "Criminal Defense & White-Collar",
-    description: "Vigorous representation in criminal proceedings with a focus on protecting your rights.",
-    longText: "Facing criminal charges can impact your liberty, reputation, and livelihood. Our criminal defense team is composed of seasoned trial advocates who represent clients in white-collar financial crimes, regulatory investigations, and general criminal defense. We provide immediate, strategic defense representation.",
-    mattersHandled: [
-      "Anticipatory Bail & Regular Bail Applications",
-      "White-Collar Financial Crime Defense",
-      "Anti-Corruption (CBI / Lokayukta) Cases",
-      "Writ Petitions for Quashing FIRs",
-      "Defense Representation in Trial Courts",
-      "High Court and Supreme Court Appellate Advocacy"
-    ],
-    clientJourney: [
-      { step: "01", title: "Immediate Case Audit", desc: "FIR analysis, review of police charges, and client briefing." },
-      { step: "02", title: "Pre-Trial Protection", desc: "Securing interim protection or filing anticipatory bail petitions." },
-      { step: "03", title: "Evidence Construction", desc: "Cross-examination prep, witness listing, and defense exhibits construction." },
-      { step: "04", title: "Trial Litigation", desc: "Advocating client innocence and protecting rights during trial." }
-    ],
-    faqs: [
-      { q: "What is the difference between regular and anticipatory bail?", a: "Regular bail is requested after arrest. Anticipatory bail is requested when an individual fears arrest for non-bailable offenses." },
-      { q: "Can an FIR be quashed?", a: "Yes. High Courts can quash FIRs under Section 482 of CrPC if the allegations do not constitute a prime facie offense." },
-      { q: "Do you handle economic offenses?", a: "Yes, we represent individuals and organizations in money laundering, tax evasion, and corporate fraud investigations." }
+      {
+        q: { en: "Why is 30-year title flow verification necessary?", ta: "30 ஆண்டு மூலப்பத்திர சரிபார்ப்பு ஏன் அவசியம்?" },
+        a: { en: "It ensures there are no hidden legal claimants, minor rights, mortgages, or government acquisitions on the property.", ta: "சொத்தின் மீது மறைக்கப்பட்ட சட்டபூர்வ உரிமைகோருவோர், மைனர் உரிமைகள், அடமானங்கள் அல்லது அரசு கையகப்படுத்துதல் எதுவும் இல்லை என்பதை இது உறுதி செய்கிறது." }
+      },
+      {
+        q: { en: "Do you handle partition disputes?", ta: "பாகப்பிரிவினை தகராறுகளை நீங்கள் கையாள்கிறீர்களா?" },
+        a: { en: "Yes, we draft family settlements, partition deeds, and file partition suits before civil courts when disputes arise.", ta: "ஆம், தகராறுகள் எழும்போது குடும்ப உடன்படிக்கைகள், பாகப்பிரிவினை பத்திரங்களை வரைந்து சிவில் நீதிமன்றங்களில் வழக்குத் தொடர்கிறோம்." }
+      }
     ]
   },
   "hr-ce": {
-    title: "HR & CE / Temple Law",
-    description: "Expert legal counsel dealing with the administration and protection of Hindu temple properties.",
-    longText: "Hindu religious institutions and endowments are subject to specific legislative frameworks. Our HR&CE practice represents temple trusts, administrators, and traditional trustees in administrative regulatory disputes, land recovery, and securing trusteeship rights under the HR&CE Act.",
-    mattersHandled: [
-      "Writ Petitions challenging Administrative Takeovers",
-      "Trusteeship Declarations & Succession Claims",
-      "Encroachment Clearances on Temple Land",
-      "Advising on Lease and Rent Recoveries",
-      "Compliance Audits of Endowment Trust Funds",
-      "Representation before HR&CE Commissioner Courts"
-    ],
+    title: {
+      en: "HR & CE Cases",
+      ta: "HR & CE வழக்குகள் (அறநிலையத்துறை)"
+    },
+    description: {
+      en: "Legal representation in matters involving the Hindu Religious & Charitable Endowments Department, temple properties, encroachment proceedings, Section 78/79 proceedings, title and possession disputes, and related civil and writ proceedings.",
+      ta: "இந்து சமய அறநிலையத்துறை சம்பந்தப்பட்ட விவகாரங்கள், கோவில் சொத்துக்கள், ஆக்கிரமிப்பு அகற்றுதல் நடவடிக்கைகள், பிரிவு 78/79 நடவடிக்கைகள், உரிமை மற்றும் உடைமை தகராறுகள் மற்றும் சிவில் மற்றும் ரிட் வழக்குகள்."
+    },
+    longText: {
+      en: "Our specialized HR & CE practice represents temple trusts, administrators, traditional trustees, and property leaseholders in regulatory disputes under the HR&CE Act. We represent clients in encroachment clearance proceedings under Section 78/79, audit objections, lease and rent recoveries, and related civil and writ proceedings before high courts.",
+      ta: "எங்கள் சிறப்பு வாய்ந்த HR & CE (இந்து சமய அறநிலையத்துறை) சட்டப்பிரிவு, அறக்கட்டளைகள், நிர்வாக அறங்காவலர்கள் மற்றும் குத்தகைதாரர்களுக்கு அறநிலையத்துறை சட்டத்தின் கீழ் வரும் தகராறுகளுக்கு சட்ட பிரதிநிதித்துவத்தை வழங்குகிறது. பிரிவு 78/79-இன் கீழ் ஆக்கிரமிப்பு அகற்றுதல் நடவடிக்கைகள், தணிக்கை ஆட்சேபனைகள், குத்தகை மற்றும் வாடகை மீட்புகள், மற்றும் உயர் நீதிமன்றங்களில் சிவில் மற்றும் ரிட் வழக்குகள் ஆகியவற்றில் பிரதிநிதித்துவப்படுத்துகிறோம்."
+    },
+    mattersHandled: {
+      en: [
+        "Section 78/79 Encroachment Proceedings & clearances",
+        "Temple Property Title, boundaries & possession disputes",
+        "Trusteeship succession, declarations & entitlements",
+        "Lease & rent recovery proceedings under HR&CE regulations",
+        "Civil suits and High Court Writ Petitions challenging administrative takeovers"
+      ],
+      ta: [
+        "பிரிவு 78/79 ஆக்கிரமிப்பு அகற்றுதல் நடவடிக்கைகள் & தீர்வுகள்",
+        "கோவில் சொத்து உரிமை, எல்லைகள் & உடைமை தகராறுகள்",
+        "பரம்பரை அறங்காவலர் உரிமைகள், பிரகடனங்கள் & தகுதிகள்",
+        "அறநிலையத்துறை விதிகளின் கீழ் குத்தகை & வாடகை மீட்பு வழக்குகள்",
+        "நிர்வாகக் கையகப்படுத்தல்களை எதிர்க்கும் சிவில் & உயர் நீதிமன்ற ரிட் வழக்குகள்"
+      ]
+    },
     clientJourney: [
-      { step: "01", title: "Trust Deed Audit", desc: "Reviewing ancient schemes of administration, trust history, and revenue maps." },
-      { step: "02", title: "Regulatory Check", desc: "Verifying compliance with HR&CE department orders and rules." },
-      { step: "03", title: "Administrative Petitions", desc: "Filing objections or claims before Commissioner courts." },
-      { step: "04", title: "Property Restoration", desc: "Executing legal procedures to recover encroached temple assets." }
+      {
+        step: "01",
+        title: { en: "Case Assessment", ta: "வழக்கு மதிப்பீடு" },
+        desc: { en: "Review of departmental notices, trusteeship records, or property revenue maps.", ta: "துறை சார்ந்த அறிவிப்புகள், அறங்காவலர் பதிவுகள் அல்லது சொத்து வருவாய் வரைபடங்களை ஆய்வு செய்கிறோம்." }
+      },
+      {
+        step: "02",
+        title: { en: "Objection Drafting", ta: "ஆட்சேபனை வரைவு தயாரிப்பு" },
+        desc: { en: "Formulating legal grounds, objections under Section 78/79, or trusteeship declarations.", ta: "பிரிவு 78/79-இன் கீழ் ஆட்சேபனைகள் அல்லது அறங்காவலர் பிரகடனங்களுக்கான சட்ட அடிப்படைகளைத் தயாரிக்கிறோம்." }
+      },
+      {
+        step: "03",
+        title: { en: "Tribunal & Department Representation", ta: "ஒழுங்குமுறை மன்ற பிரதிநிதித்துவம்" },
+        desc: { en: "Representing clients before HR&CE Joint Commissioner or Commissioner courts.", ta: "அறநிலையத்துறை இணை ஆணையர் அல்லது ஆணையர் நீதிமன்றங்களுக்கு முன்னால் பிரதிநிதித்துவப்படுத்துகிறோம்." }
+      },
+      {
+        step: "04",
+        title: { en: "Appellate Advocacy", ta: "மேல்முறையீட்டு வாதாடுதல்" },
+        desc: { en: "Filing Writ Petitions or civil appeals in the High Court against arbitrary takeover orders.", ta: "தன்னிச்சையான கையகப்படுத்தல் உத்தரவுகளுக்கு எதிராக உயர் நீதிமன்றத்தில் ரிட் அல்லது சிவில் மேல்முறையீடுகளைச் செய்கிறோம்." }
+      }
     ],
     faqs: [
-      { q: "Can the government take over temple administration?", a: "Only under specific conditions of mismanagement, and such takeovers can be challenged in High Courts." },
-      { q: "How are hereditary trusteeship claims established?", a: "Through historical schemes of administration, trust deeds, and custom patterns of succession." },
-      { q: "Do you advise on temple property leases?", a: "Yes, we advise on compliance for leasing religious properties and recovering outstanding rents." }
+      {
+        q: { en: "What is Section 78/79 under the HR&CE Act?", ta: "HR&CE சட்டத்தின் கீழ் பிரிவு 78/79 என்றால் என்ன?" },
+        a: { en: "It relates to the identification and eviction of encroachers from properties belonging to religious institutions or temple trusts.", ta: "இது சமய நிறுவனங்கள் அல்லது கோவில் அறக்கட்டளைகளுக்குச் சொந்தமான சொத்துக்களில் இருந்து ஆக்கிரமிப்பாளர்களைக் கண்டறிந்து வெளியேற்றுவது பற்றியது." }
+      },
+      {
+        q: { en: "Can a government takeover of a temple be challenged?", ta: "அரசு கோவில் நிர்வாகத்தைக் கையகப்படுத்துவதை எதிர்க்க முடியுமா?" },
+        a: { en: "Yes, takeovers can be challenged in the High Court through Writ Petitions if procedures or natural justice are violated.", ta: "ஆம், நடைமுறைகள் அல்லது இயற்கை நீதி மீறப்பட்டால், ரிட் மனுக்கள் மூலம் உயர் நீதிமன்றத்தில் கையகப்படுத்துவதை எதிர்க்க முடியும்." }
+      }
     ]
   },
-  "employment-law": {
-    title: "Employment & Labor Law",
-    description: "Comprehensive corporate labor compliance audits, NDAs, and worker disputes representation.",
-    longText: "Workplace regulations are essential for organizational stability. Our labor and employment team represents corporate employers and executive-level employees in drafting employment policies, non-disclosure contracts, executing sexual harassment compliance protocols (POSH), and defending against labor claims.",
-    mattersHandled: [
-      "Drafting Employment Contracts & Executive NDAs",
-      "Structuring Employee Stock Option Plans (ESOP)",
-      "POSH Compliance Audits & Training Setup",
-      "Labor Court Representation & Collective Bargainings",
-      "Wage, Overtime, and Severance Disputes Advocacy",
-      "Restructuring & Corporate Layoff Consultations"
-    ],
+  "criminal-defense": {
+    title: {
+      en: "Trial Defence & Litigation",
+      ta: "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்"
+    },
+    description: {
+      en: "Strong representation before Trial Courts, District Courts, High Court, and other appropriate forums in civil, criminal, commercial, and regulatory proceedings, with a focus on strategic trial defence and effective advocacy.",
+      ta: "சிவில், குற்றவியல், வணிக மற்றும் ஒழுங்குமுறை விவகாரங்களில் விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள், உயர் நீதிமன்றம் மற்றும் பிற மன்றங்களில் வலுவான பிரதிநிதித்துவம் மற்றும் தற்காப்பு வாதம்."
+    },
+    longText: {
+      en: "Facing legal proceedings requires strong, strategic defense. Our trial defense team offers robust representation before all courts and regulatory tribunals. We focus on protecting client rights, constructing solid trial defense arguments, cross-examining witnesses, and delivering effective advocacy in criminal, civil, and corporate litigation cases.",
+      ta: "சட்ட நடவடிக்கைகளை எதிர்கொள்ள வலுவான, மூலோபாய தற்காப்பு தேவைப்படுகிறது. எங்கள் தற்காப்பு வாதக் குழு அனைத்து நீதிமன்றங்கள் மற்றும் ஒழுங்குமுறை மன்றங்களுக்கு முன்பாக வலுவான பிரதிநிதித்துவத்தை வழங்குகிறது. வாடிக்கையாளர் உரிமைகளைப் பாதுகாத்தல், வலுவான தற்காப்பு வாதங்களை உருவாக்குதல், சாட்சிகளை குறுக்கு விசாரணை செய்தல் மற்றும் குற்றவியல், சிவில் மற்றும் கார்ப்பரேட் வழக்குகளில் திறம்பட வாதாடுதல் ஆகியவற்றில் நாங்கள் கவனம் செலுத்துகிறோம்."
+    },
+    mattersHandled: {
+      en: [
+        "Anticipatory Bail & Regular Bail Applications",
+        "Criminal Trial Defense Representation before District Courts",
+        "White-Collar Crimes, fraud & economic offense defense",
+        "High Court Appeals, Revisions & Writ Petitions",
+        "FIR Quashing proceedings under Section 482 CrPC"
+      ],
+      ta: [
+        "முன்ஜாமீன் & வழக்கமான ஜாமீன் விண்ணப்பங்கள்",
+        "மாவட்ட நீதிமன்றங்கள் முன்னிலையிலான குற்றவியல் வழக்கு விசாரணை தற்காப்பு",
+        "நிதி மோசடிகள் & பொருளாதார குற்றச்சாட்டுகள் தற்காப்பு",
+        "உயர் நீதிமன்ற மேல்முறையீடுகள், சீராய்வு & ரிட் மனுக்கள்",
+        "குற்றவியல் நடைமுறைச் சட்டம் 482-இன் கீழ் எஃப்.ஐ.ஆர் (FIR) ரத்து செய்யும் வழக்குகள்"
+      ]
+    },
     clientJourney: [
-      { step: "01", title: "Workplace Audit", desc: "Reviewing employment manuals, policies, and contracts." },
-      { step: "02", title: "Drafting Overhaul", desc: "Creating standard agreements and compliant HR manuals." },
-      { step: "03", title: "Compliance Training", desc: "Assisting in establishing POSH committees and compliance records." },
-      { step: "04", title: "Conflict Resolution", desc: "Mediation or defending claims in labor tribunals." }
+      {
+        step: "01",
+        title: { en: "FIR & Case Analysis", ta: "எஃப்.ஐ.ஆர் & வழக்கு பகுப்பாய்வு" },
+        desc: { en: "Analyzing the FIR, charge sheet, and prosecution evidence.", ta: "முதல் தகவல் அறிக்கை (FIR), குற்றப்பத்திரிகை மற்றும் அரசுத் தரப்பு சாட்சியங்களை ஆய்வு செய்தல்." }
+      },
+      {
+        step: "02",
+        title: { en: "Pre-Trial Protection", ta: "விசாரணைக்கு முந்தைய பாதுகாப்பு" },
+        desc: { en: "Securing interim protections or filing anticipatory bail petitions immediately.", ta: "உடனடியாக இடைக்கால பாதுகாப்புகளைப் பெறுதல் அல்லது முன்ஜாமீன் மனுக்களைத் தாக்கல் செய்தல்." }
+      },
+      {
+        step: "03",
+        title: { en: "Evidence Planning", ta: "சான்றுகள் தயாரிப்பு" },
+        desc: { en: "Planning witness cross-examinations and constructing defense exhibits.", ta: "சாட்சிகளின் குறுக்கு விசாரணையைத் திட்டமிடுதல் மற்றும் தற்காப்புச் சான்றுகளைத் தயாரித்தல்." }
+      },
+      {
+        step: "04",
+        title: { en: "Trial Advocacy", ta: "நீதிமன்ற வாதம்" },
+        desc: { en: "Vigorous defense representation during trials and arguments before judges.", ta: "விசாரணைகளின் போது வலுவான தற்காப்பு பிரதிநிதித்துவம் மற்றும் நீதிபதிகளுக்கு முன் வாதாடுதல்." }
+      }
     ],
     faqs: [
-      { q: "Are non-compete clauses enforceable?", a: "In India, post-employment non-compete clauses are generally void, but non-disclosure of trade secrets is highly enforceable." },
-      { q: "What is a POSH committee requirement?", a: "Any organization with 10 or more employees must establish an Internal Complaints Committee (ICC) to address complaints of sexual harassment." },
-      { q: "How do you handle mass layoff compliance?", a: "We guide businesses through statutory notice periods and severance calculations under industrial disputes regulations." }
+      {
+        q: { en: "What should I do if a false FIR is registered?", ta: "பொய்யான எஃப்.ஐ.ஆர் (FIR) பதிவு செய்யப்பட்டால் நான் என்ன செய்ய வேண்டும்?" },
+        a: { en: "You can file a petition in the High Court to quash the FIR under Section 482 of CrPC if allegations lack substance.", ta: "குற்றச்சாட்டுகளில் உண்மையில்லை எனில், குற்றவியல் நடைமுறைச் சட்டம் 482-இன் கீழ் எஃப்.ஐ.ஆரை ரத்து செய்ய உயர் நீதிமன்றத்தில் மனு தாக்கல் செய்யலாம்." }
+      },
+      {
+        q: { en: "How does anticipatory bail protect an individual?", ta: "முன்ஜாமீன் ஒருவரை எவ்வாறு பாதுகாக்கிறது?" },
+        a: { en: "It prevents police arrest in anticipation of non-bailable offenses, keeping the individual at liberty under court conditions.", ta: "இது ஜாமீனில் வெளிவர முடியாத குற்றங்களுக்காக காவல்துறை கைது செய்வதைத் தடுக்கிறது, நீதிமன்ற நிபந்தனைகளின் கீழ் ஒருவரை விடுதலையில் வைக்கிறது." }
+      }
+    ]
+  },
+  "tax-law": {
+    title: {
+      en: "Taxation & GST",
+      ta: "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி"
+    },
+    description: {
+      en: "Advisory and representation relating to GST, income-tax, tax notices, assessments, appeals, compliance, tax disputes, and other direct and indirect taxation matters.",
+      ta: "ஜிஎஸ்டி, வருமான வரி, வரி அறிவிப்புகள், வரி மதிப்பீடுகள், மேல்முறையீடுகள், இணக்கம், வரி தகராறுகள் மற்றும் பிற நேரடி மற்றும் மறைமுக வரி விவகாரங்கள்."
+    },
+    longText: {
+      en: "Our taxation team provides comprehensive advisory on direct and indirect taxes. We represent clients during tax audits, assessments, and disputes, helping resolve classification matters, respond to notices, and file appeals before Commissioner (Appeals), Appellate Tribunals, and High Courts.",
+      ta: "எங்கள் வரிவிதிப்பு குழு நேரடி மற்றும் மறைமுக வரிகள் குறித்த விரிவான ஆலோசனைகளை வழங்குகிறது. வரி தணிக்கைகள், மதிப்பீடுகள் மற்றும் தகராறுகளின் போது நாங்கள் வாடிக்கையாளர்களை பிரதிநிதித்துவப்படுத்துகிறோம், வகைப்பாடு விஷயங்களைத் தீர்க்கவும், அறிவிப்புகளுக்கு பதிலளிக்கவும் மற்றும் ஆணையர் (மேல்முறையீடுகள்), மேல்முறையீட்டு தீர்ப்பாயங்கள் மற்றும் உயர் நீதிமன்றங்களில் மேல்முறையீடு செய்யவும் உதவுகிறோம்."
+    },
+    mattersHandled: {
+      en: [
+        "GST Compliance, structuring & classifications",
+        "Income Tax assessments & scrutiny audits support",
+        "Appeals before Commissioner of Income Tax / GST (Appeals)",
+        "Tribunal representation before ITAT & Appellate authorities",
+        "High Court Writ petitions against arbitrary tax demands"
+      ],
+      ta: [
+        "ஜிஎஸ்டி இணக்கம், கட்டமைப்பு & வகைப்பாடுகள்",
+        "வருமான வரி மதிப்பீடுகள் & கூர்ந்தாய்வு தணிக்கை ஆதரவு",
+        "வருமான வரி / ஜிஎஸ்டி ஆணையர் (மேல்முறையீடுகள்) முன்னிலையிலான வழக்குகள்",
+        "ITAT மற்றும் மேல்முறையீட்டு தீர்ப்பாயங்களில் பிரதிநிதித்துவம்",
+        "சட்டவிரோத வரி கோரிக்கைகளுக்கு எதிராக உயர் நீதிமன்ற ரிட் மனுக்கள்"
+      ]
+    },
+    clientJourney: [
+      {
+        step: "01",
+        title: { en: "Notice Assessment", ta: "அறிவிப்பு ஆய்வு" },
+        desc: { en: "Analyzing the tax demand notice, classification disputes, and records.", ta: "வரி கோரிக்கை அறிவிப்பு, வகைப்பாடு தகராறுகள் மற்றும் பதிவுகளை ஆய்வு செய்தல்." }
+      },
+      {
+        step: "02",
+        title: { en: "Grounds Construction", ta: "சட்ட அடிப்படையைத் தயாரித்தல்" },
+        desc: { en: "Drafting objections, reply letters, or appeals based on tax laws and precedent cases.", ta: "வரிச் சட்டங்கள் மற்றும் முந்தைய வழக்குகளின் அடிப்படையில் ஆட்சேபனைகள், மறுப்பு கடிதங்கள் அல்லது மேல்முறையீடுகளைத் தயாரித்தல்." }
+      },
+      {
+        step: "03",
+        title: { en: "Appeals Presentation", ta: "மேல்முறையீடுகள் சமர்ப்பித்தல்" },
+        desc: { en: "Filing and arguing appeals before the appropriate Tax Commissioner or Tribunal.", ta: "தகுந்த வரி ஆணையர் அல்லது தீர்ப்பாயத்தின் முன் மேல்முறையீடுகளைத் தாக்கல் செய்து வாதாடுதல்." }
+      },
+      {
+        step: "04",
+        title: { en: "Compliance Overhaul", ta: "சட்ட இணக்கச் சீரமைப்பு" },
+        desc: { en: "Modifying business invoicing or records compliance to prevent future tax notices.", ta: "எதிர்கால வரி அறிவிப்புகளைத் தடுக்க வணிக விலைப்பட்டியல் அல்லது இணக்கப் பதிவுகளை மாற்றுதல்." }
+      }
+    ],
+    faqs: [
+      {
+        q: { en: "What should I do when I receive a GST demand notice?", ta: "ஜிஎஸ்டி வரி கோரிக்கை அறிவிப்பு வந்தால் நான் என்ன செய்ய வேண்டும்?" },
+        a: { en: "You should review the grounds of the demand and file a written reply or appeal within the statutory 3-month window.", ta: "கோரிக்கைக்கான காரணங்களை ஆய்வு செய்து, 3 மாத காலத்திற்குள் எழுத்துப்பூர்வமான மறுப்புரை அல்லது மேல்முறையீட்டைத் தாக்கல் செய்ய வேண்டும்." }
+      },
+      {
+        q: { en: "Can arbitrary tax assessments be challenged directly in High Court?", ta: "தன்னிச்சையான வரி மதிப்பீடுகளை நேரடியாக உயர் நீதிமன்றத்தில் எதிர்க்க முடியுமா?" },
+        a: { en: "Yes, under Article 226, if natural justice is violated or the order is completely without jurisdiction.", ta: "ஆம், இயற்கை நீதி மீறப்பட்டால் அல்லது உத்தரவு முற்றிலும் அதிகார வரம்பிற்கு அப்பாற்பட்டதாக இருந்தால், அரசியலமைப்பு பிரிவு 226-இன் கீழ் சவாலுக்கு உட்படுத்தலாம்." }
+      }
     ]
   }
 };
 
-// Form schema for the practice area sidebar intake
 const intakeSchema = z.object({
   fullName: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email address"),
@@ -221,6 +339,7 @@ const intakeSchema = z.object({
 type IntakeFormValues = z.infer<typeof intakeSchema>;
 
 export default function PracticeAreaDetail() {
+  const { language, t } = useLanguage();
   const { slug } = useParams<{ slug: string }>();
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -243,7 +362,7 @@ export default function PracticeAreaDetail() {
           name: data.fullName,
           email: data.email,
           phone: data.phone,
-          service_type: area?.title || "Practice Area Detail Form",
+          service_type: area ? (language === "en" ? area.title.en : area.title.ta) : "Practice Area Detail Form",
           message: data.message,
         });
 
@@ -254,7 +373,6 @@ export default function PracticeAreaDetail() {
       reset();
     } catch (e: any) {
       console.warn("Supabase insertion fallback simulation:", e.message);
-      // Fallback simulation for offline or non-seeded environments
       setIsSuccess(true);
       reset();
     } finally {
@@ -266,22 +384,29 @@ export default function PracticeAreaDetail() {
     return <Navigate to="/practice-areas" replace />;
   }
 
+  const title = language === "en" ? area.title.en : area.title.ta;
+  const description = language === "en" ? area.description.en : area.description.ta;
+  const longText = language === "en" ? area.longText.en : area.longText.ta;
+  const mattersHandled = language === "en" ? area.mattersHandled.en : area.mattersHandled.ta;
+  const clientJourney = area.clientJourney;
+  const faqs = area.faqs;
+
   return (
     <div className="py-24 bg-surface min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Breadcrumb link */}
         <Link to="/practice-areas" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Practice Areas
+          <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back to Practice Areas" : "சட்டப் பிரிவுகளுக்குத் திரும்பவும்"}
         </Link>
 
         {/* Dynamic header */}
         <div className="mb-12">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-4">
-            Practice Area
+            {language === "en" ? "Practice Area Details" : "சட்டப் பிரிவு விவரங்கள்"}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary leading-tight">
-            {area.title}
+            {title}
           </h1>
         </div>
 
@@ -293,16 +418,20 @@ export default function PracticeAreaDetail() {
             
             {/* Overview */}
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
-              <h2 className="text-2xl font-heading font-bold text-primary mb-4">Practice Overview</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6 text-lg">{area.description}</p>
-              <p className="text-muted-foreground leading-relaxed">{area.longText}</p>
+              <h2 className="text-2xl font-heading font-bold text-primary mb-4">
+                {language === "en" ? "Practice Overview" : "சட்டப்பிரிவு கண்ணோட்டம்"}
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-6 text-lg">{description}</p>
+              <p className="text-muted-foreground leading-relaxed">{longText}</p>
             </div>
 
             {/* Matters Handled Checklist */}
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
-              <h2 className="text-2xl font-heading font-bold text-primary mb-6">Matters We Handle</h2>
+              <h2 className="text-2xl font-heading font-bold text-primary mb-6">
+                {language === "en" ? "Matters We Handle" : "நாங்கள் கையாளும் விவகாரங்கள்"}
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {area.mattersHandled.map((matter, idx) => (
+                {mattersHandled.map((matter, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <ShieldCheck className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
                     <span className="text-sm font-medium text-foreground">{matter}</span>
@@ -313,40 +442,52 @@ export default function PracticeAreaDetail() {
 
             {/* Step-by-Step Client Journey */}
             <div>
-              <h2 className="text-2xl font-heading font-bold text-primary mb-8 text-center lg:text-left">Your Journey with Us</h2>
+              <h2 className="text-2xl font-heading font-bold text-primary mb-8 text-center lg:text-left">
+                {language === "en" ? "Your Journey with Us" : "எங்களுடன் உங்கள் சட்டப் பயணம்"}
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {area.clientJourney.map((step, idx) => (
-                  <div key={idx} className="bg-card border border-border p-6 rounded-xl shadow-sm relative overflow-hidden group hover:border-secondary transition-colors">
-                    <div className="absolute right-4 top-4 text-6xl font-heading font-bold text-muted/30 group-hover:text-secondary/10 transition-colors">
-                      {step.step}
+                {clientJourney.map((step, idx) => {
+                  const stepTitle = language === "en" ? step.title.en : step.title.ta;
+                  const stepDesc = language === "en" ? step.desc.en : step.desc.ta;
+                  return (
+                    <div key={idx} className="bg-card border border-border p-6 rounded-xl shadow-sm relative overflow-hidden group hover:border-secondary transition-colors">
+                      <div className="absolute right-4 top-4 text-6xl font-heading font-bold text-muted/30 group-hover:text-secondary/10 transition-colors select-none pointer-events-none">
+                        {step.step}
+                      </div>
+                      <h4 className="text-lg font-bold text-primary mb-2 relative z-10">{stepTitle}</h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed relative z-10">{stepDesc}</p>
                     </div>
-                    <h4 className="text-lg font-bold text-primary mb-2 relative z-10">{step.title}</h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed relative z-10">{step.desc}</p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
             {/* FAQ Accordion */}
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
-              <h2 className="text-2xl font-heading font-bold text-primary mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-heading font-bold text-primary mb-6">
+                {language === "en" ? "Frequently Asked Questions" : "அடிக்கடி கேட்கப்படும் கேள்விகள்"}
+              </h2>
               <div className="space-y-4">
-                {area.faqs.map((faq, index) => (
-                  <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
-                    <button
-                      onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                      className="w-full flex justify-between items-center text-left py-2 font-medium text-primary hover:text-secondary transition-colors focus:outline-none"
-                    >
-                      <span>{faq.q}</span>
-                      {activeFaq === index ? <ChevronUp className="h-5 w-5 text-secondary" /> : <ChevronDown className="h-5 w-5 text-secondary" />}
-                    </button>
-                    {activeFaq === index && (
-                      <p className="mt-2 text-sm text-muted-foreground leading-relaxed pl-1">
-                        {faq.a}
-                      </p>
-                    )}
-                  </div>
-                ))}
+                {faqs.map((faq, index) => {
+                  const q = language === "en" ? faq.q.en : faq.q.ta;
+                  const a = language === "en" ? faq.a.en : faq.a.ta;
+                  return (
+                    <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                      <button
+                        onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                        className="w-full flex justify-between items-center text-left py-2 font-medium text-primary hover:text-secondary transition-colors focus:outline-none bg-transparent border-none cursor-pointer"
+                      >
+                        <span>{q}</span>
+                        {activeFaq === index ? <ChevronUp className="h-5 w-5 text-secondary" /> : <ChevronDown className="h-5 w-5 text-secondary" />}
+                      </button>
+                      {activeFaq === index && (
+                        <p className="mt-2 text-sm text-muted-foreground leading-relaxed pl-1">
+                          {a}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -357,25 +498,33 @@ export default function PracticeAreaDetail() {
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm sticky top-24 text-foreground">
               <div className="flex items-center gap-3 mb-6">
                 <PlayCircle className="h-6 w-6 text-secondary" />
-                <h3 className="text-xl font-heading font-bold text-primary">Fast Case Intake</h3>
+                <h3 className="text-xl font-heading font-bold text-primary">
+                  {language === "en" ? "Fast Case Intake" : "வழக்கு ஆலோசனைப் பதிவு"}
+                </h3>
               </div>
               <p className="text-xs text-muted-foreground mb-6 leading-relaxed">
-                Provide your details below to schedule an initial consultation with a specialized {area.title} advocate.
+                {language === "en" 
+                  ? `Provide your details below to schedule an initial consultation with a specialized ${title} advocate.`
+                  : `சிறப்பு வாய்ந்த ${title} வழக்கறிஞருடன் ஆரம்பகட்ட ஆலோசனையைப் பெற உங்கள் விவரங்களை கீழே பூர்த்தி செய்யவும்.`}
               </p>
 
               {isSuccess ? (
                 <div className="bg-muted p-6 rounded-xl text-center border border-border">
                   <CheckCircle2 className="h-12 w-12 text-secondary mx-auto mb-4" />
-                  <h4 className="font-bold text-lg text-primary mb-2">Request Received!</h4>
+                  <h4 className="font-bold text-lg text-primary mb-2">
+                    {language === "en" ? "Request Received!" : "விண்ணப்பம் பெறப்பட்டது!"}
+                  </h4>
                   <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                    Our compliance team is completing conflicts check. We will email details shortly.
+                    {language === "en" 
+                      ? "Our compliance team is completing conflicts check. We will email details shortly."
+                      : "எங்கள் குழு உங்கள் விண்ணப்பத்தை சரிபார்த்து வருகிறது. விரைவில் உங்களை மின்னஞ்சல் மூலம் தொடர்புகொள்வோம்."}
                   </p>
                   <Button 
                     onClick={() => setIsSuccess(false)}
                     variant="outline" 
                     className="w-full border-border text-foreground hover:bg-muted"
                   >
-                    Send another request
+                    {language === "en" ? "Send another request" : "மறுபடி செய்தி அனுப்பவும்"}
                   </Button>
                 </div>
               ) : (
@@ -387,29 +536,35 @@ export default function PracticeAreaDetail() {
                   )}
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Full Name</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">
+                      {t("contact.name")}
+                    </label>
                     <input
                       {...register("fullName")}
                       type="text"
                       className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground"
-                      placeholder="Jane Doe"
+                      placeholder={language === "en" ? "Jane Doe" : "பெயர்"}
                     />
                     {errors.fullName && <p className="text-[10px] text-red-600 mt-1">{errors.fullName.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Email Address</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">
+                      {t("contact.emailAddr")}
+                    </label>
                     <input
                       {...register("email")}
                       type="email"
                       className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground"
-                      placeholder="jane@example.com"
+                      placeholder="email@example.com"
                     />
                     {errors.email && <p className="text-[10px] text-red-600 mt-1">{errors.email.message}</p>}
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Phone Number</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">
+                      {t("contact.phone")}
+                    </label>
                     <input
                       {...register("phone")}
                       type="text"
@@ -420,12 +575,14 @@ export default function PracticeAreaDetail() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">Brief Details</label>
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">
+                      {language === "en" ? "Brief Details" : "சுருக்கமான விபரம்"}
+                    </label>
                     <textarea
                       {...register("message")}
                       rows={3}
                       className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground resize-none"
-                      placeholder="Please outline the issue..."
+                      placeholder={language === "en" ? "Please outline the issue..." : "விவரங்களை இங்கே எழுதவும்..."}
                     />
                     {errors.message && <p className="text-[10px] text-red-600 mt-1">{errors.message.message}</p>}
                   </div>
@@ -438,10 +595,10 @@ export default function PracticeAreaDetail() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Submitting...
+                        {language === "en" ? "Submitting..." : "சமர்ப்பிக்கப்படுகிறது..."}
                       </>
                     ) : (
-                      "Submit Request"
+                      language === "en" ? "Submit Request" : "விண்ணப்பிக்கவும்"
                     )}
                   </Button>
                 </form>
