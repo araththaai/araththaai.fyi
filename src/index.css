@@ -181,21 +181,9 @@
     font-family: 'Noto Serif Tamil', serif !important;
   }
 
-  /* Disable uppercase text transform for all Indic regional languages to prevent font rendering corruption */
+  /* Disable uppercase text transform for Indic regional languages to prevent font rendering corruption */
   html[lang="ta"] *, 
-  html[lang="hi"] *,
-  html[lang="as"] *,
-  html[lang="bn"] *,
-  html[lang="gu"] *,
-  html[lang="kn"] *,
-  html[lang="ml"] *,
-  html[lang="mr"] *,
-  html[lang="or"] *,
-  html[lang="pa"] *,
-  html[lang="te"] *,
-  html[lang="sa"] *,
-  html[lang="ur"] *,
-  html[lang="ar"] * {
+  html[lang="hi"] * {
     text-transform: none !important;
   }
 }
