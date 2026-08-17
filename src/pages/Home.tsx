@@ -21,13 +21,6 @@ export default function Home() {
       area: language === "en" ? "Criminal Trial Defence" : "குற்றவியல் வழக்கு விசாரணை தற்காப்பு", 
       initials: "MM", 
       slug: "mohammad-muzammil" 
-    },
-    { 
-      name: "A. K. Munusamy", 
-      role: language === "en" ? "Senior Partner" : "மூத்த பங்குதாரர்", 
-      area: language === "en" ? "Corporate & Commercial Law" : "கார்ப்பரேட் & வணிகச் சட்டம்", 
-      initials: "AKM", 
-      slug: "ak-munusamy" 
     }
   ];
 
@@ -255,7 +248,7 @@ export default function Home() {
             {t("home.team.desc")}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left max-w-4xl mx-auto">
             {spotlightPartners.map((partner, i) => (
               <div key={i} className="bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all group flex flex-col">
                 <div className="aspect-[4/3] bg-muted flex items-center justify-center group-hover:bg-primary/5 transition-colors relative overflow-hidden">

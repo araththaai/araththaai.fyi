@@ -81,40 +81,6 @@ const extendedAttorneyDetails: Record<string, {
         "‘கார்ப்பரேட் நிதிசார் வழக்குகளில் சான்றாதாரங்களின் தரநிலைகள்’ - இந்திய வழக்கறிஞர் சங்க இதழ், 2023."
       ]
     }
-  },
-  "ak-munusamy": {
-    bioParagraphs: {
-      en: [
-        "A. K. Munusamy is a Senior Partner at AKM Associates (Araththaai). With a legal career spanning over two and a half decades, he serves as lead counsel to major corporate institutions, infrastructure builders, and retail chains.",
-        "His practice centers on corporate litigation, administrative arbitration, and joint venture structures. He has represented boards of directors in complex shareholder deadlocks and regulatory actions under the Companies Act.",
-        "In addition to his corporate work, A. K. Munusamy is an advisor to state boards regarding industrial zoning regulations."
-      ],
-      ta: [
-        "ஏ. கே. முனுசாமி AKM அசோசியேட்ஸ் (அறத்தாய்) நிறுவனத்தின் மூத்த பங்குதாரர் ஆவார். கால் நூற்றாண்டுக்கும் மேலான சட்டப் பணியில், பெரிய கார்ப்பரேட் நிறுவனங்கள், உள்கட்டமைப்பு நிறுவனங்கள் மற்றும் வணிக அமைப்புகளுக்குத் தலைமை ஆலோசகராகச் செயல்பட்டு வருகிறார்.",
-        "அவரது பணி கார்ப்பரேட் வழக்குகள், நிர்வாக நடுவர் தீர்ப்பாயங்கள் மற்றும் கூட்டு நிறுவனக் கட்டமைப்புகளில் கவனம் செலுத்துகிறது. நிறுவனங்கள் சட்டத்தின் கீழ் இயக்குநர்கள் குழுவிற்கு ஆளுமை மற்றும் இணக்க ஆலோசனைகளை வழங்கியுள்ளார்.",
-        "கார்ப்பரேட் பணிகளுக்கு மேலாக, தொழில்துறை மண்டல ஒழுங்குமுறைகள் தொடர்பாக மாநில வாரியங்களுக்கு ஆலோசகராகவும் செயல்படுகிறார்."
-      ]
-    },
-    notableCases: {
-      en: [
-        "Corporate Arbitration: Defended a national infrastructure developer in a contract breach claim.",
-        "Corporate Restructuring: Advised a retail group during a complex corporate restructuring.",
-        "Land Use Permits: Obtained favorable judgment in the High Court regarding industrial zoning classifications."
-      ],
-      ta: [
-        "கார்ப்பரேட் நடுவர் தீர்ப்பு: ஒப்பந்த மீறல் கோரிக்கையில் தேசிய உள்கட்டமைப்பு நிறுவனத்தை வெற்றிகரமாகப் பிரதிநிதித்துவப்படுத்தினார்.",
-        "கார்ப்பரேட் மறுசீரமைப்பு: ஒரு பெரிய வணிகக் குழுமத்திற்கு நிறுவன மறுசீரமைப்பின் போது ஆலோசனைகளை வழங்கினார்.",
-        "நிலப் பயன்பாட்டு அனுமதிகள்: தொழில்துறை நில வகைப்பாடுகள் தொடர்பாக சென்னை உயர் நீதிமன்றத்தில் சாதகமான தீர்ப்பைப் பெற்றுள்ளார்."
-      ]
-    },
-    publications: {
-      en: [
-        "‘Shareholder Disputes and NCLT Jurisdictions’ - Madras Law Journal, 2018."
-      ],
-      ta: [
-        "‘பங்குதாரர் தகராறுகளும் NCLT அதிகார வரம்புகளும்’ - மெட்ராஸ் சட்ட இதழ், 2018."
-      ]
-    }
   }
 };
 

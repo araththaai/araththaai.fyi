@@ -58,32 +58,6 @@ export const attorneysList = [
       ta: "தமிழ்நாடு வழக்கறிஞர் மன்றம்"
     },
     whatsapp: "7200269349"
-  },
-  {
-    slug: "ak-munusamy",
-    name: "A. K. Munusamy",
-    role: {
-      en: "Senior Partner",
-      ta: "மூத்த பங்குதாரர்"
-    },
-    practice: {
-      en: "Corporate & Commercial Law",
-      ta: "கார்ப்பரேட் மற்றும் வணிகச் சட்டம்"
-    },
-    practiceSlug: "corporate-law",
-    initials: "AKM",
-    bio: {
-      en: "Over 25 years of extensive experience in high-stakes corporate disputes, corporate restructurings, and strategic litigation before various high courts.",
-      ta: "உயர் நீதிமன்றங்களில் கார்ப்பரேட் தகராறுகள், நிறுவன மறுசீரமைப்பு மற்றும் மூலோபாய வழக்குகளில் 25 ஆண்டுகளுக்கும் மேலான விரிவான அனுபவம் கொண்டவர்."
-    },
-    education: {
-      en: "LL.B. (Hons) - Madras Law College",
-      ta: "சட்ட இளங்கலை (LL.B. Hons) - சென்னை சட்டக் கல்லூரி"
-    },
-    admissions: {
-      en: "Bar Council of Tamil Nadu (1998)",
-      ta: "தமிழ்நாடு வழக்கறிஞர் மன்றம் (1998)"
-    }
   }
 ];
 
@@ -170,7 +144,7 @@ export default function Attorneys() {
 
         {/* Attorneys Grid */}
         {filteredAttorneys.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-auto">
             {filteredAttorneys.map((attorney, i) => {
               const roleName = language === "en" ? attorney.role.en : attorney.role.ta;
               const practiceName = language === "en" ? attorney.practice.en : attorney.practice.ta;
