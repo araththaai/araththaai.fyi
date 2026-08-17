@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
 import { useLanguage } from "@/lib/LanguageContext";
+import emailjs from "@emailjs/browser";
 
 // Form validation schema using Zod
 const bookingSchema = z.object({
@@ -107,6 +108,8 @@ export default function BookConsultation() {
   const onSubmitForm = async (data: BookingFormValues) => {
     setIsSubmitting(true);
     setServerError("");
+    
+    // 1. Try saving to Supabase
     try {
       const { error } = await supabase
         .from("bookings")
@@ -119,17 +122,43 @@ export default function BookConsultation() {
         });
 
       if (error) {
-        throw new Error(error.message);
+        console.error("Supabase insert error:", error.message);
       }
-      setSuccessData(data);
-      setStep(5);
-    } catch (err: any) {
-      console.warn("Supabase insertion fallback simulation:", err.message);
-      setSuccessData(data);
-      setStep(5);
-    } finally {
-      setIsSubmitting(false);
+    } catch (supabaseErr: any) {
+      console.error("Supabase submission exception:", supabaseErr.message || supabaseErr);
     }
+
+    // 2. Try sending to EmailJS
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (serviceId && templateId && publicKey) {
+        const templateParams = {
+          client_name: data.name,
+          client_email: data.email,
+          client_phone: data.phone,
+          service_type: data.serviceType,
+          urgency: data.urgency,
+          date: data.date,
+          time_slot: data.timeSlot,
+          message: data.message,
+        };
+
+        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+        console.log("Email sent successfully via EmailJS!");
+      } else {
+        console.warn("EmailJS credentials missing in environment variables. Skipping email send.");
+      }
+    } catch (emailjsErr: any) {
+      console.error("EmailJS submission exception:", emailjsErr.text || emailjsErr.message || emailjsErr);
+    }
+
+    // 3. Complete submission (success screen)
+    setSuccessData(data);
+    setStep(5);
+    setIsSubmitting(false);
   };
 
   const downloadCalendarInvite = () => {
