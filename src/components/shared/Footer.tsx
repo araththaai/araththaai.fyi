@@ -20,9 +20,13 @@ export function Footer() {
                   className="object-contain w-full h-full"
                 />
               </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl tracking-tight text-primary">ARATHTHAAI</span>
-                <span className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">AKM ASSOCIATES</span>
+              <div className="flex flex-col notranslate" translate="no">
+                <span className="font-heading font-bold text-xl tracking-tight text-primary">
+                  {language === "ta" ? "அறத்தாய்" : language === "hi" ? "अरथाई" : "ARATHTHAAI"}
+                </span>
+                <span className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                  {language === "ta" ? "AKM அசோசியேட்ஸ்" : language === "hi" ? "एकेएम एसोसिएट्स" : "AKM ASSOCIATES"}
+                </span>
               </div>
             </Link>
             <p className="text-xs text-muted-foreground leading-relaxed">
@@ -118,7 +122,7 @@ export function Footer() {
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-            <p>&copy; {new Date().getFullYear()} Araththaai (AKM Associates). {t("footer.rights")}</p>
+            <p>&copy; {new Date().getFullYear()} <span className="notranslate" translate="no">{language === "ta" ? "அறத்தாய்" : language === "hi" ? "अरथाई" : "Araththaai"}</span> (AKM Associates). {t("footer.rights")}</p>
             <div className="flex space-x-6">
               <Link to="/privacy-policy" className="hover:text-secondary transition-colors">{t("footer.privacy")}</Link>
               <Link to="/terms-of-service" className="hover:text-secondary transition-colors">{t("footer.terms")}</Link>

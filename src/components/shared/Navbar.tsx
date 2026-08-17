@@ -110,9 +110,13 @@ export function Navbar() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl tracking-tight text-primary">Araththaai</span>
-                <span className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">AKM Associates & Legal</span>
+              <div className="flex flex-col notranslate" translate="no">
+                <span className="font-heading font-bold text-xl tracking-tight text-primary">
+                  {language === "ta" ? "அறத்தாய்" : language === "hi" ? "अरथाई" : "Araththaai"}
+                </span>
+                <span className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                  {language === "ta" ? "AKM அசோசியேட்ஸ்" : language === "hi" ? "एकेएम एसोसिएट्स" : "AKM Associates & Legal"}
+                </span>
               </div>
             </Link>
           </div>
