@@ -81,7 +81,7 @@ export function Navbar() {
   ];
 
   const currentLangLabel: Record<Language, string> = {
-    en: "English (Default)",
+    en: "English",
     hi: "हिन्दी",
     as: "অসমীয়া",
     bn: "বাংলা",
@@ -114,7 +114,7 @@ export function Navbar() {
                 <span className="font-heading font-bold text-xl tracking-tight text-primary">
                   {language === "ta" ? "அறத்தாய்" : language === "hi" ? "अरथाई" : "Araththaai"}
                 </span>
-                <span className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                <span className="hidden sm:block text-[0.65rem] uppercase tracking-widest text-muted-foreground">
                   {language === "ta" ? "AKM அசோசியேட்ஸ்" : language === "hi" ? "एकेएम एसोसिएट्स" : "AKM Associates & Legal"}
                 </span>
               </div>
@@ -248,7 +248,7 @@ export function Navbar() {
             <div className="relative notranslate" translate="no">
               <button
                 onClick={() => setIsMobileLangOpen(!isMobileLangOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-border bg-card text-xs font-bold text-secondary cursor-pointer select-none"
+                className="flex items-center gap-1 px-2 py-1 rounded-full border border-border bg-card text-[11px] font-bold text-secondary cursor-pointer select-none whitespace-nowrap shrink-0"
               >
                 <Globe className="h-3.5 w-3.5" />
                 <span>{currentLangLabel[language]}</span>
