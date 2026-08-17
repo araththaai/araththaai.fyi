@@ -33,13 +33,17 @@ export default function ContactPage() {
     setErrorMsg("");
     try {
       const { error } = await supabase
-        .from("bookings")
+        .from("ConsultationRequest")
         .insert({
+          id: crypto.randomUUID(),
           name: data.fullName,
           email: data.email,
           phone: data.phone,
-          service_type: `Contact Form Inquiry: ${data.subject}`,
+          serviceType: `Contact Form Inquiry: ${data.subject}`,
           message: data.message,
+          status: "PENDING",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         });
 
       if (error) {

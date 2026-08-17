@@ -408,13 +408,17 @@ export default function PracticeAreaDetail() {
     try {
       const activeTitle = area ? (language === "ta" ? area.title.ta : language === "hi" ? area.title.hi : area.title.en) : "Practice Area Detail Form";
       const { error } = await supabase
-        .from("bookings")
+        .from("ConsultationRequest")
         .insert({
+          id: crypto.randomUUID(),
           name: data.fullName,
           email: data.email,
           phone: data.phone,
-          service_type: activeTitle,
+          serviceType: activeTitle,
           message: data.message,
+          status: "PENDING",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         });
 
       if (error) {

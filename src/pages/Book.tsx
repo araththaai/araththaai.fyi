@@ -38,13 +38,17 @@ export default function BookConsultationPage() {
     
     try {
       const { error } = await supabase
-        .from("bookings")
+        .from("ConsultationRequest")
         .insert({
+          id: crypto.randomUUID(),
           name: data.name,
           email: data.email,
           phone: data.phone,
-          service_type: data.serviceType,
+          serviceType: data.serviceType,
           message: data.message || null,
+          status: "PENDING",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         });
 
       if (error) {

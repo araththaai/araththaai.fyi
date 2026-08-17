@@ -112,13 +112,17 @@ export default function BookConsultation() {
     // 1. Try saving to Supabase
     try {
       const { error } = await supabase
-        .from("bookings")
+        .from("ConsultationRequest")
         .insert({
+          id: crypto.randomUUID(),
           name: data.name,
           email: data.email,
           phone: data.phone,
-          service_type: `${data.serviceType} [Urgency: ${data.urgency}]`,
-          message: `Date: ${data.date} Time: ${data.timeSlot} | Details: ${data.message}`,
+          serviceType: data.serviceType,
+          message: `[Urgency: ${data.urgency}] Date: ${data.date} Time: ${data.timeSlot} | Details: ${data.message}`,
+          status: "PENDING",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         });
 
       if (error) {
