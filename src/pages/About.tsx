@@ -11,15 +11,17 @@ export default function AboutPage() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-4">
-            {language === "en" ? "About The Firm" : "நிறுவனம் பற்றி"}
+            {language === "en" ? "About The Firm" : language === "ta" ? "நிறுவனம் பற்றி" : "फर्म के बारे में"}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "A Legacy of Legal Excellence" : "சட்ட நிபுணத்துவத்தின் பாரம்பரியம்"}
+            {language === "en" ? "A Legacy of Legal Excellence" : language === "ta" ? "சட்ட நிபுணத்துவத்தின் பாரம்பரியம்" : "कानूनी उत्कृष्टता की एक विरासत"}
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
             {language === "en"
               ? "Delivering authoritative counsel, high-stakes advocacy, and transparent representation since 1998."
-              : "நம்பகமான சட்ட ஆலோசனை, மூலோபாய வாதாடுதல் மற்றும் நேர்மையான பிரதிநிதித்துவத்தை வழங்கி வருகிறோம்."}
+              : language === "ta"
+              ? "நம்பகமான சட்ட ஆலோசனை, மூலோபாய வாதாடுதல் மற்றும் நேர்மையான பிரதிநிதித்துவத்தை வழங்கி வருகிறோம்."
+              : "1998 से विश्वसनीय कानूनी परामर्श, रणनीतिक वकालत और पारदर्शी प्रतिनिधित्व प्रदान कर रहे हैं।"}
           </p>
         </div>
 
@@ -27,9 +29,9 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
           <div className="space-y-6 text-muted-foreground leading-relaxed">
             <h2 className="text-3xl font-heading font-bold text-primary mb-4">
-              {language === "en" ? "Our Founding Vision" : "எங்கள் நிறுவன நோக்கம்"}
+              {language === "en" ? "Our Founding Vision" : language === "ta" ? "எங்கள் நிறுவன நோக்கம்" : "हमारी स्थापना का दृष्टिकोण"}
             </h2>
-            {language === "en" ? (
+            {language === "en" && (
               <>
                 <p>
                   Araththaai (AKM Associates & Legal Consultants) was founded with a single core mandate: to translate complex legal regulations into actionable advantages. What began as a dedicated property title audit boutique has expanded into a full-service advocacy and consultancy firm representing corporations, startups, and families.
@@ -41,7 +43,8 @@ export default function AboutPage() {
                   Whether structuring corporate agreements or defending client liberties in court, we ensure our clients receive the highest tier of legal representation.
                 </p>
               </>
-            ) : (
+            )}
+            {language === "ta" && (
               <>
                 <p>
                   அறத்தாய் (AKM அசோசியேட்ஸ் & சட்ட ஆலோசகர்கள்) ஒரு முக்கியமான நோக்கத்துடன் நிறுவப்பட்டது: சிக்கலான சட்ட ஒழுங்குமுறைகளை எளிய மற்றும் சாதகமான தீர்வுகளாக மாற்றுவது. ஒரு பிரத்யேக சொத்துப் பத்திர தணிக்கை மையமாகத் தொடங்கப்பட்டு, இன்று நிறுவனங்கள், ஸ்டார்ட்-அப்கள் மற்றும் குடும்பங்களைப் பிரதிநிதித்துவப்படுத்தும் முழுமையான சட்ட ஆலோசனை மற்றும் வாதாடும் நிறுவனமாக விரிவடைந்துள்ளது.
@@ -54,6 +57,19 @@ export default function AboutPage() {
                 </p>
               </>
             )}
+            {language === "hi" && (
+              <>
+                <p>
+                  अरथाई (एकेएम एसोसिएट्स और कानूनी सलाहकार) की स्थापना एक मुख्य उद्देश्य के साथ की गई थी: जटिल कानूनी नियमों को व्यावहारिक समाधानों में बदलना। एक समर्पित संपत्ति स्वामित्व ऑडिट बुटीक के रूप में शुरू होकर, आज यह कंपनियों, स्टार्टअप्स और परिवारों का प्रतिनिधित्व करने वाली एक पूर्ण-सेवा कानूनी परामर्श फर्म बन गई है।
+                </p>
+                <p>
+                  हमारी संस्थापक असीमा कौधर और प्रबंध भागीदार मोहम्मद मुज़म्मिल के नेतृत्व में, हमने अनुभवी वकीलों और कॉर्पोरेट सलाहकारों की एक टीम का निर्माण किया है जो गोपनीयता, गहन कानूनी तैयारी और अटूट सत्यनिष्ठा को महत्व देते हैं।
+                </p>
+                <p>
+                  चाहे कॉर्पोरेट समझौतों को तैयार करना हो या अदालत में ग्राहकों की स्वतंत्रता की रक्षा करना हो, हम यह सुनिश्चित करते हैं कि हमारे ग्राहकों को उच्चतम स्तर का कानूनी प्रतिनिधित्व मिले।
+                </p>
+              </>
+            )}
           </div>
 
           <div className="relative">
@@ -62,10 +78,14 @@ export default function AboutPage() {
             </div>
             <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl border border-border max-w-xs">
               <p className="text-xl font-bold text-primary font-heading leading-tight">
-                {language === "en" ? "“Justice delayed is justice denied.”" : "“தாமதிக்கப்பட்ட நீதி, மறுக்கப்பட்ட நீதிக்குச் சமம்.”"}
+                {language === "en" 
+                  ? "“Justice delayed is justice denied.”" 
+                  : language === "ta" 
+                  ? "“தாமதிக்கப்பட்ட நீதி, மறுக்கப்பட்ட நீதிக்குச் சமம்.”" 
+                  : "“देर से मिला न्याय, न्याय न मिलने के समान है।”"}
               </p>
               <p className="text-xs text-muted-foreground mt-2">
-                — {language === "en" ? "Our Founding Principle" : "எங்கள் நிறுவன கொள்கை"}
+                — {language === "en" ? "Our Founding Principle" : language === "ta" ? "எங்கள் நிறுவன கொள்கை" : "हमारा संस्थापक सिद्धांत"}
               </p>
             </div>
           </div>
@@ -74,7 +94,7 @@ export default function AboutPage() {
         {/* Core Values */}
         <div className="mb-24">
           <h2 className="text-3xl font-heading font-bold text-primary text-center mb-12">
-            {language === "en" ? "Our Core Ethics" : "எங்கள் முக்கிய நெறிமுறைகள்"}
+            {language === "en" ? "Our Core Ethics" : language === "ta" ? "எங்கள் முக்கிய நெறிமுறைகள்" : "हमारे मूल नैतिक सिद्धांत"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-card border border-border p-8 rounded-xl shadow-sm space-y-4">
@@ -82,12 +102,14 @@ export default function AboutPage() {
                 <ShieldCheck className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-bold text-primary font-heading">
-                {language === "en" ? "Privileged Secrecy" : "ரகசியத்தன்மை"}
+                {language === "en" ? "Privileged Secrecy" : language === "ta" ? "ரகசியத்தன்மை" : "विशेषाधिकार प्राप्त गोपनीयता"}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {language === "en"
                   ? "All client coordinates and case briefs are protected under strict attorney secrecy codes. Your data remains secure and confidential."
-                  : "அனைத்து வாடிக்கையாளர் விவரங்களும் வழக்கு விபரங்களும் கடுமையான தொழில்முறை ரகசிய விதிகளின் கீழ் பாதுகாக்கப்படுகின்றன. உங்கள் தரவுகள் பாதுகாப்பாக வைக்கப்படும்."}
+                  : language === "ta"
+                  ? "அனைத்து வாடிக்கையாளர் விவரங்களும் வழக்கு விபரங்களும் கடுமையான தொழில்முறை ரகசிய விதிகளின் கீழ் பாதுகாக்கப்படுகின்றன. உங்கள் தரவுகள் பாதுகாப்பாக வைக்கப்படும்."
+                  : "सभी क्लाइंट विवरण और केस ब्रीफ सख्त वकील गोपनीयता कोड के तहत सुरक्षित हैं। आपका डेटा सुरक्षित और गोपनीय रहता है।"}
               </p>
             </div>
 
@@ -96,12 +118,14 @@ export default function AboutPage() {
                 <Scale className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-bold text-primary font-heading">
-                {language === "en" ? "Deep Preparation" : "ஆழமான தயாரிப்பு"}
+                {language === "en" ? "Deep Preparation" : language === "ta" ? "ஆழமான தயாரிப்பு" : "गहन तैयारी"}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {language === "en"
                   ? "We do not rely on templates. Our case strategies are engineered through exhaustive document flow checking and statutory precedents review."
-                  : "நாங்கள் வெறும் வார்ப்புருக்களை நம்புவதில்லை. எங்கள் வழக்கு உத்திகள் ஆவணங்களின் ஆழமான ஆய்வு மற்றும் சட்ட முன்னுதாரணங்களின் மறுஆய்வு மூலம் வடிவமைக்கப்படுகின்றன."}
+                  : language === "ta"
+                  ? "நாங்கள் வெறும் வார்ப்புருக்களை நம்புவதில்லை. எங்கள் வழக்கு உத்திகள் ஆவணங்களின் ஆழமான ஆய்வு மற்றும் சட்ட முன்னுதாரணங்களின் மறுஆய்வு மூலம் வடிவமைக்கப்படுகின்றன."
+                  : "हम केवल प्रारूपों पर भरोसा नहीं करते हैं। हमारी केस रणनीतियाँ गहन दस्तावेज़ प्रवाह जांच और वैधानिक मिसालों की समीक्षा के माध्यम से तैयार की जाती हैं।"}
               </p>
             </div>
 
@@ -110,12 +134,14 @@ export default function AboutPage() {
                 <HeartHandshake className="h-6 w-6" />
               </div>
               <h3 className="text-xl font-bold text-primary font-heading">
-                {language === "en" ? "Pro Bono Advocacy" : "இலவச சட்ட உதவி"}
+                {language === "en" ? "Pro Bono Advocacy" : language === "ta" ? "இலவச சட்ட உதவி" : "निःशुल्क कानूनी वकालत"}
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {language === "en"
                   ? "We believe in equal rights. Our partners dedicate pro bono legal counsel to support civil liberties and public environmental resources protection."
-                  : "சம உரிமைகளில் நாங்கள் நம்பிக்கை கொண்டுள்ளோம். சிவில் உரிமைகள் மற்றும் பொது சுற்றுச்சூழல் வளங்களைப் பாதுகாப்பதற்காக எங்கள் வழக்கறிஞர்கள் இலவச சட்ட உதவிகளை வழங்குகின்றனர்."}
+                  : language === "ta"
+                  ? "சம உரிமைகளில் நாங்கள் நம்பிக்கை கொண்டுள்ளோம். சிவில் உரிமைகள் மற்றும் பொது சுற்றுச்சூழல் வளங்களைப் பாதுகாப்பதற்காக எங்கள் வழக்கறிஞர்கள் இலவச சட்ட உதவிகளை வழங்குகின்றனர்."
+                  : "हम समान अधिकारों में विश्वास करते हैं। हमारे वकील नागरिक स्वतंत्रता और सार्वजनिक पर्यावरण संसाधनों के संरक्षण के समर्थन में निःशुल्क कानूनी परामर्श समर्पित करते हैं।"}
               </p>
             </div>
           </div>
@@ -129,12 +155,14 @@ export default function AboutPage() {
                 <Landmark className="h-8 w-8" />
               </div>
               <h3 className="text-2xl font-heading font-bold text-primary">
-                {language === "en" ? "Bar Accreditations" : "வழக்கறிஞர் மன்ற அங்கீகாரங்கள்"}
+                {language === "en" ? "Bar Accreditations" : language === "ta" ? "வழக்கறிஞர் மன்ற அங்கீகாரங்கள்" : "बार एसोसिएशन संबद्धता"}
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {language === "en"
                   ? "Our attorneys are active members in good standing of various national and state regulatory bar organizations."
-                  : "எங்கள் வழக்கறிஞர்கள் பல்வேறு தேசிய மற்றும் மாநில ஒழுங்குமுறை வழக்கறிஞர் சங்கங்களில் செயலில் உள்ள உறுப்பினர்களாக உள்ளனர்."}
+                  : language === "ta"
+                  ? "எங்கள் வழக்கறிஞர்கள் பல்வேறு தேசிய மற்றும் மாநில ஒழுங்குமுறை வழக்கறிஞர் சங்கங்களில் செயலில் உள்ள உறுப்பினர்களாக உள்ளனர்."
+                  : "हमारे वकील विभिन्न राष्ट्रीय और राज्य नियामक बार संगठनों के सक्रिय सदस्य हैं।"}
               </p>
             </div>
             
@@ -144,7 +172,9 @@ export default function AboutPage() {
                 <p className="text-xs">
                   {language === "en"
                     ? "Statutory licensing and regulatory board for all advocates practicing within the Supreme Court and national high court systems."
-                    : "உச்ச நீதிமன்றம் மற்றும் தேசிய உயர் நீதிமன்றங்களில் வாதாடும் அனைத்து வழக்கறிஞர்களுக்கான சட்டப்பூர்வ உரிமம் மற்றும் ஒழுங்குமுறை வாரியம்."}
+                    : language === "ta"
+                    ? "உச்ச நீதிமன்றம் மற்றும் தேசிய உயர் நீதிமன்றங்களில் வாதாடும் அனைத்து வழக்கறிஞர்களுக்கான சட்டப்பூர்வ உரிமம் மற்றும் ஒழுங்குமுறை வாரியம்."
+                    : "सुप्रीम कोर्ट और राष्ट्रीय उच्च न्यायालय प्रणालियों के भीतर वकालत करने वाले सभी वकीलों के लिए वैधानिक लाइसेंसिंग और नियामक बोर्ड।"}
                 </p>
               </div>
               <div className="bg-muted border border-border p-5 rounded-lg">
@@ -152,7 +182,9 @@ export default function AboutPage() {
                 <p className="text-xs">
                   {language === "en"
                     ? "One of the oldest legal association pools in South Asia, representing senior advocacy members since the 19th century."
-                    : "தெற்காசியாவின் பழமையான சட்ட சங்கங்களில் ஒன்று, 19 ஆம் நூற்றாண்டிலிருந்து மூத்த வழக்கறிஞர் உறுப்பினர்களைப் பிரதிநிதித்துவப்படுத்துகிறது."}
+                    : language === "ta"
+                    ? "தெற்காசியாவின் பழமையான சட்ட சங்கங்களில் ஒன்று, 19 ஆம் நூற்றாண்டிலிருந்து மூத்த வழக்கறிஞர் உறுப்பினர்களைப் பிரதிநிதித்துவப்படுத்துகிறது."
+                    : "दक्षिण एशिया के सबसे पुराने कानूनी संगठनों में से एक, जो 19वीं सदी से वरिष्ठ वकालत सदस्यों का प्रतिनिधित्व कर रहा है।"}
                 </p>
               </div>
             </div>

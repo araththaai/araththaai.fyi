@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 
-export type Language = "en" | "ta";
+export type Language = "en" | "ta" | "hi";
 
 interface LanguageContextType {
   language: Language;
@@ -131,7 +131,7 @@ const translations: Record<Language, Record<string, string>> = {
     "home.team.title": "முக்கிய பங்குதாரர்கள்",
     "home.team.desc": "சிறப்பு அறிவும் பல வருட வழக்கு அனுபவமும் கொண்ட அர்ப்பணிப்புள்ள வழக்கறிஞர்கள்.",
     "home.team.viewProfile": "விவரம் காண்க",
-    "home.team.all": "அனைத்து வழக்கறிஞர்களையும் சந்திக்கவும்",
+    "home.team.all": "அனைத்து வழக்கறிஞர்களையும் சந்திப்பு செய்ய",
 
     "home.testimonials.badge": "வாடிக்கையாளர் கருத்துக்கள்",
     "home.testimonials.title": "தலைவர்களின் நம்பிக்கை",
@@ -168,13 +168,92 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.privacy": "தனியுரிமைக் கொள்கை",
     "footer.terms": "சேவை விதிமுறைகள்",
     "footer.disclaimer": "பொறுப்புத் துறப்பு",
+  },
+  hi: {
+    // Navbar
+    "nav.home": "होम",
+    "nav.practiceAreas": "कार्यक्षेत्र",
+    "nav.associates": "सहयोगी वकील",
+    "nav.caseResults": "मामलों के परिणाम",
+    "nav.insights": "लेख एवं अंतर्दृष्टि",
+    "nav.aboutUs": "हमारे बारे में",
+    "nav.contactUs": "संपर्क करें",
+    "nav.bookConsultation": "परामर्श बुक करें",
+    "nav.allPractice": "सभी कानूनी क्षेत्र",
+    "nav.attorneys": "वकील",
+
+    // Home Hero
+    "hero.badge": "प्रमुख कानूनी परामर्श और वकालत",
+    "hero.title1": "प्राधिकार। सत्यनिष्ठा।",
+    "hero.title2": "सार्थक परिणाम।",
+    "hero.desc": "अरथाई (एकेएम एसोसिएट्स) कॉर्पोरेट्स, स्टार्टअप्स और परिवारों का जटिल कानूनी क्षेत्रों में प्रतिनिधित्व करता है। हम अदालत में सफलता और व्यापक अनुपालन ढांचा प्रदान करते हैं।",
+    "hero.btnIntake": "गोपनीय परामर्श बुक करें",
+    "hero.btnExplore": "कार्यक्षेत्र देखें",
+
+    // Home Statistics
+    "stats.exp.val": "11+",
+    "stats.exp.lbl": "वर्षों का सक्रिय अनुभव",
+    "stats.settle.val": "98%",
+    "stats.settle.lbl": "सकारात्मक समाधान",
+    "stats.clients.val": "5,000+",
+    "stats.clients.lbl": "कॉर्पोरेट और निजी क्लाइंट",
+    "stats.credentials.val": "सर्वोच्च श्रेणी",
+    "stats.credentials.lbl": "बार एसोसिएशन प्रमाण-पत्र",
+
+    // Home Sections
+    "home.practice.badge": "विशेष कानूनी क्षेत्र",
+    "home.practice.title": "कानूनी कार्यक्षेत्र",
+    "home.practice.desc": "हमारी फर्म कॉर्पोरेट प्रशासन, भूमि स्वामित्व ऑडिट और अदालत में वकालत को उच्च मानकों पर संतुलित करती है।",
+    "home.practice.all": "सभी कार्यक्षेत्र देखें",
+    
+    "home.team.badge": "उत्कृष्ट वकील",
+    "home.team.title": "मुख्य भागीदार",
+    "home.team.desc": "विशेषज्ञ ज्ञान और दशकों के अदालती अनुभव वाले समर्पित वकील।",
+    "home.team.viewProfile": "प्रोफ़ाइल देखें",
+    "home.team.all": "सभी वकीलों से मिलें",
+
+    "home.testimonials.badge": "क्लाइंट प्रतिक्रिया",
+    "home.testimonials.title": "नेताओं का भरोसा",
+    
+    // Contact Info
+    "contact.badge": "हमारी कानूनी सेवाएं",
+    "contact.title": "महत्वपूर्ण विशेषज्ञता",
+    "contact.office": "शाखा कार्यालय और हेल्पलाइन",
+    "contact.officeDesc": "व्यावसायिक वकील नियमों के तहत सभी पूछताछ पूरी तरह से गोपनीय रखी जाती हैं। हमारे कार्यालयों में आएं या तत्काल सहायता लें।",
+    "contact.branchChennai": "मुख्यालय (चेन्नई कार्यालय)",
+    "contact.branchKarur": "शाखा कार्यालय (करूर कार्यालय)",
+    "contact.helpline": "आपातकालीन कानूनी हेल्पलाइन",
+    "contact.helplineDesc": "जमानत और तत्काल पुलिस हिरासत के मामलों के लिए सीधा संपर्क (24/7)",
+    "contact.email": "ईमेल संपर्क",
+    "contact.hours": "कार्यालय का समय",
+    "contact.hoursWeek": "सोमवार - शुक्रवार: सुबह 9:00 - शाम 7:00",
+    "contact.hoursSat": "शनिवार: सुबह 10:00 - दोपहर 2:00 (केवल अपॉइंटमेंट)",
+    "contact.formTitle": "गोपनीय पूछताछ भेजें",
+    "contact.name": "पूरा नाम",
+    "contact.emailAddr": "ईमेल पता",
+    "contact.phone": "फ़ोन नंबर",
+    "contact.message": "विवरण / मामले की जानकारी",
+    "contact.btnSend": "पूछताछ भेजें",
+    "contact.successTitle": "पूछताछ सफलतापूर्वक भेजी गई",
+    "contact.successDesc": "आपका संदेश सुरक्षित रूप से भेज दिया गया है। हमारे एक वरिष्ठ भागीदार 24 व्यावसायिक घंटों के भीतर आपसे सीधे संपर्क करेंगे।",
+    "contact.btnAnother": "दूसरा संदेश भेजें",
+
+    // Footer
+    "footer.desc": "अरथाई (एकेएम एसोसिएट्स) कॉर्पोरेट्स, संस्थानों और व्यक्तियों का प्रतिनिधित्व करने वाली एक अग्रणी कानूनी परामर्श और वकालत फर्म है।",
+    "footer.contact": "संपर्क जानकारी",
+    "footer.rights": "सर्वाधिकार सुरक्षित।",
+    "footer.disclaimerTitle": "वकील विज्ञापन अस्वीकरण:",
+    "footer.disclaimerText": "कुछ न्यायक्षेत्रों में पेशेवर आचरण नियमों के तहत, इस साइट की सामग्री को वकील विज्ञापन माना जा सकता है। पिछले मामले के परिणाम भविष्य के परिणामों की गारंटी नहीं देते हैं। परामर्श बुकिंग से कोई कानूनी वकील-क्लाइंट संबंध नहीं बनता है।",
+    "footer.privacy": "गोपनीयता नीति",
+    "footer.terms": "सेवा की शर्तें",
+    "footer.disclaimer": "अस्वीकरण",
   }
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem("app_lang");
-    return saved === "en" || saved === "ta" ? saved : "en";
+    return saved === "en" || saved === "ta" || saved === "hi" ? saved : "en";
   });
 
   const setLanguage = (lang: Language) => {

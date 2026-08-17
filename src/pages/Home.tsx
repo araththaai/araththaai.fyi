@@ -10,15 +10,15 @@ export default function Home() {
   const spotlightPartners = [
     { 
       name: "Aseema Khaudhar", 
-      role: language === "en" ? "Founder & Senior Partner" : "நிறுவனர் & மூத்த பங்குதாரர்", 
-      area: language === "en" ? "Tax & Civil Law" : "வரி & சிவில் சட்டம்", 
+      role: language === "en" ? "Founder & Senior Partner" : language === "ta" ? "நிறுவனர் & மூத்த பங்குதாரர்" : "संस्थापक और वरिष्ठ भागीदार", 
+      area: language === "en" ? "Tax & Civil Law" : language === "ta" ? "வரி & சிவில் சட்டம்" : "कर और नागरिक कानून", 
       initials: "AK", 
       slug: "aseema-khaudhar" 
     },
     { 
       name: "Mohammad Muzammil", 
-      role: language === "en" ? "Managing Partner & Criminal Lawyer" : "நிர்வாக பங்குதாரர் & குற்றவியல் வழக்கறிஞர்", 
-      area: language === "en" ? "Criminal Trial Defence" : "குற்றவியல் வழக்கு விசாரணை தற்காப்பு", 
+      role: language === "en" ? "Managing Partner & Criminal Lawyer" : language === "ta" ? "நிர்வாக பங்குதாரர் & குற்றவியல் வழக்கறிஞர்" : "प्रबंध भागीदार और आपराधिक वकील", 
+      area: language === "en" ? "Criminal Trial Defence" : language === "ta" ? "குற்றவியல் வழக்கு விசாரணை தற்காப்பு" : "आपराधिक मामला बचाव", 
       initials: "MM", 
       slug: "mohammad-muzammil" 
     }
@@ -26,24 +26,24 @@ export default function Home() {
 
   const quickPracticeAreas = [
     { 
-      title: language === "en" ? "Corporate & Commercial" : "கார்ப்பரேட் & வணிகம்", 
+      title: language === "en" ? "Corporate & Commercial" : language === "ta" ? "கார்ப்பரேட் & வணிகம்" : "कॉर्पोरेट और व्यावसायिक", 
       slug: "corporate-law", 
-      desc: language === "en" ? "Advisory, contracts, and business structuring." : "ஆலோசனை, ஒப்பந்தங்கள் மற்றும் வணிக கட்டமைப்பு." 
+      desc: language === "en" ? "Advisory, contracts, and business structuring." : language === "ta" ? "ஆலொசனை, ஒப்பந்தங்கள் மற்றும் வணிக கட்டமைப்பு." : "सलाहकार, अनुबंध, और व्यावसायिक संरचना।" 
     },
     { 
-      title: language === "en" ? "Civil & Property Matters" : "சிவில் & சொத்து விவகாரங்கள்", 
+      title: language === "en" ? "Civil & Property Matters" : language === "ta" ? "சிவில் & சொத்து விவகாரங்கள்" : "सिविल और संपत्ति मामले", 
       slug: "property-law", 
-      desc: language === "en" ? "Property disputes, title deeds, and partition." : "சொத்து தகராறுகள், உரிமைப் பத்திரங்கள் மற்றும் பாகப்பிரிவினை." 
+      desc: language === "en" ? "Property disputes, title deeds, and partition." : language === "ta" ? "சொத்து தகராறுகள், உரிமைப் பத்திரங்கள் மற்றும் பாகப்பிரிவினை." : "संपत्ति विवाद, शीर्षक विलेख, और विभाजन।" 
     },
     { 
-      title: language === "en" ? "Trial Defence & Litigation" : "வழக்கு விசாரணை & தற்காப்பு", 
+      title: language === "en" ? "Trial Defence & Litigation" : language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" : "मुकदमा और आपराधिक बचाव", 
       slug: "criminal-defense", 
-      desc: language === "en" ? "Strong advocacy before Trial and High Courts." : "விசாரணை மற்றும் உயர் நீதிமன்றங்களில் வலுவான பிரதிநிதித்துவம்." 
+      desc: language === "en" ? "Strong advocacy before Trial and High Courts." : language === "ta" ? "விசாரணை மற்றும் உயர் நீதிமன்றங்களில் வலுவான பிரதிநிதித்துவம்." : "ट्रायल और उच्च न्यायालयों के समक्ष मजबूत वकालत।" 
     },
     { 
-      title: language === "en" ? "Taxation & GST" : "வரிவிதிப்பு & ஜிஎஸ்டி", 
+      title: language === "en" ? "Taxation & GST" : language === "ta" ? "வரிவிதிப்பு & ஜிஎஸ்டி" : "कराधान और जीएसटी", 
       slug: "tax-law", 
-      desc: language === "en" ? "Advisory relating to GST, assessments, and appeals." : "ஜிஎஸ்டி, வரி மதிப்பீடுகள் மற்றும் மேல்முறையீடுகள்." 
+      desc: language === "en" ? "Advisory relating to GST, assessments, and appeals." : language === "ta" ? "ஜிஎஸ்டி, வரி மதிப்பீடுகள் மற்றும் மேல்முறையீடுகள்." : "जीएसटी, कर निर्धारण और अपीलों से संबंधित सलाह।" 
     }
   ];
 
@@ -51,28 +51,34 @@ export default function Home() {
     { 
       quote: language === "en" 
         ? "Their strategic support in our corporate restructuring saved our subsidiary network millions in compliance friction."
-        : "எங்கள் கார்ப்பரேட் மறுசீரமைப்பில் அவர்களின் மூலோபாய ஆதரவு எங்கள் துணை நிறுவனங்களுக்கு இணக்கச் செலவில் லட்சக்கணக்கான ரூபாய்களைச் சேமித்தது.",
-      author: language === "en" ? "Chairman" : "தலைவர்", 
-      company: language === "en" ? "Logistics Conglomerate" : "லாஜிஸ்டிக்ஸ் நிறுவனம்" 
+        : language === "ta"
+        ? "எங்கள் கார்ப்பரேட் மறுசீரமைப்பில் அவர்களின் மூலோபாய ஆதரவு எங்கள் துணை நிறுவனங்களுக்கு இணக்கச் செலவில் லட்சக்கணக்கான ரூபாய்களைச் சேமித்தது."
+        : "कॉर्पोरेट पुनर्गठन में उनके रणनीतिक समर्थन ने हमारी सहायक कंपनी के नेटवर्क को अनुपालन लागतों में लाखों की बचत कराई।",
+      author: language === "en" ? "Chairman" : language === "ta" ? "தலைவர்" : "अध्यक्ष", 
+      company: language === "en" ? "Logistics Conglomerate" : language === "ta" ? "லாஜிஸ்டிக்ஸ் நிறுவனம்" : "लॉजिस्टिक्स समूह" 
     },
     { 
       quote: language === "en" 
         ? "Facing economic offense allegations was stressful, but Muzammil secured immediate protection. The case was resolved in record time."
-        : "பொருளாதார குற்றச்சாட்டுகளை எதிர்கொள்வது மன அழுத்தமாக இருந்தது, ஆனால் முஸம்மில் உடனடிப் பாதுகாப்பைப் பெற்றுத் தந்தார். வழக்கு மிகக் குறுகிய காலத்தில் தீர்க்கப்பட்டது.",
-      author: language === "en" ? "Chief Executive Officer" : "தலைமை நிர்வாக அதிகாரி", 
-      company: language === "en" ? "FinTech Enterprise" : "ஃபின்டெக் நிறுவனம்" 
+        : language === "ta"
+        ? "பொருளாதார குற்றச்சாட்டுகளை எதிர்கொள்வது மன அழுத்தமாக இருந்தது, ஆனால் முஸம்மில் உடனடிப் பாதுகாப்பைப் பெற்றுத் தந்தார். வழக்கு மிகக் குறுகிய காலத்தில் தீர்க்கப்பட்டது."
+        : "आर्थिक अपराध के आरोपों का सामना करना तनावपूर्ण था, लेकिन मुज़म्मिल ने तुरंत सुरक्षा हासिल की। मामला रिकॉर्ड समय में सुलझ गया।",
+      author: language === "en" ? "Chief Executive Officer" : language === "ta" ? "தலைமை நிர்வாக அதிகாரி" : "मुख्य कार्यकारी अधिकारी", 
+      company: language === "en" ? "FinTech Enterprise" : language === "ta" ? "ஃபின்டெக் நிறுவனம்" : "फिनटेक उद्यम" 
     },
     { 
       quote: language === "en" 
         ? "We recovered temple trust estates that had been unlawfully encroached for 15 years. Their knowledge of temple law is unmatched."
-        : "15 ஆண்டுகளாக சட்டவிரோதமாக ஆக்கிரமிக்கப்பட்டிருந்த கோவில் அறக்கட்டளை நிலங்களை மீட்டெடுத்தோம். அறநிலையத்துறை சட்டத்தில் அவர்களின் அறிவு இணையற்றது.",
-      author: language === "en" ? "Hereditary Trustee" : "பரம்பரை அறங்காவலர்", 
-      company: language === "en" ? "Religious Endowment Board" : "அறநிலையத்துறை வாரியம்" 
+        : language === "ta"
+        ? "15 ஆண்டுகளாக சட்டவிரோதமாக ஆக்கிரமிக்கப்பட்டிருந்த கோவில் அறக்கட்டளை நிலங்களை மீட்டெடுத்தோம். அறநிலையத்துறை சட்டத்தில் அவர்களின் அறிவு இணையற்றது."
+        : "हमने मंदिर ट्रस्ट की संपत्तियों को वापस पा लिया जिन पर 15 वर्षों से अवैध कब्जा था। मंदिर कानून की उनकी जानकारी बेजोड़ है।",
+      author: language === "en" ? "Hereditary Trustee" : language === "ta" ? "பரம்பரை அறங்காவலர்" : "पारंपरिक ट्रस्टी", 
+      company: language === "en" ? "Religious Endowment Board" : language === "ta" ? "அறநிலையத்துறை வாரியம்" : "धार्मिक बंदोबस्ती बोर्ड" 
     }
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen text-foreground">
       
       {/* Hero Section with LiquidEther Shader Backdrop */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-32 overflow-hidden bg-muted border-b border-border">
@@ -94,7 +100,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-background to-background z-10 pointer-events-none"></div>
 
         {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center text-foreground space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center space-y-8">
           
           <span className="inline-block py-1.5 px-4 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-xs font-bold tracking-widest uppercase mb-4 animate-pulse">
             {t("hero.badge")}
@@ -112,12 +118,12 @@ export default function Home() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Link to="/book-consultation">
-              <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded shadow-md hover:shadow-lg transition-all">
+              <Button size="lg" className="w-full sm:w-auto text-base h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded shadow-md hover:shadow-lg transition-all cursor-pointer">
                 {t("hero.btnIntake")} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/practice-areas">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 border-border text-foreground hover:bg-muted rounded transition-all">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 border-border text-foreground hover:bg-muted rounded transition-all cursor-pointer">
                 {t("hero.btnExplore")}
               </Button>
             </Link>
@@ -141,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* Trust & Achievements Section */}
-      <section className="py-16 bg-card text-foreground border-b border-border">
+      <section className="py-16 bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="space-y-2">
@@ -190,24 +196,24 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {[
               { 
-                title: language === "en" ? "Corporate & Commercial Matters" : "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்", 
+                title: language === "en" ? "Corporate & Commercial Matters" : language === "ta" ? "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்" : "कॉर्पोरेट और व्यावसायिक मामले", 
                 slug: "corporate-law", 
-                desc: language === "en" ? "Advisory, contracts, agreements, business structuring, and compliance reviews." : "கார்ப்பரேட் ஆலோசனை, வணிக ஒப்பந்தங்கள், வணிக கட்டமைப்பு மற்றும் இணக்க ஆலோசனைகள்." 
+                desc: language === "en" ? "Advisory, contracts, agreements, business structuring, and compliance reviews." : language === "ta" ? "கார்ப்பரேட் ஆலோசனை, வணிக ஒப்பந்தங்கள், வணிக கட்டமைப்பு மற்றும் இணக்க ஆலோசனைகள்." : "कॉर्पोरेट सलाह, व्यावसायिक अनुबंध, व्यावसायिक संरचना और अनुपालन समीक्षा।"
               },
               { 
-                title: language === "en" ? "Civil Disputes & Property Matters" : "சிவில் மற்றும் சொத்து விவகாரங்கள்", 
+                title: language === "en" ? "Civil Disputes & Property Matters" : language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" : "सिविल विवाद और संपत्ति मामले", 
                 slug: "property-law", 
-                desc: language === "en" ? "Land possession disputes, title verifications, partition, and civil litigation." : "நில உரிமைத் தகராறுகள், பத்திர சரிபார்ப்புகள், பாகப்பிரிவினை மற்றும் சிவில் வழக்குகள்." 
+                desc: language === "en" ? "Land possession disputes, title verifications, partition, and civil litigation." : language === "ta" ? "நில உரிமைத் தகராறுகள், பத்திர சரிபார்ப்புகள், பாகப்பிரிவினை மற்றும் சிவில் வழக்குகள்." : "भूमि स्वामित्व विवाद, शीर्षक सत्यापन, विभाजन और दीवानी मुकदमेबाजी।"
               },
               { 
-                title: language === "en" ? "HR & CE Cases" : "HR & CE வழக்குகள் (அறநிலையத்துறை)", 
+                title: language === "en" ? "HR & CE Cases" : language === "ta" ? "HR & CE வழக்குகள் (அறநிலையத்துறை)" : "देवस्थानम मामले (HR & CE)", 
                 slug: "hr-ce", 
-                desc: language === "en" ? "Temple properties, encroachment clearances, Section 78/79, and writ proceedings." : "கோவில் சொத்துக்கள், ஆக்கிரமிப்பு அகற்றுதல், பிரிவு 78/79 மற்றும் ரிட் வழக்குகள்." 
+                desc: language === "en" ? "Temple properties, encroachment clearances, Section 78/79, and writ proceedings." : language === "ta" ? "கோவில் சொத்துக்கள், ஆக்கிரமிப்பு அகற்றுதல், பிரிவு 78/79 மற்றும் ரிட் வழக்குகள்." : "मंदिर की संपत्ति, अतिक्रमण हटाना, धारा 78/79 और रिट याचिकाएं।"
               },
               { 
-                title: language === "en" ? "Trial Defence & Litigation" : "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்", 
+                title: language === "en" ? "Trial Defence & Litigation" : language === "ta" ? "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்" : "मुकदमा और आपराधिक बचाव", 
                 slug: "criminal-defense", 
-                desc: language === "en" ? "Strong advocacy before Trial Courts, District Courts, High Court, and regulatory tribunals." : "விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள், உயர் நீதிமன்றம் ஆகியவற்றில் வலுவான தற்காப்பு வாதம்." 
+                desc: language === "en" ? "Strong advocacy before Trial Courts, District Courts, High Court, and regulatory tribunals." : language === "ta" ? "விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள், உயர் நீதிமன்றம் ஆகியவற்றில் வலுவான தற்காப்பு வாதம்." : "ट्रायल कोर्ट, जिला अदालत और उच्च न्यायालय में मजबूत आपराधिक बचाव।"
               }
             ].map((area, idx) => (
               <div key={idx} className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-lg transition-all flex flex-col justify-between group">
@@ -221,7 +227,8 @@ export default function Home() {
                   to={`/practice-areas/${area.slug}`}
                   className="text-secondary font-bold text-xs uppercase tracking-wider inline-flex items-center gap-1.5 mt-auto group/link"
                 >
-                  {language === "en" ? "Consult Details" : "விவரம் காண்க"} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
+                  {language === "en" ? "Consult Details" : language === "ta" ? "விவரம் காண்க" : "विवरण देखें"}{" "}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
                 </Link>
               </div>
             ))}
@@ -229,7 +236,7 @@ export default function Home() {
 
           <div className="pt-12">
             <Link to="/practice-areas">
-              <Button size="lg" className="bg-primary text-white hover:bg-primary/95 font-semibold px-8 h-12">
+              <Button size="lg" className="bg-primary text-white hover:bg-primary/95 font-semibold px-8 h-12 cursor-pointer">
                 {t("home.practice.all")}
               </Button>
             </Link>
@@ -261,11 +268,12 @@ export default function Home() {
                     <p className="text-secondary text-[10px] font-bold uppercase tracking-widest mb-1">{partner.role}</p>
                     <h3 className="text-xl font-bold text-primary mb-1 font-heading group-hover:text-secondary transition-colors">{partner.name}</h3>
                     <p className="text-muted-foreground text-xs flex items-center gap-1.5 mb-6">
-                      <Award className="h-4 w-4 text-secondary" /> {language === "en" ? "Specialty:" : "சட்டப்பிரிவு:"} {partner.area}
+                      <Award className="h-4 w-4 text-secondary" /> 
+                      {language === "en" ? "Specialty:" : language === "ta" ? "சட்டப்பிரிவு:" : "विशेषता:"} {partner.area}
                     </p>
                   </div>
                   <Link to={`/attorneys/${partner.slug}`} className="block w-full">
-                    <Button variant="outline" className="w-full h-10 text-primary border-border hover:bg-muted font-semibold text-xs">
+                    <Button variant="outline" className="w-full h-10 text-primary border-border hover:bg-muted font-semibold text-xs cursor-pointer">
                       {t("home.team.viewProfile")}
                     </Button>
                   </Link>
@@ -276,7 +284,7 @@ export default function Home() {
 
           <div className="pt-12">
             <Link to="/attorneys">
-              <Button size="lg" className="bg-primary text-white hover:bg-primary/95 font-semibold px-8 h-12">
+              <Button size="lg" className="bg-primary text-white hover:bg-primary/95 font-semibold px-8 h-12 cursor-pointer">
                 {t("home.team.all")}
               </Button>
             </Link>
@@ -285,7 +293,7 @@ export default function Home() {
       </section>
 
       {/* Case Victories Testimonial Grid */}
-      <section className="py-24 bg-muted text-foreground border-t border-border relative overflow-hidden">
+      <section className="py-24 bg-muted border-t border-border relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-muted to-muted pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
           
@@ -295,7 +303,11 @@ export default function Home() {
             </span>
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary">{t("home.testimonials.title")}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-base">
-              {language === "en" ? "Explore outcomes accomplished for our clients across various jurisdictions." : "பல்வேறு சட்ட வரம்புகளில் எங்கள் வாடிக்கையாளர்களுக்காக சாதிக்கப்பட்ட வழக்கு முடிவுகளை அறியவும்."}
+              {language === "en" 
+                ? "Explore outcomes accomplished for our clients across various jurisdictions." 
+                : language === "ta" 
+                ? "பல்வேறு சட்ட வரம்புகளில் எங்கள் வாடிக்கையாளர்களுக்காக சாதிக்கப்பட்ட வழக்கு முடிவுகளை அறியவும்." 
+                : "विभिन्न कानूनी क्षेत्रों में हमारे मुवक्किलों के लिए हासिल किए गए परिणामों को देखें।"}
             </p>
           </div>
 
@@ -325,7 +337,7 @@ export default function Home() {
           <div className="text-center pt-8 max-w-2xl mx-auto flex items-center gap-3 bg-card border border-border p-4 rounded-lg">
             <AlertCircle className="h-5 w-5 text-secondary shrink-0" />
             <p className="text-[10px] text-muted-foreground text-left leading-relaxed">
-              <strong>{language === "en" ? "Advertising Notice:" : "விளம்பர அறிவிப்பு:"}</strong> {t("footer.disclaimerText")}
+              <strong>{language === "en" ? "Advertising Notice:" : language === "ta" ? "விளம்பர அறிவிப்பு:" : "विज्ञापन सूचना:"}</strong> {t("footer.disclaimerText")}
             </p>
           </div>
 

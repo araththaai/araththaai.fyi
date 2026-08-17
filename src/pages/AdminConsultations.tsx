@@ -42,12 +42,18 @@ export default function AdminConsultationsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-          {language === "en" ? "Consultation & Contact Requests" : "ஆலோசனை & தொடர்பு கோரிக்கைகள்"}
+          {language === "en" 
+            ? "Consultation & Contact Requests" 
+            : language === "ta" 
+            ? "ஆலோசனை & தொடர்பு கோரிக்கைகள்" 
+            : "परामर्श और संपर्क अनुरोध"}
         </h1>
         <p className="text-sm text-gray-500 mt-1">
           {language === "en" 
             ? "Review and manage consultation inquiries submitted by the public." 
-            : "பொதுமக்கள் சமர்ப்பித்த ஆலோசனை கோரிக்கைகளை மதிப்பாய்வு செய்து நிர்வகிக்கவும்."}
+            : language === "ta"
+            ? "பொதுமக்கள் சமர்ப்பித்த ஆலோசனை கோரிக்கைகளை மதிப்பாய்வு செய்து நிர்வகிக்கவும்."
+            : "जनता द्वारा प्रस्तुत परामर्श पूछताछ की समीक्षा और प्रबंधन करें।"}
         </p>
       </div>
 
@@ -55,7 +61,7 @@ export default function AdminConsultationsPage() {
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
           <h2 className="font-semibold text-gray-900 text-lg flex items-center gap-2">
             <MessageSquare className="h-5 w-5 text-primary" />{" "}
-            {language === "en" ? "Incoming Inquiries" : "வந்தடைந்த கோரிக்கைகள்"} ({requests.length})
+            {language === "en" ? "Incoming Inquiries" : language === "ta" ? "வந்தடைந்த கோரிக்கைகள்" : "आने वाली पूछताछ"} ({requests.length})
           </h2>
         </div>
 
@@ -63,8 +69,8 @@ export default function AdminConsultationsPage() {
           {requests.map((req) => (
             <div key={req.id} className="p-6 hover:bg-gray-50/80 transition-colors">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
+                <div className="space-y-2 text-foreground">
+                  <div className="flex flex-wrap items-center gap-3">
                     <span className="font-bold text-gray-900 text-lg">{req.name}</span>
                     <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
                       {req.serviceType}
@@ -74,9 +80,11 @@ export default function AdminConsultationsPage() {
                       req.status === "CONFIRMED" ? "bg-blue-100 text-blue-800" :
                       "bg-green-100 text-green-800"
                     }`}>
-                      {req.status === "PENDING" ? (language === "en" ? "PENDING" : "நிலுவையில் உள்ளது") :
-                       req.status === "CONFIRMED" ? (language === "en" ? "CONFIRMED" : "உறுதிப்படுத்தப்பட்டது") :
-                       (language === "en" ? "COMPLETED" : "நிறைவடைந்தது")}
+                      {req.status === "PENDING" 
+                        ? (language === "en" ? "PENDING" : language === "ta" ? "நிலுவையில் உள்ளது" : "लंबित") 
+                        : req.status === "CONFIRMED" 
+                        ? (language === "en" ? "CONFIRMED" : language === "ta" ? "உறுதிப்படுத்தப்பட்டது" : "पुष्टि की गई") 
+                        : (language === "en" ? "COMPLETED" : language === "ta" ? "நிறைவடைந்தது" : "पूरा हुआ")}
                     </span>
                   </div>
 
@@ -88,7 +96,8 @@ export default function AdminConsultationsPage() {
                       <Phone className="h-3.5 w-3.5" /> {req.phone}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" /> {language === "en" ? "Received:" : "பெறப்பட்டது:"} {req.date}
+                      <Calendar className="h-3.5 w-3.5" /> 
+                      {language === "en" ? "Received:" : language === "ta" ? "பெறப்பட்டது:" : "प्राप्त हुआ:"} {req.date}
                     </span>
                   </div>
 
@@ -99,10 +108,10 @@ export default function AdminConsultationsPage() {
 
                 <div className="flex items-center gap-2">
                   <a href={`mailto:${req.email}`} className="px-4 py-2 text-xs font-semibold rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors">
-                    {language === "en" ? "Reply Email" : "மின்னஞ்சல் மூலம் பதில்"}
+                    {language === "en" ? "Reply Email" : language === "ta" ? "மின்னஞ்சல் மூலம் பதில்" : "ईमेल द्वारा उत्तर दें"}
                   </a>
                   <a href={`tel:${req.phone}`} className="px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors">
-                    {language === "en" ? "Call Client" : "வாடிக்கையாளரை அழைக்க"}
+                    {language === "en" ? "Call Client" : language === "ta" ? "வாடிக்கையாளரை அழைக்க" : "क्लाइंट को कॉल करें"}
                   </a>
                 </div>
               </div>

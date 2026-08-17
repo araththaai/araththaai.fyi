@@ -66,12 +66,14 @@ export default function ContactPage() {
             {t("nav.contactUs")}
           </span>
           <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "Get In Touch" : "தொடர்பு கொள்ளவும்"}
+            {language === "en" ? "Get In Touch" : language === "ta" ? "தொடர்பு கொள்ளவும்" : "संपर्क में रहें"}
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
             {language === "en" 
               ? "Our team is ready to provide you with the expert legal counsel you need. Schedule a consultation or reach out with your inquiries."
-              : "எங்கள் வழக்கறிஞர்கள் உங்களுக்குத் தேவையான சட்ட ஆலோசனைகளை வழங்கத் தயாராக உள்ளனர். இப்போதே ஆலோசனையைப் பதிவு செய்யவும்."}
+              : language === "ta"
+              ? "எங்கள் வழக்கறிஞர்கள் உங்களுக்குத் தேவையான சட்ட ஆலோசனைகளை வழங்கத் தயாராக உள்ளனர். இப்போதே ஆலோசனையைப் பதிவு செய்யவும்."
+              : "हमारी टीम आपको आवश्यक विशेषज्ञ कानूनी सलाह प्रदान करने के लिए तैयार है। एक परामर्श निर्धारित करें या अपनी पूछताछ के साथ संपर्क करें।"}
           </p>
         </div>
         
@@ -85,7 +87,7 @@ export default function ContactPage() {
                 {t("contact.officeDesc")}
               </p>
               
-              <div className="space-y-6">
+              <div className="space-y-6 text-foreground">
                 {/* Branch 1 */}
                 <div className="flex items-start">
                   <div className="flex-shrink-0 mt-1">
@@ -156,7 +158,7 @@ export default function ContactPage() {
               <div className="absolute inset-0 bg-primary/5 flex items-center justify-center flex-col p-4 text-center">
                 <MapPin className="h-10 w-10 text-secondary mb-2 animate-bounce" />
                 <h4 className="font-heading font-bold text-primary text-sm">
-                  {language === "en" ? "Interactive Office Locator" : "அலுவலக இருப்பிடக் காட்டி"}
+                  {language === "en" ? "Interactive Office Locator" : language === "ta" ? "அலுவலக இருப்பிடக் காட்டி" : "इंटरैक्टिव कार्यालय लोकेटर"}
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">Chennai & Karur, Tamil Nadu, India</p>
               </div>
@@ -164,7 +166,7 @@ export default function ContactPage() {
           </div>
 
           {/* Secure intake form */}
-          <div className="bg-card p-8 rounded-xl border border-border shadow-sm">
+          <div className="bg-card p-8 rounded-xl border border-border shadow-sm text-foreground">
             <h2 className="text-2xl font-heading font-bold text-primary mb-6">{t("contact.formTitle")}</h2>
             
             {isSuccess ? (
@@ -176,7 +178,7 @@ export default function ContactPage() {
                 </p>
                 <Button 
                   onClick={() => setIsSuccess(false)}
-                  className="bg-primary text-white hover:bg-primary/95 text-xs"
+                  className="bg-primary text-white hover:bg-primary/95 text-xs cursor-pointer"
                 >
                   {t("contact.btnAnother")}
                 </Button>
@@ -193,24 +195,24 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-semibold text-primary uppercase tracking-wider mb-2">
-                      {language === "en" ? "Full Name *" : "முழு பெயர் *"}
+                      {language === "en" ? "Full Name *" : language === "ta" ? "முழு பெயர் *" : "पूरा नाम *"}
                     </label>
                     <input 
                       {...register("fullName")}
                       type="text" 
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" 
-                      placeholder={language === "en" ? "Jane Doe" : "பெயர்"} 
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground" 
+                      placeholder={language === "en" ? "Jane Doe" : language === "ta" ? "பெயர்" : "नाम"} 
                     />
                     {errors.fullName && <p className="text-xs text-destructive mt-1">{errors.fullName.message}</p>}
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-primary uppercase tracking-wider mb-2">
-                      {language === "en" ? "Phone Number *" : "தொலைபேசி எண் *"}
+                      {language === "en" ? "Phone Number *" : language === "ta" ? "தொலைபேசி எண் *" : "फ़ोन नंबर *"}
                     </label>
                     <input 
                       {...register("phone")}
                       type="text" 
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground" 
                       placeholder="+91 98765 43210" 
                     />
                     {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
@@ -219,12 +221,12 @@ export default function ContactPage() {
                 
                 <div>
                   <label className="block text-xs font-semibold text-primary uppercase tracking-wider mb-2">
-                    {language === "en" ? "Email Address *" : "மின்னஞ்சல் முகவரி *"}
+                    {language === "en" ? "Email Address *" : language === "ta" ? "மின்னஞ்சல் முகவரி *" : "ईमेल पता *"}
                   </label>
                   <input 
                     {...register("email")}
                     type="email" 
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" 
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground" 
                     placeholder="email@example.com" 
                   />
                   {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
@@ -232,28 +234,30 @@ export default function ContactPage() {
                 
                 <div>
                   <label className="block text-xs font-semibold text-primary uppercase tracking-wider mb-2">
-                    {language === "en" ? "Subject *" : "பொருள் *"}
+                    {language === "en" ? "Subject *" : language === "ta" ? "பொருள் *" : "विषय *"}
                   </label>
                   <input 
                     {...register("subject")}
                     type="text" 
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary" 
-                    placeholder={language === "en" ? "Brief description of matter" : "விஷயம் குறித்த சுருக்கம்"} 
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground" 
+                    placeholder={language === "en" ? "Brief description of matter" : language === "ta" ? "விஷயம் குறித்த சுருக்கம்" : "मामले का संक्षिप्त विवरण"} 
                   />
                   {errors.subject && <p className="text-xs text-destructive mt-1">{errors.subject.message}</p>}
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-primary uppercase tracking-wider mb-2">
-                    {language === "en" ? "Detailed Message *" : "விரிவான செய்தி *"}
+                    {language === "en" ? "Detailed Message *" : language === "ta" ? "விரிவான செய்தி *" : "विस्तृत संदेश *"}
                   </label>
                   <textarea 
                     {...register("message")}
                     rows={5} 
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none" 
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground resize-none" 
                     placeholder={language === "en" 
                       ? "Please share sufficient detail so we can run initial conflicts checks..." 
-                      : "சட்ட விவரங்கள் மற்றும் தகவல்களை இங்கே பகிரவும்..."} 
+                      : language === "ta"
+                      ? "சட்ட விவரங்கள் மற்றும் தகவல்களை இங்கே பகிரவும்..."
+                      : "कृपया पर्याप्त विवरण साझा करें ताकि हम प्रारंभिक हितों के टकराव की जांच कर सकें..."} 
                   />
                   {errors.message && <p className="text-xs text-destructive mt-1">{errors.message.message}</p>}
                 </div>
@@ -263,17 +267,20 @@ export default function ContactPage() {
                   <span>
                     {language === "en" 
                       ? "Your submission is subject to client confidentiality and attorney-client privilege."
-                      : "நீங்கள் சமர்ப்பிக்கும் தகவல்கள் ரகசியமாகவும் பாதுகாப்பாகவும் வைக்கப்படும்."}
+                      : language === "ta"
+                      ? "நீங்கள் சமர்ப்பிக்கும் தகவல்கள் ரகசியமாகவும் பாதுகாப்பாகவும் வைக்கப்படும்."
+                      : "आपका सबमिशन क्लाइंट गोपनीयता और वकील-क्लाइंट विशेषाधिकार के अधीन है।"}
                   </span>
                 </div>
                 
-                <Button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/95 h-12 text-sm font-semibold transition-all">
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/95 h-12 text-sm font-semibold transition-all cursor-pointer border-none">
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {language === "en" ? "Transmitting..." : "அனுப்பப்படுகிறது..."}
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
+                      {language === "en" ? "Transmitting..." : language === "ta" ? "அனுப்பப்படுகிறது..." : "भेजा जा रहा है..."}
                     </>
                   ) : (
-                    language === "en" ? "Send Encrypted Inquiry" : "செய்தி அனுப்பவும்"
+                    language === "en" ? "Send Encrypted Inquiry" : language === "ta" ? "செய்தி அனுப்பவும்" : "सुरक्षित पूछताछ भेजें"
                   )}
                 </Button>
               </form>

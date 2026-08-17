@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/lib/LanguageContext";
+import { useLanguage, Language } from "@/lib/LanguageContext";
 
 export function Navbar() {
   const { language, setLanguage, t } = useLanguage();
@@ -11,22 +11,80 @@ export function Navbar() {
   const [isAssociatesDropdownOpen, setIsAssociatesDropdownOpen] = useState(false);
   const [isMobilePracticeOpen, setIsMobilePracticeOpen] = useState(false);
   const [isMobileAssociatesOpen, setIsMobileAssociatesOpen] = useState(false);
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [isMobileLangOpen, setIsMobileLangOpen] = useState(false);
 
   const practiceSubLinks = [
-    { name: language === "en" ? "Corporate & Commercial" : "கார்ப்பரேட் மற்றும் வணிகம்", slug: "corporate-law" },
-    { name: language === "en" ? "Civil & Property Matters" : "சிவில் மற்றும் சொத்து விவகாரங்கள்", slug: "property-law" },
-    { name: language === "en" ? "HR & CE Cases" : "HR & CE வழக்குகள்", slug: "hr-ce" },
-    { name: language === "en" ? "Trial Defence & Litigation" : "வழக்கு விசாரணை & தற்காப்பு", slug: "criminal-defense" },
-    { name: language === "en" ? "Taxation & GST" : "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி", slug: "tax-law" }
+    { 
+      name: language === "en" ? "Corporate & Commercial" 
+            : language === "ta" ? "கார்ப்பரேட் மற்றும் வணிகம்" 
+            : "कॉर्पोरेट और व्यावसायिक मामले", 
+      slug: "corporate-law" 
+    },
+    { 
+      name: language === "en" ? "Civil & Property Matters" 
+            : language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" 
+            : "सिविल और संपत्ति मामले", 
+      slug: "property-law" 
+    },
+    { 
+      name: language === "en" ? "HR & CE Cases" 
+            : language === "ta" ? "HR & CE வழக்குகள்" 
+            : "एचआर एंड सीई मामले", 
+      slug: "hr-ce" 
+    },
+    { 
+      name: language === "en" ? "Trial Defence & Litigation" 
+            : language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" 
+            : "मुकदमा और आपराधिक बचाव", 
+      slug: "criminal-defense" 
+    },
+    { 
+      name: language === "en" ? "Taxation & GST" 
+            : language === "ta" ? "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி" 
+            : "कराधान और जीएसटी", 
+      slug: "tax-law" 
+    }
   ];
 
   const associatesSubLinks = [
-    { name: language === "en" ? "Attorneys" : "வழக்கறிஞர்கள்", path: "/attorneys" },
-    { name: language === "en" ? "Case Results" : "வழக்கு முடிவுகள்", path: "/case-results" },
-    { name: language === "en" ? "Insights / Blog" : "சட்டக் கட்டுரைகள்", path: "/blog" },
-    { name: language === "en" ? "About Us" : "எங்களைப் பற்றி", path: "/about" },
-    { name: language === "en" ? "Contact Us" : "தொடர்புகொள்ள", path: "/contact" }
+    { 
+      name: language === "en" ? "Attorneys" 
+            : language === "ta" ? "வழக்கறிஞர்கள்" 
+            : "वकील", 
+      path: "/attorneys" 
+    },
+    { 
+      name: language === "en" ? "Case Results" 
+            : language === "ta" ? "வழக்கு முடிவுகள்" 
+            : "मामलों के परिणाम", 
+      path: "/case-results" 
+    },
+    { 
+      name: language === "en" ? "Insights / Blog" 
+            : language === "ta" ? "சட்டக் கட்டுரைகள்" 
+            : "लेख एवं ब्लॉग", 
+      path: "/blog" 
+    },
+    { 
+      name: language === "en" ? "About Us" 
+            : language === "ta" ? "எங்களைப் பற்றி" 
+            : "हमारे बारे में", 
+      path: "/about" 
+    },
+    { 
+      name: language === "en" ? "Contact Us" 
+            : language === "ta" ? "தொடர்புகொள்ள" 
+            : "संपर्क करें", 
+      path: "/contact" 
+    }
   ];
+
+  const currentLangLabel: Record<Language, string> = {
+    en: "English",
+    ta: "தமிழ்",
+    hi: "हिंदी"
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-all duration-300">
@@ -121,23 +179,48 @@ export function Navbar() {
 
           {/* Desktop Call to Actions */}
           <div className="hidden lg:flex items-center justify-end space-x-3 shrink-0">
-            {/* Language Switcher */}
-            <button
-              onClick={() => setLanguage(language === "en" ? "ta" : "en")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-card hover:bg-muted text-[10px] xl:text-xs font-bold text-secondary hover:text-primary transition-all cursor-pointer select-none"
-              title={language === "en" ? "Switch to Tamil" : "ஆங்கிலத்திற்கு மாற்றவும்"}
+            {/* Language Switcher Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsLangDropdownOpen(true)}
+              onMouseLeave={() => setIsLangDropdownOpen(false)}
             >
-              <Globe className="h-3.5 w-3.5" />
-              <span>{language === "en" ? "தமிழ்" : "English"}</span>
-            </button>
+              <button
+                onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-card hover:bg-muted text-[10px] xl:text-xs font-bold text-secondary hover:text-primary transition-all cursor-pointer select-none"
+              >
+                <Globe className="h-3.5 w-3.5" />
+                <span>{currentLangLabel[language]}</span>
+                <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {isLangDropdownOpen && (
+                <div className="absolute top-full right-0 mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-32 animate-in fade-in duration-200">
+                  {(["en", "ta", "hi"] as Language[]).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setIsLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
+                        language === lang ? "text-secondary font-bold" : "text-foreground"
+                      }`}
+                    >
+                      {currentLangLabel[lang]}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <Link to="/sign-in">
-              <Button variant="ghost" className="text-xs uppercase tracking-wider font-semibold text-primary hover:text-secondary h-10">
-                Admin
+              <Button variant="ghost" className="text-xs uppercase tracking-wider font-semibold text-primary hover:text-secondary h-10 cursor-pointer">
+                {language === "en" ? "Admin" : language === "ta" ? "நிர்வாகி" : "एडमिन"}
               </Button>
             </Link>
             <Link to="/book-consultation">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/95 text-xs uppercase tracking-wider font-semibold px-5 h-10 rounded">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/95 text-xs uppercase tracking-wider font-semibold px-5 h-10 rounded cursor-pointer">
                 {t("nav.bookConsultation")}
               </Button>
             </Link>
@@ -146,17 +229,38 @@ export function Navbar() {
           {/* Mobile Menu Icon */}
           <div className="lg:hidden flex items-center gap-3">
             {/* Language Switcher for Mobile */}
-            <button
-              onClick={() => setLanguage(language === "en" ? "ta" : "en")}
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-border bg-card text-xs font-bold text-secondary cursor-pointer select-none"
-            >
-              <Globe className="h-3.5 w-3.5" />
-              <span>{language === "en" ? "தமிழ்" : "EN"}</span>
-            </button>
+            <div className="relative">
+              <button
+                onClick={() => setIsMobileLangOpen(!isMobileLangOpen)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-border bg-card text-xs font-bold text-secondary cursor-pointer select-none"
+              >
+                <Globe className="h-3.5 w-3.5" />
+                <span>{currentLangLabel[language]}</span>
+                <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isMobileLangOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMobileLangOpen && (
+                <div className="absolute right-0 top-full mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-28 z-50 animate-in fade-in duration-200">
+                  {(["en", "ta", "hi"] as Language[]).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setIsMobileLangOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
+                        language === lang ? "text-secondary font-bold" : "text-foreground"
+                      }`}
+                    >
+                      {currentLangLabel[lang]}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-foreground hover:text-secondary focus:outline-none"
+              className="text-foreground hover:text-secondary focus:outline-none cursor-pointer"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -234,7 +338,7 @@ export function Navbar() {
             <div className="mt-4 flex flex-col space-y-2 px-3 pb-3">
               <Link to="/sign-in" onClick={() => setIsOpen(false)}>
                 <Button variant="outline" className="w-full justify-center text-xs uppercase tracking-wider font-semibold">
-                  Admin Access
+                  {language === "en" ? "Admin Access" : language === "ta" ? "நிர்வாகி அணுகல்" : "एडमिन एक्सेस"}
                 </Button>
               </Link>
               <Link to="/book-consultation" onClick={() => setIsOpen(false)}>

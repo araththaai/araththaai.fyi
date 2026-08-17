@@ -9,25 +9,30 @@ export const attorneysList = [
     name: "Aseema Khaudhar",
     role: {
       en: "Founder & Senior Partner",
-      ta: "நிறுவனர் மற்றும் மூத்த பங்குதாரர்"
+      ta: "நிறுவனர் மற்றும் மூத்த பங்குதாரர்",
+      hi: "संस्थापक और वरिष्ठ भागीदार"
     },
     practice: {
       en: "Tax & Civil Law Specialist",
-      ta: "வரி மற்றும் சிவில் சட்ட நிபுணர்"
+      ta: "வரி மற்றும் சிவில் சட்ட நிபுணர்",
+      hi: "कराधान और नागरिक कानून विशेषज्ञ"
     },
     practiceSlug: "tax-law",
     initials: "AK",
     bio: {
       en: "Founder and Senior Partner of AKM Associates. She advises clients on a comprehensive suite of legal matters across Tamil Nadu, maintaining key offices in Karur and Chennai.",
-      ta: "AKM அசோசியேட்ஸ் நிறுவனத்தின் நிறுவனர் மற்றும் மூத்த பங்குதாரர். கரூர் மற்றும் சென்னையில் அலுவலகங்களைக் கொண்டு, தமிழகம் முழுவதும் வாடிக்கையாளர்களுக்கு சட்ட ஆலோசனைகளை வழங்கி வருகிறார்."
+      ta: "AKM அசோசியேட்ஸ் நிறுவனத்தின் நிறுவனர் மற்றும் மூத்த பங்குதாரர். கரூர் மற்றும் சென்னையில் அலுவலகங்களைக் கொண்டு, தமிழகம் முழுவதும் வாடிக்கையாளர்களுக்கு சட்ட ஆலோசனைகளை வழங்கி வருகிறார்.",
+      hi: "एकेएम एसोसिएट्स की संस्थापक और वरिष्ठ भागीदार। वह करूर और चेन्नई में कार्यालयों के साथ पूरे तमिलनाडु में ग्राहकों को कानूनी सलाह प्रदान करती हैं।"
     },
     education: {
       en: "LL.B. (Hons) - Madras High Court Jurisdiction & Legal Studies",
-      ta: "சட்ட இளங்கலை (LL.B. Hons) - சென்னை உயர் நீதிமன்ற அதிகார வரம்பு & சட்டக் கல்வி"
+      ta: "சட்ட இளங்கலை (LL.B. Hons) - சென்னை உயர் நீதிமன்ற அதிகார வரம்பு & சட்டக் கல்வி",
+      hi: "एलएल.बी. (ऑनर्स) - मद्रास उच्च न्यायालय अधिकार क्षेत्र और कानूनी अध्ययन"
     },
     admissions: {
       en: "Bar Council of Tamil Nadu (Karur & Chennai)",
-      ta: "தமிழ்நாடு வழக்கறிஞர் மன்றம் (கரூர் & சென்னை)"
+      ta: "தமிழ்நாடு வழக்கறிஞர் மன்றம் (கரூர் & சென்னை)",
+      hi: "तमिलनाडु बार काउंसिल (करूर और चेन्नई)"
     },
     whatsapp: "8610792622",
     instagram: "@ARATHTHAAI"
@@ -37,25 +42,30 @@ export const attorneysList = [
     name: "Mohammad Muzammil",
     role: {
       en: "Managing Partner & Criminal Defence Lawyer",
-      ta: "நிர்வாக பங்குதாரர் & குற்றவியல் தற்காப்பு வழக்கறிஞர்"
+      ta: "நிர்வாக பங்குதாரர் & குற்றவியல் தற்காப்பு வழக்கறிஞர்",
+      hi: "प्रबंध भागीदार और आपराधिक बचाव वकील"
     },
     practice: {
       en: "Criminal Defense & Trial Advocacy",
-      ta: "குற்றவியல் தற்காப்பு & வழக்கு விசாரணை வாதம்"
+      ta: "குற்றவியல் தற்காப்பு & வழக்கு விசாரணை வாதம்",
+      hi: "आपराधिक बचाव और ट्रायल वकालत"
     },
     practiceSlug: "criminal-defense",
     initials: "MM",
     bio: {
       en: "Managing Partner of AKM Associates. Specializes in criminal trial defense, representing clients before trial courts, district courts, High Court, and regulatory tribunals.",
-      ta: "AKM அசோசியேட்ஸ் நிறுவனத்தின் நிர்வாக பங்குதாரர். குற்றவியல் தற்காப்பு வாதங்களில் நிபுணத்துவம் பெற்றவர், விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள் மற்றும் உயர் நீதிமன்றங்களில் வாடிக்கையாளர்களுக்காகப் பிரதிநிதித்துவப்படுத்துகிறார்."
+      ta: "AKM அசோசியேட்ஸ் நிறுவனத்தின் நிர்வாக பங்குதாரர். குற்றவியல் தற்காப்பு வாதங்களில் நிபுணத்துவம் பெற்றவர், விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள் மற்றும் உயர் நீதிமன்றங்களில் வாடிக்கையாளர்களுக்காகப் பிரதிநிதித்துவப்படுத்துகிறார்.",
+      hi: "एकेएम एसोसिएट्स के प्रबंध भागीदार। आपराधिक मुकदमे की पैरवी में विशेषज्ञता रखते हैं, ग्राहकों का प्रतिनिधित्व ट्रायल कोर्ट, जिला अदालतों और उच्च न्यायालय के समक्ष करते हैं।"
     },
     education: {
       en: "LL.B. - Chennai Government Law College",
-      ta: "சட்ட இளங்கலை (LL.B.) - சென்னை அரசு சட்டக் கல்லூரி"
+      ta: "சட்ட இளங்கலை (LL.B.) - சென்னை அரசு சட்டக் கல்லூரி",
+      hi: "एलएल.बी. - चेन्नई सरकारी लॉ कॉलेज"
     },
     admissions: {
       en: "Bar Council of Tamil Nadu",
-      ta: "தமிழ்நாடு வழக்கறிஞர் மன்றம்"
+      ta: "தமிழ்நாடு வழக்கறிஞர் மன்றம்",
+      hi: "तमिलनाडु बार काउंसिल"
     },
     whatsapp: "7200269349"
   }
@@ -64,28 +74,31 @@ export const attorneysList = [
 export default function Attorneys() {
   const { language, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedRole, setSelectedRole] = useState(language === "en" ? "All" : "அனைத்தும்");
+  const [selectedRole, setSelectedRole] = useState(
+    language === "en" ? "All" : language === "ta" ? "அனைத்தும்" : "सभी"
+  );
 
   const roles = language === "en" 
-    ? ["All", "Founder", "Managing Partner", "Partner"]
-    : ["அனைத்தும்", "நிறுவனர்", "நிர்வாக பங்குதாரர்", "பங்குதாரர்"];
+    ? ["All", "Founder", "Managing Partner"]
+    : language === "ta"
+    ? ["அனைத்தும்", "நிறுவனர்", "நிர்வாக பங்குதாரர்"]
+    : ["सभी", "संस्थापक", "प्रबंध भागीदार"];
 
   const filteredAttorneys = attorneysList.filter((attorney) => {
     const nameText = attorney.name.toLowerCase();
-    const practiceText = (language === "en" ? attorney.practice.en : attorney.practice.ta).toLowerCase();
+    const activePractice = language === "en" ? attorney.practice.en : language === "ta" ? attorney.practice.ta : attorney.practice.hi;
+    const practiceText = activePractice.toLowerCase();
     
     const matchesSearch = nameText.includes(searchTerm.toLowerCase()) || 
                           practiceText.includes(searchTerm.toLowerCase());
     
     let matchesRole = true;
-    if (selectedRole !== "All" && selectedRole !== "அனைத்தும்") {
+    if (selectedRole !== "All" && selectedRole !== "அனைத்தும்" && selectedRole !== "सभी") {
       const roleEn = attorney.role.en;
-      if (selectedRole === "Founder" || selectedRole === "நிறுவனர்") {
+      if (selectedRole === "Founder" || selectedRole === "நிறுவனர்" || selectedRole === "संस्थापक") {
         matchesRole = roleEn.includes("Founder");
-      } else if (selectedRole === "Managing Partner" || selectedRole === "நிர்வாக பங்குதாரர்") {
+      } else if (selectedRole === "Managing Partner" || selectedRole === "நிர்வாக பங்குதாரர்" || selectedRole === "प्रबंध भागीदार") {
         matchesRole = roleEn.includes("Managing Partner");
-      } else if (selectedRole === "Partner" || selectedRole === "பங்குதாரர்") {
-        matchesRole = roleEn.includes("Partner");
       }
     }
     return matchesSearch && matchesRole;
@@ -101,12 +114,14 @@ export default function Attorneys() {
             {t("nav.associates")}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "Meet Our Attorneys" : "எங்கள் வழக்கறிஞர்களைச் சந்திக்கவும்"}
+            {language === "en" ? "Meet Our Attorneys" : language === "ta" ? "எங்கள் வழக்கறிஞர்களைச் சந்திக்கவும்" : "हमारे वकीलों से मिलें"}
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
             {language === "en"
               ? "A premier team of legal minds combining local jurisprudential authority with client-centric integrity."
-              : "உள்நாட்டு சட்ட அதிகாரம் மற்றும் வாடிக்கையாளர் நலன் சார்ந்த நேர்மையைக் கொண்ட முதன்மையான வழக்கறிஞர் குழு."}
+              : language === "ta"
+              ? "உள்நாட்டு சட்ட அதிகாரம் மற்றும் வாடிக்கையாளர் நலன் சார்ந்த நேர்மையைக் கொண்ட முதன்மையான வழக்கறிஞர் குழு."
+              : "स्थानीय विधिक प्राधिकार और क्लाइंट-केंद्रित सत्यनिष्ठा को संयोजित करने वाली वकीलों की एक प्रमुख टीम।"}
           </p>
         </div>
 
@@ -118,9 +133,9 @@ export default function Attorneys() {
               <button
                 key={r}
                 onClick={() => setSelectedRole(r)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
                   selectedRole === r
-                    ? "bg-primary text-primary-foreground shadow-md"
+                    ? "bg-primary text-primary-foreground shadow-md font-semibold"
                     : "bg-surface hover:bg-muted text-muted-foreground border border-border"
                 }`}
               >
@@ -134,10 +149,10 @@ export default function Attorneys() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder={language === "en" ? "Search attorney name or practice..." : "வழக்கறிஞர் பெயர் அல்லது பிரிவைத் தேடுக..."}
+              placeholder={language === "en" ? "Search attorney name..." : language === "ta" ? "வழக்கறிஞர் பெயரைத் தேடுக..." : "वकील का नाम खोजें..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
             />
           </div>
         </div>
@@ -146,11 +161,11 @@ export default function Attorneys() {
         {filteredAttorneys.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-auto">
             {filteredAttorneys.map((attorney, i) => {
-              const roleName = language === "en" ? attorney.role.en : attorney.role.ta;
-              const practiceName = language === "en" ? attorney.practice.en : attorney.practice.ta;
-              const bioText = language === "en" ? attorney.bio.en : attorney.bio.ta;
-              const educationText = language === "en" ? attorney.education.en : attorney.education.ta;
-              const admissionsText = language === "en" ? attorney.admissions.en : attorney.admissions.ta;
+              const roleName = language === "en" ? attorney.role.en : language === "ta" ? attorney.role.ta : attorney.role.hi;
+              const practiceName = language === "en" ? attorney.practice.en : language === "ta" ? attorney.practice.ta : attorney.practice.hi;
+              const bioText = language === "en" ? attorney.bio.en : language === "ta" ? attorney.bio.ta : attorney.bio.hi;
+              const educationText = language === "en" ? attorney.education.en : language === "ta" ? attorney.education.ta : attorney.education.hi;
+              const admissionsText = language === "en" ? attorney.admissions.en : language === "ta" ? attorney.admissions.ta : attorney.admissions.hi;
               
               return (
                 <div key={i} className="bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all group flex flex-col">
@@ -190,7 +205,7 @@ export default function Attorneys() {
 
                       <Link to={`/attorneys/${attorney.slug}`} className="block pt-2">
                         <button className="w-full bg-primary hover:bg-primary/95 text-white py-2 rounded font-semibold text-sm transition-all flex items-center justify-center gap-1 cursor-pointer border-none">
-                          {language === "en" ? "View Complete Profile" : "முழு விவரம் காண்க"} <ArrowRight className="h-4 w-4" />
+                          {language === "en" ? "View Complete Profile" : language === "ta" ? "முழு விவரம் காண்க" : "पूरी प्रोफ़ाइल देखें"} <ArrowRight className="h-4 w-4" />
                         </button>
                       </Link>
                     </div>
@@ -202,13 +217,13 @@ export default function Attorneys() {
         ) : (
           <div className="text-center py-20 bg-card border border-dashed border-border rounded-2xl">
             <p className="text-muted-foreground text-lg mb-4">
-              {language === "en" ? "No attorneys match your query." : "உங்கள் தேடலுடன் பொருந்தும் வழக்கறிஞர்கள் யாரும் இல்லை."}
+              {language === "en" ? "No attorneys match your query." : language === "ta" ? "உங்கள் தேடலுடன் பொருந்தும் வழக்கறிஞர்கள் யாரும் இல்லை." : "आपकी खोज से मेल खाने वाला कोई वकील नहीं मिला।"}
             </p>
             <button 
-              onClick={() => { setSearchTerm(""); setSelectedRole(language === "en" ? "All" : "அனைத்தும்"); }}
+              onClick={() => { setSearchTerm(""); setSelectedRole(language === "en" ? "All" : language === "ta" ? "அனைத்தும்" : "सभी"); }}
               className="text-secondary hover:text-primary font-bold transition-colors bg-transparent border-none cursor-pointer"
             >
-              {language === "en" ? "Reset Filters" : "வடிப்பான்களை நீக்கவும்"}
+              {language === "en" ? "Reset Filters" : language === "ta" ? "வடிப்பான்களை நீக்கவும்" : "फ़िल्टर रीसेट करें"}
             </button>
           </div>
         )}
