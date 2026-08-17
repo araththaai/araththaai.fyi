@@ -55,6 +55,7 @@ function AppContent() {
   return (
     <>
       <Helmet>
+        <html lang={language} />
         <title>{titleText}</title>
         <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
         <link rel="icon" type="image/jpeg" href="/lgo.jpg" />

@@ -162,4 +162,37 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
   }
+
+  /* Noto Serif Tamil Font Overrides when HTML has lang="ta" */
+  html[lang="ta"], 
+  html[lang="ta"] body,
+  html[lang="ta"] p,
+  html[lang="ta"] h1,
+  html[lang="ta"] h2,
+  html[lang="ta"] h3,
+  html[lang="ta"] h4,
+  html[lang="ta"] h5,
+  html[lang="ta"] h6,
+  html[lang="ta"] span,
+  html[lang="ta"] a,
+  html[lang="ta"] button,
+  html[lang="ta"] input,
+  html[lang="ta"] textarea {
+    font-family: 'Noto Serif Tamil', serif !important;
+  }
+
+  /* Disable uppercase text transform for all Indic regional languages to prevent font rendering corruption */
+  html[lang="ta"] *, 
+  html[lang="hi"] *,
+  html[lang="as"] *,
+  html[lang="bn"] *,
+  html[lang="gu"] *,
+  html[lang="kn"] *,
+  html[lang="ml"] *,
+  html[lang="mr"] *,
+  html[lang="or"] *,
+  html[lang="pa"] *,
+  html[lang="te"] * {
+    text-transform: none !important;
+  }
 }
