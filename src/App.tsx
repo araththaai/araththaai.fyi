@@ -28,7 +28,7 @@ import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
 import { ScrollToTop } from "@/components/shared/ScrollToTop";
 import { GoToTopButton } from "@/components/shared/GoToTopButton";
-import { LanguageProvider } from "@/lib/LanguageContext";
+import { LanguageProvider, useLanguage } from "@/lib/LanguageContext";
 
 // Layout wrapper for public pages that need Navbar and Footer
 function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -43,16 +43,23 @@ function PublicLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-function App() {
+function AppContent() {
+  const { language } = useLanguage();
+  
+  const titleText = language === "ta" 
+    ? "அறத்தாய் – AKM அசோசியேட்ஸ் & லீகல்" 
+    : language === "hi" 
+    ? "अरथाई – एकेएम एसोसिएट्स" 
+    : "Araththaai – AKM Associates & Legal Consultants";
+
   return (
-    <HelmetProvider>
-      <LanguageProvider>
-        <Helmet>
-          <title>Araththaai – AKM Associates & Legal Consultants</title>
-          <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
-          <link rel="icon" type="image/jpeg" href="/lgo.jpg" />
-        </Helmet>
-        <BrowserRouter>
+    <>
+      <Helmet>
+        <title>{titleText}</title>
+        <meta name="description" content="Premium, modern, secure, scalable, responsive, and production-ready Legal Consultancy Platform." />
+        <link rel="icon" type="image/jpeg" href="/lgo.jpg" />
+      </Helmet>
+      <BrowserRouter>
         <ScrollToTop />
         <GoToTopButton />
         <Routes>
@@ -101,6 +108,15 @@ function App() {
           <Route path="*" element={<PublicLayout><NotFound /></PublicLayout>} />
         </Routes>
       </BrowserRouter>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <HelmetProvider>
+      <LanguageProvider>
+        <AppContent />
       </LanguageProvider>
     </HelmetProvider>
   );
