@@ -130,7 +130,7 @@ export default function Home() {
           </div>
 
           {/* Quick Practice Area Links */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto pt-16 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto pt-16 text-left">
             {quickPracticeAreas.map((area, idx) => (
               <Link 
                 key={idx}
