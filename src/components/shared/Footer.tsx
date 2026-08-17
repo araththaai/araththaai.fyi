@@ -42,7 +42,7 @@ export function Footer() {
           {/* Directory Links */}
           <div>
             <h3 className="font-heading font-semibold text-sm mb-6 text-primary uppercase tracking-wider">
-              {language === "en" ? "Quick Links" : language === "ta" ? "விரைவு இணைப்புகள்" : "त्वरित संपर्क"}
+              {language === "ta" ? "விரைவு இணைப்புகள்" : language === "hi" ? "त्वरित संपर्क" : "Quick Links"}
             </h3>
             <ul className="space-y-3 text-xs text-muted-foreground">
               <li><Link to="/" className="hover:text-secondary transition-colors">{t("nav.home")}</Link></li>
@@ -61,27 +61,27 @@ export function Footer() {
             <ul className="space-y-3 text-xs text-muted-foreground">
               <li>
                 <Link to="/practice-areas/corporate-law" className="hover:text-secondary transition-colors">
-                  {language === "en" ? "Corporate & Commercial Matters" : language === "ta" ? "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்" : "कॉर्पोरेट और व्यावसायिक मामले"}
+                  {language === "ta" ? "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்" : language === "hi" ? "कॉर्पोरेट और व्यावसायिक मामले" : "Corporate & Commercial Matters"}
                 </Link>
               </li>
               <li>
                 <Link to="/practice-areas/property-law" className="hover:text-secondary transition-colors">
-                  {language === "en" ? "Civil Disputes & Property Matters" : language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" : "सिविल विवाद और संपत्ति मामले"}
+                  {language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" : language === "hi" ? "सिविल विवाद और संपत्ति मामले" : "Civil Disputes & Property Matters"}
                 </Link>
               </li>
               <li>
                 <Link to="/practice-areas/hr-ce" className="hover:text-secondary transition-colors">
-                  {language === "en" ? "HR & CE Cases" : language === "ta" ? "HR & CE வழக்குகள்" : "एचआर एंड सीई मामले"}
+                  {language === "ta" ? "HR & CE வழக்குகள்" : language === "hi" ? "एचआर एंड सीई मामले" : "HR & CE Cases"}
                 </Link>
               </li>
               <li>
                 <Link to="/practice-areas/criminal-defense" className="hover:text-secondary transition-colors">
-                  {language === "en" ? "Trial Defence & Litigation" : language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" : "मुकदमा और आपराधिक बचाव"}
+                  {language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" : language === "hi" ? "मुकदमा और आपराधिक बचाव" : "Trial Defence & Litigation"}
                 </Link>
               </li>
               <li>
                 <Link to="/practice-areas/tax-law" className="hover:text-secondary transition-colors">
-                  {language === "en" ? "Taxation & GST" : language === "ta" ? "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி" : "कराधान और जीएसटी"}
+                  {language === "ta" ? "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி" : language === "hi" ? "कराधान और जीएसटी" : "Taxation & GST"}
                 </Link>
               </li>
             </ul>
@@ -96,7 +96,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
                 <span>
-                  {language === "en" ? "Karur & Chennai Offices," : language === "ta" ? "கரூர் & சென்னை அலுவலகங்கள்," : "करूर और चेन्नई कार्यालय,"} <br/>
+                  {language === "ta" ? "கரூர் & சென்னை அலுவலகங்கள்," : language === "hi" ? "करूर और चेन्नई कार्यालय," : "Karur & Chennai Offices,"} <br/>
                   Tamil Nadu, India
                 </span>
               </li>

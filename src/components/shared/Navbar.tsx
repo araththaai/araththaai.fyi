@@ -16,66 +16,46 @@ export function Navbar() {
 
   const practiceSubLinks = [
     { 
-      name: language === "en" ? "Corporate & Commercial" 
-            : language === "ta" ? "கார்ப்பரேட் மற்றும் வணிகம்" 
-            : "कॉर्पोरेट और व्यावसायिक मामले", 
+      name: language === "ta" ? "கார்ப்பரேட் மற்றும் வணிகம்" : language === "hi" ? "कॉर्पोरेट और व्यावसायिक मामले" : "Corporate & Commercial", 
       slug: "corporate-law" 
     },
     { 
-      name: language === "en" ? "Civil & Property Matters" 
-            : language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" 
-            : "सिविल और संपत्ति मामले", 
+      name: language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" : language === "hi" ? "सिविल और संपत्ति मामले" : "Civil & Property Matters", 
       slug: "property-law" 
     },
     { 
-      name: language === "en" ? "HR & CE Cases" 
-            : language === "ta" ? "HR & CE வழக்குகள்" 
-            : "एचआर एंड सीई मामले", 
+      name: language === "ta" ? "HR & CE வழக்குகள்" : language === "hi" ? "एचआर एंड सीई मामले" : "HR & CE Cases", 
       slug: "hr-ce" 
     },
     { 
-      name: language === "en" ? "Trial Defence & Litigation" 
-            : language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" 
-            : "मुकदमा और आपराधिक बचाव", 
+      name: language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" : language === "hi" ? "मुकदमा और आपराधिक बचाव" : "Trial Defence & Litigation", 
       slug: "criminal-defense" 
     },
     { 
-      name: language === "en" ? "Taxation & GST" 
-            : language === "ta" ? "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி" 
-            : "कराधान और जीएसटी", 
+      name: language === "ta" ? "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி" : language === "hi" ? "कराधान और जीएसटी" : "Taxation & GST", 
       slug: "tax-law" 
     }
   ];
 
   const associatesSubLinks = [
     { 
-      name: language === "en" ? "Attorneys" 
-            : language === "ta" ? "வழக்கறிஞர்கள்" 
-            : "वकील", 
+      name: language === "ta" ? "வழக்கறிஞர்கள்" : language === "hi" ? "वकील" : "Attorneys", 
       path: "/attorneys" 
     },
     { 
-      name: language === "en" ? "Case Results" 
-            : language === "ta" ? "வழக்கு முடிவுகள்" 
-            : "मामलों के परिणाम", 
+      name: language === "ta" ? "வழக்கு முடிவுகள்" : language === "hi" ? "मामलों के परिणाम" : "Case Results", 
       path: "/case-results" 
     },
     { 
-      name: language === "en" ? "Insights / Blog" 
-            : language === "ta" ? "சட்டக் கட்டுரைகள்" 
-            : "लेख एवं ब्लॉग", 
+      name: language === "ta" ? "சட்டக் கட்டுரைகள்" : language === "hi" ? "लेख एवं ब्लॉग" : "Insights / Blog", 
       path: "/blog" 
     },
     { 
-      name: language === "en" ? "About Us" 
-            : language === "ta" ? "எங்களைப் பற்றி" 
-            : "हमारे बारे में", 
+      name: language === "ta" ? "எங்களைப் பற்றி" : language === "hi" ? "हमारे बारे में" : "About Us", 
       path: "/about" 
     },
     { 
-      name: language === "en" ? "Contact Us" 
-            : language === "ta" ? "தொடர்புகொள்ள" 
-            : "संपर्क करें", 
+      name: language === "ta" ? "தொடர்புகொள்ள" : language === "hi" ? "संपर्क करें" : "Contact Us", 
       path: "/contact" 
     }
   ];
@@ -232,7 +212,7 @@ export function Navbar() {
 
             <Link to="/sign-in">
               <Button variant="ghost" className="text-xs uppercase tracking-wider font-semibold text-primary hover:text-secondary h-10 cursor-pointer">
-                {language === "en" ? "Admin" : language === "ta" ? "நிர்வாகி" : "एडमिन"}
+                {language === "ta" ? "நிர்வாகி" : language === "hi" ? "एडमिन" : "Admin"}
               </Button>
             </Link>
             <Link to="/book-consultation">
@@ -356,7 +336,7 @@ export function Navbar() {
             <div className="mt-4 flex flex-col space-y-2 px-3 pb-3">
               <Link to="/sign-in" onClick={() => setIsOpen(false)}>
                 <Button variant="outline" className="w-full justify-center text-xs uppercase tracking-wider font-semibold">
-                  {language === "en" ? "Admin Access" : language === "ta" ? "நிர்வாகி அணுகல்" : "एडमिन एक्सेस"}
+                  {language === "ta" ? "நிர்வாகி அணுகல்" : language === "hi" ? "एडमिन एक्सेस" : "Admin Access"}
                 </Button>
               </Link>
               <Link to="/book-consultation" onClick={() => setIsOpen(false)}>

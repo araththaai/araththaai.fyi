@@ -16,29 +16,21 @@ export default function NotFound() {
           404
         </h1>
         <h2 className="text-3xl font-heading font-bold text-primary mb-4">
-          {language === "en" 
-            ? "Jurisdiction Not Found" 
-            : language === "ta" 
-            ? "பக்கம் கண்டறியப்படவில்லை" 
-            : "अधिकार क्षेत्र नहीं मिला"}
+          {language === "ta" ? "பக்கம் கண்டறியப்படவில்லை" : language === "hi" ? "अधिकार क्षेत्र नहीं मिला" : "Jurisdiction Not Found"}
         </h2>
         <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-          {language === "en" 
-            ? "The legal route or case file you are looking for does not exist. It may have been moved, deleted, or the address entered is incorrect."
-            : language === "ta"
-            ? "நீங்கள் தேடும் பக்கம் அல்லது கோப்பு இல்லை. அது நகர்த்தப்பட்டிருக்கலாம் அல்லது முகவரி தவறாக இருக்கலாம்."
-            : "आप जिस कानूनी मार्ग या केस फ़ाइल की तलाश कर रहे हैं उसका अस्तित्व नहीं है। हो सकता है कि इसे स्थानांतरित कर दिया गया हो, हटा दिया गया हो, या दर्ज किया गया पता गलत हो।"}
+          {language === "ta" ? "நீங்கள் தேடும் பக்கம் அல்லது கோப்பு இல்லை. அது நகர்த்தப்பட்டிருக்கலாம் அல்லது முகவரி தவறாக இருக்கலாம்." : language === "hi" ? "आप जिस कानूनी मार्ग या केस फ़ाइल की तलाश कर रहे हैं उसका अस्तित्व नहीं है। हो सकता है कि इसे स्थानांतरित कर दिया गया हो, हटा दिया गया हो, या दर्ज किया गया पता गलत हो।" : "The legal route or case file you are looking for does not exist. It may have been moved, deleted, or the address entered is incorrect."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/">
             <Button size="lg" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-6 cursor-pointer">
               <Home className="mr-2 h-4 w-4" /> 
-              {language === "en" ? "Return Home" : language === "ta" ? "முகப்பிற்குச் செல்ல" : "होमपेज पर वापस जाएं"}
+              {language === "ta" ? "முகப்பிற்குச் செல்ல" : language === "hi" ? "होमपेज पर वापस जाएं" : "Return Home"}
             </Button>
           </Link>
           <Link to="/practice-areas">
             <Button size="lg" variant="outline" className="w-full sm:w-auto border-border text-foreground hover:bg-muted h-12 px-6 cursor-pointer">
-              {language === "en" ? "View Practice Areas" : language === "ta" ? "சட்டப் பிரிவுகளைப் பார்க்க" : "कार्यक्षेत्र देखें"}{" "}
+              {language === "ta" ? "சட்டப் பிரிவுகளைப் பார்க்க" : language === "hi" ? "कार्यक्षेत्र देखें" : "View Practice Areas"}{" "}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>

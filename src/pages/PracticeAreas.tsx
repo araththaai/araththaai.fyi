@@ -115,7 +115,7 @@ export default function PracticeAreas() {
   const { language, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(
-    language === "en" ? "All" : language === "ta" ? "அனைத்தும்" : "सभी"
+    language === "ta" ? "அனைத்தும்" : language === "hi" ? "सभी" : "All"
   );
 
   const categories = language === "en" 
@@ -125,8 +125,8 @@ export default function PracticeAreas() {
     : ["सभी", "कॉर्पोरेट", "संपत्ति और सिविल", "मुकदमेबाजी"];
 
   const filteredAreas = practiceAreasList.filter((area) => {
-    const activeTitle = language === "en" ? area.title.en : language === "ta" ? area.title.ta : area.title.hi;
-    const activeDesc = language === "en" ? area.description.en : language === "ta" ? area.description.ta : area.description.hi;
+    const activeTitle = language === "ta" ? area.title.ta : language === "hi" ? area.title.hi : area.title.en;
+    const activeDesc = language === "ta" ? area.description.ta : language === "hi" ? area.description.hi : area.description.en;
     
     const matchesSearch = activeTitle.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           activeDesc.toLowerCase().includes(searchTerm.toLowerCase());
@@ -161,14 +161,10 @@ export default function PracticeAreas() {
             {t("nav.practiceAreas")}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "Fields of Legal Expertise" : language === "ta" ? "எங்கள் சட்ட நிபுணத்துவத் துறைகள்" : "हमारे विधिक विशेषज्ञता क्षेत्र"}
+            {language === "ta" ? "எங்கள் சட்ட நிபுணத்துவத் துறைகள்" : language === "hi" ? "हमारे विधिक विशेषज्ञता क्षेत्र" : "Fields of Legal Expertise"}
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
-            {language === "en" 
-              ? "AKM Associates delivers authoritative representation across a vast legal spectrum. Filter our practice areas below to find the specialized legal team for your needs."
-              : language === "ta"
-              ? "AKM அசோசியேட்ஸ் பரந்த சட்ட நிபுணத்துவத்தைக் கொண்டு வாடிக்கையாளர்களுக்கு வலுவான பாதுகாப்பை வழங்குகிறது. உங்களின் தேவைகளுக்கான குறிப்பிட்ட சட்டப்பிரிவை கீழே தேடி தேர்ந்தெடுக்கவும்."
-              : "एकेएम एसोसिएट्स एक विशाल कानूनी क्षेत्र में प्रभावी प्रतिनिधित्व प्रदान करता है। अपनी आवश्यकताओं के लिए विशेष कानूनी टीम खोजने के लिए हमारे अभ्यास क्षेत्रों को नीचे फ़िल्टर करें।"}
+            {language === "ta" ? "AKM அசோசியேட்ஸ் பரந்த சட்ட நிபுணத்துவத்தைக் கொண்டு வாடிக்கையாளர்களுக்கு வலுவான பாதுகாப்பை வழங்குகிறது. உங்களின் தேவைகளுக்கான குறிப்பிட்ட சட்டப்பிரிவை கீழே தேடி தேர்ந்தெடுக்கவும்." : language === "hi" ? "एकेएम एसोसिएट्स एक विशाल कानूनी क्षेत्र में प्रभावी प्रतिनिधित्व प्रदान करता है। अपनी आवश्यकताओं के लिए विशेष कानूनी टीम खोजने के लिए हमारे अभ्यास क्षेत्रों को नीचे फ़िल्टर करें।" : "AKM Associates delivers authoritative representation across a vast legal spectrum. Filter our practice areas below to find the specialized legal team for your needs."}
           </p>
         </div>
 
@@ -196,7 +192,7 @@ export default function PracticeAreas() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder={language === "en" ? "Search legal issues..." : language === "ta" ? "சட்டப் பிரச்சனைகளைத் தேடவும்..." : "कानूनी मुद्दे खोजें..."}
+              placeholder={language === "ta" ? "சட்டப் பிரச்சனைகளைத் தேடவும்..." : language === "hi" ? "कानूनी मुद्दे खोजें..." : "Search legal issues..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
@@ -209,9 +205,9 @@ export default function PracticeAreas() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             {filteredAreas.map((area, index) => {
               const Icon = area.icon;
-              const title = language === "en" ? area.title.en : language === "ta" ? area.title.ta : area.title.hi;
-              const desc = language === "en" ? area.description.en : language === "ta" ? area.description.ta : area.description.hi;
-              const bullets = language === "en" ? area.bullets.en : language === "ta" ? area.bullets.ta : area.bullets.hi;
+              const title = language === "ta" ? area.title.ta : language === "hi" ? area.title.hi : area.title.en;
+              const desc = language === "ta" ? area.description.ta : language === "hi" ? area.description.hi : area.description.en;
+              const bullets = language === "ta" ? area.bullets.ta : language === "hi" ? area.bullets.hi : area.bullets.en;
               
               return (
                 <div key={index} className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-lg hover:-translate-y-1 transition-all text-left flex flex-col group h-full">
@@ -249,7 +245,7 @@ export default function PracticeAreas() {
                       to={`/practice-areas/${area.slug}`} 
                       className="text-secondary font-bold hover:text-primary transition-colors inline-flex items-center text-sm uppercase tracking-wider group/link"
                     >
-                      {language === "en" ? "Explore Details" : language === "ta" ? "மேலும் விவரங்கள்" : "विवरण देखें"}{" "}
+                      {language === "ta" ? "மேலும் விவரங்கள்" : language === "hi" ? "विवरण देखें" : "Explore Details"}{" "}
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                     </Link>
                   </div>
@@ -260,13 +256,13 @@ export default function PracticeAreas() {
         ) : (
           <div className="text-center py-20 bg-card border border-dashed border-border rounded-2xl">
             <p className="text-muted-foreground text-lg mb-4">
-              {language === "en" ? "No practice areas match your filters." : language === "ta" ? "உங்கள் வடிப்பான்களுடன் பொருந்தும் சட்டப் பிரிவுகள் எதுவும் இல்லை." : "आपके फ़िल्टर से मेल खाने वाला कोई कार्यक्षेत्र नहीं मिला।"}
+              {language === "ta" ? "உங்கள் வடிப்பான்களுடன் பொருந்தும் சட்டப் பிரிவுகள் எதுவும் இல்லை." : language === "hi" ? "आपके फ़िल्टर से मेल खाने वाला कोई कार्यक्षेत्र नहीं मिला।" : "No practice areas match your filters."}
             </p>
             <button 
-              onClick={() => { setSearchTerm(""); setSelectedCategory(language === "en" ? "All" : language === "ta" ? "அனைத்தும்" : "सभी"); }}
+              onClick={() => { setSearchTerm(""); setSelectedCategory(language === "ta" ? "அனைத்தும்" : language === "hi" ? "सभी" : "All"); }}
               className="text-secondary hover:text-primary font-bold transition-colors bg-transparent border-none cursor-pointer"
             >
-              {language === "en" ? "Clear filters and search" : language === "ta" ? "வடிப்பான்களை நீக்கவும்" : "फ़िल्टर साफ़ करें"}
+              {language === "ta" ? "வடிப்பான்களை நீக்கவும்" : language === "hi" ? "फ़िल्टर साफ़ करें" : "Clear filters and search"}
             </button>
           </div>
         )}

@@ -160,8 +160,8 @@ export default function Blog() {
   ];
 
   const filteredPosts = blogPosts.filter((post) => {
-    const activeTitle = language === "en" ? post.title.en : language === "ta" ? post.title.ta : post.title.hi;
-    const activeSummary = language === "en" ? post.summary.en : language === "ta" ? post.summary.ta : post.summary.hi;
+    const activeTitle = language === "ta" ? post.title.ta : language === "hi" ? post.title.hi : post.title.en;
+    const activeSummary = language === "ta" ? post.summary.ta : language === "hi" ? post.summary.hi : post.summary.en;
     
     const matchesSearch = activeTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           activeSummary.toLowerCase().includes(searchTerm.toLowerCase());
@@ -176,17 +176,13 @@ export default function Blog() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-4">
-            {language === "en" ? "Legal Insights" : language === "ta" ? "சட்ட நுண்ணறிவுகள்" : "कानूनी अंतर्दृष्टि"}
+            {language === "ta" ? "சட்ட நுண்ணறிவுகள்" : language === "hi" ? "कानूनी अंतर्दृष्टि" : "Legal Insights"}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "Knowledge Hub & Resources" : language === "ta" ? "அறிவு மையம் & கட்டுரைகள்" : "ज्ञान केंद्र और संसाधन"}
+            {language === "ta" ? "அறிவு மையம் & கட்டுரைகள்" : language === "hi" ? "ज्ञान केंद्र और संसाधन" : "Knowledge Hub & Resources"}
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
-            {language === "en"
-              ? "Stay informed with legal articles, legislative reviews, and compliance briefs written by our senior partners."
-              : language === "ta"
-              ? "எங்கள் வழக்கறிஞர்களால் எழுதப்பட்ட சட்டக் கட்டுரைகள், சட்ட விவாதங்கள் மற்றும் இணக்க வழிகாட்டுதல்கள் மூலம் விழிப்புடன் இருங்கள்."
-              : "हमारे वरिष्ठ भागीदारों द्वारा लिखे गए कानूनी लेखों, विधायी समीक्षाओं और अनुपालन विवरणों से सूचित रहें।"}
+            {language === "ta" ? "எங்கள் வழக்கறிஞர்களால் எழுதப்பட்ட சட்டக் கட்டுரைகள், சட்ட விவாதங்கள் மற்றும் இணக்க வழிகாட்டுதல்கள் மூலம் விழிப்புடன் இருங்கள்." : language === "hi" ? "हमारे वरिष्ठ भागीदारों द्वारा लिखे गए कानूनी लेखों, विधायी समीक्षाओं और अनुपालन विवरणों से सूचित रहें।" : "Stay informed with legal articles, legislative reviews, and compliance briefs written by our senior partners."}
           </p>
         </div>
 
@@ -204,7 +200,7 @@ export default function Blog() {
                     : "bg-surface hover:bg-muted text-muted-foreground border border-border"
                 }`}
               >
-                {language === "en" ? cat.en : language === "ta" ? cat.ta : cat.hi}
+                {language === "ta" ? cat.ta : language === "hi" ? cat.hi : cat.en}
               </button>
             ))}
           </div>
@@ -214,7 +210,7 @@ export default function Blog() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder={language === "en" ? "Search articles..." : language === "ta" ? "கட்டுரைகளைத் தேட..." : "लेख खोजें..."}
+              placeholder={language === "ta" ? "கட்டுரைகளைத் தேட..." : language === "hi" ? "लेख खोजें..." : "Search articles..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
@@ -226,11 +222,11 @@ export default function Blog() {
         {filteredPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {filteredPosts.map((post, idx) => {
-              const categoryText = language === "en" ? post.category.en : language === "ta" ? post.category.ta : post.category.hi;
-              const readTimeText = language === "en" ? post.readTime.en : language === "ta" ? post.readTime.ta : post.readTime.hi;
-              const titleText = language === "en" ? post.title.en : language === "ta" ? post.title.ta : post.title.hi;
-              const summaryText = language === "en" ? post.summary.en : language === "ta" ? post.summary.ta : post.summary.hi;
-              const authorTitleText = language === "en" ? post.authorTitle.en : language === "ta" ? post.authorTitle.ta : post.authorTitle.hi;
+              const categoryText = language === "ta" ? post.category.ta : language === "hi" ? post.category.hi : post.category.en;
+              const readTimeText = language === "ta" ? post.readTime.ta : language === "hi" ? post.readTime.hi : post.readTime.en;
+              const titleText = language === "ta" ? post.title.ta : language === "hi" ? post.title.hi : post.title.en;
+              const summaryText = language === "ta" ? post.summary.ta : language === "hi" ? post.summary.hi : post.summary.en;
+              const authorTitleText = language === "ta" ? post.authorTitle.ta : language === "hi" ? post.authorTitle.hi : post.authorTitle.en;
 
               return (
                 <div key={idx} className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col justify-between">
@@ -268,7 +264,7 @@ export default function Blog() {
                       to={`/blog/${post.slug}`}
                       className="text-secondary font-bold hover:text-primary transition-colors text-xs uppercase tracking-wider inline-flex items-center gap-1 group/link"
                     >
-                      {language === "en" ? "Read Article" : language === "ta" ? "மேலும் படிக்க" : "लेख पढ़ें"}{" "}
+                      {language === "ta" ? "மேலும் படிக்க" : language === "hi" ? "लेख पढ़ें" : "Read Article"}{" "}
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
                     </Link>
                   </div>
@@ -280,11 +276,7 @@ export default function Blog() {
         ) : (
           <div className="text-center py-20 bg-card border border-dashed border-border rounded-2xl max-w-5xl mx-auto">
             <p className="text-muted-foreground text-lg">
-              {language === "en" 
-                ? "No insights matched your query." 
-                : language === "ta" 
-                ? "தேடலுக்குரிய கட்டுரைகள் எதுவும் இல்லை." 
-                : "आपकी खोज से मेल खाता कोई लेख नहीं मिला।"}
+              {language === "ta" ? "தேடலுக்குரிய கட்டுரைகள் எதுவும் இல்லை." : language === "hi" ? "आपकी खोज से मेल खाता कोई लेख नहीं मिला।" : "No insights matched your query."}
             </p>
           </div>
         )}

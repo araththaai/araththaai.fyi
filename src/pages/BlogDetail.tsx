@@ -226,12 +226,12 @@ export default function BlogDetail() {
     return <Navigate to="/blog" replace />;
   }
 
-  const categoryText = language === "en" ? post.category.en : language === "ta" ? post.category.ta : post.category.hi;
-  const titleText = language === "en" ? post.title.en : language === "ta" ? post.title.ta : post.title.hi;
-  const dateText = language === "en" ? post.date.en : language === "ta" ? post.date.ta : post.date.hi;
-  const readTimeText = language === "en" ? post.readTime.en : language === "ta" ? post.readTime.ta : post.readTime.hi;
-  const authorTitleText = language === "en" ? post.authorTitle.en : language === "ta" ? post.authorTitle.ta : post.authorTitle.hi;
-  const paragraphs = language === "en" ? detail.paragraphs.en : language === "ta" ? detail.paragraphs.ta : detail.paragraphs.hi;
+  const categoryText = language === "ta" ? post.category.ta : language === "hi" ? post.category.hi : post.category.en;
+  const titleText = language === "ta" ? post.title.ta : language === "hi" ? post.title.hi : post.title.en;
+  const dateText = language === "ta" ? post.date.ta : language === "hi" ? post.date.hi : post.date.en;
+  const readTimeText = language === "ta" ? post.readTime.ta : language === "hi" ? post.readTime.hi : post.readTime.en;
+  const authorTitleText = language === "ta" ? post.authorTitle.ta : language === "hi" ? post.authorTitle.hi : post.authorTitle.en;
+  const paragraphs = language === "ta" ? detail.paragraphs.ta : language === "hi" ? detail.paragraphs.hi : detail.paragraphs.en;
   const faqs = detail.faqs;
 
   // Inject structured JSON-LD FAQ Metadata for SEO
@@ -240,10 +240,10 @@ export default function BlogDetail() {
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      "name": language === "en" ? faq.question.en : language === "ta" ? faq.question.ta : faq.question.hi,
+      "name": language === "ta" ? faq.question.ta : language === "hi" ? faq.question.hi : faq.question.en,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": language === "en" ? faq.answer.en : language === "ta" ? faq.answer.ta : faq.answer.hi
+        "text": language === "ta" ? faq.answer.ta : language === "hi" ? faq.answer.hi : faq.answer.en
       }
     }))
   };
@@ -267,11 +267,7 @@ export default function BlogDetail() {
         {/* Back navigation */}
         <Link to="/blog" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" /> 
-          {language === "en" 
-            ? "Back to Knowledge Hub" 
-            : language === "ta" 
-            ? "கட்டுரைகள் பகுதிக்குத் திரும்பவும்" 
-            : "ज्ञान केंद्र पर वापस जाएं"}
+          {language === "ta" ? "கட்டுரைகள் பகுதிக்குத் திரும்பவும்" : language === "hi" ? "ज्ञान केंद्र पर वापस जाएं" : "Back to Knowledge Hub"}
         </Link>
 
         {/* Article Meta */}
@@ -287,7 +283,7 @@ export default function BlogDetail() {
             <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-secondary" /> {readTimeText}</span>
             <span className="flex items-center gap-1.5">
               <Award className="h-4 w-4 text-secondary" /> 
-              {language === "en" ? "Drafted by:" : language === "ta" ? "எழுதியவர்:" : "लेखक:"} <strong>{post.author}</strong> ({authorTitleText})
+              {language === "ta" ? "எழுதியவர்:" : language === "hi" ? "लेखक:" : "Drafted by:"} <strong>{post.author}</strong> ({authorTitleText})
             </span>
           </div>
         </div>
@@ -301,7 +297,7 @@ export default function BlogDetail() {
           {/* Social Share Buttons */}
           <div className="border-t border-b border-border/80 py-4 my-8 flex items-center justify-between">
             <span className="text-sm font-semibold text-primary">
-              {language === "en" ? "Share Legal Insight:" : language === "ta" ? "பகிர்வதற்கு:" : "कानूनी अंतर्दृष्टि साझा करें:"}
+              {language === "ta" ? "பகிர்வதற்கு:" : language === "hi" ? "कानूनी अंतर्दृष्टि साझा करें:" : "Share Legal Insight:"}
             </span>
             <div className="flex gap-3">
               <button className="p-2 bg-muted hover:bg-primary hover:text-white rounded-full transition-all text-muted-foreground cursor-pointer">
@@ -319,12 +315,12 @@ export default function BlogDetail() {
           {/* FAQs Accordion inside article */}
           <div className="bg-muted/40 p-6 rounded-xl border border-border/80">
             <h3 className="text-xl font-heading font-bold text-primary mb-4">
-              {language === "en" ? "Frequently Asked Questions" : language === "ta" ? "அடிக்கடி கேட்கப்படும் கேள்விகள்" : "अक्सर पूछे जाने वाले प्रश्न"}
+              {language === "ta" ? "அடிக்கடி கேட்கப்படும் கேள்விகள்" : language === "hi" ? "अक्सर पूछे जाने वाले प्रश्न" : "Frequently Asked Questions"}
             </h3>
             <div className="space-y-4">
               {faqs.map((faq, idx) => {
-                const qText = language === "en" ? faq.question.en : language === "ta" ? faq.question.ta : faq.question.hi;
-                const aText = language === "en" ? faq.answer.en : language === "ta" ? faq.answer.ta : faq.answer.hi;
+                const qText = language === "ta" ? faq.question.ta : language === "hi" ? faq.question.hi : faq.question.en;
+                const aText = language === "ta" ? faq.answer.ta : language === "hi" ? faq.answer.hi : faq.answer.en;
                 return (
                   <div key={idx} className="space-y-1">
                     <h4 className="font-bold text-sm text-primary">Q: {qText}</h4>
@@ -340,18 +336,14 @@ export default function BlogDetail() {
         {/* Read Next Banner */}
         <div className="bg-card text-foreground p-8 rounded-2xl shadow-sm mt-12 border border-border text-center">
           <h3 className="text-2xl font-heading font-bold text-primary mb-2">
-            {language === "en" ? "Need Direct Case Guidance?" : language === "ta" ? "உங்களுக்கு சட்ட ஆலோசனை தேவையா?" : "क्या आपको प्रत्यक्ष मामले में मार्गदर्शन चाहिए?"}
+            {language === "ta" ? "உங்களுக்கு சட்ட ஆலோசனை தேவையா?" : language === "hi" ? "क्या आपको प्रत्यक्ष मामले में मार्गदर्शन चाहिए?" : "Need Direct Case Guidance?"}
           </h3>
           <p className="text-xs text-muted-foreground mb-6 max-w-lg mx-auto">
-            {language === "en"
-              ? "Schedule a private, privileged consultation with our senior partners regarding PMLA, GST audits, or corporate restructuring."
-              : language === "ta"
-              ? "வழக்குகள், ஜிஎஸ்டி தணிக்கைகள் அல்லது கார்ப்பரேட் விவகாரங்கள் தொடர்பாக எங்கள் மூத்த வழக்கறிஞர்களுடன் ஒரு தனிப்பட்ட ஆலோசனையைத் திட்டமிடுங்கள்."
-              : "पीएमएलए, जीएसटी ऑडिट या कॉर्पोरेट पुनर्गठन के संबंध में हमारे वरिष्ठ भागीदारों के साथ एक निजी परामर्श निर्धारित करें।"}
+            {language === "ta" ? "வழக்குகள், ஜிஎஸ்டி தணிக்கைகள் அல்லது கார்ப்பரேட் விவகாரங்கள் தொடர்பாக எங்கள் மூத்த வழக்கறிஞர்களுடன் ஒரு தனிப்பட்ட ஆலோசனையைத் திட்டமிடுங்கள்." : language === "hi" ? "पीएमएलए, जीएसटी ऑडिट या कॉर्पोरेट पुनर्गठन के संबंध में हमारे वरिष्ठ भागीदारों के साथ एक निजी परामर्श निर्धारित करें।" : "Schedule a private, privileged consultation with our senior partners regarding PMLA, GST audits, or corporate restructuring."}
           </p>
           <Link to="/book-consultation">
             <button className="bg-primary text-primary-foreground hover:bg-primary/95 font-bold px-6 py-3 rounded text-sm transition-all cursor-pointer">
-              {language === "en" ? "Schedule Private Consultation" : language === "ta" ? "ஆலோசனை முன்பதிவு செய்ய" : "निजी परामर्श निर्धारित करें"}
+              {language === "ta" ? "ஆலோசனை முன்பதிவு செய்ய" : language === "hi" ? "निजी परामर्श निर्धारित करें" : "Schedule Private Consultation"}
             </button>
           </Link>
         </div>

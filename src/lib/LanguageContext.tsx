@@ -7,6 +7,7 @@ interface LanguageContextType {
   selectedLanguage: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  tText: (en: string, ta?: string, hi?: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -862,8 +863,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return dict[key] || translations["en"][key] || key;
   };
 
+  const tText = (en: string, ta?: string, hi?: string): string => {
+    if (language === "ta" && ta) return ta;
+    if (language === "hi" && hi) return hi;
+    return en;
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, selectedLanguage: language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, selectedLanguage: language, setLanguage, t, tText }}>
       {children}
     </LanguageContext.Provider>
   );

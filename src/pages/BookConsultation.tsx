@@ -172,16 +172,16 @@ END:VCALENDAR`;
           {step <= 4 && (
             <div className="bg-primary/5 px-8 py-4 border-b border-border flex justify-between items-center text-xs font-semibold text-muted-foreground">
               <span className={step >= 1 ? "text-secondary font-bold" : ""}>
-                {language === "en" ? "1. Practice Area" : language === "ta" ? "1. சட்டப் பிரிவு" : "1. कानूनी क्षेत्र"}
+                {language === "ta" ? "1. சட்டப் பிரிவு" : language === "hi" ? "1. कानूनी क्षेत्र" : "1. Practice Area"}
               </span>
               <span className={step >= 2 ? "text-secondary font-bold" : ""}>
-                {language === "en" ? "2. Case Details" : language === "ta" ? "2. வழக்கு விபரங்கள்" : "2. मामले का विवरण"}
+                {language === "ta" ? "2. வழக்கு விபரங்கள்" : language === "hi" ? "2. मामले का विवरण" : "2. Case Details"}
               </span>
               <span className={step >= 3 ? "text-secondary font-bold" : ""}>
-                {language === "en" ? "3. Date & Time" : language === "ta" ? "3. தேதி & நேரம்" : "3. तिथि और समय"}
+                {language === "ta" ? "3. தேதி & நேரம்" : language === "hi" ? "3. तिथि और समय" : "3. Date & Time"}
               </span>
               <span className={step >= 4 ? "text-secondary font-bold" : ""}>
-                {language === "en" ? "4. Contact Info" : language === "ta" ? "4. தொடர்பு விபரங்கள்" : "4. संपर्क जानकारी"}
+                {language === "ta" ? "4. தொடர்பு விபரங்கள்" : language === "hi" ? "4. संपर्क जानकारी" : "4. Contact Info"}
               </span>
             </div>
           )}
@@ -193,10 +193,10 @@ END:VCALENDAR`;
               <div className="space-y-6">
                 <div className="text-center md:text-left mb-8">
                   <h2 className="text-3xl font-heading font-bold text-primary mb-2">
-                    {language === "en" ? "Select Practice Area" : language === "ta" ? "சட்டப் பிரிவைத் தேர்ந்தெடுக்கவும்" : "कानूनी क्षेत्र चुनें"}
+                    {language === "ta" ? "சட்டப் பிரிவைத் தேர்ந்தெடுக்கவும்" : language === "hi" ? "कानूनी क्षेत्र चुनें" : "Select Practice Area"}
                   </h2>
                   <p className="text-muted-foreground text-sm">
-                    {language === "en" ? "Which division of law does your legal inquiry concern?" : language === "ta" ? "உங்கள் சட்ட விசாரணை எந்த சட்டப்பிரிவைச் சார்ந்தது?" : "आपकी कानूनी पूछताछ कानून के किस प्रभाग से संबंधित है?"}
+                    {language === "ta" ? "உங்கள் சட்ட விசாரணை எந்த சட்டப்பிரிவைச் சார்ந்தது?" : language === "hi" ? "आपकी कानूनी पूछताछ कानून के किस प्रभाग से संबंधित है?" : "Which division of law does your legal inquiry concern?"}
                   </p>
                 </div>
 
@@ -221,7 +221,7 @@ END:VCALENDAR`;
 
                 <div className="flex justify-end pt-6">
                   <Button size="lg" onClick={nextStep} disabled={!selectedService} className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
-                    {language === "en" ? "Continue" : language === "ta" ? "தொடரவும்" : "आगे बढ़ें"} <ArrowRight className="ml-2 h-4 w-4" />
+                    {language === "ta" ? "தொடரவும்" : language === "hi" ? "आगे बढ़ें" : "Continue"} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -232,30 +232,30 @@ END:VCALENDAR`;
               <div className="space-y-6">
                 <div className="text-center md:text-left mb-8">
                   <h2 className="text-3xl font-heading font-bold text-primary mb-2">
-                    {language === "en" ? "Explain Your Case" : language === "ta" ? "உங்கள் வழக்கை விளக்கவும்" : "अपने मामले की व्याख्या करें"}
+                    {language === "ta" ? "உங்கள் வழக்கை விளக்கவும்" : language === "hi" ? "अपने मामले की व्याख्या करें" : "Explain Your Case"}
                   </h2>
                   <p className="text-muted-foreground text-sm">
-                    {language === "en" ? "Provide details so our specialized legal partners can run conflicts clearance checks." : language === "ta" ? "விவரங்களை அளிக்கவும், இதன் மூலம் எங்கள் வழக்கறிஞர்கள் ஆரம்பகட்ட சரிபார்ப்புகளை மேற்கொள்ள முடியும்." : "विवरण प्रदान करें ताकि हमारे कानूनी भागीदार प्रारंभिक जांच कर सकें।"}
+                    {language === "ta" ? "விவரங்களை அளிக்கவும், இதன் மூலம் எங்கள் வழக்கறிஞர்கள் ஆரம்பகட்ட சரிபார்ப்புகளை மேற்கொள்ள முடியும்." : language === "hi" ? "विवरण प्रदान करें ताकि हमारे कानूनी भागीदार प्रारंभिक जांच कर सकें।" : "Provide details so our specialized legal partners can run conflicts clearance checks."}
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">
-                      {language === "en" ? "Brief Summary of Legal Issue *" : language === "ta" ? "சட்டப் பிரச்சனையின் சுருக்கம் *" : "कानूनी मुद्दे का संक्षिप्त विवरण *"}
+                      {language === "ta" ? "சட்டப் பிரச்சனையின் சுருக்கம் *" : language === "hi" ? "कानूनी मुद्दे का संक्षिप्त विवरण *" : "Brief Summary of Legal Issue *"}
                     </label>
                     <textarea
                       {...register("message")}
                       rows={5}
                       className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground resize-none"
-                      placeholder={language === "en" ? "Please outline details, dates, parties involved, and the core legal concern..." : language === "ta" ? "தேதிகள், சம்பந்தப்பட்ட நபர்கள் மற்றும் முக்கிய சட்டப் பிரச்சனையை விவரிக்கவும்..." : "कृपया तिथियों, शामिल पक्षों और मुख्य कानूनी चिंता का विवरण दें..."}
+                      placeholder={language === "ta" ? "தேதிகள், சம்பந்தப்பட்ட நபர்கள் மற்றும் முக்கிய சட்டப் பிரச்சனையை விவரிக்கவும்..." : language === "hi" ? "कृपया तिथियों, शामिल पक्षों और मुख्य कानूनी चिंता का विवरण दें..." : "Please outline details, dates, parties involved, and the core legal concern..."}
                     />
                     {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">
-                      {language === "en" ? "Urgency Level *" : language === "ta" ? "அவசர நிலை *" : "आपातकाल स्तर *"}
+                      {language === "ta" ? "அவசர நிலை *" : language === "hi" ? "आपातकाल स्तर *" : "Urgency Level *"}
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {(language === "en" 
@@ -286,10 +286,10 @@ END:VCALENDAR`;
 
                 <div className="flex justify-between pt-6">
                   <Button variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted cursor-pointer">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back" : language === "ta" ? "முந்தைய" : "पीछे"}
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "ta" ? "முந்தைய" : language === "hi" ? "पीछे" : "Back"}
                   </Button>
                   <Button size="lg" onClick={nextStep} className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
-                    {language === "en" ? "Continue" : language === "ta" ? "தொடரவும்" : "आगे बढ़ें"} <ArrowRight className="ml-2 h-4 w-4" />
+                    {language === "ta" ? "தொடரவும்" : language === "hi" ? "आगे बढ़ें" : "Continue"} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -300,10 +300,10 @@ END:VCALENDAR`;
               <div className="space-y-6">
                 <div className="text-center md:text-left mb-8">
                   <h2 className="text-3xl font-heading font-bold text-primary mb-2">
-                    {language === "en" ? "Schedule Appointment" : language === "ta" ? "சந்திப்பைத் திட்டமிடவும்" : "परामर्श निर्धारित करें"}
+                    {language === "ta" ? "சந்திப்பைத் திட்டமிடவும்" : language === "hi" ? "परामर्श निर्धारित करें" : "Schedule Appointment"}
                   </h2>
                   <p className="text-muted-foreground text-sm">
-                    {language === "en" ? "Select a date and preferred time slot for your initial discussion." : language === "ta" ? "ஆலோசனைக்கான தேதி மற்றும் நேரத்தைத் தேர்ந்தெடுக்கவும்." : "अपनी प्रारंभिक चर्चा के लिए एक तिथि और पसंदीदा समय चुनें।"}
+                    {language === "ta" ? "ஆலோசனைக்கான தேதி மற்றும் நேரத்தைத் தேர்ந்தெடுக்கவும்." : language === "hi" ? "अपनी प्रारंभिक चर्चा के लिए एक तिथि और पसंदीदा समय चुनें।" : "Select a date and preferred time slot for your initial discussion."}
                   </p>
                 </div>
 
@@ -312,7 +312,7 @@ END:VCALENDAR`;
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground flex items-center gap-1.5">
                       <Calendar className="h-4 w-4 text-secondary" /> 
-                      {language === "en" ? "Preferred Date *" : language === "ta" ? "விருப்பமான தேதி *" : "पसंदीदा तिथि *"}
+                      {language === "ta" ? "விருப்பமான தேதி *" : language === "hi" ? "पसंदीदा तिथि *" : "Preferred Date *"}
                     </label>
                     <input
                       type="date"
@@ -327,7 +327,7 @@ END:VCALENDAR`;
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground flex items-center gap-1.5">
                       <Clock className="h-4 w-4 text-secondary" /> 
-                      {language === "en" ? "Preferred Time Slot *" : language === "ta" ? "விருப்பமான நேரம் *" : "पसंदीदा समय *"}
+                      {language === "ta" ? "விருப்பமான நேரம் *" : language === "hi" ? "पसंदीदा समय *" : "Preferred Time Slot *"}
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       {timeSlots.map((ts) => (
@@ -351,10 +351,10 @@ END:VCALENDAR`;
 
                 <div className="flex justify-between pt-6">
                   <Button variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted cursor-pointer">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back" : language === "ta" ? "முந்தைய" : "पीछे"}
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "ta" ? "முந்தைய" : language === "hi" ? "पीछे" : "Back"}
                   </Button>
                   <Button size="lg" onClick={nextStep} disabled={!selectedDate || !selectedTime} className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
-                    {language === "en" ? "Continue" : language === "ta" ? "தொடரவும்" : "आगे बढ़ें"} <ArrowRight className="ml-2 h-4 w-4" />
+                    {language === "ta" ? "தொடரவும்" : language === "hi" ? "आगे बढ़ें" : "Continue"} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -365,10 +365,10 @@ END:VCALENDAR`;
               <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-6">
                 <div className="text-center md:text-left mb-8">
                   <h2 className="text-3xl font-heading font-bold text-primary mb-2">
-                    {language === "en" ? "Intake Contact Details" : language === "ta" ? "தொடர்பு விபரங்கள்" : "संपर्क विवरण"}
+                    {language === "ta" ? "தொடர்பு விபரங்கள்" : language === "hi" ? "संपर्क विवरण" : "Intake Contact Details"}
                   </h2>
                   <p className="text-muted-foreground text-sm">
-                    {language === "en" ? "Provide your secure coordinates so our compliance desk can verify the booking." : language === "ta" ? "முன்பதிவைச் சரிபார்க்க உங்கள் பாதுகாப்பான தொடர்பு விபரங்களை வழங்கவும்." : "अपने सुरक्षित विवरण प्रदान करें ताकि हमारा अनुपालन विभाग बुकिंग का सत्यापन कर सके।"}
+                    {language === "ta" ? "முன்பதிவைச் சரிபார்க்க உங்கள் பாதுகாப்பான தொடர்பு விபரங்களை வழங்கவும்." : language === "hi" ? "अपने सुरक्षित विवरण प्रदान करें ताकि हमारा अनुपालन विभाग बुकिंग का सत्यापन कर सके।" : "Provide your secure coordinates so our compliance desk can verify the booking."}
                   </p>
                 </div>
 
@@ -381,12 +381,12 @@ END:VCALENDAR`;
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">
-                      {language === "en" ? "Your Full Name *" : language === "ta" ? "உங்கள் முழு பெயர் *" : "आपका पूरा नाम *"}
+                      {language === "ta" ? "உங்கள் முழு பெயர் *" : language === "hi" ? "आपका पूरा नाम *" : "Your Full Name *"}
                     </label>
                     <input
                       {...register("name")}
                       className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
-                      placeholder={language === "en" ? "Jane Doe" : language === "ta" ? "பெயர்" : "नाम"}
+                      placeholder={language === "ta" ? "பெயர்" : language === "hi" ? "नाम" : "Jane Doe"}
                     />
                     {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
                   </div>
@@ -417,7 +417,7 @@ END:VCALENDAR`;
                   {/* Document Upload Zone */}
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">
-                      {language === "en" ? "Attach Documents (Optional)" : language === "ta" ? "ஆவணங்களை இணைக்கவும் (விரும்பினால்)" : "दस्तावेज़ संलग्न करें (वैकल्पिक)"}
+                      {language === "ta" ? "ஆவணங்களை இணைக்கவும் (விரும்பினால்)" : language === "hi" ? "दस्तावेज़ संलग्न करें (वैकल्पिक)" : "Attach Documents (Optional)"}
                     </label>
                     <div className="border border-dashed border-border p-6 rounded-lg text-center bg-muted/40 hover:bg-muted transition-colors relative cursor-pointer group">
                       <input
@@ -432,7 +432,7 @@ END:VCALENDAR`;
                       />
                       <Upload className="h-8 w-8 text-secondary mx-auto mb-2 group-hover:scale-110 transition-transform" />
                       <span className="text-xs font-semibold text-primary block">
-                        {language === "en" ? "Click to upload files" : language === "ta" ? "கோப்புகளைப் பதிவேற்ற இங்கே கிளிக் செய்யவும்" : "फ़ाइलें अपलोड करने के लिए क्लिक करें"}
+                        {language === "ta" ? "கோப்புகளைப் பதிவேற்ற இங்கே கிளிக் செய்யவும்" : language === "hi" ? "फ़ाइलें अपलोड करने के लिए क्लिक करें" : "Click to upload files"}
                       </span>
                       <span className="text-[10px] text-muted-foreground block mt-1">PDF, DOCX up to 10MB</span>
                     </div>
@@ -441,16 +441,16 @@ END:VCALENDAR`;
 
                 <div className="flex justify-between pt-6">
                   <Button type="button" variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted cursor-pointer" disabled={isSubmitting}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back" : language === "ta" ? "முந்தைய" : "पीछे"}
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "ta" ? "முந்தைய" : language === "hi" ? "पीछे" : "Back"}
                   </Button>
                   <Button type="submit" size="lg" className="bg-primary hover:bg-primary/95 text-white cursor-pointer" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {language === "en" ? "Submitting..." : language === "ta" ? "சமர்ப்பிக்கப்படுகிறது..." : "जमा किया जा रहा है..."}
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {language === "ta" ? "சமர்ப்பிக்கப்படுகிறது..." : language === "hi" ? "जमा किया जा रहा है..." : "Submitting..."}
                       </>
                     ) : (
                       <>
-                        {language === "en" ? "Confirm Consultation" : language === "ta" ? "முன்பதிவை உறுதிசெய்யவும்" : "परामर्श की पुष्टि करें"} <CheckCircle2 className="ml-2 h-4 w-4" />
+                        {language === "ta" ? "முன்பதிவை உறுதிசெய்யவும்" : language === "hi" ? "परामर्श की पुष्टि करें" : "Confirm Consultation"} <CheckCircle2 className="ml-2 h-4 w-4" />
                       </>
                     )}
                   </Button>
@@ -466,29 +466,29 @@ END:VCALENDAR`;
                 </div>
                 <div>
                   <h1 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-2">
-                    {language === "en" ? "Consultation Requested!" : language === "ta" ? "ஆலோசனை கோரப்பட்டது!" : "परामर्श का अनुरोध प्राप्त हुआ!"}
+                    {language === "ta" ? "ஆலோசனை கோரப்பட்டது!" : language === "hi" ? "परामर्श का अनुरोध प्राप्त हुआ!" : "Consultation Requested!"}
                   </h1>
                   <p className="text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
-                    {language === "en" ? (
-                      <>Thank you, <strong>{successData.name}</strong>. Your intake files have been securely transmitted under attorney confidentiality rules.</>
-                    ) : language === "ta" ? (
-                      <>நன்றி, <strong>{successData.name}</strong>. உங்கள் கோப்புகள் பாதுகாப்பாக வழக்கறிஞர் ரகசிய காப்பு விதிகளின் கீழ் அனுப்பப்பட்டுள்ளன.</>
-                    ) : (
-                      <>धन्यवाद, <strong>{successData.name}</strong>। आपके मामले का विवरण वकील गोपनीयता नियमों के तहत सुरक्षित रूप से भेज दिया गया है।</>
-                    )}
+                    {language === "ta" ? (
+<>நன்றி, <strong>{successData.name}</strong>. உங்கள் கோப்புகள் பாதுகாப்பாக வழக்கறிஞர் ரகசிய காப்பு விதிகளின் கீழ் அனுப்பப்பட்டுள்ளன.</>
+) : language === "hi" ? (
+<>धन्यवाद, <strong>{successData.name}</strong>। आपके मामले का विवरण वकील गोपनीयता नियमों के तहत सुरक्षित रूप से भेज दिया गया है।</>
+) : (
+<>Thank you, <strong>{successData.name}</strong>. Your intake files have been securely transmitted under attorney confidentiality rules.</>
+)}
                   </p>
                 </div>
 
                 {/* Booking details card */}
                 <div className="bg-muted border border-border p-6 rounded-xl max-w-md mx-auto text-left space-y-3">
                   <h4 className="font-heading font-bold border-b border-border/80 pb-2 text-sm uppercase tracking-wider text-secondary">
-                    {language === "en" ? "Appointment Details" : language === "ta" ? "முன்பதிவு விபரங்கள்" : "अपॉइंटमेंट का विवरण"}
+                    {language === "ta" ? "முன்பதிவு விபரங்கள்" : language === "hi" ? "अपॉइंटमेंट का विवरण" : "Appointment Details"}
                   </h4>
                   <div className="text-xs text-muted-foreground space-y-1.5">
-                    <p><strong>{language === "en" ? "Practice:" : language === "ta" ? "சட்டப்பிரிவு:" : "कानूनी क्षेत्र:"}</strong> {successData.serviceType}</p>
-                    <p><strong>{language === "en" ? "Urgency:" : language === "ta" ? "அவசரநிலை:" : "आपातकाल:"}</strong> {successData.urgency}</p>
-                    <p><strong>{language === "en" ? "Date:" : language === "ta" ? "தேதி:" : "तिथि:"}</strong> {successData.date}</p>
-                    <p><strong>{language === "en" ? "Time Slot:" : language === "ta" ? "நேரம்:" : "समय:"}</strong> {successData.timeSlot}</p>
+                    <p><strong>{language === "ta" ? "சட்டப்பிரிவு:" : language === "hi" ? "कानूनी क्षेत्र:" : "Practice:"}</strong> {successData.serviceType}</p>
+                    <p><strong>{language === "ta" ? "அவசரநிலை:" : language === "hi" ? "आपातकाल:" : "Urgency:"}</strong> {successData.urgency}</p>
+                    <p><strong>{language === "ta" ? "தேதி:" : language === "hi" ? "तिथि:" : "Date:"}</strong> {successData.date}</p>
+                    <p><strong>{language === "ta" ? "நேரம்:" : language === "hi" ? "समय:" : "Time Slot:"}</strong> {successData.timeSlot}</p>
                   </div>
                 </div>
 
@@ -497,11 +497,11 @@ END:VCALENDAR`;
                     onClick={downloadCalendarInvite}
                     className="flex-grow bg-primary text-white hover:bg-primary/95 flex items-center justify-center gap-2 h-12 cursor-pointer border-none"
                   >
-                    <Download className="h-4 w-4" /> {language === "en" ? "Add to Calendar (.ics)" : language === "ta" ? "காலெண்டரில் சேர்க்கவும் (.ics)" : "कैलेंडर में जोड़ें (.ics)"}
+                    <Download className="h-4 w-4" /> {language === "ta" ? "காலெண்டரில் சேர்க்கவும் (.ics)" : language === "hi" ? "कैलेंडर में जोड़ें (.ics)" : "Add to Calendar (.ics)"}
                   </Button>
                   <Link to="/" className="flex-grow">
                     <Button variant="outline" className="w-full border-border hover:bg-muted text-foreground h-12 cursor-pointer">
-                      {language === "en" ? "Return to Home" : language === "ta" ? "முகப்பிற்குத் திரும்பவும்" : "होमपेज पर वापस जाएं"}
+                      {language === "ta" ? "முகப்பிற்குத் திரும்பவும்" : language === "hi" ? "होमपेज पर वापस जाएं" : "Return to Home"}
                     </Button>
                   </Link>
                 </div>

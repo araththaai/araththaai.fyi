@@ -406,7 +406,7 @@ export default function PracticeAreaDetail() {
     setIsSubmitting(true);
     setErrorMsg("");
     try {
-      const activeTitle = area ? (language === "en" ? area.title.en : language === "ta" ? area.title.ta : area.title.hi) : "Practice Area Detail Form";
+      const activeTitle = area ? (language === "ta" ? area.title.ta : language === "hi" ? area.title.hi : area.title.en) : "Practice Area Detail Form";
       const { error } = await supabase
         .from("bookings")
         .insert({
@@ -435,10 +435,10 @@ export default function PracticeAreaDetail() {
     return <Navigate to="/practice-areas" replace />;
   }
 
-  const title = language === "en" ? area.title.en : language === "ta" ? area.title.ta : area.title.hi;
-  const description = language === "en" ? area.description.en : language === "ta" ? area.description.ta : area.description.hi;
-  const longText = language === "en" ? area.longText.en : language === "ta" ? area.longText.ta : area.longText.hi;
-  const mattersHandled = language === "en" ? area.mattersHandled.en : language === "ta" ? area.mattersHandled.ta : area.mattersHandled.hi;
+  const title = language === "ta" ? area.title.ta : language === "hi" ? area.title.hi : area.title.en;
+  const description = language === "ta" ? area.description.ta : language === "hi" ? area.description.hi : area.description.en;
+  const longText = language === "ta" ? area.longText.ta : language === "hi" ? area.longText.hi : area.longText.en;
+  const mattersHandled = language === "ta" ? area.mattersHandled.ta : language === "hi" ? area.mattersHandled.hi : area.mattersHandled.en;
   const clientJourney = area.clientJourney;
   const faqs = area.faqs;
 
@@ -449,13 +449,13 @@ export default function PracticeAreaDetail() {
         {/* Breadcrumb link */}
         <Link to="/practice-areas" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" /> 
-          {language === "en" ? "Back to Practice Areas" : language === "ta" ? "சட்டப் பிரிவுகளுக்குத் திரும்பவும்" : "अभ्यास क्षेत्रों पर वापस जाएं"}
+          {language === "ta" ? "சட்டப் பிரிவுகளுக்குத் திரும்பவும்" : language === "hi" ? "अभ्यास क्षेत्रों पर वापस जाएं" : "Back to Practice Areas"}
         </Link>
 
         {/* Dynamic header */}
         <div className="mb-12">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-4">
-            {language === "en" ? "Practice Area Details" : language === "ta" ? "சட்டப் பிரிவு விவரங்கள்" : "अभ्यास क्षेत्र विवरण"}
+            {language === "ta" ? "சட்டப் பிரிவு விவரங்கள்" : language === "hi" ? "अभ्यास क्षेत्र विवरण" : "Practice Area Details"}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary leading-tight">
             {title}
@@ -471,7 +471,7 @@ export default function PracticeAreaDetail() {
             {/* Overview */}
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
               <h2 className="text-2xl font-heading font-bold text-primary mb-4">
-                {language === "en" ? "Practice Overview" : language === "ta" ? "சட்டப்பிரிவு கண்ணோட்டம்" : "अभ्यास अवलोकन"}
+                {language === "ta" ? "சட்டப்பிரிவு கண்ணோட்டம்" : language === "hi" ? "अभ्यास अवलोकन" : "Practice Overview"}
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6 text-lg">{description}</p>
               <p className="text-muted-foreground leading-relaxed">{longText}</p>
@@ -480,7 +480,7 @@ export default function PracticeAreaDetail() {
             {/* Matters Handled Checklist */}
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
               <h2 className="text-2xl font-heading font-bold text-primary mb-6">
-                {language === "en" ? "Matters We Handle" : language === "ta" ? "நாங்கள் கையாளும் விவகாரங்கள்" : "मामले जिन्हें हम संभालते हैं"}
+                {language === "ta" ? "நாங்கள் கையாளும் விவகாரங்கள்" : language === "hi" ? "मामले जिन्हें हम संभालते हैं" : "Matters We Handle"}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {mattersHandled.map((matter, idx) => (
@@ -495,12 +495,12 @@ export default function PracticeAreaDetail() {
             {/* Step-by-Step Client Journey */}
             <div>
               <h2 className="text-2xl font-heading font-bold text-primary mb-8 text-center lg:text-left">
-                {language === "en" ? "Your Journey with Us" : language === "ta" ? "எங்களுடன் உங்கள் சட்டப் பயணம்" : "हमारे साथ आपकी यात्रा"}
+                {language === "ta" ? "எங்களுடன் உங்கள் சட்டப் பயணம்" : language === "hi" ? "हमारे साथ आपकी यात्रा" : "Your Journey with Us"}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {clientJourney.map((step, idx) => {
-                  const stepTitle = language === "en" ? step.title.en : language === "ta" ? step.title.ta : step.title.hi;
-                  const stepDesc = language === "en" ? step.desc.en : language === "ta" ? step.desc.ta : step.desc.hi;
+                  const stepTitle = language === "ta" ? step.title.ta : language === "hi" ? step.title.hi : step.title.en;
+                  const stepDesc = language === "ta" ? step.desc.ta : language === "hi" ? step.desc.hi : step.desc.en;
                   return (
                     <div key={idx} className="bg-card border border-border p-6 rounded-xl shadow-sm relative overflow-hidden group hover:border-secondary transition-colors">
                       <div className="absolute right-4 top-4 text-6xl font-heading font-bold text-muted/30 group-hover:text-secondary/10 transition-colors select-none pointer-events-none">
@@ -517,12 +517,12 @@ export default function PracticeAreaDetail() {
             {/* FAQ Accordion */}
             <div className="bg-card border border-border p-8 rounded-2xl shadow-sm">
               <h2 className="text-2xl font-heading font-bold text-primary mb-6">
-                {language === "en" ? "Frequently Asked Questions" : language === "ta" ? "அடிக்கடி கேட்கப்படும் கேள்விகள்" : "अक्सर पूछे जाने वाले प्रश्न"}
+                {language === "ta" ? "அடிக்கடி கேட்கப்படும் கேள்விகள்" : language === "hi" ? "अक्सर पूछे जाने वाले प्रश्न" : "Frequently Asked Questions"}
               </h2>
               <div className="space-y-4">
                 {faqs.map((faq, index) => {
-                  const q = language === "en" ? faq.q.en : language === "ta" ? faq.q.ta : faq.q.hi;
-                  const a = language === "en" ? faq.a.en : language === "ta" ? faq.a.ta : faq.a.hi;
+                  const q = language === "ta" ? faq.q.ta : language === "hi" ? faq.q.hi : faq.q.en;
+                  const a = language === "ta" ? faq.a.ta : language === "hi" ? faq.a.hi : faq.a.en;
                   return (
                     <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
                       <button
@@ -551,36 +551,28 @@ export default function PracticeAreaDetail() {
               <div className="flex items-center gap-3 mb-6">
                 <PlayCircle className="h-6 w-6 text-secondary" />
                 <h3 className="text-xl font-heading font-bold text-primary">
-                  {language === "en" ? "Fast Case Intake" : language === "ta" ? "வழக்கு ஆலோசனைப் பதிவு" : "त्वरित मामला पंजीकरण"}
+                  {language === "ta" ? "வழக்கு ஆலோசனைப் பதிவு" : language === "hi" ? "त्वरित मामला पंजीकरण" : "Fast Case Intake"}
                 </h3>
               </div>
               <p className="text-xs text-muted-foreground mb-6 leading-relaxed">
-                {language === "en" 
-                  ? `Provide your details below to schedule an initial consultation with a specialized ${title} advocate.`
-                  : language === "ta"
-                  ? `சிறப்பு வாய்ந்த ${title} வழக்கறிஞருடன் ஆரம்பகட்ட ஆலோசனையைப் பெற உங்கள் விவரங்களை கீழே பூர்த்தி செய்யவும்.`
-                  : `एक विशेषज्ञ ${title} अधिवक्ता के साथ प्रारंभिक परामर्श निर्धारित करने के लिए नीचे अपना विवरण प्रदान करें।`}
+                {language === "ta" ? `சிறப்பு வாய்ந்த ${title} வழக்கறிஞருடன் ஆரம்பகட்ட ஆலோசனையைப் பெற உங்கள் விவரங்களை கீழே பூர்த்தி செய்யவும்.` : language === "hi" ? `एक विशेषज्ञ ${title} अधिवक्ता के साथ प्रारंभिक परामर्श निर्धारित करने के लिए नीचे अपना विवरण प्रदान करें।` : `Provide your details below to schedule an initial consultation with a specialized ${title} advocate.`}
               </p>
 
               {isSuccess ? (
                 <div className="bg-muted p-6 rounded-xl text-center border border-border">
                   <CheckCircle2 className="h-12 w-12 text-secondary mx-auto mb-4" />
                   <h4 className="font-bold text-lg text-primary mb-2">
-                    {language === "en" ? "Request Received!" : language === "ta" ? "விண்ணப்பம் பெறப்பட்டது!" : "अनुरोध प्राप्त हुआ!"}
+                    {language === "ta" ? "விண்ணப்பம் பெறப்பட்டது!" : language === "hi" ? "अनुरोध प्राप्त हुआ!" : "Request Received!"}
                   </h4>
                   <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                    {language === "en" 
-                      ? "Our compliance team is completing conflicts check. We will email details shortly."
-                      : language === "ta"
-                      ? "எங்கள் குழு உங்கள் விண்ணப்பத்தை சரிபார்த்து வருகிறது. விரைவில் உங்களை மின்னஞ்சல் மூலம் தொடர்புகொள்வோம்."
-                      : "हमारी अनुपालन टीम हितों के टकराव की जांच पूरी कर रही है। हम जल्द ही विवरण ईमेल करेंगे।"}
+                    {language === "ta" ? "எங்கள் குழு உங்கள் விண்ணப்பத்தை சரிபார்த்து வருகிறது. விரைவில் உங்களை மின்னஞ்சல் மூலம் தொடர்புகொள்வோம்." : language === "hi" ? "हमारी अनुपालन टीम हितों के टकराव की जांच पूरी कर रही है। हम जल्द ही विवरण ईमेल करेंगे।" : "Our compliance team is completing conflicts check. We will email details shortly."}
                   </p>
                   <Button 
                     onClick={() => setIsSuccess(false)}
                     variant="outline" 
                     className="w-full border-border text-foreground hover:bg-muted cursor-pointer"
                   >
-                    {language === "en" ? "Send another request" : language === "ta" ? "மறுபடி செய்தி அனுப்பவும்" : "दूसरा अनुरोध भेजें"}
+                    {language === "ta" ? "மறுபடி செய்தி அனுப்பவும்" : language === "hi" ? "दूसरा अनुरोध भेजें" : "Send another request"}
                   </Button>
                 </div>
               ) : (
@@ -599,7 +591,7 @@ export default function PracticeAreaDetail() {
                       {...register("fullName")}
                       type="text"
                       className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground"
-                      placeholder={language === "en" ? "Jane Doe" : language === "ta" ? "பெயர்" : "नाम"}
+                      placeholder={language === "ta" ? "பெயர்" : language === "hi" ? "नाम" : "Jane Doe"}
                     />
                     {errors.fullName && <p className="text-[10px] text-red-600 mt-1">{errors.fullName.message}</p>}
                   </div>
@@ -632,13 +624,13 @@ export default function PracticeAreaDetail() {
 
                   <div>
                     <label className="block text-[11px] uppercase tracking-wider font-semibold mb-1 text-primary">
-                      {language === "en" ? "Brief Details" : language === "ta" ? "சுருக்கமான விபரம்" : "संक्षिप्त विवरण"}
+                      {language === "ta" ? "சுருக்கமான விபரம்" : language === "hi" ? "संक्षिप्त विवरण" : "Brief Details"}
                     </label>
                     <textarea
                       {...register("message")}
                       rows={3}
                       className="w-full bg-background border border-input rounded p-2 text-sm focus:outline-none focus:ring-1 focus:ring-secondary text-foreground resize-none"
-                      placeholder={language === "en" ? "Please outline the issue..." : language === "ta" ? "விவரங்களை இங்கே எழுதவும்..." : "कृपया समस्या की रूपरेखा दें..."}
+                      placeholder={language === "ta" ? "விவரங்களை இங்கே எழுதவும்..." : language === "hi" ? "कृपया समस्या की रूपरेखा दें..." : "Please outline the issue..."}
                     />
                     {errors.message && <p className="text-[10px] text-red-600 mt-1">{errors.message.message}</p>}
                   </div>
@@ -651,10 +643,10 @@ export default function PracticeAreaDetail() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        {language === "en" ? "Submitting..." : language === "ta" ? "சமர்ப்பிக்கப்படுகிறது..." : "जमा किया जा रहा है..."}
+                        {language === "ta" ? "சமர்ப்பிக்கப்படுகிறது..." : language === "hi" ? "जमा किया जा रहा है..." : "Submitting..."}
                       </>
                     ) : (
-                      language === "en" ? "Submit Request" : language === "ta" ? "விண்ணப்பிக்கவும்" : "अनुरोध सबमिट करें"
+                      language === "ta" ? "விண்ணப்பிக்கவும்" : language === "hi" ? "अनुरोध सबमिट करें" : "Submit Request"
                     )}
                   </Button>
                 </form>

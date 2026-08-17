@@ -42,18 +42,10 @@ export default function AdminConsultationsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-          {language === "en" 
-            ? "Consultation & Contact Requests" 
-            : language === "ta" 
-            ? "ஆலோசனை & தொடர்பு கோரிக்கைகள்" 
-            : "परामर्श और संपर्क अनुरोध"}
+          {language === "ta" ? "ஆலோசனை & தொடர்பு கோரிக்கைகள்" : language === "hi" ? "परामर्श और संपर्क अनुरोध" : "Consultation & Contact Requests"}
         </h1>
         <p className="text-sm text-gray-500 mt-1">
-          {language === "en" 
-            ? "Review and manage consultation inquiries submitted by the public." 
-            : language === "ta"
-            ? "பொதுமக்கள் சமர்ப்பித்த ஆலோசனை கோரிக்கைகளை மதிப்பாய்வு செய்து நிர்வகிக்கவும்."
-            : "जनता द्वारा प्रस्तुत परामर्श पूछताछ की समीक्षा और प्रबंधन करें।"}
+          {language === "ta" ? "பொதுமக்கள் சமர்ப்பித்த ஆலோசனை கோரிக்கைகளை மதிப்பாய்வு செய்து நிர்வகிக்கவும்." : language === "hi" ? "जनता द्वारा प्रस्तुत परामर्श पूछताछ की समीक्षा और प्रबंधन करें।" : "Review and manage consultation inquiries submitted by the public."}
         </p>
       </div>
 
@@ -61,7 +53,7 @@ export default function AdminConsultationsPage() {
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
           <h2 className="font-semibold text-gray-900 text-lg flex items-center gap-2">
             <MessageSquare className="h-5 w-5 text-primary" />{" "}
-            {language === "en" ? "Incoming Inquiries" : language === "ta" ? "வந்தடைந்த கோரிக்கைகள்" : "आने वाली पूछताछ"} ({requests.length})
+            {language === "ta" ? "வந்தடைந்த கோரிக்கைகள்" : language === "hi" ? "आने वाली पूछताछ" : "Incoming Inquiries"} ({requests.length})
           </h2>
         </div>
 
@@ -81,10 +73,10 @@ export default function AdminConsultationsPage() {
                       "bg-green-100 text-green-800"
                     }`}>
                       {req.status === "PENDING" 
-                        ? (language === "en" ? "PENDING" : language === "ta" ? "நிலுவையில் உள்ளது" : "लंबित") 
+                        ? (language === "ta" ? "நிலுவையில் உள்ளது" : language === "hi" ? "लंबित" : "PENDING") 
                         : req.status === "CONFIRMED" 
-                        ? (language === "en" ? "CONFIRMED" : language === "ta" ? "உறுதிப்படுத்தப்பட்டது" : "पुष्टि की गई") 
-                        : (language === "en" ? "COMPLETED" : language === "ta" ? "நிறைவடைந்தது" : "पूरा हुआ")}
+                        ? (language === "ta" ? "உறுதிப்படுத்தப்பட்டது" : language === "hi" ? "पुष्टि की गई" : "CONFIRMED") 
+                        : (language === "ta" ? "நிறைவடைந்தது" : language === "hi" ? "पूरा हुआ" : "COMPLETED")}
                     </span>
                   </div>
 
@@ -97,7 +89,7 @@ export default function AdminConsultationsPage() {
                     </span>
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3.5 w-3.5" /> 
-                      {language === "en" ? "Received:" : language === "ta" ? "பெறப்பட்டது:" : "प्राप्त हुआ:"} {req.date}
+                      {language === "ta" ? "பெறப்பட்டது:" : language === "hi" ? "प्राप्त हुआ:" : "Received:"} {req.date}
                     </span>
                   </div>
 
@@ -108,10 +100,10 @@ export default function AdminConsultationsPage() {
 
                 <div className="flex items-center gap-2">
                   <a href={`mailto:${req.email}`} className="px-4 py-2 text-xs font-semibold rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors">
-                    {language === "en" ? "Reply Email" : language === "ta" ? "மின்னஞ்சல் மூலம் பதில்" : "ईमेल द्वारा उत्तर दें"}
+                    {language === "ta" ? "மின்னஞ்சல் மூலம் பதில்" : language === "hi" ? "ईमेल द्वारा उत्तर दें" : "Reply Email"}
                   </a>
                   <a href={`tel:${req.phone}`} className="px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors">
-                    {language === "en" ? "Call Client" : language === "ta" ? "வாடிக்கையாளரை அழைக்க" : "क्लाइंट को कॉल करें"}
+                    {language === "ta" ? "வாடிக்கையாளரை அழைக்க" : language === "hi" ? "क्लाइंट को कॉल करें" : "Call Client"}
                   </a>
                 </div>
               </div>

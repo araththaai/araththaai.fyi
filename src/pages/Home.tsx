@@ -10,15 +10,15 @@ export default function Home() {
   const spotlightPartners = [
     { 
       name: "Aseema Khaudhar", 
-      role: language === "en" ? "Founder & Senior Partner" : language === "ta" ? "நிறுவனர் & மூத்த பங்குதாரர்" : "संस्थापक और वरिष्ठ भागीदार", 
-      area: language === "en" ? "Tax & Civil Law" : language === "ta" ? "வரி & சிவில் சட்டம்" : "कर और नागरिक कानून", 
+      role: language === "ta" ? "நிறுவனர் & மூத்த பங்குதாரர்" : language === "hi" ? "संस्थापक और वरिष्ठ भागीदार" : "Founder & Senior Partner", 
+      area: language === "ta" ? "வரி & சிவில் சட்டம்" : language === "hi" ? "कर और नागरिक कानून" : "Tax & Civil Law", 
       initials: "AK", 
       slug: "aseema-khaudhar" 
     },
     { 
       name: "Mohammad Muzammil", 
-      role: language === "en" ? "Managing Partner & Criminal Lawyer" : language === "ta" ? "நிர்வாக பங்குதாரர் & குற்றவியல் வழக்கறிஞர்" : "प्रबंध भागीदार और आपराधिक वकील", 
-      area: language === "en" ? "Criminal Trial Defence" : language === "ta" ? "குற்றவியல் வழக்கு விசாரணை தற்காப்பு" : "आपराधिक मामला बचाव", 
+      role: language === "ta" ? "நிர்வாக பங்குதாரர் & குற்றவியல் வழக்கறிஞர்" : language === "hi" ? "प्रबंध भागीदार और आपराधिक वकील" : "Managing Partner & Criminal Lawyer", 
+      area: language === "ta" ? "குற்றவியல் வழக்கு விசாரணை தற்காப்பு" : language === "hi" ? "आपराधिक मामला बचाव" : "Criminal Trial Defence", 
       initials: "MM", 
       slug: "mohammad-muzammil" 
     }
@@ -26,54 +26,42 @@ export default function Home() {
 
   const quickPracticeAreas = [
     { 
-      title: language === "en" ? "Corporate & Commercial" : language === "ta" ? "கார்ப்பரேட் & வணிகம்" : "कॉर्पोरेट और व्यावसायिक", 
+      title: language === "ta" ? "கார்ப்பரேட் & வணிகம்" : language === "hi" ? "कॉर्पोरेट और व्यावसायिक" : "Corporate & Commercial", 
       slug: "corporate-law", 
-      desc: language === "en" ? "Advisory, contracts, and business structuring." : language === "ta" ? "ஆலொசனை, ஒப்பந்தங்கள் மற்றும் வணிக கட்டமைப்பு." : "सलाहकार, अनुबंध, और व्यावसायिक संरचना।" 
+      desc: language === "ta" ? "ஆலொசனை, ஒப்பந்தங்கள் மற்றும் வணிக கட்டமைப்பு." : language === "hi" ? "सलाहकार, अनुबंध, और व्यावसायिक संरचना।" : "Advisory, contracts, and business structuring." 
     },
     { 
-      title: language === "en" ? "Civil & Property Matters" : language === "ta" ? "சிவில் & சொத்து விவகாரங்கள்" : "सिविल और संपत्ति मामले", 
+      title: language === "ta" ? "சிவில் & சொத்து விவகாரங்கள்" : language === "hi" ? "सिविल और संपत्ति मामले" : "Civil & Property Matters", 
       slug: "property-law", 
-      desc: language === "en" ? "Property disputes, title deeds, and partition." : language === "ta" ? "சொத்து தகராறுகள், உரிமைப் பத்திரங்கள் மற்றும் பாகப்பிரிவினை." : "संपत्ति विवाद, शीर्षक विलेख, और विभाजन।" 
+      desc: language === "ta" ? "சொத்து தகராறுகள், உரிமைப் பத்திரங்கள் மற்றும் பாகப்பிரிவினை." : language === "hi" ? "संपत्ति विवाद, शीर्षक विलेख, और विभाजन।" : "Property disputes, title deeds, and partition." 
     },
     { 
-      title: language === "en" ? "Trial Defence & Litigation" : language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" : "मुकदमा और आपराधिक बचाव", 
+      title: language === "ta" ? "வழக்கு விசாரணை & தற்காப்பு" : language === "hi" ? "मुकदमा और आपराधिक बचाव" : "Trial Defence & Litigation", 
       slug: "criminal-defense", 
-      desc: language === "en" ? "Strong advocacy before Trial and High Courts." : language === "ta" ? "விசாரணை மற்றும் உயர் நீதிமன்றங்களில் வலுவான பிரதிநிதித்துவம்." : "ट्रायल और उच्च न्यायालयों के समक्ष मजबूत वकालत।" 
+      desc: language === "ta" ? "விசாரணை மற்றும் உயர் நீதிமன்றங்களில் வலுவான பிரதிநிதித்துவம்." : language === "hi" ? "ट्रायल और उच्च न्यायालयों के समक्ष मजबूत वकालत।" : "Strong advocacy before Trial and High Courts." 
     },
     { 
-      title: language === "en" ? "Taxation & GST" : language === "ta" ? "வரிவிதிப்பு & ஜிஎஸ்டி" : "कराधान और जीएसटी", 
+      title: language === "ta" ? "வரிவிதிப்பு & ஜிஎஸ்டி" : language === "hi" ? "कराधान और जीएसटी" : "Taxation & GST", 
       slug: "tax-law", 
-      desc: language === "en" ? "Advisory relating to GST, assessments, and appeals." : language === "ta" ? "ஜிஎஸ்டி, வரி மதிப்பீடுகள் மற்றும் மேல்முறையீடுகள்." : "जीएसटी, कर निर्धारण और अपीलों से संबंधित सलाह।" 
+      desc: language === "ta" ? "ஜிஎஸ்டி, வரி மதிப்பீடுகள் மற்றும் மேல்முறையீடுகள்." : language === "hi" ? "जीएसटी, कर निर्धारण और अपीलों से संबंधित सलाह।" : "Advisory relating to GST, assessments, and appeals." 
     }
   ];
 
   const testimonials = [
     { 
-      quote: language === "en" 
-        ? "Their strategic support in our corporate restructuring saved our subsidiary network millions in compliance friction."
-        : language === "ta"
-        ? "எங்கள் கார்ப்பரேட் மறுசீரமைப்பில் அவர்களின் மூலோபாய ஆதரவு எங்கள் துணை நிறுவனங்களுக்கு இணக்கச் செலவில் லட்சக்கணக்கான ரூபாய்களைச் சேமித்தது."
-        : "कॉर्पोरेट पुनर्गठन में उनके रणनीतिक समर्थन ने हमारी सहायक कंपनी के नेटवर्क को अनुपालन लागतों में लाखों की बचत कराई।",
-      author: language === "en" ? "Chairman" : language === "ta" ? "தலைவர்" : "अध्यक्ष", 
-      company: language === "en" ? "Logistics Conglomerate" : language === "ta" ? "லாஜிஸ்டிக்ஸ் நிறுவனம்" : "लॉजिस्टिक्स समूह" 
+      quote: language === "ta" ? "எங்கள் கார்ப்பரேட் மறுசீரமைப்பில் அவர்களின் மூலோபாய ஆதரவு எங்கள் துணை நிறுவனங்களுக்கு இணக்கச் செலவில் லட்சக்கணக்கான ரூபாய்களைச் சேமித்தது." : language === "hi" ? "कॉर्पोरेट पुनर्गठन में उनके रणनीतिक समर्थन ने हमारी सहायक कंपनी के नेटवर्क को अनुपालन लागतों में लाखों की बचत कराई।" : "Their strategic support in our corporate restructuring saved our subsidiary network millions in compliance friction.",
+      author: language === "ta" ? "தலைவர்" : language === "hi" ? "अध्यक्ष" : "Chairman", 
+      company: language === "ta" ? "லாஜிஸ்டிக்ஸ் நிறுவனம்" : language === "hi" ? "लॉजिस्टिक्स समूह" : "Logistics Conglomerate" 
     },
     { 
-      quote: language === "en" 
-        ? "Facing economic offense allegations was stressful, but Muzammil secured immediate protection. The case was resolved in record time."
-        : language === "ta"
-        ? "பொருளாதார குற்றச்சாட்டுகளை எதிர்கொள்வது மன அழுத்தமாக இருந்தது, ஆனால் முஸம்மில் உடனடிப் பாதுகாப்பைப் பெற்றுத் தந்தார். வழக்கு மிகக் குறுகிய காலத்தில் தீர்க்கப்பட்டது."
-        : "आर्थिक अपराध के आरोपों का सामना करना तनावपूर्ण था, लेकिन मुज़म्मिल ने तुरंत सुरक्षा हासिल की। मामला रिकॉर्ड समय में सुलझ गया।",
-      author: language === "en" ? "Chief Executive Officer" : language === "ta" ? "தலைமை நிர்வாக அதிகாரி" : "मुख्य कार्यकारी अधिकारी", 
-      company: language === "en" ? "FinTech Enterprise" : language === "ta" ? "ஃபின்டெக் நிறுவனம்" : "फिनटेक उद्यम" 
+      quote: language === "ta" ? "பொருளாதார குற்றச்சாட்டுகளை எதிர்கொள்வது மன அழுத்தமாக இருந்தது, ஆனால் முஸம்மில் உடனடிப் பாதுகாப்பைப் பெற்றுத் தந்தார். வழக்கு மிகக் குறுகிய காலத்தில் தீர்க்கப்பட்டது." : language === "hi" ? "आर्थिक अपराध के आरोपों का सामना करना तनावपूर्ण था, लेकिन मुज़म्मिल ने तुरंत सुरक्षा हासिल की। मामला रिकॉर्ड समय में सुलझ गया।" : "Facing economic offense allegations was stressful, but Muzammil secured immediate protection. The case was resolved in record time.",
+      author: language === "ta" ? "தலைமை நிர்வாக அதிகாரி" : language === "hi" ? "मुख्य कार्यकारी अधिकारी" : "Chief Executive Officer", 
+      company: language === "ta" ? "ஃபின்டெக் நிறுவனம்" : language === "hi" ? "फिनटेक उद्यम" : "FinTech Enterprise" 
     },
     { 
-      quote: language === "en" 
-        ? "We recovered temple trust estates that had been unlawfully encroached for 15 years. Their knowledge of temple law is unmatched."
-        : language === "ta"
-        ? "15 ஆண்டுகளாக சட்டவிரோதமாக ஆக்கிரமிக்கப்பட்டிருந்த கோவில் அறக்கட்டளை நிலங்களை மீட்டெடுத்தோம். அறநிலையத்துறை சட்டத்தில் அவர்களின் அறிவு இணையற்றது."
-        : "हमने मंदिर ट्रस्ट की संपत्तियों को वापस पा लिया जिन पर 15 वर्षों से अवैध कब्जा था। मंदिर कानून की उनकी जानकारी बेजोड़ है।",
-      author: language === "en" ? "Hereditary Trustee" : language === "ta" ? "பரம்பரை அறங்காவலர்" : "पारंपरिक ट्रस्टी", 
-      company: language === "en" ? "Religious Endowment Board" : language === "ta" ? "அறநிலையத்துறை வாரியம்" : "धार्मिक बंदोबस्ती बोर्ड" 
+      quote: language === "ta" ? "15 ஆண்டுகளாக சட்டவிரோதமாக ஆக்கிரமிக்கப்பட்டிருந்த கோவில் அறக்கட்டளை நிலங்களை மீட்டெடுத்தோம். அறநிலையத்துறை சட்டத்தில் அவர்களின் அறிவு இணையற்றது." : language === "hi" ? "हमने मंदिर ट्रस्ट की संपत्तियों को वापस पा लिया जिन पर 15 वर्षों से अवैध कब्जा था। मंदिर कानून की उनकी जानकारी बेजोड़ है।" : "We recovered temple trust estates that had been unlawfully encroached for 15 years. Their knowledge of temple law is unmatched.",
+      author: language === "ta" ? "பரம்பரை அறங்காவலர்" : language === "hi" ? "पारंपरिक ट्रस्टी" : "Hereditary Trustee", 
+      company: language === "ta" ? "அறநிலையத்துறை வாரியம்" : language === "hi" ? "धार्मिक बंदोबस्ती बोर्ड" : "Religious Endowment Board" 
     }
   ];
 
@@ -196,24 +184,24 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {[
               { 
-                title: language === "en" ? "Corporate & Commercial Matters" : language === "ta" ? "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்" : "कॉर्पोरेट और व्यावसायिक मामले", 
+                title: language === "ta" ? "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்" : language === "hi" ? "कॉर्पोरेट और व्यावसायिक मामले" : "Corporate & Commercial Matters", 
                 slug: "corporate-law", 
-                desc: language === "en" ? "Advisory, contracts, agreements, business structuring, and compliance reviews." : language === "ta" ? "கார்ப்பரேட் ஆலோசனை, வணிக ஒப்பந்தங்கள், வணிக கட்டமைப்பு மற்றும் இணக்க ஆலோசனைகள்." : "कॉर्पोरेट सलाह, व्यावसायिक अनुबंध, व्यावसायिक संरचना और अनुपालन समीक्षा।"
+                desc: language === "ta" ? "கார்ப்பரேட் ஆலோசனை, வணிக ஒப்பந்தங்கள், வணிக கட்டமைப்பு மற்றும் இணக்க ஆலோசனைகள்." : language === "hi" ? "कॉर्पोरेट सलाह, व्यावसायिक अनुबंध, व्यावसायिक संरचना और अनुपालन समीक्षा।" : "Advisory, contracts, agreements, business structuring, and compliance reviews."
               },
               { 
-                title: language === "en" ? "Civil Disputes & Property Matters" : language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" : "सिविल विवाद और संपत्ति मामले", 
+                title: language === "ta" ? "சிவில் மற்றும் சொத்து விவகாரங்கள்" : language === "hi" ? "सिविल विवाद और संपत्ति मामले" : "Civil Disputes & Property Matters", 
                 slug: "property-law", 
-                desc: language === "en" ? "Land possession disputes, title verifications, partition, and civil litigation." : language === "ta" ? "நில உரிமைத் தகராறுகள், பத்திர சரிபார்ப்புகள், பாகப்பிரிவினை மற்றும் சிவில் வழக்குகள்." : "भूमि स्वामित्व विवाद, शीर्षक सत्यापन, विभाजन और दीवानी मुकदमेबाजी।"
+                desc: language === "ta" ? "நில உரிமைத் தகராறுகள், பத்திர சரிபார்ப்புகள், பாகப்பிரிவினை மற்றும் சிவில் வழக்குகள்." : language === "hi" ? "भूमि स्वामित्व विवाद, शीर्षक सत्यापन, विभाजन और दीवानी मुकदमेबाजी।" : "Land possession disputes, title verifications, partition, and civil litigation."
               },
               { 
-                title: language === "en" ? "HR & CE Cases" : language === "ta" ? "HR & CE வழக்குகள் (அறநிலையத்துறை)" : "देवस्थानम मामले (HR & CE)", 
+                title: language === "ta" ? "HR & CE வழக்குகள் (அறநிலையத்துறை)" : language === "hi" ? "देवस्थानम मामले (HR & CE)" : "HR & CE Cases", 
                 slug: "hr-ce", 
-                desc: language === "en" ? "Temple properties, encroachment clearances, Section 78/79, and writ proceedings." : language === "ta" ? "கோவில் சொத்துக்கள், ஆக்கிரமிப்பு அகற்றுதல், பிரிவு 78/79 மற்றும் ரிட் வழக்குகள்." : "मंदिर की संपत्ति, अतिक्रमण हटाना, धारा 78/79 और रिट याचिकाएं।"
+                desc: language === "ta" ? "கோவில் சொத்துக்கள், ஆக்கிரமிப்பு அகற்றுதல், பிரிவு 78/79 மற்றும் ரிட் வழக்குகள்." : language === "hi" ? "मंदिर की संपत्ति, अतिक्रमण हटाना, धारा 78/79 और रिट याचिकाएं।" : "Temple properties, encroachment clearances, Section 78/79, and writ proceedings."
               },
               { 
-                title: language === "en" ? "Trial Defence & Litigation" : language === "ta" ? "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்" : "मुकदमा और आपराधिक बचाव", 
+                title: language === "ta" ? "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்" : language === "hi" ? "मुकदमा और आपराधिक बचाव" : "Trial Defence & Litigation", 
                 slug: "criminal-defense", 
-                desc: language === "en" ? "Strong advocacy before Trial Courts, District Courts, High Court, and regulatory tribunals." : language === "ta" ? "விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள், உயர் நீதிமன்றம் ஆகியவற்றில் வலுவான தற்காப்பு வாதம்." : "ट्रायल कोर्ट, जिला अदालत और उच्च न्यायालय में मजबूत आपराधिक बचाव।"
+                desc: language === "ta" ? "விசாரணை நீதிமன்றங்கள், மாவட்ட நீதிமன்றங்கள், உயர் நீதிமன்றம் ஆகியவற்றில் வலுவான தற்காப்பு வாதம்." : language === "hi" ? "ट्रायल कोर्ट, जिला अदालत और उच्च न्यायालय में मजबूत आपराधिक बचाव।" : "Strong advocacy before Trial Courts, District Courts, High Court, and regulatory tribunals."
               }
             ].map((area, idx) => (
               <div key={idx} className="bg-card p-8 rounded-xl shadow-sm border border-border hover:shadow-lg transition-all flex flex-col justify-between group">
@@ -227,7 +215,7 @@ export default function Home() {
                   to={`/practice-areas/${area.slug}`}
                   className="text-secondary font-bold text-xs uppercase tracking-wider inline-flex items-center gap-1.5 mt-auto group/link"
                 >
-                  {language === "en" ? "Consult Details" : language === "ta" ? "விவரம் காண்க" : "विवरण देखें"}{" "}
+                  {language === "ta" ? "விவரம் காண்க" : language === "hi" ? "विवरण देखें" : "Consult Details"}{" "}
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
                 </Link>
               </div>
@@ -269,7 +257,7 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-primary mb-1 font-heading group-hover:text-secondary transition-colors">{partner.name}</h3>
                     <p className="text-muted-foreground text-xs flex items-center gap-1.5 mb-6">
                       <Award className="h-4 w-4 text-secondary" /> 
-                      {language === "en" ? "Specialty:" : language === "ta" ? "சட்டப்பிரிவு:" : "विशेषता:"} {partner.area}
+                      {language === "ta" ? "சட்டப்பிரிவு:" : language === "hi" ? "विशेषता:" : "Specialty:"} {partner.area}
                     </p>
                   </div>
                   <Link to={`/attorneys/${partner.slug}`} className="block w-full">
@@ -303,11 +291,7 @@ export default function Home() {
             </span>
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary">{t("home.testimonials.title")}</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-base">
-              {language === "en" 
-                ? "Explore outcomes accomplished for our clients across various jurisdictions." 
-                : language === "ta" 
-                ? "பல்வேறு சட்ட வரம்புகளில் எங்கள் வாடிக்கையாளர்களுக்காக சாதிக்கப்பட்ட வழக்கு முடிவுகளை அறியவும்." 
-                : "विभिन्न कानूनी क्षेत्रों में हमारे मुवक्किलों के लिए हासिल किए गए परिणामों को देखें।"}
+              {language === "ta" ? "பல்வேறு சட்ட வரம்புகளில் எங்கள் வாடிக்கையாளர்களுக்காக சாதிக்கப்பட்ட வழக்கு முடிவுகளை அறியவும்." : language === "hi" ? "विभिन्न कानूनी क्षेत्रों में हमारे मुवक्किलों के लिए हासिल किए गए परिणामों को देखें।" : "Explore outcomes accomplished for our clients across various jurisdictions."}
             </p>
           </div>
 
@@ -337,7 +321,7 @@ export default function Home() {
           <div className="text-center pt-8 max-w-2xl mx-auto flex items-center gap-3 bg-card border border-border p-4 rounded-lg">
             <AlertCircle className="h-5 w-5 text-secondary shrink-0" />
             <p className="text-[10px] text-muted-foreground text-left leading-relaxed">
-              <strong>{language === "en" ? "Advertising Notice:" : language === "ta" ? "விளம்பர அறிவிப்பு:" : "विज्ञापन सूचना:"}</strong> {t("footer.disclaimerText")}
+              <strong>{language === "ta" ? "விளம்பர அறிவிப்பு:" : language === "hi" ? "विज्ञापन सूचना:" : "Advertising Notice:"}</strong> {t("footer.disclaimerText")}
             </p>
           </div>
 

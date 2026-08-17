@@ -75,7 +75,7 @@ export default function Attorneys() {
   const { language, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRole, setSelectedRole] = useState(
-    language === "en" ? "All" : language === "ta" ? "அனைத்தும்" : "सभी"
+    language === "ta" ? "அனைத்தும்" : language === "hi" ? "सभी" : "All"
   );
 
   const roles = language === "en" 
@@ -86,7 +86,7 @@ export default function Attorneys() {
 
   const filteredAttorneys = attorneysList.filter((attorney) => {
     const nameText = attorney.name.toLowerCase();
-    const activePractice = language === "en" ? attorney.practice.en : language === "ta" ? attorney.practice.ta : attorney.practice.hi;
+    const activePractice = language === "ta" ? attorney.practice.ta : language === "hi" ? attorney.practice.hi : attorney.practice.en;
     const practiceText = activePractice.toLowerCase();
     
     const matchesSearch = nameText.includes(searchTerm.toLowerCase()) || 
@@ -114,14 +114,10 @@ export default function Attorneys() {
             {t("nav.associates")}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "Meet Our Attorneys" : language === "ta" ? "எங்கள் வழக்கறிஞர்களைச் சந்திக்கவும்" : "हमारे वकीलों से मिलें"}
+            {language === "ta" ? "எங்கள் வழக்கறிஞர்களைச் சந்திக்கவும்" : language === "hi" ? "हमारे वकीलों से मिलें" : "Meet Our Attorneys"}
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
-            {language === "en"
-              ? "A premier team of legal minds combining local jurisprudential authority with client-centric integrity."
-              : language === "ta"
-              ? "உள்நாட்டு சட்ட அதிகாரம் மற்றும் வாடிக்கையாளர் நலன் சார்ந்த நேர்மையைக் கொண்ட முதன்மையான வழக்கறிஞர் குழு."
-              : "स्थानीय विधिक प्राधिकार और क्लाइंट-केंद्रित सत्यनिष्ठा को संयोजित करने वाली वकीलों की एक प्रमुख टीम।"}
+            {language === "ta" ? "உள்நாட்டு சட்ட அதிகாரம் மற்றும் வாடிக்கையாளர் நலன் சார்ந்த நேர்மையைக் கொண்ட முதன்மையான வழக்கறிஞர் குழு." : language === "hi" ? "स्थानीय विधिक प्राधिकार और क्लाइंट-केंद्रित सत्यनिष्ठा को संयोजित करने वाली वकीलों की एक प्रमुख टीम।" : "A premier team of legal minds combining local jurisprudential authority with client-centric integrity."}
           </p>
         </div>
 
@@ -149,7 +145,7 @@ export default function Attorneys() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder={language === "en" ? "Search attorney name..." : language === "ta" ? "வழக்கறிஞர் பெயரைத் தேடுக..." : "वकील का नाम खोजें..."}
+              placeholder={language === "ta" ? "வழக்கறிஞர் பெயரைத் தேடுக..." : language === "hi" ? "वकील का नाम खोजें..." : "Search attorney name..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground"
@@ -161,11 +157,11 @@ export default function Attorneys() {
         {filteredAttorneys.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center max-w-4xl mx-auto">
             {filteredAttorneys.map((attorney, i) => {
-              const roleName = language === "en" ? attorney.role.en : language === "ta" ? attorney.role.ta : attorney.role.hi;
-              const practiceName = language === "en" ? attorney.practice.en : language === "ta" ? attorney.practice.ta : attorney.practice.hi;
-              const bioText = language === "en" ? attorney.bio.en : language === "ta" ? attorney.bio.ta : attorney.bio.hi;
-              const educationText = language === "en" ? attorney.education.en : language === "ta" ? attorney.education.ta : attorney.education.hi;
-              const admissionsText = language === "en" ? attorney.admissions.en : language === "ta" ? attorney.admissions.ta : attorney.admissions.hi;
+              const roleName = language === "ta" ? attorney.role.ta : language === "hi" ? attorney.role.hi : attorney.role.en;
+              const practiceName = language === "ta" ? attorney.practice.ta : language === "hi" ? attorney.practice.hi : attorney.practice.en;
+              const bioText = language === "ta" ? attorney.bio.ta : language === "hi" ? attorney.bio.hi : attorney.bio.en;
+              const educationText = language === "ta" ? attorney.education.ta : language === "hi" ? attorney.education.hi : attorney.education.en;
+              const admissionsText = language === "ta" ? attorney.admissions.ta : language === "hi" ? attorney.admissions.hi : attorney.admissions.en;
               
               return (
                 <div key={i} className="bg-card rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all group flex flex-col">
@@ -205,7 +201,7 @@ export default function Attorneys() {
 
                       <Link to={`/attorneys/${attorney.slug}`} className="block pt-2">
                         <button className="w-full bg-primary hover:bg-primary/95 text-white py-2 rounded font-semibold text-sm transition-all flex items-center justify-center gap-1 cursor-pointer border-none">
-                          {language === "en" ? "View Complete Profile" : language === "ta" ? "முழு விவரம் காண்க" : "पूरी प्रोफ़ाइल देखें"} <ArrowRight className="h-4 w-4" />
+                          {language === "ta" ? "முழு விவரம் காண்க" : language === "hi" ? "पूरी प्रोफ़ाइल देखें" : "View Complete Profile"} <ArrowRight className="h-4 w-4" />
                         </button>
                       </Link>
                     </div>
@@ -217,13 +213,13 @@ export default function Attorneys() {
         ) : (
           <div className="text-center py-20 bg-card border border-dashed border-border rounded-2xl">
             <p className="text-muted-foreground text-lg mb-4">
-              {language === "en" ? "No attorneys match your query." : language === "ta" ? "உங்கள் தேடலுடன் பொருந்தும் வழக்கறிஞர்கள் யாரும் இல்லை." : "आपकी खोज से मेल खाने वाला कोई वकील नहीं मिला।"}
+              {language === "ta" ? "உங்கள் தேடலுடன் பொருந்தும் வழக்கறிஞர்கள் யாரும் இல்லை." : language === "hi" ? "आपकी खोज से मेल खाने वाला कोई वकील नहीं मिला।" : "No attorneys match your query."}
             </p>
             <button 
-              onClick={() => { setSearchTerm(""); setSelectedRole(language === "en" ? "All" : language === "ta" ? "அனைத்தும்" : "सभी"); }}
+              onClick={() => { setSearchTerm(""); setSelectedRole(language === "ta" ? "அனைத்தும்" : language === "hi" ? "सभी" : "All"); }}
               className="text-secondary hover:text-primary font-bold transition-colors bg-transparent border-none cursor-pointer"
             >
-              {language === "en" ? "Reset Filters" : language === "ta" ? "வடிப்பான்களை நீக்கவும்" : "फ़िल्टर रीसेट करें"}
+              {language === "ta" ? "வடிப்பான்களை நீக்கவும்" : language === "hi" ? "फ़िल्टर रीसेट करें" : "Reset Filters"}
             </button>
           </div>
         )}

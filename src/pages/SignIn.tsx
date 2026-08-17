@@ -38,14 +38,10 @@ export default function SignInPage() {
       <div className="w-full max-w-md flex flex-col items-center">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-heading font-bold text-primary mb-2">
-            {language === "en" ? "Admin Portal" : language === "ta" ? "நிர்வாகி போர்டல்" : "प्रशासक पोर्टल"}
+            {language === "ta" ? "நிர்வாகி போர்டல்" : language === "hi" ? "प्रशासक पोर्टल" : "Admin Portal"}
           </h1>
           <p className="text-muted-foreground text-sm">
-            {language === "en"
-              ? "Sign in to manage firm consultations, cases, and settings."
-              : language === "ta"
-              ? "நிறுவனத்தின் ஆலோசனைகள், வழக்குகள் மற்றும் அமைப்புகளை நிர்வகிக்க உள்நுழையவும்."
-              : "फर्म के परामर्श, मामलों और सेटिंग्स को प्रबंधित करने के लिए साइन इन करें।"}
+            {language === "ta" ? "நிறுவனத்தின் ஆலோசனைகள், வழக்குகள் மற்றும் அமைப்புகளை நிர்வகிக்க உள்நுழையவும்." : language === "hi" ? "फर्म के परामर्श, मामलों और सेटिंग्स को प्रबंधित करने के लिए साइन इन करें।" : "Sign in to manage firm consultations, cases, and settings."}
           </p>
         </div>
         
@@ -53,7 +49,7 @@ export default function SignInPage() {
           {error && <div className="text-red-500 text-sm mb-4 text-center">{error}</div>}
           <div className="mb-4">
             <label className="block text-foreground font-medium mb-2 text-sm">
-              {language === "en" ? "Email" : language === "ta" ? "மின்னஞ்சல்" : "ईमेल"}
+              {language === "ta" ? "மின்னஞ்சல்" : language === "hi" ? "ईमेल" : "Email"}
             </label>
             <input 
               type="email" 
@@ -65,7 +61,7 @@ export default function SignInPage() {
           </div>
           <div className="mb-6">
             <label className="block text-foreground font-medium mb-2 text-sm">
-              {language === "en" ? "Password" : language === "ta" ? "கடவுச்சொல்" : "पासवर्ड"}
+              {language === "ta" ? "கடவுச்சொல்" : language === "hi" ? "पासवर्ड" : "Password"}
             </label>
             <input 
               type="password" 
@@ -81,8 +77,8 @@ export default function SignInPage() {
             className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 cursor-pointer border-none"
           >
             {loading 
-              ? (language === "en" ? "Signing in..." : language === "ta" ? "உள்நுழைகிறது..." : "साइन इन किया जा रहा है...") 
-              : (language === "en" ? "Sign In to Admin" : language === "ta" ? "நிர்வாகியாக உள்நுழைக" : "एडमिन में साइन इन करें")}
+              ? (language === "ta" ? "உள்நுழைகிறது..." : language === "hi" ? "साइन इन किया जा रहा है..." : "Signing in...") 
+              : (language === "ta" ? "நிர்வாகியாக உள்நுழைக" : language === "hi" ? "एडमिन में साइन इन करें" : "Sign In to Admin")}
           </Button>
         </form>
       </div>

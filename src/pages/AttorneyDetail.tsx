@@ -122,13 +122,13 @@ export default function AttorneyDetail() {
     return <Navigate to="/attorneys" replace />;
   }
 
-  const roleName = language === "en" ? attorney.role.en : language === "ta" ? attorney.role.ta : attorney.role.hi;
-  const practiceName = language === "en" ? attorney.practice.en : language === "ta" ? attorney.practice.ta : attorney.practice.hi;
-  const educationName = language === "en" ? attorney.education.en : language === "ta" ? attorney.education.ta : attorney.education.hi;
-  const admissionsName = language === "en" ? attorney.admissions.en : language === "ta" ? attorney.admissions.ta : attorney.admissions.hi;
-  const bioParagraphs = language === "en" ? details.bioParagraphs.en : language === "ta" ? details.bioParagraphs.ta : details.bioParagraphs.hi;
-  const notableCases = language === "en" ? details.notableCases.en : language === "ta" ? details.notableCases.ta : details.notableCases.hi;
-  const publications = language === "en" ? details.publications.en : language === "ta" ? details.publications.ta : details.publications.hi;
+  const roleName = language === "ta" ? attorney.role.ta : language === "hi" ? attorney.role.hi : attorney.role.en;
+  const practiceName = language === "ta" ? attorney.practice.ta : language === "hi" ? attorney.practice.hi : attorney.practice.en;
+  const educationName = language === "ta" ? attorney.education.ta : language === "hi" ? attorney.education.hi : attorney.education.en;
+  const admissionsName = language === "ta" ? attorney.admissions.ta : language === "hi" ? attorney.admissions.hi : attorney.admissions.en;
+  const bioParagraphs = language === "ta" ? details.bioParagraphs.ta : language === "hi" ? details.bioParagraphs.hi : details.bioParagraphs.en;
+  const notableCases = language === "ta" ? details.notableCases.ta : language === "hi" ? details.notableCases.hi : details.notableCases.en;
+  const publications = language === "ta" ? details.publications.ta : language === "hi" ? details.publications.hi : details.publications.en;
 
   return (
     <div className="py-24 bg-surface min-h-screen">
@@ -137,11 +137,7 @@ export default function AttorneyDetail() {
         {/* Back Link */}
         <Link to="/attorneys" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary mb-8 transition-colors">
           <ArrowLeft className="mr-2 h-4 w-4" /> 
-          {language === "en" 
-            ? "Back to Attorneys List" 
-            : language === "ta" 
-            ? "வழக்கறிஞர்கள் பட்டியலுக்குத் திரும்பவும்" 
-            : "वकीलों की सूची पर वापस जाएं"}
+          {language === "ta" ? "வழக்கறிஞர்கள் பட்டியலுக்குத் திரும்பவும்" : language === "hi" ? "वकीलों की सूची पर वापस जाएं" : "Back to Attorneys List"}
         </Link>
 
         {/* Profile Card */}
@@ -178,11 +174,11 @@ export default function AttorneyDetail() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <GraduationCap className="h-4 w-4 text-secondary shrink-0" />
-                    <span><strong>{language === "en" ? "Education:" : language === "ta" ? "கல்வி:" : "शिक्षा:"}</strong> {educationName}</span>
+                    <span><strong>{language === "ta" ? "கல்வி:" : language === "hi" ? "शिक्षा:" : "Education:"}</strong> {educationName}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Scale className="h-4 w-4 text-secondary shrink-0" />
-                    <span><strong>{language === "en" ? "Admissions:" : language === "ta" ? "அங்கீகாரம்:" : "स्वीकृति:"}</strong> {admissionsName}</span>
+                    <span><strong>{language === "ta" ? "அங்கீகாரம்:" : language === "hi" ? "स्वीकृति:" : "Admissions:"}</strong> {admissionsName}</span>
                   </div>
                   {attorney.whatsapp && (
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -205,11 +201,7 @@ export default function AttorneyDetail() {
                 <Link to="/book-consultation">
                   <Button className="bg-secondary text-primary hover:bg-secondary/90 font-bold h-12 px-6">
                     <Calendar className="mr-2 h-4 w-4" /> 
-                    {language === "en" 
-                      ? "Book Appointment" 
-                      : language === "ta" 
-                      ? "முன்பதிவு செய்ய" 
-                      : "अपॉइंटमेंट बुक करें"}
+                    {language === "ta" ? "முன்பதிவு செய்ய" : language === "hi" ? "अपॉइंटमेंट बुक करें" : "Book Appointment"}
                   </Button>
                 </Link>
               </div>
@@ -225,7 +217,7 @@ export default function AttorneyDetail() {
             <div className="flex items-center gap-3 mb-6">
               <Briefcase className="h-6 w-6 text-secondary shrink-0" />
               <h3 className="text-xl font-heading font-bold text-primary">
-                {language === "en" ? "Representative Matters" : language === "ta" ? "வழக்கு பிரதிநிதித்துவம்" : "प्रतिनिधि मामले"}
+                {language === "ta" ? "வழக்கு பிரதிநிதித்துவம்" : language === "hi" ? "प्रतिनिधि मामले" : "Representative Matters"}
               </h3>
             </div>
             <ul className="space-y-4">
@@ -243,7 +235,7 @@ export default function AttorneyDetail() {
             <div className="flex items-center gap-3 mb-6">
               <BookOpen className="h-6 w-6 text-secondary shrink-0" />
               <h3 className="text-xl font-heading font-bold text-primary">
-                {language === "en" ? "Publications & Articles" : language === "ta" ? "கட்டுரைகள் & வெளியீடுகள்" : "प्रकाशन और लेख"}
+                {language === "ta" ? "கட்டுரைகள் & வெளியீடுகள்" : language === "hi" ? "प्रकाशन और लेख" : "Publications & Articles"}
               </h3>
             </div>
             {publications && publications.length > 0 ? (
@@ -257,11 +249,7 @@ export default function AttorneyDetail() {
               </ul>
             ) : (
               <p className="text-sm text-muted-foreground italic">
-                {language === "en" 
-                  ? "No public publications recorded in compliance with bar guidelines." 
-                  : language === "ta"
-                  ? "விளம்பர வழிகாட்டுதல்களின்படி எந்த பொது வெளியீடுகளும் பதிவு செய்யப்படவில்லை."
-                  : "बार दिशानिर्देशों के अनुपालन में कोई सार्वजनिक प्रकाशन दर्ज नहीं है।"}
+                {language === "ta" ? "விளம்பர வழிகாட்டுதல்களின்படி எந்த பொது வெளியீடுகளும் பதிவு செய்யப்படவில்லை." : language === "hi" ? "बार दिशानिर्देशों के अनुपालन में कोई सार्वजनिक प्रकाशन दर्ज नहीं है।" : "No public publications recorded in compliance with bar guidelines."}
               </p>
             )}
           </div>

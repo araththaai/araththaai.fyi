@@ -174,17 +174,13 @@ export default function CaseResults() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block py-1 px-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20 text-sm font-semibold tracking-wider uppercase mb-4">
-            {language === "en" ? "Track Record" : language === "ta" ? "முந்தைய வழக்கு முடிவுகள்" : "पिछला रिकॉर्ड"}
+            {language === "ta" ? "முந்தைய வழக்கு முடிவுகள்" : language === "hi" ? "पिछला रिकॉर्ड" : "Track Record"}
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary mb-6">
-            {language === "en" ? "Case Results & Victories" : language === "ta" ? "வழக்கு முடிவுகள் & வெற்றிகள்" : "मामलों के परिणाम और सफलताएं"}
+            {language === "ta" ? "வழக்கு முடிவுகள் & வெற்றிகள்" : language === "hi" ? "मामलों के परिणाम और सफलताएं" : "Case Results & Victories"}
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg leading-relaxed">
-            {language === "en" 
-              ? "A review of legal outcomes accomplished for our clients. In compliance with professional standards, all client details have been anonymized."
-              : language === "ta"
-              ? "எங்கள் வாடிக்கையாளர்களுக்காக எட்டப்பட்ட சாதகமான வழக்கு முடிவுகள். தொழில்முறை நெறிமுறைகளின்படி, வாடிக்கையாளர் விவரங்கள் அநாமதேயமாக்கப்பட்டுள்ளன."
-              : "हमारे मुवक्किलों के लिए हासिल किए गए कानूनी परिणामों की समीक्षा। पेशेवर मानकों के अनुपालन में, सभी विवरणों को अज्ञात रखा गया है।"}
+            {language === "ta" ? "எங்கள் வாடிக்கையாளர்களுக்காக எட்டப்பட்ட சாதகமான வழக்கு முடிவுகள். தொழில்முறை நெறிமுறைகளின்படி, வாடிக்கையாளர் விவரங்கள் அநாமதேயமாக்கப்பட்டுள்ளன." : language === "hi" ? "हमारे मुवक्किलों के लिए हासिल किए गए कानूनी परिणामों की समीक्षा। पेशेवर मानकों के अनुपालन में, सभी विवरणों को अज्ञात रखा गया है।" : "A review of legal outcomes accomplished for our clients. In compliance with professional standards, all client details have been anonymized."}
           </p>
         </div>
 
@@ -193,14 +189,10 @@ export default function CaseResults() {
           <AlertCircle className="h-6 w-6 text-secondary shrink-0 mt-0.5" />
           <div className="text-sm text-primary">
             <h4 className="font-bold mb-1 font-heading">
-              {language === "en" ? "Regulatory Notice & Disclaimer" : language === "ta" ? "ஒழுங்குமுறை அறிவிப்பு & மறுப்புரை" : "नियामक सूचना और अस्वीकरण"}
+              {language === "ta" ? "ஒழுங்குமுறை அறிவிப்பு & மறுப்புரை" : language === "hi" ? "नियामक सूचना और अस्वीकरण" : "Regulatory Notice & Disclaimer"}
             </h4>
             <p className="text-muted-foreground leading-relaxed text-xs">
-              {language === "en"
-                ? "The cases presented below represent specific legal matters resolved by our partners. Prior results do not guarantee a similar outcome. Outcome values and factual details are subject to variation depending on the specifics of each representation."
-                : language === "ta"
-                ? "கீழே வழங்கப்பட்டுள்ள வழக்குகள் எங்கள் வழக்கறிஞர்களால் தீர்க்கப்பட்ட குறிப்பிட்ட சட்ட விவகாரங்களைப் பிரதிநிதித்துவப்படுத்துகின்றன. முந்தைய முடிவுகள் எதிர்காலத்தில் இதே போன்ற முடிவுகளுக்கு உத்தரவாதம் அளிக்காது."
-                : "नीचे प्रस्तुत मामले हमारे भागीदारों द्वारा हल किए गए विशिष्ट कानूनी मामलों का प्रतिनिधित्व करते हैं। पिछले परिणाम भविष्य के परिणामों की गारंटी नहीं देते हैं।"}
+              {language === "ta" ? "கீழே வழங்கப்பட்டுள்ள வழக்குகள் எங்கள் வழக்கறிஞர்களால் தீர்க்கப்பட்ட குறிப்பிட்ட சட்ட விவகாரங்களைப் பிரதிநிதித்துவப்படுத்துகின்றன. முந்தைய முடிவுகள் எதிர்காலத்தில் இதே போன்ற முடிவுகளுக்கு உத்தரவாதம் அளிக்காது." : language === "hi" ? "नीचे प्रस्तुत मामले हमारे भागीदारों द्वारा हल किए गए विशिष्ट कानूनी मामलों का प्रतिनिधित्व करते हैं। पिछले परिणाम भविष्य के परिणामों की गारंटी नहीं देते हैं।" : "The cases presented below represent specific legal matters resolved by our partners. Prior results do not guarantee a similar outcome. Outcome values and factual details are subject to variation depending on the specifics of each representation."}
             </p>
           </div>
         </div>
@@ -217,7 +209,7 @@ export default function CaseResults() {
                   : "bg-card hover:bg-muted text-muted-foreground border border-border"
               }`}
             >
-              {language === "en" ? f.en : language === "ta" ? f.ta : f.hi}
+              {language === "ta" ? f.ta : language === "hi" ? f.hi : f.en}
             </button>
           ))}
         </div>
@@ -227,12 +219,12 @@ export default function CaseResults() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {filteredCases.map((item, idx) => {
               const Icon = item.icon;
-              const outcomeText = language === "en" ? item.outcome.en : language === "ta" ? item.outcome.ta : item.outcome.hi;
-              const titleText = language === "en" ? item.title.en : language === "ta" ? item.title.ta : item.title.hi;
-              const summaryText = language === "en" ? item.summary.en : language === "ta" ? item.summary.ta : item.summary.hi;
-              const detailText = language === "en" ? item.detail.en : language === "ta" ? item.detail.ta : item.detail.hi;
+              const outcomeText = language === "ta" ? item.outcome.ta : language === "hi" ? item.outcome.hi : item.outcome.en;
+              const titleText = language === "ta" ? item.title.ta : language === "hi" ? item.title.hi : item.title.en;
+              const summaryText = language === "ta" ? item.summary.ta : language === "hi" ? item.summary.hi : item.summary.en;
+              const detailText = language === "ta" ? item.detail.ta : language === "hi" ? item.detail.hi : item.detail.en;
               const fieldObj = fields.find((f) => f.key === item.field);
-              const fieldText = fieldObj ? (language === "en" ? fieldObj.en : language === "ta" ? fieldObj.ta : fieldObj.hi) : item.field;
+              const fieldText = fieldObj ? (language === "ta" ? fieldObj.ta : language === "hi" ? fieldObj.hi : fieldObj.en) : item.field;
 
               return (
                 <div key={idx} className="bg-card border border-border p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
@@ -258,7 +250,7 @@ export default function CaseResults() {
                   </div>
 
                   <div className="bg-muted p-4 rounded-xl border border-border/40 mt-4 text-xs text-muted-foreground leading-relaxed">
-                    <strong>{language === "en" ? "Strategy Highlight:" : language === "ta" ? "வியூக சிறப்பம்சம்:" : "रणनीति मुख्य आकर्षण:"}</strong> {detailText}
+                    <strong>{language === "ta" ? "வியூக சிறப்பம்சம்:" : language === "hi" ? "रणनीति मुख्य आकर्षण:" : "Strategy Highlight:"}</strong> {detailText}
                   </div>
                 </div>
               );
@@ -267,11 +259,7 @@ export default function CaseResults() {
         ) : (
           <div className="text-center py-20 bg-card border border-dashed border-border rounded-2xl max-w-4xl mx-auto">
             <p className="text-muted-foreground text-lg">
-              {language === "en" 
-                ? "No cases listed under this practice field." 
-                : language === "ta" 
-                ? "இந்த சட்டப்பிரிவின் கீழ் வழக்குகள் எதுவும் பட்டியலிடப்படவில்லை." 
-                : "इस अभ्यास क्षेत्र के अंतर्गत कोई मामला सूचीबद्ध नहीं है।"}
+              {language === "ta" ? "இந்த சட்டப்பிரிவின் கீழ் வழக்குகள் எதுவும் பட்டியலிடப்படவில்லை." : language === "hi" ? "इस अभ्यास क्षेत्र के अंतर्गत कोई मामला सूचीबद्ध नहीं है।" : "No cases listed under this practice field."}
             </p>
           </div>
         )}
