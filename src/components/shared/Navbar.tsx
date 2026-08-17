@@ -72,7 +72,10 @@ export function Navbar() {
     or: "ଓଡ଼ିଆ",
     pa: "ਪੰਜਾਬੀ",
     ta: "தமிழ்",
-    te: "తెలుగు"
+    te: "తెలుగు",
+    sa: "संस्कृतम्",
+    ur: "اردو",
+    ar: "العربية"
   };
 
   return (
@@ -191,7 +194,7 @@ export function Navbar() {
               {isLangDropdownOpen && (
                 <div className="absolute top-full right-0 pt-2 z-50">
                   <div className="bg-background border border-border shadow-lg rounded-xl py-2 w-44 max-h-60 overflow-y-auto animate-in fade-in duration-200">
-                    {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
+                    {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te", "sa", "ur", "ar"] as Language[]).map((lang) => (
                       <button
                         key={lang}
                         onClick={() => {
@@ -237,7 +240,7 @@ export function Navbar() {
               {isMobileLangOpen && (
                 <div className="absolute right-0 top-full pt-2 z-50">
                   <div className="bg-background border border-border shadow-lg rounded-xl py-2 w-40 max-h-60 overflow-y-auto animate-in fade-in duration-200">
-                    {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
+                    {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te", "sa", "ur", "ar"] as Language[]).map((lang) => (
                       <button
                         key={lang}
                         onClick={() => {

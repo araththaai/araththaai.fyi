@@ -192,7 +192,10 @@
   html[lang="mr"] *,
   html[lang="or"] *,
   html[lang="pa"] *,
-  html[lang="te"] * {
+  html[lang="te"] *,
+  html[lang="sa"] *,
+  html[lang="ur"] *,
+  html[lang="ar"] * {
     text-transform: none !important;
   }
 }
