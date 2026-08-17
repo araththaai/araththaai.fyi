@@ -262,6 +262,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("app_lang", lang);
+    window.location.reload();
   };
 
   const t = (key: string): string => {
