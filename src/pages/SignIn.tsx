@@ -1,10 +1,10 @@
-"use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function SignInPage() {
+  const { language } = useLanguage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -37,40 +37,50 @@ export default function SignInPage() {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-surface">
       <div className="w-full max-w-md flex flex-col items-center">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-heading font-bold text-primary mb-2">Admin Portal</h1>
+          <h1 className="text-3xl font-heading font-bold text-primary mb-2">
+            {language === "en" ? "Admin Portal" : "நிர்வாகி போர்டல்"}
+          </h1>
           <p className="text-muted-foreground text-sm">
-            Sign in to manage firm consultations, cases, and settings.
+            {language === "en"
+              ? "Sign in to manage firm consultations, cases, and settings."
+              : "நிறுவனத்தின் ஆலோசனைகள், வழக்குகள் மற்றும் அமைப்புகளை நிர்வகிக்க உள்நுழையவும்."}
           </p>
         </div>
         
         <form onSubmit={handleSubmit} className="w-full bg-card border border-border p-8 rounded-xl shadow-lg">
           {error && <div className="text-red-500 text-sm mb-4 text-center">{error}</div>}
           <div className="mb-4">
-            <label className="block text-foreground font-medium mb-2 text-sm">Email</label>
+            <label className="block text-foreground font-medium mb-2 text-sm">
+              {language === "en" ? "Email" : "மின்னஞ்சல்"}
+            </label>
             <input 
               type="email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full p-3 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
               required 
             />
           </div>
           <div className="mb-6">
-            <label className="block text-foreground font-medium mb-2 text-sm">Password</label>
+            <label className="block text-foreground font-medium mb-2 text-sm">
+              {language === "en" ? "Password" : "கடவுச்சொல்"}
+            </label>
             <input 
               type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full p-3 border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
               required 
             />
           </div>
           <Button 
             type="submit" 
             disabled={loading}
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12"
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 cursor-pointer"
           >
-            {loading ? "Signing in..." : "Sign In to Admin"}
+            {loading 
+              ? (language === "en" ? "Signing in..." : "உள்நுழைகிறது...") 
+              : (language === "en" ? "Sign In to Admin" : "நிர்வாகியாக உள்நுழைக")}
           </Button>
         </form>
       </div>

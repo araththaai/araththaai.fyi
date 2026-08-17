@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabaseClient";
+import { useLanguage } from "@/lib/LanguageContext";
 
 // Form validation schema using Zod
 const bookingSchema = z.object({
@@ -29,22 +30,26 @@ const timeSlots = [
   "09:30 AM", "11:00 AM", "02:00 PM", "03:30 PM", "05:00 PM"
 ];
 
-const practiceAreas = [
-  "Corporate Law & Governance",
-  "Property & Real Estate Law",
-  "Family & Matrimonial Law",
-  "Taxation & GST Litigation",
-  "Intellectual Property Rights",
-  "Criminal Defense & White-Collar",
-  "HR & CE / Temple Law",
-  "Employment & Labor Law"
-];
-
 export default function BookConsultation() {
+  const { language, t } = useLanguage();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState("");
   const [successData, setSuccessData] = useState<BookingFormValues | null>(null);
+
+  const practiceAreas = language === "en" ? [
+    "Corporate & Commercial Matters",
+    "Civil Disputes & Property Matters",
+    "HR & CE Cases",
+    "Trial Defence & Litigation",
+    "Taxation & GST"
+  ] : [
+    "கார்ப்பரேட் மற்றும் வணிக விவகாரங்கள்",
+    "சிவில் தகராறுகள் மற்றும் சொத்து விவகாரங்கள்",
+    "HR & CE வழக்குகள் (அறநிலையத்துறை)",
+    "வழக்கு விசாரணை மற்றும் தற்காப்பு வாதம்",
+    "வரிவிதிப்பு மற்றும் ஜிஎஸ்டி"
+  ];
 
   const {
     register,
@@ -114,7 +119,6 @@ export default function BookConsultation() {
       setStep(5);
     } catch (err: any) {
       console.warn("Supabase insertion fallback simulation:", err.message);
-      // Simulate success for development environments
       setSuccessData(data);
       setStep(5);
     } finally {
@@ -122,14 +126,12 @@ export default function BookConsultation() {
     }
   };
 
-  // Generate a mock ICS calendar file and download it
   const downloadCalendarInvite = () => {
     if (!successData) return;
     const { date, serviceType } = successData;
     const title = `Legal Consultation: ${serviceType}`;
     const desc = "Initial consultation with Araththaai (AKM Associates).";
     
-    // Simple ICS format
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Araththaai//Legal Consultancy//EN
@@ -140,7 +142,7 @@ DTSTART:${date.replace(/-/g, "")}T100000
 DURATION:PT1H
 SUMMARY:${title}
 DESCRIPTION:${desc}
-LOCATION:123 Legal Avenue, Business District, Chennai
+LOCATION:Chennai & Karur, Tamil Nadu
 END:VEVENT
 END:VCALENDAR`;
 
@@ -163,10 +165,18 @@ END:VCALENDAR`;
           {/* Progress Bar (Only visible steps 1 to 4) */}
           {step <= 4 && (
             <div className="bg-primary/5 px-8 py-4 border-b border-border flex justify-between items-center text-xs font-semibold text-muted-foreground">
-              <span className={step >= 1 ? "text-secondary" : ""}>1. Practice Area</span>
-              <span className={step >= 2 ? "text-secondary" : ""}>2. Case Details</span>
-              <span className={step >= 3 ? "text-secondary" : ""}>3. Date & Time</span>
-              <span className={step >= 4 ? "text-secondary" : ""}>4. Contact Info</span>
+              <span className={step >= 1 ? "text-secondary font-bold" : ""}>
+                {language === "en" ? "1. Practice Area" : "1. சட்டப் பிரிவு"}
+              </span>
+              <span className={step >= 2 ? "text-secondary font-bold" : ""}>
+                {language === "en" ? "2. Case Details" : "2. வழக்கு விபரங்கள்"}
+              </span>
+              <span className={step >= 3 ? "text-secondary font-bold" : ""}>
+                {language === "en" ? "3. Date & Time" : "3. தேதி & நேரம்"}
+              </span>
+              <span className={step >= 4 ? "text-secondary font-bold" : ""}>
+                {language === "en" ? "4. Contact Info" : "4. தொடர்பு விபரங்கள்"}
+              </span>
             </div>
           )}
 
@@ -176,8 +186,12 @@ END:VCALENDAR`;
             {step === 1 && (
               <div className="space-y-6">
                 <div className="text-center md:text-left mb-8">
-                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">Select Practice Area</h2>
-                  <p className="text-muted-foreground text-sm">Which division of law does your legal inquiry concern?</p>
+                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">
+                    {language === "en" ? "Select Practice Area" : "சட்டப் பிரிவைத் தேர்ந்தெடுக்கவும்"}
+                  </h2>
+                  <p className="text-muted-foreground text-sm">
+                    {language === "en" ? "Which division of law does your legal inquiry concern?" : "உங்கள் சட்ட விசாரணை எந்த சட்டப்பிரிவைச் சார்ந்தது?"}
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -186,13 +200,13 @@ END:VCALENDAR`;
                       key={idx}
                       type="button"
                       onClick={() => setValue("serviceType", area)}
-                      className={`p-5 rounded-xl border text-left font-medium transition-all flex items-center gap-3 ${
+                      className={`p-5 rounded-xl border text-left font-medium transition-all flex items-center gap-3 cursor-pointer ${
                         selectedService === area 
                           ? "border-secondary bg-secondary/5 text-primary" 
                           : "border-border hover:border-secondary hover:bg-muted text-muted-foreground"
                       }`}
                     >
-                      <Briefcase className={`h-5 w-5 ${selectedService === area ? 'text-secondary' : 'text-muted-foreground'}`} />
+                      <Briefcase className={`h-5 w-5 ${selectedService === area ? 'text-secondary font-bold' : 'text-muted-foreground'}`} />
                       <span className="text-sm">{area}</span>
                     </button>
                   ))}
@@ -200,8 +214,8 @@ END:VCALENDAR`;
                 {errors.serviceType && <p className="text-xs text-destructive">{errors.serviceType.message}</p>}
 
                 <div className="flex justify-end pt-6">
-                  <Button size="lg" onClick={nextStep} disabled={!selectedService} className="bg-primary hover:bg-primary/90 text-white">
-                    Continue <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button size="lg" onClick={nextStep} disabled={!selectedService} className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
+                    {language === "en" ? "Continue" : "தொடரவும்"} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -211,49 +225,63 @@ END:VCALENDAR`;
             {step === 2 && (
               <div className="space-y-6">
                 <div className="text-center md:text-left mb-8">
-                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">Explain Your Case</h2>
-                  <p className="text-muted-foreground text-sm">Provide details so our specialized legal partners can run conflicts clearance checks.</p>
+                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">
+                    {language === "en" ? "Explain Your Case" : "உங்கள் வழக்கை விளக்கவும்"}
+                  </h2>
+                  <p className="text-muted-foreground text-sm">
+                    {language === "en" ? "Provide details so our specialized legal partners can run conflicts clearance checks." : "விவரங்களை அளிக்கவும், இதன் மூலம் எங்கள் வழக்கறிஞர்கள் ஆரம்பகட்ட சரிபார்ப்புகளை மேற்கொள்ள முடியும்."}
+                  </p>
                 </div>
 
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Brief Summary of Legal Issue *</label>
+                    <label className="text-sm font-medium text-foreground">
+                      {language === "en" ? "Brief Summary of Legal Issue *" : "சட்டப் பிரச்சனையின் சுருக்கம் *"}
+                    </label>
                     <textarea
                       {...register("message")}
                       rows={5}
-                      className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="Please details dates, parties involved, and the core legal concern..."
+                      className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground resize-none"
+                      placeholder={language === "en" ? "Please details dates, parties involved, and the core legal concern..." : "தேதிகள், சம்பந்தப்பட்ட நபர்கள் மற்றும் முக்கிய சட்டப் பிரச்சனையை விவரிக்கவும்..."}
                     />
                     {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Urgency Level *</label>
-                    <div className="flex gap-4">
-                      {["Low", "Medium", "High", "Immediate Emergency"].map((u) => (
-                        <button
-                          key={u}
-                          type="button"
-                          onClick={() => setValue("urgency", u)}
-                          className={`flex-grow py-3 rounded-md text-sm font-medium border transition-all ${
-                            selectedUrgency === u 
-                              ? "border-secondary bg-secondary/5 text-primary font-semibold"
-                              : "border-border text-muted-foreground hover:bg-muted"
-                          }`}
-                        >
-                          {u}
-                        </button>
-                      ))}
+                    <label className="text-sm font-medium text-foreground">
+                      {language === "en" ? "Urgency Level *" : "அவசர நிலை *"}
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {(language === "en" 
+                        ? ["Low", "Medium", "High", "Immediate Emergency"]
+                        : ["குறைந்த", "நடுத்தர", "அதிக", "உடனடி அவசரம்"]
+                      ).map((u, i) => {
+                        const val = ["Low", "Medium", "High", "Immediate Emergency"][i];
+                        return (
+                          <button
+                            key={val}
+                            type="button"
+                            onClick={() => setValue("urgency", val)}
+                            className={`py-3 rounded-md text-sm font-medium border transition-all cursor-pointer ${
+                              selectedUrgency === val 
+                                ? "border-secondary bg-secondary/5 text-primary font-semibold"
+                                : "border-border text-muted-foreground hover:bg-muted"
+                            }`}
+                          >
+                            {u}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex justify-between pt-6">
-                  <Button variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                  <Button variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted cursor-pointer">
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back" : "முந்தைய"}
                   </Button>
-                  <Button size="lg" onClick={nextStep} className="bg-primary hover:bg-primary/90 text-white">
-                    Continue <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button size="lg" onClick={nextStep} className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
+                    {language === "en" ? "Continue" : "தொடரவும்"} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -263,33 +291,43 @@ END:VCALENDAR`;
             {step === 3 && (
               <div className="space-y-6">
                 <div className="text-center md:text-left mb-8">
-                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">Schedule Appointment</h2>
-                  <p className="text-muted-foreground text-sm">Select a date and preferred time slot for your initial discussion.</p>
+                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">
+                    {language === "en" ? "Schedule Appointment" : "சந்திப்பைத் திட்டமிடவும்"}
+                  </h2>
+                  <p className="text-muted-foreground text-sm">
+                    {language === "en" ? "Select a date and preferred time slot for your initial discussion." : "ஆலோசனைக்கான தேதி மற்றும் நேரத்தைத் தேர்ந்தெடுக்கவும்."}
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Date Input */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground flex items-center gap-1.5"><Calendar className="h-4 w-4 text-secondary" /> Preferred Date *</label>
+                    <label className="text-sm font-medium text-foreground flex items-center gap-1.5">
+                      <Calendar className="h-4 w-4 text-secondary" /> 
+                      {language === "en" ? "Preferred Date *" : "விருப்பமான தேதி *"}
+                    </label>
                     <input
                       type="date"
                       {...register("date")}
                       min={new Date().toISOString().split("T")[0]}
-                      className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                     />
                     {errors.date && <p className="text-xs text-destructive">{errors.date.message}</p>}
                   </div>
 
                   {/* Time Slots Grid */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground flex items-center gap-1.5"><Clock className="h-4 w-4 text-secondary" /> Preferred Time Slot *</label>
+                    <label className="text-sm font-medium text-foreground flex items-center gap-1.5">
+                      <Clock className="h-4 w-4 text-secondary" /> 
+                      {language === "en" ? "Preferred Time Slot *" : "விருப்பமான நேரம் *"}
+                    </label>
                     <div className="grid grid-cols-2 gap-3">
                       {timeSlots.map((ts) => (
                         <button
                           key={ts}
                           type="button"
                           onClick={() => setValue("timeSlot", ts)}
-                          className={`py-2 px-3 rounded-md text-xs font-semibold border transition-all ${
+                          className={`py-2 px-3 rounded-md text-xs font-semibold border transition-all cursor-pointer ${
                             selectedTime === ts 
                               ? "border-secondary bg-secondary/5 text-primary"
                               : "border-border text-muted-foreground hover:bg-muted"
@@ -304,11 +342,11 @@ END:VCALENDAR`;
                 </div>
 
                 <div className="flex justify-between pt-6">
-                  <Button variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                  <Button variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted cursor-pointer">
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back" : "முந்தைய"}
                   </Button>
-                  <Button size="lg" onClick={nextStep} disabled={!selectedDate || !selectedTime} className="bg-primary hover:bg-primary/90 text-white">
-                    Continue <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button size="lg" onClick={nextStep} disabled={!selectedDate || !selectedTime} className="bg-primary hover:bg-primary/90 text-white cursor-pointer">
+                    {language === "en" ? "Continue" : "தொடரவும்"} <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -318,8 +356,12 @@ END:VCALENDAR`;
             {step === 4 && (
               <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-6">
                 <div className="text-center md:text-left mb-8">
-                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">Intake Contact Details</h2>
-                  <p className="text-muted-foreground text-sm">Provide your secure coordinates so our compliance desk can verify the booking.</p>
+                  <h2 className="text-3xl font-heading font-bold text-primary mb-2">
+                    {language === "en" ? "Intake Contact Details" : "தொடர்பு விபரங்கள்"}
+                  </h2>
+                  <p className="text-muted-foreground text-sm">
+                    {language === "en" ? "Provide your secure coordinates so our compliance desk can verify the booking." : "முன்பதிவைச் சரிபார்க்க உங்கள் பாதுகாப்பான தொடர்பு விபரங்களை வழங்கவும்."}
+                  </p>
                 </div>
 
                 {serverError && (
@@ -330,33 +372,35 @@ END:VCALENDAR`;
 
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Your Full Name *</label>
+                    <label className="text-sm font-medium text-foreground">
+                      {language === "en" ? "Your Full Name *" : "உங்கள் முழு பெயர் *"}
+                    </label>
                     <input
                       {...register("name")}
-                      className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="John Doe"
+                      className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
+                      placeholder={language === "en" ? "Jane Doe" : "பெயர்"}
                     />
                     {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Phone Number *</label>
+                      <label className="text-sm font-medium text-foreground">{t("contact.phone")} *</label>
                       <input
                         {...register("phone")}
-                        className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                        className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                         placeholder="+91 98765 43210"
                       />
                       {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">Email Address *</label>
+                      <label className="text-sm font-medium text-foreground">{t("contact.emailAddr")} *</label>
                       <input
                         {...register("email")}
                         type="email"
-                        className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                        placeholder="john@example.com"
+                        className="w-full p-3 border border-input bg-background rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
+                        placeholder="email@example.com"
                       />
                       {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
                     </div>
@@ -364,7 +408,9 @@ END:VCALENDAR`;
 
                   {/* Document Upload Zone */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Attach Documents (Optional)</label>
+                    <label className="text-sm font-medium text-foreground">
+                      {language === "en" ? "Attach Documents (Optional)" : "ஆவணங்களை இணைக்கவும் (விரும்பினால்)"}
+                    </label>
                     <div className="border border-dashed border-border p-6 rounded-lg text-center bg-muted/40 hover:bg-muted transition-colors relative cursor-pointer group">
                       <input
                         type="file"
@@ -377,24 +423,26 @@ END:VCALENDAR`;
                         }}
                       />
                       <Upload className="h-8 w-8 text-secondary mx-auto mb-2 group-hover:scale-110 transition-transform" />
-                      <span className="text-xs font-semibold text-primary block">Click to upload files</span>
+                      <span className="text-xs font-semibold text-primary block">
+                        {language === "en" ? "Click to upload files" : "கோப்புகளைப் பதிவேற்ற இங்கே கிளிக் செய்யவும்"}
+                      </span>
                       <span className="text-[10px] text-muted-foreground block mt-1">PDF, DOCX up to 10MB</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex justify-between pt-6">
-                  <Button type="button" variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted" disabled={isSubmitting}>
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                  <Button type="button" variant="outline" onClick={prevStep} className="border-border text-foreground hover:bg-muted cursor-pointer" disabled={isSubmitting}>
+                    <ArrowLeft className="mr-2 h-4 w-4" /> {language === "en" ? "Back" : "முந்தைய"}
                   </Button>
-                  <Button type="submit" size="lg" className="bg-primary hover:bg-primary/95 text-white" disabled={isSubmitting}>
+                  <Button type="submit" size="lg" className="bg-primary hover:bg-primary/95 text-white cursor-pointer" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting Request...
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {language === "en" ? "Submitting..." : "சமர்ப்பிக்கப்படுகிறது..."}
                       </>
                     ) : (
                       <>
-                        Confirm Consultation <CheckCircle2 className="ml-2 h-4 w-4" />
+                        {language === "en" ? "Confirm Consultation" : "முன்பதிவை உறுதிசெய்யவும்"} <CheckCircle2 className="ml-2 h-4 w-4" />
                       </>
                     )}
                   </Button>
@@ -410,34 +458,40 @@ END:VCALENDAR`;
                 </div>
                 <div>
                   <h1 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-2">
-                    Consultation Requested!
+                    {language === "en" ? "Consultation Requested!" : "ஆலோசனை கோரப்பட்டது!"}
                   </h1>
                   <p className="text-muted-foreground text-sm max-w-lg mx-auto leading-relaxed">
-                    Thank you, <strong>{successData.name}</strong>. Your intake files have been securely transmitted under attorney confidentiality rules.
+                    {language === "en" ? (
+                      <>Thank you, <strong>{successData.name}</strong>. Your intake files have been securely transmitted under attorney confidentiality rules.</>
+                    ) : (
+                      <>நன்றி, <strong>{successData.name}</strong>. உங்கள் கோப்புகள் பாதுகாப்பாக வழக்கறிஞர் ரகசிய காப்பு விதிகளின் கீழ் அனுப்பப்பட்டுள்ளன.</>
+                    )}
                   </p>
                 </div>
 
                 {/* Booking details card */}
                 <div className="bg-muted border border-border p-6 rounded-xl max-w-md mx-auto text-left space-y-3">
-                  <h4 className="font-heading font-bold text-primary border-b border-border/80 pb-2 text-sm uppercase tracking-wider text-secondary">Appointment Details</h4>
+                  <h4 className="font-heading font-bold border-b border-border/80 pb-2 text-sm uppercase tracking-wider text-secondary">
+                    {language === "en" ? "Appointment Details" : "முன்பதிவு விபரங்கள்"}
+                  </h4>
                   <div className="text-xs text-muted-foreground space-y-1.5">
-                    <p><strong>Practice:</strong> {successData.serviceType}</p>
-                    <p><strong>Urgency:</strong> {successData.urgency}</p>
-                    <p><strong>Date:</strong> {successData.date}</p>
-                    <p><strong>Time Slot:</strong> {successData.timeSlot}</p>
+                    <p><strong>{language === "en" ? "Practice:" : "சட்டப்பிரிவு:"}</strong> {successData.serviceType}</p>
+                    <p><strong>{language === "en" ? "Urgency:" : "அவசரநிலை:"}</strong> {successData.urgency}</p>
+                    <p><strong>{language === "en" ? "Date:" : "தேதி:"}</strong> {successData.date}</p>
+                    <p><strong>{language === "en" ? "Time Slot:" : "நேரம்:"}</strong> {successData.timeSlot}</p>
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4 max-w-md mx-auto">
                   <Button 
                     onClick={downloadCalendarInvite}
-                    className="flex-grow bg-primary text-white hover:bg-primary/95 flex items-center justify-center gap-2 h-12"
+                    className="flex-grow bg-primary text-white hover:bg-primary/95 flex items-center justify-center gap-2 h-12 cursor-pointer"
                   >
-                    <Download className="h-4 w-4" /> Add to Calendar (.ics)
+                    <Download className="h-4 w-4" /> {language === "en" ? "Add to Calendar (.ics)" : "காலெண்டரில் சேர்க்கவும் (.ics)"}
                   </Button>
                   <Link to="/" className="flex-grow">
-                    <Button variant="outline" className="w-full border-border hover:bg-muted text-foreground h-12">
-                      Return to Home
+                    <Button variant="outline" className="w-full border-border hover:bg-muted text-foreground h-12 cursor-pointer">
+                      {language === "en" ? "Return to Home" : "முகப்பிற்குத் திரும்பவும்"}
                     </Button>
                   </Link>
                 </div>

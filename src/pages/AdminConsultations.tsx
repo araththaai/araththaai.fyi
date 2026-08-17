@@ -1,9 +1,9 @@
-"use client";
-
 import { useState } from "react";
 import { MessageSquare, Mail, Phone, Calendar } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function AdminConsultationsPage() {
+  const { language } = useLanguage();
   // Demonstration data for public requests received via /book and /contact
   const [requests] = useState([
     {
@@ -41,16 +41,21 @@ export default function AdminConsultationsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900">Consultation & Contact Requests</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+          {language === "en" ? "Consultation & Contact Requests" : "ஆலோசனை & தொடர்பு கோரிக்கைகள்"}
+        </h1>
         <p className="text-sm text-gray-500 mt-1">
-          Review and manage consultation inquiries submitted by the public.
+          {language === "en" 
+            ? "Review and manage consultation inquiries submitted by the public." 
+            : "பொதுமக்கள் சமர்ப்பித்த ஆலோசனை கோரிக்கைகளை மதிப்பாய்வு செய்து நிர்வகிக்கவும்."}
         </p>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
           <h2 className="font-semibold text-gray-900 text-lg flex items-center gap-2">
-            <MessageSquare className="h-5 w-5 text-primary" /> Incoming Inquiries ({requests.length})
+            <MessageSquare className="h-5 w-5 text-primary" />{" "}
+            {language === "en" ? "Incoming Inquiries" : "வந்தடைந்த கோரிக்கைகள்"} ({requests.length})
           </h2>
         </div>
 
@@ -69,7 +74,9 @@ export default function AdminConsultationsPage() {
                       req.status === "CONFIRMED" ? "bg-blue-100 text-blue-800" :
                       "bg-green-100 text-green-800"
                     }`}>
-                      {req.status}
+                      {req.status === "PENDING" ? (language === "en" ? "PENDING" : "நிலுவையில் உள்ளது") :
+                       req.status === "CONFIRMED" ? (language === "en" ? "CONFIRMED" : "உறுதிப்படுத்தப்பட்டது") :
+                       (language === "en" ? "COMPLETED" : "நிறைவடைந்தது")}
                     </span>
                   </div>
 
@@ -81,7 +88,7 @@ export default function AdminConsultationsPage() {
                       <Phone className="h-3.5 w-3.5" /> {req.phone}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" /> Received: {req.date}
+                      <Calendar className="h-3.5 w-3.5" /> {language === "en" ? "Received:" : "பெறப்பட்டது:"} {req.date}
                     </span>
                   </div>
 
@@ -92,10 +99,10 @@ export default function AdminConsultationsPage() {
 
                 <div className="flex items-center gap-2">
                   <a href={`mailto:${req.email}`} className="px-4 py-2 text-xs font-semibold rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors">
-                    Reply Email
+                    {language === "en" ? "Reply Email" : "மின்னஞ்சல் மூலம் பதில்"}
                   </a>
                   <a href={`tel:${req.phone}`} className="px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors">
-                    Call Client
+                    {language === "en" ? "Call Client" : "வாடிக்கையாளரை அழைக்க"}
                   </a>
                 </div>
               </div>
