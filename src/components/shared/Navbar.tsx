@@ -205,21 +205,23 @@ export function Navbar() {
               </button>
               
               {isLangDropdownOpen && (
-                <div className="absolute top-full right-0 mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-44 max-h-60 overflow-y-auto z-50 animate-in fade-in duration-200">
-                  {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={() => {
-                        setLanguage(lang);
-                        setIsLangDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
-                        language === lang ? "text-secondary font-bold" : "text-foreground"
-                      }`}
-                    >
-                      {currentLangLabel[lang]}
-                    </button>
-                  ))}
+                <div className="absolute top-full right-0 pt-2 z-50">
+                  <div className="bg-background border border-border shadow-lg rounded-xl py-2 w-44 max-h-60 overflow-y-auto animate-in fade-in duration-200">
+                    {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang);
+                          setIsLangDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
+                          language === lang ? "text-secondary font-bold" : "text-foreground"
+                        }`}
+                      >
+                        {currentLangLabel[lang]}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -249,21 +251,23 @@ export function Navbar() {
                 <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${isMobileLangOpen ? 'rotate-180' : ''}`} />
               </button>
               {isMobileLangOpen && (
-                <div className="absolute right-0 top-full mt-2 bg-background border border-border shadow-lg rounded-xl py-2 w-40 max-h-60 overflow-y-auto z-50 animate-in fade-in duration-200">
-                  {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={() => {
-                        setLanguage(lang);
-                        setIsMobileLangOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
-                        language === lang ? "text-secondary font-bold" : "text-foreground"
-                      }`}
-                    >
-                      {currentLangLabel[lang]}
-                    </button>
-                  ))}
+                <div className="absolute right-0 top-full pt-2 z-50">
+                  <div className="bg-background border border-border shadow-lg rounded-xl py-2 w-40 max-h-60 overflow-y-auto animate-in fade-in duration-200">
+                    {(["en", "hi", "as", "bn", "gu", "kn", "ml", "mr", "or", "pa", "ta", "te"] as Language[]).map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang);
+                          setIsMobileLangOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2 text-xs font-semibold hover:bg-muted transition-all cursor-pointer border-none bg-transparent ${
+                          language === lang ? "text-secondary font-bold" : "text-foreground"
+                        }`}
+                      >
+                        {currentLangLabel[lang]}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
